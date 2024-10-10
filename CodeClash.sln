@@ -1,6 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeClash", "CodeClash\CodeClash.csproj", "{E934C248-5544-4CFA-B851-14C0FA8DE791}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeClash.API", "CodeClash.API\CodeClash.API.csproj", "{E934C248-5544-4CFA-B851-14C0FA8DE791}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeClash.Core", "CodeClash.Core\CodeClash.Core.csproj", "{D366D4E7-3363-4B7C-BB60-411DF0B0F3F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClashCode.Application", "ClashCode.Application\ClashCode.Application.csproj", "{5C2029E3-94CF-4F21-820D-A27B5D9227F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeClash.Persistence", "CodeClash.Persistence\CodeClash.Persistence.csproj", "{352112C1-BEB2-4A76-AA5C-3925E753C3AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +18,17 @@ Global
 		{E934C248-5544-4CFA-B851-14C0FA8DE791}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E934C248-5544-4CFA-B851-14C0FA8DE791}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E934C248-5544-4CFA-B851-14C0FA8DE791}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D366D4E7-3363-4B7C-BB60-411DF0B0F3F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D366D4E7-3363-4B7C-BB60-411DF0B0F3F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D366D4E7-3363-4B7C-BB60-411DF0B0F3F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D366D4E7-3363-4B7C-BB60-411DF0B0F3F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C2029E3-94CF-4F21-820D-A27B5D9227F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C2029E3-94CF-4F21-820D-A27B5D9227F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C2029E3-94CF-4F21-820D-A27B5D9227F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C2029E3-94CF-4F21-820D-A27B5D9227F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{352112C1-BEB2-4A76-AA5C-3925E753C3AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{352112C1-BEB2-4A76-AA5C-3925E753C3AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{352112C1-BEB2-4A76-AA5C-3925E753C3AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{352112C1-BEB2-4A76-AA5C-3925E753C3AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
