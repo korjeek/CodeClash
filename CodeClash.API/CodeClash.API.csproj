@@ -1,15 +1,28 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <RootNamespace>CodeClash</RootNamespace>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\ClashCode.Application\ClashCode.Application.csproj" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.10"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\CodeClash.Application\CodeClash.Application.csproj" />
       <ProjectReference Include="..\CodeClash.Core\CodeClash.Core.csproj" />
+      <ProjectReference Include="..\CodeClash.Infrastructure\CodeClash.Infrastructure.csproj" />
+      <ProjectReference Include="..\CodeClash.Persistence\CodeClash.Persistence.csproj" />
     </ItemGroup>
 
 </Project>

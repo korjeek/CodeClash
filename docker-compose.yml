@@ -1,0 +1,12 @@
+﻿services:
+  codeclash.api:
+    image: codeclash.api
+    build:
+      context: .
+      dockerfile: CodeClash.API/Dockerfile
+
+  codeclash.api-1:
+    image: codeclash.api-1
+    build:
+      context: .
+      dockerfile: CodeClash.API/Dockerfile
