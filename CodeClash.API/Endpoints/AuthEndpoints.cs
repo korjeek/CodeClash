@@ -1,4 +1,8 @@
-﻿using CodeClash.Application.Services;
+﻿using System.Threading.Tasks;
+using CodeClash.Application.Services;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 
 namespace CodeClash.API.Endpoints;
 
@@ -8,11 +12,10 @@ public record LoginRequest(string Email, string Password);
 
 public static class AuthEndpoints
 {
-    public static IEndpointRouteBuilder MapUserEndpoints(this IEndpointRouteBuilder endpoints)
+    public static void MapUserEndpoints(this IEndpointRouteBuilder endpoints)
     {
         endpoints.MapPost("register", Register);
         endpoints.MapPost("login", Login);
-        return endpoints;
     }
 
     private static async Task<IResult> Register(RegisterRequest request, UserService userService)
