@@ -1,6 +1,9 @@
 using CodeClash.Application.Services;
+using CodeClash.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
 
 builder.Services.AddControllers();
 // Add services to the container.
@@ -8,7 +11,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<UserService>();
+// builder.Services.AddScoped<UserService>();
+
+builder.Services.AddDbContext<ApplicationDbContext>(
+    options =>
+    {
+        options.UseNpgsql(configuration.GetConnectionString(nameof(ApplicationDbContext)));
+    });
+
+
 
 var app = builder.Build();
 
@@ -27,5 +38,5 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-//app.AddMappedEndpoints();
+
 app.Run();

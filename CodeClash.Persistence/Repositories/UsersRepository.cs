@@ -1,21 +1,21 @@
-﻿using CodeClash.Application.Interfaces.Repositories;
-using CodeClash.Core.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using CodeClash.Core.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CodeClash.Persistence.Repositories;
 
-public class UsersRepository(IdentityDbContext<User> context)
+public class UsersRepository(ApplicationDbContext dbContext)
 {
     public async Task Add(User user)
     {
-        throw new NotImplementedException();
+        await dbContext.AddAsync(user);
+        await dbContext.SaveChangesAsync();
     }
 
-    public User? FindUserByEmail(string email)
+    public async Task<User?> FindUserByEmail(string email)
     {
-        var user = context.Users.FirstOrDefault(user => user.Email == email);
-        context.SaveChangesAsync();
-        
-        return user;
+        return await dbContext
+            .Users
+            .AsNoTracking()
+            .FirstOrDefaultAsync(user => user.Email == email);
     }
 }

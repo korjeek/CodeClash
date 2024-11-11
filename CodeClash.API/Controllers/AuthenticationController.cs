@@ -39,7 +39,7 @@ public class AuthenticationController(TokenService tokenService, UsersRepository
         if (!isLoginValid)
             return BadRequest("Login or password is incorrect");
         
-        var user = usersRepository.FindUserByEmail(request.Email);
+        var user = await usersRepository.FindUserByEmail(request.Email);
         if (user is null)
             return Unauthorized();
 
