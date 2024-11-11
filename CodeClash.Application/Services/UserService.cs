@@ -1,24 +1,20 @@
-﻿using ClashCode.Application.Interfaces.Auth;
-using CodeClash.Application.Interfaces.Repositories;
-using CodeClash.Core.Models;
+﻿using CodeClash.Core.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace CodeClash.Application.Services;
 
-public class UserService(IPasswordHasher passwordHasher, IUsersRepositories usersRepositories, IJwtProvider jwtProvider)
+public class UserService(UserManager<User> userManager)
 {
-    public async Task Register(string username, string email, string password)
+    public async Task<bool> IsLoginValid(string email, string password)
     {
-        var hashedPassword = passwordHasher.Generate(password);
-        var user = new User(Guid.NewGuid(), username, hashedPassword, email);
-        await usersRepositories.Add(user);
-    }
-
-    public async Task<string> Login(string email, string password)
-    {
-        var user = await usersRepositories.GetByEmail(email);
-        if (passwordHasher.Verify(password, user.Password))
-            throw new Exception();
+        var managedUser = await userManager.FindByEmailAsync(email);
+        if (managedUser == null)
+            return false;
         
-        return jwtProvider.GenerateToken(user);
+        var managedPassword = await userManager.CheckPasswordAsync(managedUser , password);
+        if (!managedPassword)
+            return false;
+
+        return true;
     }
 }

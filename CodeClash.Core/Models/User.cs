@@ -1,3 +1,9 @@
-﻿namespace CodeClash.Core.Models;
+﻿using Microsoft.AspNetCore.Identity;
 
-public record User(Guid Id, string Username, string Password, string Email);
+namespace CodeClash.Core.Models;
+
+public class User: IdentityUser
+{
+    public string? RefreshToken { get; set; }
+    public DateTime RefreshTokenExpiryTime { get; set; }
+}
