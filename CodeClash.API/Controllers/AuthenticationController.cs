@@ -1,5 +1,4 @@
 ﻿using CodeClash.Application.Services;
-using CodeClash.Core.Models;
 using CodeClash.Core.Models.Identity;
 using CodeClash.Core.Services;
 using CodeClash.Persistence.Repositories;
@@ -19,11 +18,9 @@ public class AuthenticationController(TokenService tokenService, UsersRepository
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
         
-        var user = new User
-        {
-            UserName = request.UserName,
-            Email = request.Email
-        };
+        var user = await userService.CreateUser(request.UserName, request.Email);
+        if (!user.Succeeded)
+            return BadRequest();
         
         return await Login(new LoginRequest
         {
@@ -45,11 +42,9 @@ public class AuthenticationController(TokenService tokenService, UsersRepository
         var user = usersRepository.FindUserByEmail(request.Email);
         if (user is null)
             return Unauthorized();
-        
-        var accessToken = tokenService.CreateToken(user);
-        var refreshToken = tokenService.UpdateRefreshToken(user);
-        
-        return Ok(new AuthResponse(user.UserName!, user.Email!, accessToken, refreshToken));
+
+        var tokens = tokenService.UpdateTokens(user);
+        return Ok(new AuthResponse(user.UserName!, user.Email!, tokens.AccessToken, tokens.RefreshToken));
     }
     
     [HttpPost]
@@ -57,34 +52,19 @@ public class AuthenticationController(TokenService tokenService, UsersRepository
     public async Task<IActionResult> RefreshToken(JwtToken? tokenModel)
     {
         if (tokenModel is null)
-            return BadRequest("Invalid client request");
+            return BadRequest();
         
-        var refreshToken = tokenModel.RefreshToken;
-        var principal = _configuration.GetPrincipalFromExpiredToken(tokenModel.AccessToken);
-        
+        var principal = tokenService.GetPrincipal(tokenModel.AccessToken);
         if (principal == null)
-        {
-            return BadRequest("Invalid access token or refresh token");
-        }
+            return BadRequest();
+
+        var user = await userService.FindUserByUsername(principal.Identity!.Name);
+        if (user == null || user.RefreshToken != tokenModel.RefreshToken || user.RefreshTokenExpiryTime <= DateTime.UtcNow)
+            return BadRequest();
         
-        var username = principal.Identity!.Name;
-        var user = await _userManager.FindByNameAsync(username!);
+        var tokens = tokenService.CreateTokensByPrincipleClaims(principal.Claims.ToList());
+        userService.UpdateRefreshToken(user, tokens.RefreshToken);
 
-        if (user == null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.UtcNow)
-        {
-            return BadRequest("Invalid access token or refresh token");
-        }
-
-        var newAccessToken = _configuration.CreateToken(principal.Claims.ToList());
-        var newRefreshToken = _configuration.GenerateRefreshToken();
-
-        user.RefreshToken = newRefreshToken;
-        await _userManager.UpdateAsync(user);
-
-        return new ObjectResult(new
-        {
-            accessToken = new JwtSecurityTokenHandler().WriteToken(newAccessToken),
-            refreshToken = newRefreshToken
-        });
+        return new ObjectResult(tokens);
     }
 }

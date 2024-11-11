@@ -17,4 +17,29 @@ public class UserService(UserManager<User> userManager)
 
         return true;
     }
+
+    public async Task<User?> FindUserByUsername(string? username)
+    {
+        if (username == null)
+            return null;
+        
+        return await userManager.FindByNameAsync(username);
+    }
+
+    public async void UpdateRefreshToken(User user, string refreshToken)
+    {
+        user.RefreshToken = refreshToken;
+        await userManager.UpdateAsync(user);
+    }
+
+    public async Task<IdentityResult> CreateUser(string username, string email)
+    {
+        var user = new User
+        {
+            UserName = username,
+            Email = email
+        };
+        
+        return await userManager.CreateAsync(user);
+    }
 }
