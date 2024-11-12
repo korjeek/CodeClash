@@ -1,4 +1,5 @@
-using CodeClash.Application.Services;
+using CodeClash.Core.Models;
+using Microsoft.AspNetCore.Identity;
 using CodeClash.Persistence;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 // builder.Services.AddScoped<UserService>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(
@@ -38,5 +40,5 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-
+//app.AddMappedEndpoints();
 app.Run();
