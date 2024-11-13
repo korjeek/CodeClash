@@ -18,14 +18,14 @@ public static class JwtBearerExtensions
         {
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)),
-            new(ClaimTypes.NameIdentifier, user.Id),
+            new(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new(ClaimTypes.Name, user.UserName),
             new(ClaimTypes.Email, user.Email)
         };
         return claims;
     }
-    
-    public static SigningCredentials CreateSigningCredentials(this IConfiguration configuration)
+
+    private static SigningCredentials CreateSigningCredentials(this IConfiguration configuration)
     {
         return new SigningCredentials(
             new SymmetricSecurityKey(

@@ -31,11 +31,11 @@ public class TokenService(IConfiguration configuration)
     private string UpdateRefreshToken(User user)
     {
         user.RefreshToken = configuration.GenerateRefreshToken();
-        user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(configuration.GetSection("some").Get<int>());
+        user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(configuration.GetSection("a secret key is needed here...").Get<int>());
         return user.RefreshToken;
     }
 
-    public ClaimsPrincipal? GetPrincipal(string accessToken) => configuration.GetPrincipalFromExpiredToken(accessToken);
+    public ClaimsPrincipal? GetPrincipalClaims(string accessToken) => configuration.GetPrincipalFromExpiredToken(accessToken);
 
     public JwtToken CreateTokensByPrincipleClaims(List<Claim> claims)
     {

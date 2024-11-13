@@ -1,32 +1,30 @@
 ﻿using CodeClash.Application.Services;
+using CodeClash.Core.Models;
 using CodeClash.Core.Models.Identity;
 using CodeClash.Core.Services;
 using CodeClash.Persistence.Repositories;
-using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
+using LoginRequest = CodeClash.Core.Models.Identity.LoginRequest;
 using RegisterRequest = CodeClash.Core.Models.Identity.RegisterRequest;
 
 namespace CodeClash.API.Controllers;
 
 [ApiController]
 [Route("auth")]
-public class AuthenticationController(TokenService tokenService, UsersRepository usersRepository, UserService userService) : ControllerBase
+public class AuthenticationController(TokenService tokenService, UsersRepository usersRepository, AuthService authService) : ControllerBase
 {
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterRequest request)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
-        
-        var user = await userService.CreateUser(request.UserName, request.Email);
-        if (!user.Succeeded)
+
+        var password = await authService.HashPassword(request.Password);
+        var user = await usersRepository.AddUser(new User(request.UserName, request.Email, password));
+        if (user is null)
             return BadRequest();
         
-        return await Login(new LoginRequest
-        {
-            Email = request.Email,
-            Password = request.Password,
-        });
+        return await Login(new LoginRequest(request.UserName, request.Password));
     }
 
     [HttpPost("login")]
@@ -35,7 +33,7 @@ public class AuthenticationController(TokenService tokenService, UsersRepository
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        var isLoginValid = await userService.IsLoginValid(request.Email, request.Password);
+        var isLoginValid = await authService.IsLoginValid(request.Email, request.Password);
         if (!isLoginValid)
             return BadRequest("Login or password is incorrect");
         
@@ -44,7 +42,7 @@ public class AuthenticationController(TokenService tokenService, UsersRepository
             return Unauthorized();
 
         var tokens = tokenService.UpdateTokens(user);
-        return Ok(new AuthResponse(user.UserName!, user.Email!, tokens.AccessToken, tokens.RefreshToken));
+        return Ok(new AuthResponse(user.UserName, user.Email, tokens.AccessToken, tokens.RefreshToken));
     }
     
     [HttpPost]
@@ -54,16 +52,16 @@ public class AuthenticationController(TokenService tokenService, UsersRepository
         if (tokenModel is null)
             return BadRequest();
         
-        var principal = tokenService.GetPrincipal(tokenModel.AccessToken);
+        var principal = tokenService.GetPrincipalClaims(tokenModel.AccessToken);
         if (principal == null)
             return BadRequest();
 
-        var user = await userService.FindUserByUsername(principal.Identity!.Name);
+        var user = await usersRepository.FindUserByUserName(principal.Identity!.Name);
         if (user == null || user.RefreshToken != tokenModel.RefreshToken || user.RefreshTokenExpiryTime <= DateTime.UtcNow)
             return BadRequest();
         
         var tokens = tokenService.CreateTokensByPrincipleClaims(principal.Claims.ToList());
-        userService.UpdateRefreshToken(user, tokens.RefreshToken);
+        usersRepository.UpdateUsersRefreshToken(user, tokens.RefreshToken);
 
         return new ObjectResult(tokens);
     }
