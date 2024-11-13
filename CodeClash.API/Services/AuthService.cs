@@ -10,7 +10,7 @@ public class AuthService(UsersRepository usersRepository, PasswordHasher passwor
         if (managedUser == null)
             return false;
         
-        var managedPassword = await usersRepository.GetPassword(managedUser);
+        var managedPassword = await usersRepository.GetPassword(managedUser.Id);
         return passwordHasher.Verify(password, managedPassword);
     }
     

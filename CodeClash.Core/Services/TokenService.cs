@@ -31,7 +31,7 @@ public class TokenService(IConfiguration configuration)
     private string UpdateRefreshToken(User user)
     {
         user.RefreshToken = configuration.GenerateRefreshToken();
-        user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(configuration.GetSection("a secret key is needed here...").Get<int>());
+        user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(configuration.GetSection("Jwt:RefreshTokenValidityInDays").Get<int>());
         return user.RefreshToken;
     }
 

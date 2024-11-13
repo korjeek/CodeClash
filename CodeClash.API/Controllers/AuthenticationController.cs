@@ -61,7 +61,7 @@ public class AuthenticationController(TokenService tokenService, UsersRepository
             return BadRequest();
         
         var tokens = tokenService.CreateTokensByPrincipleClaims(principal.Claims.ToList());
-        usersRepository.UpdateUsersRefreshToken(user, tokens.RefreshToken);
+        usersRepository.UpdateUsersRefreshToken(user.Id, tokens.RefreshToken);
 
         return new ObjectResult(tokens);
     }
