@@ -1,5 +1,4 @@
-﻿using CodeClash.Application;
-using CodeClash.Core.Models;
+﻿using CodeClash.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CodeClash.Persistence.Repositories;
@@ -8,33 +7,42 @@ public class UsersRepository(ApplicationDbContext dbContext)
 {
     public async Task<User?> AddUser(User user)
     {
-        //TODO: Хочу получать создавать пользователя в БД,
-        //TODO: а затем получать инфу успешно это или нет (либо User = null или че то другое (т.е. не User, что удобно))
+        var isUserContainsInDb = await dbContext.Users.ContainsAsync(user);
+        if (isUserContainsInDb)
+            return null;
         await dbContext.AddAsync(user);
         await dbContext.SaveChangesAsync();
+        return user;
     }
 
     public async Task<User?> FindUserByUserName(string? userName)
     {
-        //TODO: Хочу получать пользователя по никнейму в бд, если нет -> null
+        return await dbContext.Users
+            .AsNoTracking()
+            .FirstOrDefaultAsync(user => user.UserName == userName);
     }
 
     public async Task<User?> FindUserByEmail(string email)
     {
-        return await dbContext
-            .Users
+        return await dbContext.Users
             .AsNoTracking()
             .FirstOrDefaultAsync(user => user.Email == email);
     }
 
-    public async void UpdateUsersRefreshToken(User user, string newRefreshToken)
+    public async void UpdateUsersRefreshToken(Guid id, string newRefreshToken)
     {
-        //TODO: Хочу обновить RefreshToken у пользователя
-        user.RefreshToken = newRefreshToken;
+        // user.RefreshToken = newRefreshToken;
+        await dbContext.Users
+            .Where(user => user.Id == id)
+            .ExecuteUpdateAsync(s => s
+                .SetProperty(u => u.RefreshToken, newRefreshToken));
     }
 
-    public async Task<string> GetPassword(User user)
+    public async Task<string> GetPassword(Guid id)
     {
-        //TODO: Хочу получить хэшированный пароль пользователя
+        var userResult = await dbContext.Users
+            .AsNoTracking()
+            .FirstAsync(user => user.Id == id);
+        return userResult.PasswordHash;
     }
 }
