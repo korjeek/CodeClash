@@ -22,7 +22,7 @@ public class AuthenticationController(TokenService tokenService, UsersRepository
         var password = await authService.HashPassword(request.Password);
         var user = await usersRepository.AddUser(new User(request.UserName, request.Email, password));
         if (user is null)
-            return BadRequest();
+            return BadRequest("Seems like this user is already registered");
         
         return await Login(new LoginRequest(request.UserName, request.Password));
     }
@@ -39,7 +39,7 @@ public class AuthenticationController(TokenService tokenService, UsersRepository
         
         var user = await usersRepository.FindUserByEmail(request.Email);
         if (user is null)
-            return Unauthorized();
+            return Unauthorized("Not logged in");
 
         var tokens = tokenService.UpdateTokens(user);
         return Ok(new AuthResponse(user.UserName, user.Email, tokens.AccessToken, tokens.RefreshToken));
@@ -50,11 +50,11 @@ public class AuthenticationController(TokenService tokenService, UsersRepository
     public async Task<IActionResult> RefreshToken(JwtToken? tokenModel)
     {
         if (tokenModel is null)
-            return BadRequest();
+            return BadRequest("Invalid token model");
         
         var principal = tokenService.GetPrincipalClaims(tokenModel.AccessToken);
         if (principal == null)
-            return BadRequest();
+            return BadRequest("Invalid principal claims");
 
         var user = await usersRepository.FindUserByUserName(principal.Identity!.Name);
         if (user == null || user.RefreshToken != tokenModel.RefreshToken || user.RefreshTokenExpiryTime <= DateTime.UtcNow)
