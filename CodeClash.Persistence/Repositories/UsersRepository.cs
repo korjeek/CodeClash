@@ -7,8 +7,10 @@ public class UsersRepository(ApplicationDbContext dbContext)
 {
     public async Task<User?> AddUser(User user)
     {
-        var isUserContainsInDb = await dbContext.Users.ContainsAsync(user);
-        if (isUserContainsInDb)
+        var isUserEmailContainsInDb = await dbContext.Users
+            .Select(u => u.Email)
+            .ContainsAsync(user.Email);
+        if (isUserEmailContainsInDb)
             return null;
         await dbContext.AddAsync(user);
         await dbContext.SaveChangesAsync();
