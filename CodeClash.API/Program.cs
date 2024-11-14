@@ -1,22 +1,31 @@
-using ClashCode.Application.Interfaces.Auth;
-using CodeClash.API.Endpoints;
-using CodeClash.Application.Interfaces.Repositories;
+using CodeClash.Application;
 using CodeClash.Application.Services;
-using CodeClash.Infrastructure;
+using CodeClash.Core.Services;
+using CodeClash.Persistence;
 using CodeClash.Persistence.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
 
+builder.Services.AddControllers();
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<PasswordHasher>();
+builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<TokenService>();
+builder.Services.AddScoped<UsersRepository>();
 
-builder.Services.AddScoped<IJwtProvider, JwtProvider>();
-builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
-builder.Services.AddScoped<IUsersRepositories, UsersRepository>();
+builder.Services.AddDbContext<ApplicationDbContext>(
+    options =>
+    {
+        options.UseNpgsql(configuration.GetConnectionString(nameof(ApplicationDbContext)));
+    });
+
+
 
 var app = builder.Build();
 
@@ -27,5 +36,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapUserEndpoints();
+app.UseHttpsRedirection();
+app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.MapControllers();
+
+//app.AddMappedEndpoints();
 app.Run();
