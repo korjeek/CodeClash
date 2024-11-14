@@ -24,7 +24,7 @@ public class AuthenticationController(TokenService tokenService, UsersRepository
         if (user is null)
             return BadRequest("Seems like this user is already registered");
         
-        return await Login(new LoginRequest(request.UserName, request.Password));
+        return await Login(new LoginRequest(request.Email, request.Password));
     }
 
     [HttpPost("login")]
