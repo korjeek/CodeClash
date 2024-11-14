@@ -33,8 +33,8 @@ public class AuthService(UsersRepository usersRepository, PasswordHasher passwor
     public JwtToken UpdateUsersTokens(User user)
     {
         var tokens = tokenService.UpdateTokens(user);
-        usersRepository.UpdateUsersRefreshToken(user.Id, tokens.RefreshToken);
         UpdateUsersRefreshTokenProperties(user, tokens.RefreshToken);
+        usersRepository.UpdateUsersRefreshToken(user.Id, tokens.RefreshToken);
         
         return tokens;
     }
