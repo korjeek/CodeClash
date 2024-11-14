@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-
+﻿
 namespace CodeClash.Core.Models;
 
 public class User(string userName, string email, string passwordHash)
