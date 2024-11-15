@@ -4,7 +4,7 @@ namespace CodeClash.Core.Entities;
 
 public class Competition
 {
-    private Problem problem;
+    private Issue issue;
     private bool _inProgress;
     // private string _usersCode;
     

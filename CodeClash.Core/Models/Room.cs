@@ -2,10 +2,10 @@
 
 namespace CodeClash.Core.Entities;
 
-public class Room(Guid id, List<Problem> problems, Room.RoomStatus status)
+public class Room(Guid id, List<Issue> problems, Room.RoomStatus status)
 {
     public Guid Id { get; } = id;
-    public List<Problem> Problems { get; } = problems;
+    public List<Issue> Issues { get; } = problems;
     private RoomStatus Status { get; set; } = status;
     private List<User> Participants { get; } = [];
     private Competition _competition = new();
