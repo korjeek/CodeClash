@@ -1,5 +1,4 @@
-﻿using CodeClash.Application.Services;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace CodeClash.API.Endpoints;
 

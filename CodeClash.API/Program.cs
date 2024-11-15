@@ -1,5 +1,5 @@
+using CodeClash.API.Services;
 using CodeClash.Application;
-using CodeClash.Application.Services;
 using CodeClash.Core.Services;
 using CodeClash.Persistence;
 using CodeClash.Persistence.Repositories;
@@ -25,8 +25,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(
         options.UseNpgsql(configuration.GetConnectionString(nameof(ApplicationDbContext)));
     });
 
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -44,5 +42,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-//app.AddMappedEndpoints();
 app.Run();

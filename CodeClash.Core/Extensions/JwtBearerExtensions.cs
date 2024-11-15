@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -12,59 +11,35 @@ namespace CodeClash.Core.Extensions;
 
 public static class JwtBearerExtensions
 {
-    public static List<Claim> CreateClaims(this User user)
-    {
-        var claims = new List<Claim>
-        {
-            new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)),
-            new(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new(ClaimTypes.Name, user.UserName),
-            new(ClaimTypes.Email, user.Email)
-        };
-        return claims;
-    }
+    public static List<Claim> CreateClaims(this User user) =>
+    [
+        new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+        new(ClaimTypes.NameIdentifier, user.Id.ToString()),
+        new(ClaimTypes.Name, user.UserName),
+        new(ClaimTypes.Email, user.Email)
+    ];
 
     private static SigningCredentials CreateSigningCredentials(this IConfiguration configuration)
     {
-        return new SigningCredentials(
-            new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(configuration["Jwt:Secret"]!)
-            ),
-            SecurityAlgorithms.HmacSha256
-        );
+        return new SigningCredentials(configuration.CreateSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256);
     }
+
+    private static SymmetricSecurityKey CreateSymmetricSecurityKey(this IConfiguration configuration) =>
+        new (Encoding.UTF8.GetBytes(configuration["Jwt:Secret"]!));
 
     public static JwtSecurityToken CreateJwtToken(this IEnumerable<Claim> claims, IConfiguration configuration)
     {
         var expire = configuration.GetSection("Jwt:Expire").Get<int>();
-        
         return new JwtSecurityToken(
             configuration["Jwt:Issuer"],
             configuration["Jwt:Audience"],
             claims,
-            expires: DateTime.UtcNow.AddMinutes(expire),
+            expires: DateTime.Now.AddSeconds(expire),
             signingCredentials: configuration.CreateSigningCredentials()
         );
     }
-    
-    public static JwtSecurityToken CreateToken(this IConfiguration configuration, List<Claim> authClaims)
-    {
-        var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Secret"]!));
-        var tokenValidityInMinutes = configuration.GetSection("Jwt:TokenValidityInMinutes").Get<int>();
-        
-        var token = new JwtSecurityToken(
-            issuer: configuration["Jwt:Issuer"],
-            audience: configuration["Jwt:Audience"],
-            expires: DateTime.Now.AddMinutes(tokenValidityInMinutes),
-            claims: authClaims,
-            signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
-        );
 
-        return token;
-    }
-
-    public static string GenerateRefreshToken(this IConfiguration configuration)
+    public static string GenerateRefreshToken()
     {
         var randomNumber = new byte[64];
         using var rng = RandomNumberGenerator.Create();
@@ -79,15 +54,11 @@ public static class JwtBearerExtensions
             ValidateAudience = false,
             ValidateIssuer = false,
             ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Secret"]!)),
+            IssuerSigningKey = configuration.CreateSymmetricSecurityKey(),
             ValidateLifetime = false
         };
 
         var tokenHandler = new JwtSecurityTokenHandler();
-        var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out var securityToken);
-        if (securityToken is not JwtSecurityToken jwtSecurityToken || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
-            throw new SecurityTokenException("Invalid token");
-
-        return principal;
+        return tokenHandler.ValidateToken(token, tokenValidationParameters, out _);
     }
 }

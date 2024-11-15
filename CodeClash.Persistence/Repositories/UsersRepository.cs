@@ -33,7 +33,6 @@ public class UsersRepository(ApplicationDbContext dbContext)
 
     public async void UpdateUsersRefreshToken(Guid id, string newRefreshToken)
     {
-        // user.RefreshToken = newRefreshToken;
         await dbContext.Users
             .Where(user => user.Id == id)
             .ExecuteUpdateAsync(s => s

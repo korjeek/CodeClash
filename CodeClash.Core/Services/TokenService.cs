@@ -30,17 +30,11 @@ public class TokenService(IConfiguration configuration)
 
     private string UpdateRefreshToken(User user)
     {
-        user.RefreshToken = configuration.GenerateRefreshToken();
-        user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(configuration.GetSection("Jwt:RefreshTokenValidityInDays").Get<int>());
+        user.RefreshToken = JwtBearerExtensions.GenerateRefreshToken();
+        user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
         return user.RefreshToken;
     }
 
-    public ClaimsPrincipal? GetPrincipalClaims(string accessToken) => configuration.GetPrincipalFromExpiredToken(accessToken);
-
-    public JwtToken CreateTokensByPrincipleClaims(List<Claim> claims)
-    {
-        var newAccessToken = CompileJwtSecurityToken(configuration.CreateToken(claims));
-        var newRefreshToken = configuration.GenerateRefreshToken();
-        return new JwtToken(newAccessToken, newRefreshToken);
-    }
+    public ClaimsPrincipal? GetPrincipalClaims(string accessToken) => 
+        configuration.GetPrincipalFromExpiredToken(accessToken);
 }
