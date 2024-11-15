@@ -17,13 +17,6 @@ public class UsersRepository(ApplicationDbContext dbContext)
         return user;
     }
 
-    public async Task<User?> FindUserByUserName(string? userName)
-    {
-        return await dbContext.Users
-            .AsNoTracking()
-            .FirstOrDefaultAsync(user => user.UserName == userName);
-    }
-
     public async Task<User?> FindUserByEmail(string email)
     {
         return await dbContext.Users

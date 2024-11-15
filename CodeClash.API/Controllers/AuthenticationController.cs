@@ -46,7 +46,7 @@ public class AuthenticationController(AuthService authService) : ControllerBase
 
         var user = await authService.GetUserByPrincipalClaims(tokenModel);
         if (user == null || user.RefreshToken != tokenModel.RefreshToken || user.RefreshTokenExpiryTime <= DateTime.Now)
-            return BadRequest(AuthRequestErrorType.ComplexRefreshTokenError.ToString());
+            return BadRequest(AuthRequestErrorType.ComplexRefreshTokenError + " " + user.RefreshTokenExpiryTime + " " + DateTime.Now);
         
         var tokens = authService.UpdateUsersTokens(user);
         return new ObjectResult(tokens);

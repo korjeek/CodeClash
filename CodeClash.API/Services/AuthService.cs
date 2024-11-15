@@ -1,4 +1,5 @@
-﻿using CodeClash.Application;
+﻿using System.Security.Claims;
+using CodeClash.Application;
 using CodeClash.Core.Models;
 using CodeClash.Core.Models.Identity;
 using CodeClash.Core.Services;
@@ -27,7 +28,11 @@ public class AuthService(UsersRepository usersRepository, PasswordHasher passwor
     public async Task<User?> GetUserByPrincipalClaims(JwtToken tokenModel)
     {
         var principal = tokenService.GetPrincipalClaims(tokenModel.AccessToken);
-        return principal is null ? null : await usersRepository.FindUserByUserName(principal.Identity!.Name);
+        
+        if (principal is null)
+            return null;
+        return await usersRepository.FindUserByEmail(principal.Claims
+            .First(claim => claim.Type == ClaimTypes.Email).Value);
     }
 
     public JwtToken UpdateUsersTokens(User user)
@@ -42,6 +47,6 @@ public class AuthService(UsersRepository usersRepository, PasswordHasher passwor
     private void UpdateUsersRefreshTokenProperties(User user, string refreshToken)
     {
         user.RefreshToken = refreshToken;
-        user.RefreshTokenExpiryTime = DateTime.Now.AddDays(7);
+        user.RefreshTokenExpiryTime = DateTime.Now.AddHours(12);
     }
 }
