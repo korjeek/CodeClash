@@ -1,7 +1,7 @@
 // src/services/authService.ts
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5099/api/auth';
+const API_URL = 'http://localhost:5099/auth';
 
 export interface RegisterUser {
   username: string;
@@ -11,7 +11,7 @@ export interface RegisterUser {
 }
 
 export interface LoginUser {
-  username: string;
+  email: string;
   password: string;
 }
 

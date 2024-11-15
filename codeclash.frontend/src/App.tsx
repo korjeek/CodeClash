@@ -1,36 +1,43 @@
 // src/App.tsx
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Register from './components/Register';
+import Home from './components/Home';
 import Login from './components/Login';
+import Auth from './components/Auth';
+import Header from './components/Header'
+import TopNavBar from './components/TopNavBar';
+import Rooms from './components/Rooms';
+import Page from './components/Page';
 
 const App: React.FC = () => {
-  return (
-//     <div>
-//             <Register />
-//     </div>
-//   );
+    const rooms = [
+        {key: 0, Name: "ABCD", host: "example@example.com", connected: 1, total: 10},
+        {key: 1, Name: "My Room", host: "example@example.com", connected: 3, total: 5},
+        {key: 2, Name: "Another Room", host: "example@example.com", connected: 5, total: 5},
+        {key: 3, Name: "New Room", host: "example@example.com", connected: 1, total: 2},
+        {key: 3, Name: "New Room", host: "example@example.com", connected: 1, total: 2},
+        {key: 3, Name: "New Room", host: "example@example.com", connected: 1, total: 2},
+        {key: 3, Name: "New Room", host: "example@example.com", connected: 1, total: 2},
+        {key: 3, Name: "New Room", host: "example@example.com", connected: 1, total: 2},
+        {key: 3, Name: "New Room", host: "example@example.com", connected: 1, total: 2},
+        {key: 3, Name: "New Room", host: "example@example.com", connected: 1, total: 2},
+        {key: 3, Name: "New Room", host: "example@example.com", connected: 1, total: 2},
+        {key: 3, Name: "New Room", host: "example@example.com", connected: 1, total: 2},
+        {key: 3, Name: "New Room", host: "example@example.com", connected: 1, total: 2}
+    ];
+    return (
+        <div>
         <Router>
-        <nav>
-            <ul>
-                <li>
-                    <Link to="/">App</Link>
-                </li>
-                <li>
-                    <Link to="/register">Register</Link>
-                </li>
-                <li>
-                    <Link to="/login">Log in</Link>
-                </li>
-            </ul>
-        </nav>
-
-        <Routes>
-            <Route path="/" element={App} />
-            <Route path="/register" element={<Register/>} />
-            <Route path="/login" element={<Login/>} />
-        </Routes>
+            <Routes>
+                    <Route path="/" element={<Page navBarIndex={0}><Home/></Page>} />
+                    <Route path="/home" element={<Page navBarIndex={0}><Home/></Page>} />
+                    <Route path="/login" element={<Page><Auth><Login/></Auth></Page>} />
+                    <Route path="/register" element={<Page><Auth><Register/></Auth></Page>} />
+                    <Route path="/rooms" element={<Page navBarIndex={1}><Rooms Rooms={rooms}/></Page>} />
+            </Routes>
         </Router>
+        </div>
     );
 };
 
