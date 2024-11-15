@@ -47,6 +47,6 @@ public class AuthService(UsersRepository usersRepository, PasswordHasher passwor
     private void UpdateUsersRefreshTokenProperties(User user, string refreshToken)
     {
         user.RefreshToken = refreshToken;
-        user.RefreshTokenExpiryTime = DateTime.Now.AddHours(12);
+        user.RefreshTokenExpiryTime = DateTime.UtcNow.AddHours(12);
     }
 }

@@ -45,8 +45,8 @@ public class AuthenticationController(AuthService authService) : ControllerBase
             return BadRequest(AuthRequestErrorType.InvalidTokenModel.ToString());
 
         var user = await authService.GetUserByPrincipalClaims(tokenModel);
-        if (user == null || user.RefreshToken != tokenModel.RefreshToken || user.RefreshTokenExpiryTime <= DateTime.Now)
-            return BadRequest(AuthRequestErrorType.ComplexRefreshTokenError + " " + user.RefreshTokenExpiryTime + " " + DateTime.Now);
+        if (user == null || user.RefreshToken != tokenModel.RefreshToken || user.RefreshTokenExpiryTime <= DateTime.UtcNow)
+            return BadRequest(AuthRequestErrorType.ComplexRefreshTokenError);
         
         var tokens = authService.UpdateUsersTokens(user);
         return new ObjectResult(tokens);
