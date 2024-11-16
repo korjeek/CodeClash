@@ -1,5 +1,6 @@
 // src/components/Register.tsx
 import React, { useState } from 'react';
+import {Link} from "react-router-dom"
 import { register } from '../services/authService';
 
 const Register: React.FC = () => {
@@ -20,19 +21,18 @@ const Register: React.FC = () => {
   };
 
   return (
-    <div className="wrapper fadeInDown">
         <div id="formContent">
+            <h2 className="inactive underlineHover"><Link to="/login">Sign In</Link> </h2>
             <h2 className="active"> Sign Up </h2>
-            <h2 className="inactive underlineHover"><a href="/login">Sign In</a> </h2>
 
-            <form>
+            <form onSubmit={handleRegister}>
                 <input 
                     type="text"
                     placeholder='Username'
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     id="login"
-                    className="fadeIn second"
+                    className="fadeIn"
                     name="login"
                     required
                 />
@@ -42,81 +42,42 @@ const Register: React.FC = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     id="email"
-                    className="fadeIn second"
+                    className="fadeIn"
                     name="email"
+                    required
                 />
                 <input 
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     id="password"
-                    className="fadeIn third"
+                    className="fadeIn"
                     name="password"
                     placeholder="Password"
+                    required
                 />
                 <input 
                     type="password"
                     value={passwordConfirm}
                     onChange={(e) => setPasswordConfirm(e.target.value)}
                     id="passwordConfirm"
-                    className="fadeIn third"
+                    className="fadeIn"
                     name="login"
                     placeholder="Confirm password"
+                    required
                 />
                 <input 
                     type="submit"
-                    className="fadeIn fourth"
+                    className="fadeIn"
                     value="Have fun"
                 />
             </form>
 
             <div id="formFooter">
-                <a className="underlineHover" href="#">Forgot Password?</a>
+                <Link to="/login">Already have an acount?</Link>
             </div>
-
         </div>
-    </div>
   );
-    <form onSubmit={handleRegister}>
-      <div >
-        <input
-          type="text"
-          placeholder='Username'
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <input
-          type="email"
-          placeholder='Email'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <input
-          placeholder='Password'
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <input
-          placeholder='Confirm password'
-          type="password"
-          value={passwordConfirm}
-          onChange={(e) => setPasswordConfirm(e.target.value)}
-          required
-        />
-      </div>
-      <button type="submit">Join all the fun</button>
-    </form>
-//   );
 };
 
 export default Register;

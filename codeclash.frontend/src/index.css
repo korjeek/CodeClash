@@ -23,11 +23,12 @@ a:hover {
 }
 
 body {
-  margin: 0;
   display: flex;
+  flex-direction: column;
+  /* width: 100%; */
   place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  max-width: 100vw;
+  padding: 1%;
 }
 
 h1 {
@@ -65,4 +66,17 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+p {
+  padding: 2%;
+}
+footer {
+  position: absolute;
+  bottom: 5px;
+  right: 50%;
+}
+
+footer:hover {
+  color: red;
+  text-decoration-line: underline;
 }
