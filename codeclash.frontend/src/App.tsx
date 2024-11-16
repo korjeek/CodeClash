@@ -5,8 +5,6 @@ import Register from './components/Register';
 import Home from './components/Home';
 import Login from './components/Login';
 import Auth from './components/Auth';
-import Header from './components/Header'
-import TopNavBar from './components/TopNavBar';
 import Rooms from './components/Rooms';
 import Page from './components/Page';
 
@@ -35,6 +33,7 @@ const App: React.FC = () => {
                     <Route path="/login" element={<Page><Auth><Login/></Auth></Page>} />
                     <Route path="/register" element={<Page><Auth><Register/></Auth></Page>} />
                     <Route path="/rooms" element={<Page navBarIndex={1}><Rooms Rooms={rooms}/></Page>} />
+                    <Route path="/ranks" element={<Page navBarIndex={2}></Page>} />
             </Routes>
         </Router>
         </div>

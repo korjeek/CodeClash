@@ -3,7 +3,7 @@ import TopNavBar from "./TopNavBar";
 
 interface PageProp {
     navBarIndex?: number;
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }
 
 export default function Page ({navBarIndex, children} : PageProp) {
@@ -17,6 +17,7 @@ export default function Page ({navBarIndex, children} : PageProp) {
             <div id="mainContentHolder">
                 {children}
             </div>
+            <footer>Powered by <b>BetBoom</b></footer>
         </div>
     );
 }
