@@ -1,12 +1,11 @@
-﻿using CodeClash.Core.Models;
+﻿namespace CodeClash.Core.Models;
 
-namespace CodeClash.Core.Entities;
-
-public class Room(Guid id, List<Problem> problems, Room.RoomStatus status)
+public class Room(TimeOnly time, Issue issues)
 {
-    public Guid Id { get; } = id;
-    public List<Problem> Problems { get; } = problems;
-    private RoomStatus Status { get; set; } = status;
+    public Guid Id { get; } = Guid.NewGuid();
+    public Issue Problems { get; } = issues;
+    public TimeOnly Time { get; } = time;
+    private RoomStatus Status { get; set; } = RoomStatus.WaitingForParticipants;
     private List<User> Participants { get; } = [];
     private Competition _competition = new();
     
@@ -16,6 +15,11 @@ public class Room(Guid id, List<Problem> problems, Room.RoomStatus status)
             Participants.Add(participant);
         else
             throw new InvalidOperationException("Cannot add participant. Competition in progress!");
+    }
+    
+    public void RemoveParticipant(User participant)
+    {
+        
     }
     
     public void StartCompetition()
