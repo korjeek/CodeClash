@@ -1,8 +1,5 @@
-﻿using CodeClash.Application.Services;
-using CodeClash.Core.Models;
+﻿using CodeClash.API.Services;
 using CodeClash.Core.Models.Identity;
-using CodeClash.Core.Services;
-using CodeClash.Persistence.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using LoginRequest = CodeClash.Core.Models.Identity.LoginRequest;
 using RegisterRequest = CodeClash.Core.Models.Identity.RegisterRequest;
@@ -11,18 +8,17 @@ namespace CodeClash.API.Controllers;
 
 [ApiController]
 [Route("auth")]
-public class AuthenticationController(TokenService tokenService, UsersRepository usersRepository, AuthService authService) : ControllerBase
+public class AuthenticationController(AuthService authService) : ControllerBase
 {
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterRequest request)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
-
-        var password = await authService.HashPassword(request.Password);
-        var user = await usersRepository.AddUser(new User(request.UserName, request.Email, password));
+        
+        var user = await authService.CreateUser(request);
         if (user is null)
-            return BadRequest("Seems like this user is already registered");
+            return BadRequest(AuthRequestErrorType.ExistedAccount.ToString());
         
         return await Login(new LoginRequest(request.Email, request.Password));
     }
@@ -33,15 +29,11 @@ public class AuthenticationController(TokenService tokenService, UsersRepository
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        var isLoginValid = await authService.IsLoginValid(request.Email, request.Password);
-        if (!isLoginValid)
-            return BadRequest("Login or password is incorrect");
-        
-        var user = await usersRepository.FindUserByEmail(request.Email);
+        var user = await authService.GetUser(request);
         if (user is null)
-            return Unauthorized("Not logged in");
-
-        var tokens = tokenService.UpdateTokens(user);
+            return BadRequest(AuthRequestErrorType.WrongCredentials.ToString());
+        
+        var tokens = authService.UpdateUsersTokens(user);
         return Ok(new AuthResponse(user.UserName, user.Email, tokens.AccessToken, tokens.RefreshToken));
     }
     
@@ -50,19 +42,21 @@ public class AuthenticationController(TokenService tokenService, UsersRepository
     public async Task<IActionResult> RefreshToken(JwtToken? tokenModel)
     {
         if (tokenModel is null)
-            return BadRequest("Invalid token model");
-        
-        var principal = tokenService.GetPrincipalClaims(tokenModel.AccessToken);
-        if (principal == null)
-            return BadRequest("Invalid principal claims");
+            return BadRequest(AuthRequestErrorType.InvalidTokenModel.ToString());
 
-        var user = await usersRepository.FindUserByUserName(principal.Identity!.Name);
+        var user = await authService.GetUserByPrincipalClaims(tokenModel);
         if (user == null || user.RefreshToken != tokenModel.RefreshToken || user.RefreshTokenExpiryTime <= DateTime.UtcNow)
-            return BadRequest();
+            return BadRequest(AuthRequestErrorType.ComplexRefreshTokenError);
         
-        var tokens = tokenService.CreateTokensByPrincipleClaims(principal.Claims.ToList());
-        usersRepository.UpdateUsersRefreshToken(user.Id, tokens.RefreshToken);
-
+        var tokens = authService.UpdateUsersTokens(user);
         return new ObjectResult(tokens);
     }
+}
+
+internal enum AuthRequestErrorType
+{
+    ExistedAccount,
+    WrongCredentials,
+    InvalidTokenModel,
+    ComplexRefreshTokenError
 }

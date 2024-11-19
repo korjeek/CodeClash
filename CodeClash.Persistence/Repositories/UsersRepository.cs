@@ -17,13 +17,6 @@ public class UsersRepository(ApplicationDbContext dbContext)
         return user;
     }
 
-    public async Task<User?> FindUserByUserName(string? userName)
-    {
-        return await dbContext.Users
-            .AsNoTracking()
-            .FirstOrDefaultAsync(user => user.UserName == userName);
-    }
-
     public async Task<User?> FindUserByEmail(string email)
     {
         return await dbContext.Users
@@ -31,13 +24,13 @@ public class UsersRepository(ApplicationDbContext dbContext)
             .FirstOrDefaultAsync(user => user.Email == email);
     }
 
-    public async void UpdateUsersRefreshToken(Guid id, string newRefreshToken)
+    public async void UpdateUsersRefreshToken(User user)
     {
-        // user.RefreshToken = newRefreshToken;
         await dbContext.Users
-            .Where(user => user.Id == id)
+            .Where(u => u.Id == user.Id)
             .ExecuteUpdateAsync(s => s
-                .SetProperty(u => u.RefreshToken, newRefreshToken));
+                .SetProperty(u => u.RefreshToken, user.RefreshToken)
+                .SetProperty(u => u.RefreshTokenExpiryTime, user.RefreshTokenExpiryTime));
     }
 
     public async Task<string> GetPassword(Guid id)

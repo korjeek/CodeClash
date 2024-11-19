@@ -1,0 +1,32 @@
+.floating {
+    position: absolute;
+    overflow: visible;
+    bottom: 50%;
+    right: 50%;
+    z-index: 9999;
+ }
+
+ #roomsScroll {
+    display: grid;
+    max-height: 50vh;
+    overflow-y: scroll;
+ }
+
+ .roomListItem {
+    display: flex;
+    float:left;
+    background-color: #555;
+    color: white;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+ }
+ .roomListItem * {
+    padding: 10px;
+ }
+
+ .roomListItem:hover {
+    background-color: #999;
+    color: #000;
+    scale: 103%;
+ }

@@ -2,7 +2,7 @@
 
 public class Competition
 {
-    private Issue _issue;
+    private Issue issue;
     private bool _inProgress;
     // private string _usersCode;
     
