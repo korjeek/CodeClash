@@ -7,6 +7,7 @@ import Login from './components/Login';
 import Auth from './components/Auth';
 import Rooms from './components/Rooms';
 import Page from './components/Page';
+import HomePage from './components/HomePage';
 
 const App: React.FC = () => {
     const rooms = [
@@ -34,6 +35,7 @@ const App: React.FC = () => {
                     <Route path="/register" element={<Page><Auth><Register/></Auth></Page>} />
                     <Route path="/rooms" element={<Page navBarIndex={1}><Rooms Rooms={rooms}/></Page>} />
                     <Route path="/ranks" element={<Page navBarIndex={2}></Page>} />
+                    <Route path="/test" element={<HomePage />} />
             </Routes>
         </Router>
         </div>
