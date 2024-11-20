@@ -7,6 +7,8 @@ namespace CodeClash.Persistence;
 public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
 {
     public DbSet<User> Users { get; set; }
+    // public DbSet<Room> Rooms { get; set; }
+    // public DbSet<Issue> Issues { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

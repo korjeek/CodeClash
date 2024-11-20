@@ -15,11 +15,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<ApplicationDbContext>(
-    options =>
-    {
-        options.UseNpgsql(configuration.GetConnectionString(nameof(ApplicationDbContext)));
-    });
+
+
+ builder.Services.AddDbContext<ApplicationDbContext>(
+     options => options.UseNpgsql(configuration.GetConnectionString(nameof(ApplicationDbContext))));
+
+
+// builder.Services.AddDbContext<ApplicationDbContext>(
+//     options => options.UseSqlite("Data Source=./Database/TestDB.db")
+// );
+
+
 builder.Services.AddScoped<PasswordHasher>();
 
 builder.Services.AddScoped<AuthService>();
@@ -27,6 +33,7 @@ builder.Services.AddScoped<TokenService>();
 builder.Services.AddScoped<RoomService>();
 builder.Services.AddScoped<IssueService>();
 
+builder.Services.AddScoped<IssuesRepository>();
 builder.Services.AddScoped<UsersRepository>();
 builder.Services.AddScoped<RoomsRepository>();
 builder.Services.AddScoped<IssuesRepository>();

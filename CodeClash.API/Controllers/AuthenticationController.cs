@@ -33,7 +33,7 @@ public class AuthenticationController(AuthService authService) : ControllerBase
         if (user is null)
             return BadRequest(AuthRequestErrorType.WrongCredentials.ToString());
         
-        var tokens = authService.UpdateUsersTokens(user);
+        var tokens = await authService.UpdateUsersTokens(user);
         return Ok(new AuthResponse(user.UserName, user.Email, tokens.AccessToken, tokens.RefreshToken));
     }
     

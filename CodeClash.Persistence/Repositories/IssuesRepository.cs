@@ -1,4 +1,4 @@
-﻿using CodeClash.Core.Models;
+using CodeClash.Core.Models;
 
 namespace CodeClash.Persistence.Repositories;
 
