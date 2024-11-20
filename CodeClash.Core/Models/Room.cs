@@ -1,6 +1,4 @@
-﻿using Microsoft.IdentityModel.Tokens;
-
-namespace CodeClash.Core.Models;
+﻿namespace CodeClash.Core.Models;
 
 public class Room(TimeOnly time, Issue issue)
 {
@@ -9,7 +7,7 @@ public class Room(TimeOnly time, Issue issue)
     public TimeOnly Time { get; } = time;
     public RoomStatus Status { get; set; } = RoomStatus.WaitingForParticipants;
     public List<User> Participants { get; } = [];
-    
+
     // public void AddParticipant(User participant)
     // {
     //     if (Status is RoomStatus.WaitingForParticipants)
@@ -43,7 +41,7 @@ public class Room(TimeOnly time, Issue issue)
     //     else
     //         throw new InvalidOperationException("Competition is not started!");
     // }
-    
+
     public enum RoomStatus
     {
         WaitingForParticipants = 0,

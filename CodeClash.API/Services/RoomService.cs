@@ -8,14 +8,7 @@ public class RoomService(RoomsRepository repository)
 {
     public async Task<string> CreateRoom(TimeOnly time, Issue issue)
     {
-        // TODO: RECHANGE
         return await repository.Add(new Room(time, issue));
-    }
-
-    private static bool CheckTime(string time)
-    {
-        var regex = new Regex(@"^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$");
-        return regex.IsMatch(time);
     }
     
     public async Task<Room?> EnterRoom(Guid roomId, User participant)

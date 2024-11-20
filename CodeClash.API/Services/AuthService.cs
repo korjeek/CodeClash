@@ -16,7 +16,7 @@ public class AuthService(UsersRepository usersRepository, PasswordHasher passwor
             return null;
         
         var password = await usersRepository.GetPassword(user.Id);
-        return passwordHasher.Verify(password, user.PasswordHash) ? null : user;
+        return passwordHasher.Verify(password, user.PasswordHash) ? user : null;
     }
 
     public async Task<User?> CreateUser(RegisterRequest request)
@@ -35,11 +35,11 @@ public class AuthService(UsersRepository usersRepository, PasswordHasher passwor
             .First(claim => claim.Type == ClaimTypes.Email).Value);
     }
 
-    public JwtToken UpdateUsersTokens(User user)
+    public async Task<JwtToken> UpdateUsersTokens(User user)
     {
         var tokens = tokenService.UpdateTokens(user);
         UpdateUsersRefreshTokenProperties(user, tokens.RefreshToken);
-        usersRepository.UpdateUsersRefreshToken(user);
+        await usersRepository.UpdateUsersRefreshToken(user);
         
         return tokens;
     }
