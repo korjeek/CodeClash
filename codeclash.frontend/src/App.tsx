@@ -29,13 +29,13 @@ const App: React.FC = () => {
         <div>
         <Router>
             <Routes>
-                    <Route path="/" element={<Page navBarIndex={0}><Home/></Page>} />
-                    <Route path="/home" element={<Page navBarIndex={0}><Home/></Page>} />
-                    <Route path="/login" element={<Page><Auth><Login/></Auth></Page>} />
-                    <Route path="/register" element={<Page><Auth><Register/></Auth></Page>} />
-                    <Route path="/rooms" element={<Page navBarIndex={1}><Rooms Rooms={rooms}/></Page>} />
-                    <Route path="/ranks" element={<Page navBarIndex={2}></Page>} />
-                    <Route path="/test" element={<HomePage />} />
+                <Route path="/" element={<Page navBarIndex={0}><Home/></Page>} />
+                <Route path="/home" element={<Page navBarIndex={0}><Home/></Page>} />
+                <Route path="/login" element={<Page><Auth><Login/></Auth></Page>} />
+                <Route path="/register" element={<Page><Auth><Register/></Auth></Page>} />
+                <Route path="/rooms" element={<Page navBarIndex={1}><Rooms Rooms={rooms}/></Page>} />
+                <Route path="/ranks" element={<Page navBarIndex={2}></Page>} />
+                <Route path="/test" element={<HomePage />} />
             </Routes>
         </Router>
         </div>
