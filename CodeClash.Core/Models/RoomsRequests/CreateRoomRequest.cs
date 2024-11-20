@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CodeClash.Core.Models.RoomsRequests;
 
@@ -6,9 +7,10 @@ public class CreateRoomRequest
 {
     [Required]
     [DataType(DataType.Time)]
-    public string Time { get; set; } = null!;
+    [Remote(action: "CheckTime", controller: "RoomController", ErrorMessage = "Invalid string time")]
+    public TimeOnly Time { get; set; }
     
     [Required]
     // [Display()]
-    public string Issue { get; set; } = null!;
+    public Issue Issue { get; set; } = null!;
 }

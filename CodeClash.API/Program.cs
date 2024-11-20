@@ -14,16 +14,21 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<PasswordHasher>();
-builder.Services.AddScoped<AuthService>();
-builder.Services.AddScoped<TokenService>();
-builder.Services.AddScoped<UsersRepository>();
-
 builder.Services.AddDbContext<ApplicationDbContext>(
     options =>
     {
         options.UseNpgsql(configuration.GetConnectionString(nameof(ApplicationDbContext)));
     });
+builder.Services.AddScoped<PasswordHasher>();
+
+builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<TokenService>();
+builder.Services.AddScoped<RoomService>();
+
+builder.Services.AddScoped<UsersRepository>();
+builder.Services.AddScoped<RoomsRepository>();
+
+
 
 var app = builder.Build();
 

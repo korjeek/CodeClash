@@ -1,16 +1,14 @@
 ﻿using CodeClash.Core.Models;
-
 namespace CodeClash.Persistence.Repositories;
 
 public class RoomsRepository 
-    // нужно ли сделать дженерик с типом данных, которые мы хотим достать из БД? Код похож на код UserRepository
 {
-    public async Task Add(Room room)
+    public async Task<string> Add(Room room)
     {
-        throw new NotImplementedException();
+        return await new Task<string>(() => "HUI IS CREATED");
     }
     
-    public async Task<Room> GetById(Guid id)
+    public async Task<Room?> GetRoomById(Guid id)
     {
         throw new NotImplementedException();
     }

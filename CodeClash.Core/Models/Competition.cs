@@ -1,6 +1,6 @@
 ﻿namespace CodeClash.Core.Models;
 
-public class Competition
+public class Competition()
 {
     private Issue issue;
     private bool _inProgress;
