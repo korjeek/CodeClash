@@ -1,38 +1,40 @@
-﻿using System.Text.RegularExpressions;
-using CodeClash.Core.Models;
+﻿using CodeClash.Core.Models;
+using CodeClash.Core.Models.RoomsRequests;
 using CodeClash.Persistence.Repositories;
 
 namespace CodeClash.API.Services;
 
-public class RoomService(RoomsRepository repository)
+public class RoomService(RoomsRepository roomsRepository, IssuesRepository issuesRepository, UsersRepository usersRepository)
 {
-    public async Task<string> CreateRoom(TimeOnly time, Issue issue)
+    public async Task<Room?> CreateRoom(CreateRoomRequest request)
     {
-        // TODO: RECHANGE
-        return await repository.Add(new Room(time, issue));
-    }
-
-    private static bool CheckTime(string time)
-    {
-        var regex = new Regex(@"^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$");
-        return regex.IsMatch(time);
+        var issue = await issuesRepository.GetIssueById(request.IssueId); // Guid.Parse(request.IssueId)
+        if (issue == null)
+            return null;
+        var admin = await usersRepository.FindUserByEmail(request.UserEmail);
+        
+        return await roomsRepository.Add(new Room(request.Time, issue, admin!));
     }
     
-    public async Task<Room?> EnterRoom(Guid roomId, User participant)
+    public async Task<Room?> EnterRoom(EnterRoomRequest request)
     {
-        var room = await repository.GetRoomById(roomId);
+        var room = await roomsRepository.GetRoomById(request.RoomId);
         if (room == null)
             return null;
+        
+        var participant = await usersRepository.FindUserByEmail(request.UserEmail);
+        
         if (room.Status == Room.RoomStatus.WaitingForParticipants)
-            room.Participants.Add(participant);
+            room.Participants.Add(participant!);
         else
             return null;
-        return room; // нужно ли возвращать комнату?
+        
+        return room;
     }
     
     public async Task<Room?> QuitRoom(Guid roomId, User participant)
     {
-        var room = await repository.GetRoomById(roomId);
+        var room = await roomsRepository.GetRoomById(roomId);
         if (room == null)
             return null;
         return room.Participants.Remove(participant) ? room : null;
@@ -40,13 +42,21 @@ public class RoomService(RoomsRepository repository)
     
     public async Task<Room?> StartCompetition(Guid roomId)
     {
-        var room = await repository.GetRoomById(roomId);
+        var room = await roomsRepository.GetRoomById(roomId);
         if (room == null)
             return null;
         if (room.Status == Room.RoomStatus.CompetitionInProgress) return null;
         room.Status = Room.RoomStatus.CompetitionInProgress;
         return room;
     }
-    
-    
+
+    public async Task<Room?> FinishCompetition(Guid roomId)
+    {
+        var room = await roomsRepository.GetRoomById(roomId);
+        if (room == null)
+            return null;
+        if (room.Status == Room.RoomStatus.WaitingForParticipants) return null;
+        room.Status = Room.RoomStatus.WaitingForParticipants;
+        return room;
+    }
 }

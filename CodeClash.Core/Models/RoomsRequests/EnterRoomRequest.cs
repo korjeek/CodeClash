@@ -6,9 +6,9 @@ public class EnterRoomRequest
 {
     [Required]
     [Display(Name = "RoomId")]
-    public string RoomId { get; set; } = null!;
-    
+    public Guid RoomId { get; set; }
+
     [Required]
-    [Display(Name = "Key")]
-    public string Key { get; set; } = null!;
+    [Display(Name = "UserEmail")]
+    public string UserEmail { get; set; } = null!;
 }

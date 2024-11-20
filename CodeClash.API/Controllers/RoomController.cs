@@ -1,6 +1,5 @@
 ﻿using CodeClash.API.Services;
 using CodeClash.Core.Models.RoomsRequests;
-using CodeClash.Persistence.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodeClash.API.Controllers;
@@ -14,9 +13,12 @@ public class RoomController(RoomService roomService) : ControllerBase
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
-
-        var res = await roomService.CreateRoom(request.Time, request.Issue);
-        return Ok(res);
+        
+        var result = await roomService.CreateRoom(request);
+        if (result == null)
+            return BadRequest("Wrong issue id");
+        
+        return Ok(result);
     }
     
     [HttpPost("enter-room")]
@@ -24,10 +26,14 @@ public class RoomController(RoomService roomService) : ControllerBase
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
-        
-        return Ok();
-    }
 
+        var result = await roomService.EnterRoom(request);
+        if (result == null)
+            return BadRequest();
+
+        return Ok(result);
+    }
+    
     [HttpPost("start-competition")]
     public async Task<IActionResult> StartCompetition([FromBody] StartCompetitionRequest request)
     {
