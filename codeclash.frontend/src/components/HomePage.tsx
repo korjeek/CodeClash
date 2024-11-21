@@ -3,11 +3,9 @@ import TypeIt from "typeit-react";
 import {motion, useMotionTemplate, useMotionValue, animate} from "framer-motion";
 import '../style/HomePage/Main.css'
 import '../style/HomePage/NavBar.css'
-import '../style/HomePage/Grid.css'
 
 
 export default function HomePage() {
-    Grid();
     return (
         <div className="home-page">
             <div className="navbar_container">
@@ -38,27 +36,10 @@ export default function HomePage() {
                         <button className="get-started-button">Get Started</button>
                     </div>
                 </header>
-                <Grid/>
             </main>
         </div>
     )
 };
-
-const Grid = () => {
-    const cols = 10;
-    const rows = 7;
-    const grid = [];
-
-    for (let i = 1; i <= cols; i++) {
-        grid.push(<div className={`grid_line vertical_line v-line-${i}`}></div>)
-    }
-
-    for (let i = 1; i <= rows; i++) {
-        grid.push(<div className={`grid_line horizontal_line h-line-${i}`}></div>)
-    }
-
-    return <div className="grid-container">{grid}</div>;
-}
 
 
 
