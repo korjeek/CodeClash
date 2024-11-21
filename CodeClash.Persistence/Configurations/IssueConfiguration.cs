@@ -8,6 +8,6 @@ public class IssueConfiguration : IEntityTypeConfiguration<Issue>
 {
     public void Configure(EntityTypeBuilder<Issue> builder)
     {
-        throw new NotImplementedException();
+        builder.HasKey(issue => issue.Id);
     }
 }

@@ -39,7 +39,7 @@ public class AuthService(UsersRepository usersRepository, PasswordHasher passwor
     {
         var tokens = tokenService.UpdateTokens(user);
         UpdateUsersRefreshTokenProperties(user, tokens.RefreshToken);
-        await usersRepository.UpdateUsersRefreshToken(user);
+        await usersRepository.UpdateUserRefreshToken(user);
         
         return tokens;
     }

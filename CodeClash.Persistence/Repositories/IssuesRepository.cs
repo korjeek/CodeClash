@@ -1,8 +1,9 @@
 ﻿using CodeClash.Core.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CodeClash.Persistence.Repositories;
 
-public class IssuesRepository
+public class IssuesRepository(ApplicationDbContext dbContext)
 {
     public async Task<Issue?> Add(Issue issue)
     {
@@ -11,6 +12,8 @@ public class IssuesRepository
 
     public async Task<Issue?> GetIssueById(Guid id)
     {
-        throw new NotImplementedException();
+        return await dbContext.Issues
+            .AsNoTracking()
+            .FirstOrDefaultAsync(issue => issue.Id == id);
     }
 }

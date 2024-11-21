@@ -15,7 +15,7 @@ public static class JwtBearerExtensions
     [
         new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
         new(ClaimTypes.NameIdentifier, user.Id.ToString()),
-        new(ClaimTypes.Name, user.UserName),
+        new(ClaimTypes.Name, user.Name),
         new(ClaimTypes.Email, user.Email)
     ];
 
