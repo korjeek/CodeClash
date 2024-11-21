@@ -3,6 +3,7 @@ using System;
 using CodeClash.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CodeClash.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241121202745_AddedRoomsIssues_UpdatedUsers")]
+    partial class AddedRoomsIssues_UpdatedUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +37,7 @@ namespace CodeClash.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Issues", (string)null);
+                    b.ToTable("Issues");
                 });
 
             modelBuilder.Entity("CodeClash.Core.Models.Room", b =>
@@ -54,7 +57,7 @@ namespace CodeClash.Persistence.Migrations
                     b.HasIndex("AdminId")
                         .IsUnique();
 
-                    b.ToTable("Rooms", (string)null);
+                    b.ToTable("Rooms");
                 });
 
             modelBuilder.Entity("CodeClash.Core.Models.User", b =>
@@ -91,7 +94,7 @@ namespace CodeClash.Persistence.Migrations
 
                     b.HasIndex("RoomId", "IsAdmin");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("CodeClash.Core.Models.Room", b =>

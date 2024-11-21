@@ -11,37 +11,33 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
         var issue = await issuesRepository.GetIssueById(request.IssueId); // Guid.Parse(request.IssueId)
         if (issue == null)
             return null;
+        // А КАКОГО ХУЯ, СПРАШИВАЕТСЯ, МЫ УВЕРЕНЫ, ЧТО ЗДЕСЬ ДОЛЖЕН ИСКАТЬСЯ ADMIN??????
         var admin = await usersRepository.FindUserByEmail(request.UserEmail);
-        
         return await roomsRepository.Add(new Room(request.Time, issue, admin!));
     }
     
-    public async Task<Room?> EnterRoom(EnterRoomRequest request)
+    public async Task<Room?> EnterRoom(EnterQuitRoomRequest request)
     {
-        var room = await roomsRepository.GetRoomById(request.RoomId);
-        if (room == null)
-            return null;
-        
         var participant = await usersRepository.FindUserByEmail(request.UserEmail);
-        
-        if (room.Status == Room.RoomStatus.WaitingForParticipants)
-            room.Participants.Add(participant!);
-        else
-            return null;
-        
-        return room;
+        return await roomsRepository.AddUserToRoom(participant!, request.RoomId);
     }
     
-    public async Task<Room?> QuitRoom(Guid roomId, User participant)
+    public async Task<Room?> QuitRoom(EnterQuitRoomRequest request)
     {
-        var room = await roomsRepository.GetRoomById(roomId);
-        if (room == null)
-            return null;
-        
-        
-        
-        return room.Participants.Remove(participant) ? room : null;
+        var user = await usersRepository.FindUserByEmail(request.UserEmail);
+        return await roomsRepository.RemoveUserFromRoom(user, request.RoomId);
+        // return room.Participants.Remove(participant) ? room : null;
     }
+
+    public async Task<bool> CloseRoom(Guid roomId)
+    {
+        throw new NotImplementedException();
+    }
+    
+    
+    
+    
+    
     
     public async Task<Room?> StartCompetition(Guid roomId)
     {

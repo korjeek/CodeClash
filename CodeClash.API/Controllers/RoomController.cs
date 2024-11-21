@@ -8,6 +8,7 @@ namespace CodeClash.API.Controllers;
 [Route("room")]
 public class RoomController(RoomService roomService) : ControllerBase
 {
+    // TODO: Websocket connection
     [HttpPost("create-room")]
     public async Task<IActionResult> CreateRoom([FromBody] CreateRoomRequest request)
     {
@@ -21,8 +22,9 @@ public class RoomController(RoomService roomService) : ControllerBase
         return Ok(result);
     }
     
+    // TODO: Websocket connection
     [HttpPost("enter-room")]
-    public async Task<IActionResult> EnterRoomByKey([FromBody] EnterRoomRequest request)
+    public async Task<IActionResult> EnterRoomByKey([FromBody] EnterQuitRoomRequest request)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -34,8 +36,34 @@ public class RoomController(RoomService roomService) : ControllerBase
         return Ok(result);
     }
     
+    [HttpPost("quit-room")]
+    public async Task<IActionResult> QuitRoom([FromBody] EnterQuitRoomRequest request)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        var result = await roomService.QuitRoom(request);
+        if (result == null)
+            return BadRequest("The room does not exist or competition in progress");
+
+        return Ok(result);
+    }
+    
+    [HttpPost("close-room")]
+    public async Task<IActionResult> CloseRoom([FromBody] Guid roomId)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        var result = await roomService.CloseRoom(roomId);
+        if (result == null)
+            return BadRequest("The room does not exist or competition in progress");
+
+        return Ok();
+    }
+    
     [HttpPost("start-competition")]
-    public async Task<IActionResult> StartCompetition([FromBody] StartCompetitionRequest request)
+    public async Task<IActionResult> StartCompetition([FromBody] Guid roomId)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);

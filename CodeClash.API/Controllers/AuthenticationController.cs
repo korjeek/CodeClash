@@ -34,7 +34,7 @@ public class AuthenticationController(AuthService authService) : ControllerBase
             return BadRequest(AuthRequestErrorType.WrongCredentials.ToString());
         
         var tokens = await authService.UpdateUsersTokens(user);
-        return Ok(new AuthResponse(user.UserName, user.Email, tokens.AccessToken, tokens.RefreshToken));
+        return Ok(new AuthResponse(user.Name, user.Email, tokens.AccessToken, tokens.RefreshToken));
     }
     
     [HttpPost]

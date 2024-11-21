@@ -24,7 +24,7 @@ public class UsersRepository(ApplicationDbContext dbContext)
             .FirstOrDefaultAsync(user => user.Email == email);
     }
 
-    public async Task UpdateUsersRefreshToken(User user)
+    public async Task UpdateUserRefreshToken(User user)
     {
         await dbContext.Users
             .Where(u => u.Id == user.Id)

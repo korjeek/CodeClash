@@ -2,12 +2,12 @@
 
 namespace CodeClash.Core.Models.RoomsRequests;
 
-public class EnterRoomRequest
+public class EnterQuitRoomRequest
 {
     [Required]
     [Display(Name = "RoomId")]
     public Guid RoomId { get; set; }
-
+    
     [Required]
     [Display(Name = "UserEmail")]
     public string UserEmail { get; set; } = null!;
