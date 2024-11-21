@@ -29,7 +29,7 @@ public class RoomController(RoomService roomService) : ControllerBase
 
         var result = await roomService.EnterRoom(request);
         if (result == null)
-            return BadRequest();
+            return BadRequest("The room does not exist or competition in progress");
 
         return Ok(result);
     }
@@ -40,6 +40,17 @@ public class RoomController(RoomService roomService) : ControllerBase
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
         
+        
+        
         return Ok();
     }
+    
+    // [HttpPost("finish-competition")]
+    // public async Task<IActionResult> FinishCompetition([FromBody] FinishCompetitionRequest request)
+    // {
+    //     if (!ModelState.IsValid)
+    //         return BadRequest(ModelState);
+    //     
+    //     return Ok();
+    // }
 }

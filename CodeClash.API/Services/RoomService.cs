@@ -37,6 +37,9 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
         var room = await roomsRepository.GetRoomById(roomId);
         if (room == null)
             return null;
+        
+        
+        
         return room.Participants.Remove(participant) ? room : null;
     }
     
