@@ -1,5 +1,4 @@
 ﻿using CodeClash.API.Services;
-using CodeClash.Core.Models;
 using CodeClash.Core.Models.RoomsRequests;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,17 +6,19 @@ namespace CodeClash.API.Controllers;
 
 [ApiController]
 [Route("room")]
-public class RoomController(RoomService roomService, IssueService issueService) : ControllerBase
+public class RoomController(RoomService roomService) : ControllerBase
 {
     [HttpPost("create-room")]
     public async Task<IActionResult> CreateRoom([FromBody] CreateRoomRequest request)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
-
-        var issue = await issueService.GetIssueById(request.IssueId);
-        var res = await roomService.CreateRoom(request.Time, issue);
-        return Ok(request.Time);
+        
+        var result = await roomService.CreateRoom(request);
+        if (result == null)
+            return BadRequest("Wrong issue id");
+        
+        return Ok(result);
     }
     
     [HttpPost("enter-room")]
@@ -25,10 +26,14 @@ public class RoomController(RoomService roomService, IssueService issueService) 
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
-        
-        return Ok();
-    }
 
+        var result = await roomService.EnterRoom(request);
+        if (result == null)
+            return BadRequest();
+
+        return Ok(result);
+    }
+    
     [HttpPost("start-competition")]
     public async Task<IActionResult> StartCompetition([FromBody] StartCompetitionRequest request)
     {

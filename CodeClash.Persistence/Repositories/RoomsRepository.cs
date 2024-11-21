@@ -4,7 +4,7 @@ namespace CodeClash.Persistence.Repositories;
 
 public class RoomsRepository
 {
-    public async Task<string> Add(Room room)
+    public async Task<Room?> Add(Room room)
     {
         throw new NotImplementedException();
     }

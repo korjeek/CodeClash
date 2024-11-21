@@ -1,11 +1,12 @@
 ﻿using CodeClash.Core.Models;
+using CodeClash.Persistence.Repositories;
 
 namespace CodeClash.API.Services;
 
-public class IssueService
+public class IssueService(IssuesRepository repository)
 {
-    public async Task<Issue> GetIssueById(Guid issueId)
+    public async Task<Issue?> GetIssue(Guid id)
     {
-        throw new NotImplementedException();
+        return await repository.GetIssueById(id);
     }
 }

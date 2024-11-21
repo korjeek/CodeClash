@@ -3,6 +3,7 @@ using CodeClash.Application;
 using CodeClash.Core.Services;
 using CodeClash.Persistence;
 using CodeClash.Persistence.Repositories;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,8 +36,7 @@ builder.Services.AddScoped<IssueService>();
 builder.Services.AddScoped<IssuesRepository>();
 builder.Services.AddScoped<UsersRepository>();
 builder.Services.AddScoped<RoomsRepository>();
-
-
+builder.Services.AddScoped<IssuesRepository>();
 
 var app = builder.Build();
 
