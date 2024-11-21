@@ -26,7 +26,6 @@ const App: React.FC = () => {
         {key: 3, Name: "New Room", host: "example@example.com", connected: 1, total: 2}
     ];
     return (
-        <div>
         <Router>
             <Routes>
                 <Route path="/" element={<Page navBarIndex={0}><Home/></Page>} />
@@ -38,7 +37,6 @@ const App: React.FC = () => {
                 <Route path="/test" element={<HomePage />} />
             </Routes>
         </Router>
-        </div>
     );
 };
 

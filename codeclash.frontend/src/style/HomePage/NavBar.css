@@ -5,6 +5,7 @@
     position: fixed;
     font-family: "Inter", Arial;
     text-align: center;
+    z-index: 1;
 }
 
 .navbar-content {
@@ -15,7 +16,7 @@
     padding-right: 10rem;
     min-height: 6rem;
     display: flex;
-    position: static;
+    position: fixed;
 }
 
 .navbar-text-content{
