@@ -40,6 +40,7 @@
     position: relative;
     font-size: 1.563rem;
     font-weight: 600;
+    z-index: 2;
 }
 
 .navbar-menu-links{
@@ -48,6 +49,7 @@
     align-items: center;
     display: flex;
     position: static;
+    color: white;
 }
 
 .menu-buttons{
