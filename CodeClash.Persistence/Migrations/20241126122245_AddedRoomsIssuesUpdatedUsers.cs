@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CodeClash.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class AddedRoomsIssues_UpdatedUsers : Migration
+    public partial class AddedRoomsIssuesUpdatedUsers : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -46,18 +46,19 @@ namespace CodeClash.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Time = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
                     Status = table.Column<int>(type: "integer", nullable: false),
-                    AdminId = table.Column<Guid>(type: "uuid", nullable: false)
+                    IssueId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Rooms", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Rooms_Users_AdminId",
-                        column: x => x.AdminId,
-                        principalTable: "Users",
+                        name: "FK_Rooms_Issues_IssueId",
+                        column: x => x.IssueId,
+                        principalTable: "Issues",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -66,9 +67,9 @@ namespace CodeClash.Persistence.Migrations
                 columns: new[] { "RoomId", "IsAdmin" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Rooms_AdminId",
+                name: "IX_Rooms_IssueId",
                 table: "Rooms",
-                column: "AdminId",
+                column: "IssueId",
                 unique: true);
 
             migrationBuilder.AddForeignKey(
@@ -88,10 +89,10 @@ namespace CodeClash.Persistence.Migrations
                 table: "Users");
 
             migrationBuilder.DropTable(
-                name: "Issues");
+                name: "Rooms");
 
             migrationBuilder.DropTable(
-                name: "Rooms");
+                name: "Issues");
 
             migrationBuilder.DropIndex(
                 name: "IX_Users_RoomId_IsAdmin",

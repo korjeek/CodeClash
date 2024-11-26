@@ -11,9 +11,8 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
         var issue = await issuesRepository.GetIssueById(request.IssueId); // Guid.Parse(request.IssueId)
         if (issue == null)
             return null;
-        // А КАКОГО ХУЯ, СПРАШИВАЕТСЯ, МЫ УВЕРЕНЫ, ЧТО ЗДЕСЬ ДОЛЖЕН ИСКАТЬСЯ ADMIN??????
-        var admin = await usersRepository.FindUserByEmail(request.UserEmail);
-        return await roomsRepository.Add(new Room(request.Time, issue, admin!));
+        
+        return await roomsRepository.Add(new Room(request.Time, issue), request.UserEmail);
     }
     
     public async Task<Room?> EnterRoom(EnterQuitRoomRequest request)
@@ -25,8 +24,7 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
     public async Task<Room?> QuitRoom(EnterQuitRoomRequest request)
     {
         var user = await usersRepository.FindUserByEmail(request.UserEmail);
-        return await roomsRepository.RemoveUserFromRoom(user, request.RoomId);
-        // return room.Participants.Remove(participant) ? room : null;
+        return await roomsRepository.RemoveUserFromRoom(user!, request.RoomId);
     }
 
     public async Task<bool> CloseRoom(Guid roomId)

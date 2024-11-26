@@ -3,8 +3,6 @@ using CodeClash.Application;
 using CodeClash.Core.Services;
 using CodeClash.Persistence;
 using CodeClash.Persistence.Repositories;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -17,8 +15,7 @@ builder.Services.AddSwaggerGen();
 
 
 
- builder.Services.AddDbContext<ApplicationDbContext>(
-     options => options.UseNpgsql(configuration.GetConnectionString(nameof(ApplicationDbContext))));
+ builder.Services.AddDbContext<ApplicationDbContext>();
 
 builder.Services.AddScoped<PasswordHasher>();
 

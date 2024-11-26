@@ -5,8 +5,9 @@ namespace CodeClash.Persistence.Repositories;
 
 public class UsersRepository(ApplicationDbContext dbContext)
 {
-    public async Task<User?> AddUser(User user)
+    public async Task<User?> AddUser(string name, string email, string passwordHash)
     {
+        var user = new User(name, email, passwordHash);
         var isUserEmailContainsInDb = await dbContext.Users
             .Select(u => u.Email)
             .ContainsAsync(user.Email);
@@ -19,9 +20,15 @@ public class UsersRepository(ApplicationDbContext dbContext)
 
     public async Task<User?> FindUserByEmail(string email)
     {
-        return await dbContext.Users
-            .AsNoTracking()
+        var user = await dbContext.Users
+            .Include(u => u.Room)
+            .ThenInclude(r => r!.Participants)
             .FirstOrDefaultAsync(user => user.Email == email);
+        if (user is null) return null;
+        if (user.Room is null) return user;
+        await dbContext.Entry(user.Room).Reference(r => r.Issue).LoadAsync();
+        
+        return user;
     }
 
     public async Task UpdateUserRefreshToken(User user)
@@ -33,11 +40,15 @@ public class UsersRepository(ApplicationDbContext dbContext)
                 .SetProperty(u => u.RefreshTokenExpiryTime, user.RefreshTokenExpiryTime));
     }
 
-    public async Task<string> GetPassword(Guid id)
+    public async Task<User?> GetUserById(Guid userId)
     {
-        var userResult = await dbContext.Users
-            .AsNoTracking()
-            .FirstAsync(user => user.Id == id);
-        return userResult.PasswordHash;
+        return await dbContext.Users
+            .FindAsync(userId);
+    }
+
+    public async Task<string> GetPassword(Guid userId)
+    {
+        var userResult = await GetUserById(userId);
+        return userResult!.PasswordHash;
     }
 }

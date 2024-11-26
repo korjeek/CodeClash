@@ -19,7 +19,7 @@ public class RoomController(RoomService roomService) : ControllerBase
         if (result == null)
             return BadRequest("Wrong issue id");
         
-        return Ok(result);
+        return Ok($"Room is created id: {result.Id}");
     }
     
     // TODO: Websocket connection
@@ -44,9 +44,9 @@ public class RoomController(RoomService roomService) : ControllerBase
 
         var result = await roomService.QuitRoom(request);
         if (result == null)
-            return BadRequest("The room does not exist or competition in progress");
+            return BadRequest("The room does not exist");
 
-        return Ok(result);
+        return Ok("You quited from room");
     }
     
     [HttpPost("close-room")]
