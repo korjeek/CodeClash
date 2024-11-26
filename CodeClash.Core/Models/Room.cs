@@ -23,7 +23,6 @@ public class Room
         AdminId = admin.Id;
     }
     
-    
     public enum RoomStatus
     {
         WaitingForParticipants = 0,

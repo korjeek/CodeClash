@@ -3,7 +3,6 @@ using CodeClash.Application;
 using CodeClash.Core.Services;
 using CodeClash.Persistence;
 using CodeClash.Persistence.Repositories;
-using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,7 +14,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
+builder.Services.AddSignalR();
 
  builder.Services.AddDbContext<ApplicationDbContext>(
      options => options.UseNpgsql(configuration.GetConnectionString(nameof(ApplicationDbContext))));
