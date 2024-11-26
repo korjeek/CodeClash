@@ -43,6 +43,7 @@
         color:aqua;
     }
 }
+
 @keyframes changeColors {
     0% {
         color: aqua;

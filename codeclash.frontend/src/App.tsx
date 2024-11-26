@@ -8,6 +8,7 @@ import Auth from './components/Auth';
 import Rooms from './components/Rooms';
 import Page from './components/Page';
 import HomePage from './components/HomePage';
+import RegisterPage from './components/RegisterPage';
 
 const App: React.FC = () => {
     const rooms = [
@@ -26,19 +27,18 @@ const App: React.FC = () => {
         {key: 3, Name: "New Room", host: "example@example.com", connected: 1, total: 2}
     ];
     return (
-        <div>
         <Router>
             <Routes>
-                    <Route path="/" element={<Page navBarIndex={0}><Home/></Page>} />
-                    <Route path="/home" element={<Page navBarIndex={0}><Home/></Page>} />
-                    <Route path="/login" element={<Page><Auth><Login/></Auth></Page>} />
-                    <Route path="/register" element={<Page><Auth><Register/></Auth></Page>} />
-                    <Route path="/rooms" element={<Page navBarIndex={1}><Rooms Rooms={rooms}/></Page>} />
-                    <Route path="/ranks" element={<Page navBarIndex={2}></Page>} />
-                    <Route path="/test" element={<HomePage />} />
+                <Route path="/" element={<Page navBarIndex={0}><Home/></Page>} />
+                <Route path="/home" element={<Page navBarIndex={0}><Home/></Page>} />
+                <Route path="/login" element={<Page><Auth><Login/></Auth></Page>} />
+                <Route path="/register" element={<Page><Auth><Register/></Auth></Page>} />
+                <Route path="/rooms" element={<Page navBarIndex={1}><Rooms Rooms={rooms}/></Page>} />
+                <Route path="/ranks" element={<Page navBarIndex={2}></Page>} />
+                <Route path="/test" element={<HomePage/>} />
+                <Route path="/login1" element={<RegisterPage/>} />
             </Routes>
         </Router>
-        </div>
     );
 };
 
