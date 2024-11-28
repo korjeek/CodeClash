@@ -15,11 +15,19 @@ public class RoomsRepository(ApplicationDbContext dbContext)
         dbContext.Rooms.Attach(room);
         admin.IsAdmin = true;
         admin.Room = room;
+
+        var entries = dbContext.ChangeTracker.Entries();
         
         await dbContext.SaveChangesAsync();
         
         return room;
     }
+
+    // public async Task<bool> Remove(Guid roomId)
+    // {
+    //     dbContext.Rooms.Remov 
+    // }
+    
 
     public async Task<Room?> GetRoomById(Guid roomId)
     {

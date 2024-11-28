@@ -5,9 +5,8 @@ namespace CodeClash.Persistence.Repositories;
 
 public class UsersRepository(ApplicationDbContext dbContext)
 {
-    public async Task<User?> AddUser(string name, string email, string passwordHash)
+    public async Task<User?> AddUser(User user)
     {
-        var user = new User(name, email, passwordHash);
         var isUserEmailContainsInDb = await dbContext.Users
             .Select(u => u.Email)
             .ContainsAsync(user.Email);
@@ -44,11 +43,5 @@ public class UsersRepository(ApplicationDbContext dbContext)
     {
         return await dbContext.Users
             .FindAsync(userId);
-    }
-
-    public async Task<string> GetPassword(Guid userId)
-    {
-        var userResult = await GetUserById(userId);
-        return userResult!.PasswordHash;
     }
 }

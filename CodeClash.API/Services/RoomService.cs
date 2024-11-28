@@ -6,13 +6,13 @@ namespace CodeClash.API.Services;
 
 public class RoomService(RoomsRepository roomsRepository, IssuesRepository issuesRepository, UsersRepository usersRepository)
 {
-    public async Task<Room?> CreateRoom(CreateRoomRequest request)
+    public async Task<Room?> CreateRoom(TimeOnly time, Guid issueId, string userEmail)
     {
-        var issue = await issuesRepository.GetIssueById(request.IssueId); // Guid.Parse(request.IssueId)
+        var issue = await issuesRepository.GetIssueById(issueId); // Guid.Parse(request.IssueId)
         if (issue == null)
             return null;
         
-        return await roomsRepository.Add(new Room(request.Time, issue), request.UserEmail);
+        return await roomsRepository.Add(new Room(time, issue), userEmail);
     }
     
     public async Task<Room?> EnterRoom(EnterQuitRoomRequest request)

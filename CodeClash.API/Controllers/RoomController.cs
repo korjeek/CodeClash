@@ -15,7 +15,7 @@ public class RoomController(RoomService roomService) : ControllerBase
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
         
-        var result = await roomService.CreateRoom(request);
+        var result = await roomService.CreateRoom(request.Time, request.IssueId, request.UserEmail);
         if (result == null)
             return BadRequest("Wrong issue id");
         
@@ -33,7 +33,7 @@ public class RoomController(RoomService roomService) : ControllerBase
         if (result == null)
             return BadRequest("The room does not exist or competition in progress");
 
-        return Ok(result);
+        return Ok("User is added to Room");
     }
     
     [HttpPost("quit-room")]
@@ -52,22 +52,12 @@ public class RoomController(RoomService roomService) : ControllerBase
     [HttpPost("close-room")]
     public async Task<IActionResult> CloseRoom([FromBody] Guid roomId)
     {
-        if (!ModelState.IsValid)
-            return BadRequest(ModelState);
-
-        var result = await roomService.CloseRoom(roomId);
-        if (result == null)
-            return BadRequest("The room does not exist or competition in progress");
-
-        return Ok();
+        throw new NotImplementedException();
     }
     
     [HttpPost("start-competition")]
     public async Task<IActionResult> StartCompetition([FromBody] Guid roomId)
     {
-        if (!ModelState.IsValid)
-            return BadRequest(ModelState);
-        
-        return Ok();
+        throw new NotImplementedException();
     }
 }

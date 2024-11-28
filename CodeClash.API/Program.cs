@@ -5,7 +5,6 @@ using CodeClash.Persistence;
 using CodeClash.Persistence.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
-var configuration = builder.Configuration;
 
 builder.Services.AddControllers();
 // Add services to the container.
@@ -15,8 +14,8 @@ builder.Services.AddSwaggerGen();
 
 
 
- builder.Services.AddDbContext<ApplicationDbContext>();
-
+builder.Services.AddDbContext<ApplicationDbContext>();
+//TODO Сделать, чтобы добавлялись только интерфесы с нужными методами. Интерфейсы реализовываются через Services, которые можно менять
 builder.Services.AddScoped<PasswordHasher>();
 
 builder.Services.AddScoped<AuthService>();
