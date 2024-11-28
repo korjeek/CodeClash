@@ -1,10 +1,13 @@
-﻿using CodeClash.API.Services;
+﻿using CodeClash.API.Extensions;
+using CodeClash.API.Services;
 using CodeClash.Core.Models.RoomsRequests;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodeClash.API.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("room")]
 public class RoomController(RoomService roomService) : ControllerBase
 {
@@ -12,14 +15,16 @@ public class RoomController(RoomService roomService) : ControllerBase
     [HttpPost("create-room")]
     public async Task<IActionResult> CreateRoom([FromBody] CreateRoomRequest request)
     {
+        var userId = User.GetUserIdFromAccessToken();
+        
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
         
-        var result = await roomService.CreateRoom(request);
+        var result = await roomService.CreateRoom(request.Time, request.IssueId, userId);
         if (result == null)
             return BadRequest("Wrong issue id");
         
-        return Ok(result);
+        return Ok($"Room is created id: {result.Id}");
     }
     
     // TODO: Websocket connection
@@ -28,12 +33,13 @@ public class RoomController(RoomService roomService) : ControllerBase
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
-
-        var result = await roomService.EnterRoom(request);
+        
+        var userId = User.GetUserIdFromAccessToken();
+        var result = await roomService.EnterRoom(request.RoomId, userId);
         if (result == null)
             return BadRequest("The room does not exist or competition in progress");
 
-        return Ok(result);
+        return Ok("User is added to Room");
     }
     
     [HttpPost("quit-room")]
@@ -42,24 +48,18 @@ public class RoomController(RoomService roomService) : ControllerBase
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        var result = await roomService.QuitRoom(request);
+        var userId = User.GetUserIdFromAccessToken();
+        var result = await roomService.QuitRoom(request.RoomId, userId);
         if (result == null)
-            return BadRequest("The room does not exist or competition in progress");
+            return BadRequest("The room does not exist");
 
-        return Ok(result);
+        return Ok("You quited from room");
     }
     
     [HttpPost("close-room")]
     public async Task<IActionResult> CloseRoom([FromBody] Guid roomId)
     {
-        if (!ModelState.IsValid)
-            return BadRequest(ModelState);
-
-        var result = await roomService.CloseRoom(roomId);
-        if (result == null)
-            return BadRequest("The room does not exist or competition in progress");
-
-        return Ok();
+        throw new NotImplementedException();
     }
     
     [HttpPost("start-competition")]
@@ -68,17 +68,6 @@ public class RoomController(RoomService roomService) : ControllerBase
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
         
-        
-        
         return Ok();
     }
-    
-    // [HttpPost("finish-competition")]
-    // public async Task<IActionResult> FinishCompetition([FromBody] FinishCompetitionRequest request)
-    // {
-    //     if (!ModelState.IsValid)
-    //         return BadRequest(ModelState);
-    //     
-    //     return Ok();
-    // }
 }

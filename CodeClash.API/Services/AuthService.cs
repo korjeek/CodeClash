@@ -7,22 +7,24 @@ using CodeClash.Persistence.Repositories;
 
 namespace CodeClash.API.Services;
 
-public class AuthService(UsersRepository usersRepository, PasswordHasher passwordHasher, TokenService tokenService)
+public class AuthService(UsersRepository usersRepository, TokenService tokenService)
 {
+    
+    //TODO: Переписать сигнатуру методов. Нехорошо, что они принимают реквесты, они должны быть только в Controllers
     public async Task<User?> GetUser(LoginRequest request)
     {
         var user = await usersRepository.FindUserByEmail(request.Email);
         if (user is null)
             return null;
-        
-        var password = await usersRepository.GetPassword(user.Id);
-        return passwordHasher.Verify(password, user.PasswordHash) ? user : null;
+
+        return PasswordHasher.Verify(request.Password, user.PasswordHash) ? user : null;
     }
 
     public async Task<User?> CreateUser(RegisterRequest request)
     {
-        var passwordHash = passwordHasher.Generate(request.Password);
-        return await usersRepository.AddUser(new User(request.UserName, request.Email, passwordHash));
+        var passwordHash = PasswordHasher.Generate(request.Password);
+        var newUser = new User(request.UserName, request.Email, passwordHash);
+        return await usersRepository.AddUser(newUser);
     }
 
     public async Task<User?> GetUserByPrincipalClaims(JwtToken tokenModel)

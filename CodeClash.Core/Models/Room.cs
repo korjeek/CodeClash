@@ -1,27 +1,30 @@
-﻿namespace CodeClash.Core.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace CodeClash.Core.Models;
 
 public class Room
 {
-    public Guid Id { get; }
-    public Issue Issue { get; }
-    public TimeOnly Time { get; }
-    public RoomStatus Status { get; set; }
-    public List<User> Participants { get; }
-    public Guid AdminId { get; set; }
-    public User Admin { get; set; }
-    
-    public Room(){}
+    public Guid Id { get; init; }
 
-    public Room(TimeOnly time, Issue issue, User admin)
+    [Required] public TimeOnly Time { get; init; }
+    public RoomStatus Status { get; set; }
+    public List<User> Participants { get; init; } = null!;
+
+    [Required] 
+    public Issue Issue { get; init; } = null!;
+    public Guid IssueId { get; init; }
+
+    private Room()
     {
-        Id = Guid.NewGuid();
+    }
+
+    public Room(TimeOnly time, Issue issue)
+    {
         Time = time;
         Issue = issue;
-        Participants = new List<User>();
-        Status = RoomStatus.WaitingForParticipants;
-        Admin = admin;
-        AdminId = admin.Id;
+        Participants = [];
     }
+    
     
     public enum RoomStatus
     {

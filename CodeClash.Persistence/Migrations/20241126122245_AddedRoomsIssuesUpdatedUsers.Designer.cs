@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CodeClash.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241121202745_AddedRoomsIssues_UpdatedUsers")]
-    partial class AddedRoomsIssues_UpdatedUsers
+    [Migration("20241126122245_AddedRoomsIssuesUpdatedUsers")]
+    partial class AddedRoomsIssuesUpdatedUsers
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,15 +46,18 @@ namespace CodeClash.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("AdminId")
+                    b.Property<Guid>("IssueId")
                         .HasColumnType("uuid");
 
                     b.Property<int>("Status")
                         .HasColumnType("integer");
 
+                    b.Property<TimeOnly>("Time")
+                        .HasColumnType("time without time zone");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AdminId")
+                    b.HasIndex("IssueId")
                         .IsUnique();
 
                     b.ToTable("Rooms");
@@ -99,13 +102,13 @@ namespace CodeClash.Persistence.Migrations
 
             modelBuilder.Entity("CodeClash.Core.Models.Room", b =>
                 {
-                    b.HasOne("CodeClash.Core.Models.User", "Admin")
-                        .WithMany()
-                        .HasForeignKey("AdminId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                    b.HasOne("CodeClash.Core.Models.Issue", "Issue")
+                        .WithOne()
+                        .HasForeignKey("CodeClash.Core.Models.Room", "IssueId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Admin");
+                    b.Navigation("Issue");
                 });
 
             modelBuilder.Entity("CodeClash.Core.Models.User", b =>

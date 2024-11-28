@@ -5,36 +5,50 @@ namespace CodeClash.Persistence.Repositories;
 
 public class RoomsRepository(ApplicationDbContext dbContext)
 {
-    public async Task<Room> Add(Room room)
+    public async Task<Room?> Add(Room room, Guid userId)
     {
-        await dbContext.AddAsync(room);
+        var admin = await dbContext.Users.FindAsync(userId);
+        if (admin!.IsAdmin)
+            return null;
+        
+        dbContext.Rooms.Attach(room);
+        admin.IsAdmin = true;
+        admin.Room = room;
+        
         await dbContext.SaveChangesAsync();
+        
         return room;
     }
 
     public async Task<Room?> GetRoomById(Guid roomId)
     {
         return await dbContext.Rooms
-            .AsNoTracking()
-            .FirstOrDefaultAsync(room => room.Id == roomId);
+            .Include(r => r.Participants)
+            .Include(r => r.Issue)
+            .FirstOrDefaultAsync(r => r.Id == roomId);
     }
-
-    public async Task<Room?> AddUserToRoom(User user, Guid roomId)
+    
+    public async Task<Room?> AddUserToRoom(Guid userId, Guid roomId)
     {
         var room = await GetRoomById(roomId);
         if (room is null || room.Status is Room.RoomStatus.CompetitionInProgress)
             return null;
-        room.Participants.Add(user);
+
+        var user = await dbContext.Users.FindAsync(userId);
+        room.Participants.Add(user!); 
         await dbContext.SaveChangesAsync();
         return room;
     }
-    
-    public async Task<Room?> RemoveUserFromRoom(User user, Guid roomId)
+
+    public async Task<Room?> RemoveUserFromRoom(Guid userId, Guid roomId)
     {
+        var user = await dbContext.Users.FindAsync(userId);
         var room = await GetRoomById(roomId);
         if (room is null)
             return null;
-        room.Participants.Remove(user);
+        room.Participants.Remove(user!);
+        if (user!.IsAdmin)
+            user.IsAdmin = false;
         await dbContext.SaveChangesAsync();
         return room;
     }

@@ -6,27 +6,23 @@ namespace CodeClash.API.Services;
 
 public class RoomService(RoomsRepository roomsRepository, IssuesRepository issuesRepository, UsersRepository usersRepository)
 {
-    public async Task<Room?> CreateRoom(CreateRoomRequest request)
+    public async Task<Room?> CreateRoom(TimeOnly time, Guid issueId, Guid userId)
     {
-        var issue = await issuesRepository.GetIssueById(request.IssueId); // Guid.Parse(request.IssueId)
+        var issue = await issuesRepository.GetIssueById(issueId); // Guid.Parse(request.IssueId)
         if (issue == null)
             return null;
-        // А КАКОГО ХУЯ, СПРАШИВАЕТСЯ, МЫ УВЕРЕНЫ, ЧТО ЗДЕСЬ ДОЛЖЕН ИСКАТЬСЯ ADMIN??????
-        var admin = await usersRepository.FindUserByEmail(request.UserEmail);
-        return await roomsRepository.Add(new Room(request.Time, issue, admin!));
+        
+        return await roomsRepository.Add(new Room(time, issue), userId);
     }
     
-    public async Task<Room?> EnterRoom(EnterQuitRoomRequest request)
+    public async Task<Room?> EnterRoom(Guid roomId, Guid userId)
     {
-        var participant = await usersRepository.FindUserByEmail(request.UserEmail);
-        return await roomsRepository.AddUserToRoom(participant!, request.RoomId);
+        return await roomsRepository.AddUserToRoom(userId, roomId);
     }
     
-    public async Task<Room?> QuitRoom(EnterQuitRoomRequest request)
+    public async Task<Room?> QuitRoom(Guid roomId, Guid userId)
     {
-        var user = await usersRepository.FindUserByEmail(request.UserEmail);
-        return await roomsRepository.RemoveUserFromRoom(user, request.RoomId);
-        // return room.Participants.Remove(participant) ? room : null;
+        return await roomsRepository.RemoveUserFromRoom(userId, roomId);
     }
 
     public async Task<bool> CloseRoom(Guid roomId)
