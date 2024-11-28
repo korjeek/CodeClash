@@ -9,11 +9,11 @@ public class RoomHub(RoomService roomService) : Hub
 {
     public async Task<(string, string)> CreateRoom(CreateRoomRequest request)
     {
-        var result = await roomService.CreateRoom(request);
-        await Groups.AddToGroupAsync(Context.ConnectionId, request.UserEmail); 
-        // имя группы?? пока имя пользователя
-
-        return (result.Id.ToString(), result.Admin.ToString());
+        // var result = await roomService.CreateRoom(request);
+        // await Groups.AddToGroupAsync(Context.ConnectionId, request.);
+        //
+        // return (result.Id.ToString(), result.Admin.ToString());
+        throw new NotImplementedException();
     }
     
     public async Task JoinRoom(string userEmail, Guid roomId)
