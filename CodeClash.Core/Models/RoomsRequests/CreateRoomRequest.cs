@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc;
 
 namespace CodeClash.Core.Models.RoomsRequests;
 
@@ -13,8 +12,4 @@ public class CreateRoomRequest
     [Required]
     [Display(Name = "IssueId")]
     public Guid IssueId { get; set; }
-    
-    [Required]
-    [Display(Name = "UserEmail")]
-    public string UserEmail { get; set; } = null!;
 }

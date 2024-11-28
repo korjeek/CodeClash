@@ -54,8 +54,7 @@ namespace CodeClash.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IssueId")
-                        .IsUnique();
+                    b.HasIndex("IssueId");
 
                     b.ToTable("Rooms");
                 });
@@ -102,8 +101,8 @@ namespace CodeClash.Persistence.Migrations
             modelBuilder.Entity("CodeClash.Core.Models.Room", b =>
                 {
                     b.HasOne("CodeClash.Core.Models.Issue", "Issue")
-                        .WithOne()
-                        .HasForeignKey("CodeClash.Core.Models.Room", "IssueId")
+                        .WithMany()
+                        .HasForeignKey("IssueId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

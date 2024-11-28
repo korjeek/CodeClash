@@ -34,6 +34,8 @@ public class AuthenticationController(AuthService authService) : ControllerBase
             return BadRequest(AuthRequestErrorType.WrongCredentials.ToString());
         
         var tokens = await authService.UpdateUsersTokens(user);
+        HttpContext.Response.Cookies.Append("spooky-cookies", tokens.AccessToken);
+        
         return Ok(new AuthResponse(user.Name, user.Email, tokens.AccessToken, tokens.RefreshToken));
     }
     
@@ -48,7 +50,7 @@ public class AuthenticationController(AuthService authService) : ControllerBase
         if (user == null || user.RefreshToken != tokenModel.RefreshToken || user.RefreshTokenExpiryTime <= DateTime.UtcNow)
             return BadRequest(AuthRequestErrorType.ComplexRefreshTokenError);
         
-        var tokens = authService.UpdateUsersTokens(user);
+        var tokens = await authService.UpdateUsersTokens(user);
         return new ObjectResult(tokens);
     }
 }

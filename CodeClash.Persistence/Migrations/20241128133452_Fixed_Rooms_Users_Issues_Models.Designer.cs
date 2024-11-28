@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CodeClash.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241126201058_FixedUsersRoomsIssues")]
-    partial class FixedUsersRoomsIssues
+    [Migration("20241128133452_Fixed_Rooms_Users_Issues_Models")]
+    partial class Fixed_Rooms_Users_Issues_Models
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -57,8 +57,7 @@ namespace CodeClash.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IssueId")
-                        .IsUnique();
+                    b.HasIndex("IssueId");
 
                     b.ToTable("Rooms");
                 });
@@ -105,8 +104,8 @@ namespace CodeClash.Persistence.Migrations
             modelBuilder.Entity("CodeClash.Core.Models.Room", b =>
                 {
                     b.HasOne("CodeClash.Core.Models.Issue", "Issue")
-                        .WithOne()
-                        .HasForeignKey("CodeClash.Core.Models.Room", "IssueId")
+                        .WithMany()
+                        .HasForeignKey("IssueId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -1,10 +1,13 @@
-﻿using CodeClash.API.Services;
+﻿using CodeClash.API.Extensions;
+using CodeClash.API.Services;
 using CodeClash.Core.Models.RoomsRequests;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodeClash.API.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("room")]
 public class RoomController(RoomService roomService) : ControllerBase
 {
@@ -12,10 +15,12 @@ public class RoomController(RoomService roomService) : ControllerBase
     [HttpPost("create-room")]
     public async Task<IActionResult> CreateRoom([FromBody] CreateRoomRequest request)
     {
+        var userId = User.GetUserIdFromAccessToken();
+        
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
         
-        var result = await roomService.CreateRoom(request.Time, request.IssueId, request.UserEmail);
+        var result = await roomService.CreateRoom(request.Time, request.IssueId, userId);
         if (result == null)
             return BadRequest("Wrong issue id");
         
@@ -28,8 +33,9 @@ public class RoomController(RoomService roomService) : ControllerBase
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
-
-        var result = await roomService.EnterRoom(request);
+        
+        var userId = User.GetUserIdFromAccessToken();
+        var result = await roomService.EnterRoom(request.RoomId, userId);
         if (result == null)
             return BadRequest("The room does not exist or competition in progress");
 
@@ -42,7 +48,8 @@ public class RoomController(RoomService roomService) : ControllerBase
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        var result = await roomService.QuitRoom(request);
+        var userId = User.GetUserIdFromAccessToken();
+        var result = await roomService.QuitRoom(request.RoomId, userId);
         if (result == null)
             return BadRequest("The room does not exist");
 

@@ -5,29 +5,20 @@ namespace CodeClash.Persistence.Repositories;
 
 public class RoomsRepository(ApplicationDbContext dbContext)
 {
-    public async Task<Room?> Add(Room room, string adminEmail)
+    public async Task<Room?> Add(Room room, Guid userId)
     {
-        var admin = await dbContext.Users
-            .FirstOrDefaultAsync(u => u.Email == adminEmail);
-        if (admin is null || admin.IsAdmin)
+        var admin = await dbContext.Users.FindAsync(userId);
+        if (admin!.IsAdmin)
             return null;
         
         dbContext.Rooms.Attach(room);
         admin.IsAdmin = true;
         admin.Room = room;
-
-        var entries = dbContext.ChangeTracker.Entries();
         
         await dbContext.SaveChangesAsync();
         
         return room;
     }
-
-    // public async Task<bool> Remove(Guid roomId)
-    // {
-    //     dbContext.Rooms.Remov 
-    // }
-    
 
     public async Task<Room?> GetRoomById(Guid roomId)
     {
@@ -36,24 +27,27 @@ public class RoomsRepository(ApplicationDbContext dbContext)
             .Include(r => r.Issue)
             .FirstOrDefaultAsync(r => r.Id == roomId);
     }
-
-    public async Task<Room?> AddUserToRoom(User user, Guid roomId)
+    
+    public async Task<Room?> AddUserToRoom(Guid userId, Guid roomId)
     {
         var room = await GetRoomById(roomId);
         if (room is null || room.Status is Room.RoomStatus.CompetitionInProgress)
             return null;
-        room.Participants.Add(user); 
+
+        var user = await dbContext.Users.FindAsync(userId);
+        room.Participants.Add(user!); 
         await dbContext.SaveChangesAsync();
         return room;
     }
-    
-    public async Task<Room?> RemoveUserFromRoom(User user, Guid roomId)
+
+    public async Task<Room?> RemoveUserFromRoom(Guid userId, Guid roomId)
     {
+        var user = await dbContext.Users.FindAsync(userId);
         var room = await GetRoomById(roomId);
         if (room is null)
             return null;
-        room.Participants.Remove(user);
-        if (user.IsAdmin)
+        room.Participants.Remove(user!);
+        if (user!.IsAdmin)
             user.IsAdmin = false;
         await dbContext.SaveChangesAsync();
         return room;

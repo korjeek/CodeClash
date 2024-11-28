@@ -5,7 +5,7 @@
 namespace CodeClash.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class FixedUsersRoomsIssues : Migration
+    public partial class Fixed_Rooms_Users_Issues_Models : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -13,6 +13,10 @@ namespace CodeClash.Persistence.Migrations
             migrationBuilder.DropIndex(
                 name: "IX_Users_RoomId_IsAdmin",
                 table: "Users");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Rooms_IssueId",
+                table: "Rooms");
 
             migrationBuilder.AlterColumn<string>(
                 name: "Name",
@@ -36,6 +40,11 @@ namespace CodeClash.Persistence.Migrations
                 name: "IX_Users_RoomId",
                 table: "Users",
                 column: "RoomId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Rooms_IssueId",
+                table: "Rooms",
+                column: "IssueId");
         }
 
         /// <inheritdoc />
@@ -44,6 +53,10 @@ namespace CodeClash.Persistence.Migrations
             migrationBuilder.DropIndex(
                 name: "IX_Users_RoomId",
                 table: "Users");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Rooms_IssueId",
+                table: "Rooms");
 
             migrationBuilder.AlterColumn<string>(
                 name: "Name",
@@ -67,6 +80,12 @@ namespace CodeClash.Persistence.Migrations
                 name: "IX_Users_RoomId_IsAdmin",
                 table: "Users",
                 columns: new[] { "RoomId", "IsAdmin" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Rooms_IssueId",
+                table: "Rooms",
+                column: "IssueId",
+                unique: true);
         }
     }
 }

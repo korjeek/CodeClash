@@ -6,25 +6,23 @@ namespace CodeClash.API.Services;
 
 public class RoomService(RoomsRepository roomsRepository, IssuesRepository issuesRepository, UsersRepository usersRepository)
 {
-    public async Task<Room?> CreateRoom(TimeOnly time, Guid issueId, string userEmail)
+    public async Task<Room?> CreateRoom(TimeOnly time, Guid issueId, Guid userId)
     {
         var issue = await issuesRepository.GetIssueById(issueId); // Guid.Parse(request.IssueId)
         if (issue == null)
             return null;
         
-        return await roomsRepository.Add(new Room(time, issue), userEmail);
+        return await roomsRepository.Add(new Room(time, issue), userId);
     }
     
-    public async Task<Room?> EnterRoom(EnterQuitRoomRequest request)
+    public async Task<Room?> EnterRoom(Guid roomId, Guid userId)
     {
-        var participant = await usersRepository.FindUserByEmail(request.UserEmail);
-        return await roomsRepository.AddUserToRoom(participant!, request.RoomId);
+        return await roomsRepository.AddUserToRoom(userId, roomId);
     }
     
-    public async Task<Room?> QuitRoom(EnterQuitRoomRequest request)
+    public async Task<Room?> QuitRoom(Guid roomId, Guid userId)
     {
-        var user = await usersRepository.FindUserByEmail(request.UserEmail);
-        return await roomsRepository.RemoveUserFromRoom(user!, request.RoomId);
+        return await roomsRepository.RemoveUserFromRoom(userId, roomId);
     }
 
     public async Task<bool> CloseRoom(Guid roomId)
