@@ -1,3 +1,4 @@
+using CodeClash.API.Hubs;
 using CodeClash.API.Services;
 using CodeClash.Application;
 using CodeClash.Core.Services;
@@ -30,6 +31,17 @@ builder.Services.AddScoped<UsersRepository>();
 builder.Services.AddScoped<RoomsRepository>();
 builder.Services.AddScoped<IssuesRepository>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policyBuilder =>
+    {
+        policyBuilder.WithOrigins("http://localhost:5099")
+            .AllowAnyHeader()
+            .AllowCredentials()
+            .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -45,6 +57,9 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseCors();
+
 app.MapControllers();
+app.MapHub<RoomHub>("/room"); // как сделать для разных комнат?
 
 app.Run();
