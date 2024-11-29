@@ -7,7 +7,7 @@ import Login from './components/Login';
 import Auth from './components/Auth';
 import Rooms from './components/Rooms';
 import Page from './components/Page';
-import HomePage from './components/HomePage';
+import { CodePallete } from './components/CodePallete';
 
 const App: React.FC = () => {
     const rooms = [
@@ -15,27 +15,19 @@ const App: React.FC = () => {
         {key: 1, Name: "My Room", host: "example@example.com", connected: 3, total: 5},
         {key: 2, Name: "Another Room", host: "example@example.com", connected: 5, total: 5},
         {key: 3, Name: "New Room", host: "example@example.com", connected: 1, total: 2},
-        {key: 3, Name: "New Room", host: "example@example.com", connected: 1, total: 2},
-        {key: 3, Name: "New Room", host: "example@example.com", connected: 1, total: 2},
-        {key: 3, Name: "New Room", host: "example@example.com", connected: 1, total: 2},
-        {key: 3, Name: "New Room", host: "example@example.com", connected: 1, total: 2},
-        {key: 3, Name: "New Room", host: "example@example.com", connected: 1, total: 2},
-        {key: 3, Name: "New Room", host: "example@example.com", connected: 1, total: 2},
-        {key: 3, Name: "New Room", host: "example@example.com", connected: 1, total: 2},
-        {key: 3, Name: "New Room", host: "example@example.com", connected: 1, total: 2},
-        {key: 3, Name: "New Room", host: "example@example.com", connected: 1, total: 2}
+        {key: 4, Name: "More Room", host: "example@example.com", connected: 5, total: 1},
     ];
     return (
         <div>
         <Router>
             <Routes>
-                    <Route path="/" element={<Page navBarIndex={0}><Home/></Page>} />
-                    <Route path="/home" element={<Page navBarIndex={0}><Home/></Page>} />
+                    <Route path="/" element={<Page navBarIndex={0}><link rel="stylesheet" href="./src/style/Home.css"></link><Home/></Page>} />
+                    <Route path="/home" element={<Page navBarIndex={0}><link rel="stylesheet" href="./src/style/Home.css"></link><Home/></Page>} />
                     <Route path="/login" element={<Page><Auth><Login/></Auth></Page>} />
                     <Route path="/register" element={<Page><Auth><Register/></Auth></Page>} />
-                    <Route path="/rooms" element={<Page navBarIndex={1}><Rooms Rooms={rooms}/></Page>} />
+                    <Route path="/rooms" element={<Page navBarIndex={1}><link rel="stylesheet" href="./src/style/Home.css"></link><Rooms Rooms={rooms}/></Page>} />
                     <Route path="/ranks" element={<Page navBarIndex={2}></Page>} />
-                    <Route path="/test" element={<HomePage />} />
+                    <Route path="/submit" element={<Page navBarIndex={-1}><CodePallete/></Page>} />
             </Routes>
         </Router>
         </div>

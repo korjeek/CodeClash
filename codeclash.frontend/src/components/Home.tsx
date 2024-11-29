@@ -4,6 +4,7 @@ import {Link} from "react-router-dom"
 const Home: React.FC = () => {
     return (
         <div style={{"display": "flex"}}>
+            <link rel="stylesheet" href="./src/style/Home.css"></link>
             <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum
                 tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas
                 semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien
