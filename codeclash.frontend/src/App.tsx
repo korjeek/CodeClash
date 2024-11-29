@@ -7,7 +7,9 @@ import Login from './components/Login';
 import Auth from './components/Auth';
 import Rooms from './components/Rooms';
 import Page from './components/Page';
+import HomePage from './components/HomePage';
 import { CodePallete } from './components/CodePallete';
+import RegisterPage from './components/RegisterPage';
 
 const App: React.FC = () => {
     const rooms = [
@@ -18,7 +20,6 @@ const App: React.FC = () => {
         {key: 4, Name: "More Room", host: "example@example.com", connected: 5, total: 1},
     ];
     return (
-        <div>
         <Router>
             <Routes>
                     <Route path="/" element={<Page navBarIndex={0}><link rel="stylesheet" href="./src/style/Home.css"></link><Home/></Page>} />
@@ -28,9 +29,10 @@ const App: React.FC = () => {
                     <Route path="/rooms" element={<Page navBarIndex={1}><link rel="stylesheet" href="./src/style/Home.css"></link><Rooms Rooms={rooms}/></Page>} />
                     <Route path="/ranks" element={<Page navBarIndex={2}></Page>} />
                     <Route path="/submit" element={<Page navBarIndex={-1}><CodePallete/></Page>} />
+                    <Route path="/test" element={<HomePage/>} />
+                    <Route path="/login1" element={<RegisterPage/>} />
             </Routes>
         </Router>
-        </div>
     );
 };
 
