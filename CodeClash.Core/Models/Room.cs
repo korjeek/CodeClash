@@ -1,42 +1,31 @@
-﻿using CodeClash.Core.Models;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace CodeClash.Core.Entities;
+namespace CodeClash.Core.Models;
 
-public class Room(Guid id, List<Issue> problems, Room.RoomStatus status)
+public class Room
 {
-    public Guid Id { get; } = id;
-    public List<Issue> Issues { get; } = problems;
-    private RoomStatus Status { get; set; } = status;
-    private List<User> Participants { get; } = [];
-    private Competition _competition = new();
-    
-    public void AddParticipant(User participant)
+    public Guid Id { get; init; }
+
+    [Required] public TimeOnly Time { get; init; }
+    public RoomStatus Status { get; set; }
+    public List<User> Participants { get; init; } = null!;
+
+    [Required] 
+    public Issue Issue { get; init; } = null!;
+    public Guid IssueId { get; init; }
+
+    private Room()
     {
-        if (Status is RoomStatus.WaitingForParticipants)
-            Participants.Add(participant);
-        else
-            throw new InvalidOperationException("Cannot add participant. Competition in progress!");
     }
-    
-    public void StartCompetition()
+
+    public Room(TimeOnly time, Issue issue)
     {
-        if (Status is RoomStatus.WaitingForParticipants)
-        {
-            Status = RoomStatus.CompetitionInProgress;
-            _competition.Start();
-        }
-        else 
-            throw new InvalidOperationException("Competition is already started!");
+        Time = time;
+        Issue = issue;
+        Participants = [];
     }
-    
-    public void FinishCompetition()
-    {
-        if (Status is RoomStatus.CompetitionInProgress)
-            Status = RoomStatus.WaitingForParticipants;
-        else
-            throw new InvalidOperationException("Competition is not started!");
-    }
-    
+
+
     public enum RoomStatus
     {
         WaitingForParticipants = 0,

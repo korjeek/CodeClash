@@ -1,8 +1,6 @@
-﻿using CodeClash.Core.Models;
+﻿namespace CodeClash.Core.Models;
 
-namespace CodeClash.Core.Entities;
-
-public class Competition
+public class Competition()
 {
     private Issue issue;
     private bool _inProgress;
