@@ -65,6 +65,9 @@ public class RoomController(RoomService roomService) : ControllerBase
     [HttpPost("start-competition")]
     public async Task<IActionResult> StartCompetition([FromBody] Guid roomId)
     {
-        throw new NotImplementedException();
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+        
+        return Ok();
     }
 }
