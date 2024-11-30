@@ -24,8 +24,8 @@ public class Room
         Issue = issue;
         Participants = [];
     }
-
-
+    
+    
     public enum RoomStatus
     {
         WaitingForParticipants = 0,
