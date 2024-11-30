@@ -1,29 +1,36 @@
+using CodeClash.API.Extensions;
 using CodeClash.API.Services;
 using CodeClash.Application;
 using CodeClash.Core.Services;
 using CodeClash.Persistence;
 using CodeClash.Persistence.Repositories;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
+var services = builder.Services;
 
-builder.Services.AddControllers();
+
+services.AddControllers();
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+services.AddEndpointsApiExplorer();
+services.AddSwaggerGen();
 
-builder.Services.AddScoped<PasswordHasher>();
-builder.Services.AddScoped<AuthService>();
-builder.Services.AddScoped<TokenService>();
-builder.Services.AddScoped<UsersRepository>();
 
-builder.Services.AddDbContext<ApplicationDbContext>(
-    options =>
-    {
-        options.UseNpgsql(configuration.GetConnectionString(nameof(ApplicationDbContext)));
-    });
+
+services.AddDbContext<ApplicationDbContext>();
+//TODO Сделать, чтобы добавлялись только интерфесы с нужными методами. Интерфейсы реализовываются через Services, которые можно менять
+services.AddScoped<PasswordHasher>();
+services.AddApiAuthentication(configuration);
+
+services.AddScoped<AuthService>();
+services.AddScoped<TokenService>();
+services.AddScoped<RoomService>();
+services.AddScoped<IssueService>();
+
+services.AddScoped<UsersRepository>();
+services.AddScoped<RoomsRepository>();
+services.AddScoped<IssuesRepository>();
 
 var app = builder.Build();
 

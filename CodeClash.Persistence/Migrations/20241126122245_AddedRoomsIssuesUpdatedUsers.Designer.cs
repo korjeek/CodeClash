@@ -3,6 +3,7 @@ using System;
 using CodeClash.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CodeClash.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241126122245_AddedRoomsIssuesUpdatedUsers")]
+    partial class AddedRoomsIssuesUpdatedUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,7 +57,8 @@ namespace CodeClash.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IssueId");
+                    b.HasIndex("IssueId")
+                        .IsUnique();
 
                     b.ToTable("Rooms");
                 });
@@ -67,16 +71,14 @@ namespace CodeClash.Persistence.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(320)
-                        .HasColumnType("character varying(320)");
+                        .HasColumnType("text");
 
                     b.Property<bool>("IsAdmin")
                         .HasColumnType("boolean");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
+                        .HasColumnType("text");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
@@ -93,7 +95,7 @@ namespace CodeClash.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RoomId");
+                    b.HasIndex("RoomId", "IsAdmin");
 
                     b.ToTable("Users");
                 });
@@ -101,8 +103,8 @@ namespace CodeClash.Persistence.Migrations
             modelBuilder.Entity("CodeClash.Core.Models.Room", b =>
                 {
                     b.HasOne("CodeClash.Core.Models.Issue", "Issue")
-                        .WithMany()
-                        .HasForeignKey("IssueId")
+                        .WithOne()
+                        .HasForeignKey("CodeClash.Core.Models.Room", "IssueId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
