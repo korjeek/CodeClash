@@ -35,7 +35,7 @@ public class RoomController(RoomService roomService) : ControllerBase
             return BadRequest(ModelState);
         
         var userId = User.GetUserIdFromAccessToken();
-        var result = await roomService.EnterRoom(request.RoomId, userId);
+        var result = await roomService.JoinRoom(request.RoomId, userId);
         if (result == null)
             return BadRequest("The room does not exist or competition in progress");
 
@@ -59,6 +59,7 @@ public class RoomController(RoomService roomService) : ControllerBase
     [HttpPost("close-room")]
     public async Task<IActionResult> CloseRoom([FromBody] Guid roomId)
     {
+        await roomService.CloseRoom(roomId);
         throw new NotImplementedException();
     }
     

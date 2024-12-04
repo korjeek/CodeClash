@@ -27,7 +27,7 @@ const Register: React.FC = () => {
 
             <form onSubmit={handleRegister}>
                 <input 
-                    type="text"
+                    type="text"   
                     placeholder='Username'
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}

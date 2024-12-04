@@ -29,7 +29,7 @@ export interface UserSolution {
     roomId: string
 }
 
-class RoomService {
+export class RoomService {
     private connection: signalR.HubConnection;
 
     constructor() {

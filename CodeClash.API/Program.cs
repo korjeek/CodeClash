@@ -5,6 +5,8 @@ using CodeClash.Application;
 using CodeClash.Core.Services;
 using CodeClash.Persistence;
 using CodeClash.Persistence.Repositories;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -33,15 +35,14 @@ services.AddScoped<UsersRepository>();
 services.AddScoped<RoomsRepository>();
 services.AddScoped<IssuesRepository>();
 
-services.AddCors(options =>
+builder.Services.AddCors(options =>
 {
-    options.AddPolicy("CorsPolicy",policyBuilder =>
+    options.AddDefaultPolicy(policyBuilder =>
     {
-        policyBuilder
-            .WithOrigins("http://localhost:5173", "https://localhost:7282")
+        policyBuilder.WithOrigins("http://localhost:5099")
             .AllowAnyHeader()
-            .AllowAnyMethod()
-            .AllowCredentials();
+            .AllowCredentials()
+            .AllowAnyMethod();
     });
 });
 
@@ -57,16 +58,10 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
-app.UseCors("CorsPolicy");
-
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseCookiePolicy(new CookiePolicyOptions
-{
-    MinimumSameSitePolicy = SameSiteMode.None,
-    Secure = CookieSecurePolicy.Always
-});
+app.UseCors();
 
 app.MapControllers();
 app.MapHub<RoomHub>("/room"); // как сделать для разных комнат?

@@ -15,7 +15,7 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
         return await roomsRepository.Add(new Room(time, issue), userId);
     }
     
-    public async Task<Room?> EnterRoom(Guid roomId, Guid userId)
+    public async Task<Room?> JoinRoom(Guid roomId, Guid userId)
     {
         return await roomsRepository.AddUserToRoom(userId, roomId);
     }
@@ -25,7 +25,7 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
         return await roomsRepository.RemoveUserFromRoom(userId, roomId);
     }
 
-    public async Task<bool> CloseRoom(Guid roomId)
+    public async Task<Room?> CloseRoom(Guid roomId)
     {
         throw new NotImplementedException();
     }
