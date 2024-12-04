@@ -5,8 +5,11 @@ const API_URL = 'https://localhost:7282/room';
 
 export interface CreateRoomData {
     time: string,
-    issueId: string,
-    adminEmail: string
+    issueId: string
+}
+
+export interface RoomData {
+    // Неважно какие аргументы -> не работает
 }
 
 export interface JoinQuitRoomData {
@@ -54,13 +57,14 @@ export class RoomService {
         }
     }
 
-    async createRoom(createRoomData: CreateRoomData): Promise<{ roomKey: string;  }> {
+    async createRoom(createRoomData: CreateRoomData): Promise<RoomData> {
         try {
-            const roomData = await this.connection.invoke<{ roomKey: string; }>(
+            const roomData = await this.connection.invoke<RoomData>(
                 "CreateRoom",
                 createRoomData
             );
 
+            console.log(roomData.id);
             console.log("Room created");
             return roomData;
         }

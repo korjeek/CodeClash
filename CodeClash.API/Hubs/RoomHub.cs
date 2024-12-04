@@ -13,13 +13,14 @@ namespace CodeClash.API.Hubs;
 [EnableCors("CorsPolicy")]
 public class RoomHub(RoomService roomService) : Hub
 {
-    public async Task CreateRoom(CreateRoomRequest request)
+    public async Task<Room?> CreateRoom(CreateRoomRequest request)
     {
         var userId = Context.User!.GetUserIdFromAccessToken();
         var room =  await roomService.CreateRoom(request.Time, request.IssueId, userId);
 
         // Что то вернули на какую то функцию
-        await Clients.User(Context.ConnectionId).SendAsync("FunctionName", room);
+        //await Clients.User(Context.ConnectionId).SendAsync("createRoom", room);
+        return room;
     }
     
     public async Task<Room?> JoinRoom(Guid roomId)
