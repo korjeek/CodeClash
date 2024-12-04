@@ -4,40 +4,31 @@ using CodeClash.API.Services;
 using CodeClash.Core.Models;
 using CodeClash.Core.Models.RoomsRequests;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.SignalR;
 
 namespace CodeClash.API.Hubs;
 
-// [Authorize]
+[Authorize]
+[EnableCors("CorsPolicy")]
 public class RoomHub(RoomService roomService) : Hub
 {
-    public async Task Send(string message)
-    {
-        var userId = Context.User?.GetUserIdFromAccessToken();
-        Console.WriteLine($"Connected user token:\n{userId}");
-        await Clients.All.SendAsync("Receive", message);
-    }
-    
-    
-    
-    public async Task<(string, string)> CreateRoom(CreateRoomRequest request)
-    {
-        
-        // var userId = Context.User?.GetUserIdFromAccessToken();
-        // Console.WriteLine($"Connected user token:\n{userId}");
-        var httpContext = Context.GetHttpContext();
-        var cookie = httpContext!.Request.Cookies["spooky-cookies"];
-        Console.WriteLine(cookie);
-        return ("ALL", "IS ALLRIGHT");
-    }
-    
-    public async Task JoinRoom(Guid roomId)
+    public async Task CreateRoom(CreateRoomRequest request)
     {
         var userId = Context.User!.GetUserIdFromAccessToken();
-        await roomService.JoinRoom(roomId, userId);
+        var room =  await roomService.CreateRoom(request.Time, request.IssueId, userId);
+
+        // Что то вернули на какую то функцию
+        await Clients.User(Context.ConnectionId).SendAsync("FunctionName", room);
+    }
+    
+    public async Task<Room?> JoinRoom(Guid roomId)
+    {
+        var userId = Context.User!.GetUserIdFromAccessToken();
+        return await roomService.JoinRoom(roomId, userId);
     }
 
-    public async Task QuitRoom(string userEmail, Guid roomId)
+    public async Task QuitRoom(Guid roomId)
     {
         throw new NotImplementedException();
     }

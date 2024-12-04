@@ -36,12 +36,7 @@ public class AuthenticationController(AuthService authService) : ControllerBase
             return BadRequest(AuthRequestErrorType.WrongCredentials.ToString());
         
         var tokens = await authService.UpdateUsersTokens(user);
-        HttpContext.Response.Cookies.Append("spooky-cookies", tokens.AccessToken, new CookieOptions
-        {
-            HttpOnly = true,
-            Secure = false, // Только для HTTPS
-            SameSite = SameSiteMode.None
-        });
+        HttpContext.Response.Cookies.Append("spooky-cookies", tokens.AccessToken);
         
         return Ok(new AuthResponse(user.Name, user.Email, tokens.AccessToken, tokens.RefreshToken));
     }

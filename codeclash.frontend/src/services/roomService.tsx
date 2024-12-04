@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as signalR from "@microsoft/signalr";
 
-const API_URL = 'http://localhost:5099/room';
+const API_URL = 'https://localhost:7282/room';
 
 export interface CreateRoomData {
     time: string,
@@ -54,9 +54,9 @@ export class RoomService {
         }
     }
 
-    async createRoom(createRoomData: CreateRoomData): Promise<{ roomKey: string; adminEmail: string }> {
+    async createRoom(createRoomData: CreateRoomData): Promise<{ roomKey: string;  }> {
         try {
-            const roomData = await this.connection.invoke<{ roomKey: string; adminEmail: string }>(
+            const roomData = await this.connection.invoke<{ roomKey: string; }>(
                 "CreateRoom",
                 createRoomData
             );
