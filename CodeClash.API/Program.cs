@@ -35,10 +35,10 @@ services.AddScoped<IssuesRepository>();
 
 services.AddCors(options =>
 {
-    options.AddPolicy("PolicyName",policyBuilder =>
+    options.AddPolicy("CorsPolicy",policyBuilder =>
     {
         policyBuilder
-            .WithOrigins("http://localhost:5173")
+            .WithOrigins("http://localhost:5173", "https://localhost:7282")
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();
@@ -57,14 +57,15 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
-app.UseCors("PolicyName");
+app.UseCors("CorsPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseCookiePolicy(new CookiePolicyOptions
 {
-    MinimumSameSitePolicy = SameSiteMode.None
+    MinimumSameSitePolicy = SameSiteMode.None,
+    Secure = CookieSecurePolicy.Always
 });
 
 app.MapControllers();
