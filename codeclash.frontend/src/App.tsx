@@ -10,6 +10,7 @@ import Page from './components/Page';
 import HomePage from './components/HomePage';
 import { CodePallete } from './components/CodePallete';
 import RegisterPage from './components/RegisterPage';
+import CreateRoomPage from './components/CreateRoomPage';
 
 const App: React.FC = () => {
     const rooms = [
@@ -31,6 +32,7 @@ const App: React.FC = () => {
                     <Route path="/submit" element={<Page navBarIndex={-1}><CodePallete/></Page>} />
                     <Route path="/test" element={<HomePage/>} />
                     <Route path="/login1" element={<RegisterPage/>} />
+                    <Route path="/createRoom" element={<CreateRoomPage/>} />
             </Routes>
         </Router>
     );
