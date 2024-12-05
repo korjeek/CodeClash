@@ -27,7 +27,7 @@ const App: React.FC = () => {
                     <Route path="/home" element={<Page navBarIndex={0}><link rel="stylesheet" href="./src/style/Home.css"></link><Home/></Page>} />
                     <Route path="/login" element={<Page><Auth><Login/></Auth></Page>} />
                     <Route path="/register" element={<Page><Auth><Register/></Auth></Page>} />
-                    <Route path="/rooms" element={<Page navBarIndex={1}><link rel="stylesheet" href="./src/style/Home.css"></link><Rooms Rooms={rooms}/></Page>} />
+                    <Route path="/rooms" element={<Page navBarIndex={1}><link rel="stylesheet" href="./src/style/Home.css"></link><Rooms/></Page>} />
                     <Route path="/ranks" element={<Page navBarIndex={2}></Page>} />
                     <Route path="/submit" element={<Page navBarIndex={-1}><CodePallete/></Page>} />
                     <Route path="/test" element={<HomePage/>} />

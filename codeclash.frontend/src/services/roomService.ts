@@ -94,5 +94,6 @@ export class RoomService {
 }
 
 export const getRoomsList = async () => {
-    response = await axios.get('')
+    const response = await axios.get<Room[]>(`${API_URL}/get-rooms`)
+    return response.data;
 }

@@ -15,6 +15,8 @@ public class RoomController(RoomsRepository roomsRepository) : ControllerBase
     public async Task<IActionResult> GetRooms()
     {
         //TODO: Get list of active rooms
-        return Ok(await roomsRepository.GetRooms());
+        var rooms = await roomsRepository.GetRooms();
+        rooms.Select(room => new {room.Id, room.Issue.Id, room})
+        return Ok();
     }
 }
