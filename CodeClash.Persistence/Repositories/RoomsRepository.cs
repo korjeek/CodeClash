@@ -1,4 +1,5 @@
 ﻿using CodeClash.Core.Models;
+using CodeClash.Core.Models.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace CodeClash.Persistence.Repositories;
@@ -31,7 +32,7 @@ public class RoomsRepository(ApplicationDbContext dbContext)
     public async Task<RoomEntity?> AddUserToRoom(Guid userId, Guid roomId)
     {
         var room = await GetRoomById(roomId);
-        if (room is null || room.Status is RoomEntity.RoomStatus.CompetitionInProgress)
+        if (room is null || room.Status is RoomStatus.CompetitionInProgress)
             return null;
 
         var user = await dbContext.Users.FindAsync(userId);

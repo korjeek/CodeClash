@@ -10,7 +10,7 @@ public class UserEntity : IEntity
     
     [Required]
     [MaxLength(320)]
-    public string Email { get; init; }
+    public string Email { get; set; }
     [Required]
     public string PasswordHash { get; set; }
     public DateTime RefreshTokenExpiryTime { get; set; }
@@ -23,12 +23,4 @@ public class UserEntity : IEntity
     public RoomEntity? Room { get; set; }
     public Guid? RoomId { get; set; }
     public bool IsAdmin { get; set; }
-    
-
-    public UserEntity(string name, string email, string passwordHash)
-    {
-        Email = email;
-        Name = name;
-        PasswordHash = passwordHash;
-    }
 }

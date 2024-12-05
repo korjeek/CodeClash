@@ -1,14 +1,13 @@
-﻿using System.Runtime.InteropServices.ComTypes;
-using CodeClash.Core.Interfaces;
+﻿using CodeClash.Core.Interfaces;
 
 namespace CodeClash.Core.Models;
 
 // подумать над тем, какой тип тестовых данных использовать
-public class Issue(string description, string name) : IModel<IssueEntity>
+public class Issue(Guid id, string description, string name) : IModel<IssueEntity>
 {
-    public Guid Id { get; private init; }
-    public string Description { get; private init; } = description;
-    public string Name { get; private init; } = name;
+    public Guid Id { get; } = id;
+    public string Description { get; } = description;
+    public string Name { get; } = name;
 
 
     public IssueEntity GetEntity()
@@ -16,9 +15,13 @@ public class Issue(string description, string name) : IModel<IssueEntity>
         return new IssueEntity
         {
             Id = Id,
-            Description = Description
+            Description = Description,
+            Name = Name
         };
     }
 
-    public Issue GetModel(IssueEntity issueEntity) => new Issue(issueEntity.Id, issueEntity.Description, issueEntity.Name);
+    public static Issue GetModel(IssueEntity issueEntity)
+    { 
+      return new Issue(issueEntity.Id, issueEntity.Description, issueEntity.Name);
+    }
 }

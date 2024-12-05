@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using CodeClash.Core.Models.Enums;
 using CodeClash.Persistence.Interfaces;
 
 namespace CodeClash.Core.Models;
@@ -6,31 +7,14 @@ namespace CodeClash.Core.Models;
 public class RoomEntity : IEntity
 {
     public Guid Id { get; init; }
+    public string Name { get; set; }
 
     [Required] 
-    public TimeOnly Time { get; init; }
+    public TimeOnly Time { get; set; }
     public RoomStatus Status { get; set; }
-    public List<UserEntity> Participants { get; init; } = null!;
+    public List<UserEntity> Participants { get; set; } = null!;
 
     [Required] 
-    public IssueEntity IssueEntity { get; init; } = null!;
-    public Guid IssueId { get; init; }
-
-    private RoomEntity()
-    {
-    }
-
-    public RoomEntity(TimeOnly time, IssueEntity issueEntity)
-    {
-        Time = time;
-        IssueEntity = issueEntity;
-        Participants = [];
-    }
-    
-    
-    public enum RoomStatus
-    {
-        WaitingForParticipants = 0,
-        CompetitionInProgress = 1
-    }
+    public IssueEntity IssueEntity { get; set; } = null!;
+    public Guid IssueId { get; set; }
 }

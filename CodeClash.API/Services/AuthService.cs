@@ -11,9 +11,9 @@ public class AuthService(UsersRepository usersRepository, TokenService tokenServ
 {
     
     //TODO: Переписать сигнатуру методов. Нехорошо, что они принимают реквесты, они должны быть только в Controllers
-    public async Task<UserEntity?> GetUser(LoginRequest request)
+    public async Task<User?> GetUser(LoginRequest request)
     {
-        var user = await usersRepository.FindUserByEmail(request.Email);
+        var user = (await usersRepository.FindUserByEmail(request.Email));
         if (user is null)
             return null;
 
@@ -37,18 +37,19 @@ public class AuthService(UsersRepository usersRepository, TokenService tokenServ
             .First(claim => claim.Type == ClaimTypes.Email).Value);
     }
 
-    public async Task<JwtToken> UpdateUsersTokens(UserEntity userEntity)
+    public async Task<JwtToken> UpdateUsersTokens(User user)
     {
-        var tokens = tokenService.UpdateTokens(userEntity);
-        UpdateUsersRefreshTokenProperties(userEntity, tokens.RefreshToken);
+        var tokens = tokenService.UpdateTokens(user);
+        UpdateUsersRefreshTokenProperties(user, tokens.RefreshToken);
+        var userEntity = user.GetEntity();
         await usersRepository.UpdateUserRefreshToken(userEntity);
         
         return tokens;
     }
 
-    private void UpdateUsersRefreshTokenProperties(UserEntity userEntity, string refreshToken)
+    private void UpdateUsersRefreshTokenProperties(User user, string refreshToken)
     {
-        userEntity.RefreshToken = refreshToken;
-        userEntity.RefreshTokenExpiryTime = DateTime.UtcNow.AddHours(12);
+        user.RefreshToken = refreshToken;
+        user.RefreshTokenExpiryTime = DateTime.UtcNow.AddHours(12);
     }
 }
