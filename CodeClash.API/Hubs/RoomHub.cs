@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using CodeClash.API.Extensions;
 using CodeClash.API.Services;
+using CodeClash.Core;
 using CodeClash.Core.Models;
 using CodeClash.Core.Models.RoomsRequests;
 using Microsoft.AspNetCore.Authorization;

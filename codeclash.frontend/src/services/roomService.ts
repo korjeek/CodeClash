@@ -1,16 +1,8 @@
 import axios from 'axios';
 import * as signalR from "@microsoft/signalr";
+import { RoomOptions, Room } from "../interfaces/roomInterfaces.ts";
 
 const API_URL = 'https://localhost:7282/room';
-
-export interface CreateRoomData {
-    time: string,
-    issueId: string
-}
-
-export interface RoomData {
-    // Неважно какие аргументы -> не работает
-}
 
 export interface JoinQuitRoomData {
     roomId: string,
@@ -57,16 +49,14 @@ export class RoomService {
         }
     }
 
-    async createRoom(createRoomData: CreateRoomData): Promise<RoomData> {
+    async createRoom(roomOptions: RoomOptions): Promise<Room> {
+        const methodName = "CreateRoom";
         try {
-            const roomData = await this.connection.invoke<RoomData>(
-                "CreateRoom",
-                createRoomData
-            );
+            const room = await this.connection.invoke<Room>(methodName, roomOptions);
 
-            console.log(roomData.id);
+            console.log(room);
             console.log("Room created");
-            return roomData;
+            return room;
         }
         catch (error) {
             console.log(error);
@@ -74,46 +64,35 @@ export class RoomService {
         }
     }
 
-    async joinRoom(joinRoomData: JoinQuitRoomData): Promise<void> {
+    async joinRoom(room: Room): Promise<void> {
         try {
-            await this.connection.invoke(
-                "JoinRoom",
-                joinRoomData.userEmail,
-                joinRoomData.roomId
-            );
+            await this.connection.invoke("JoinRoom", room.id);
         }
         catch (error) {
             console.log(error);
         }
     }
 
-    async quitRoom(quitRoomData: JoinQuitRoomData): Promise<void> {
+    async quitRoom(room: Room): Promise<void> {
         try {
-            await this.connection.invoke(
-                "QuitRoom",
-                quitRoomData.userEmail,
-                quitRoomData.roomId
-            );
+            await this.connection.invoke("QuitRoom", room.id);
         }
         catch (error) {
             console.log(error);
         }
     }
 
-    async sendSolution(solution: UserSolution): Promise<SolutionResponse> { // использовать ли отдельный класс?
+    async sendSolution(solution: UserSolution): Promise<SolutionResponse> {
         try {
-            return await this.connection.invoke<SolutionResponse>(
-                "CheckSolution",
-                solution.solution,
-                solution.issueId,
-                solution.roomId
-            );
+            return await this.connection.invoke<SolutionResponse>("CheckSolution", solution.solution, solution.issueId, solution.roomId);
         }
         catch (error) {
             console.log(error);
             throw error;
         }
     }
+}
 
-    
+export const getRoomsList = async () => {
+    response = await axios.get('')
 }
