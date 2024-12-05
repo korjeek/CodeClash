@@ -52,4 +52,9 @@ public class RoomsRepository(ApplicationDbContext dbContext)
         await dbContext.SaveChangesAsync();
         return room;
     }
+
+    public async Task<List<Room>?> GetRooms()
+    {
+        //TODO: get list of active rooms
+    }
 }

@@ -6,12 +6,13 @@ public class Room
 {
     public Guid Id { get; init; }
 
-    [Required] public TimeOnly Time { get; init; }
+    [Required] 
+    public TimeOnly Time { get; init; }
     public RoomStatus Status { get; set; }
     public List<User> Participants { get; init; } = null!;
-
-    [Required] 
+    [Required]
     public Issue Issue { get; init; } = null!;
+    [Required]
     public Guid IssueId { get; init; }
 
     private Room()

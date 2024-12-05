@@ -1,6 +1,6 @@
 // src/components/CreateRoomPage.tsx
 import React, { useState } from 'react';
-import { RoomService, CreateRoomData } from '../services/roomService';
+import { RoomService, RoomOptions, Room } from '../services/roomService.ts';
 
 const CreateRoomPage: React.FC = () => {
     const [time, setTime] = useState<string>('');
@@ -17,18 +17,17 @@ const CreateRoomPage: React.FC = () => {
         setLoading(true);
         setError(null);
 
-        const createRoomData: CreateRoomData = {
+        const createRoomData: RoomOptions = {
             time,
-            issueId,
-            adminEmail,
+            issueId
         };
 
         try {
             await roomService.startConnection();
 
             const result = await roomService.createRoom(createRoomData);
-            setRoomKey(result.roomKey);
-            alert(`Room created successfully! Room Key: ${result.roomKey}`);
+            setRoomKey(result.id);
+            alert(`Room created successfully! Room Key: ${result.id}`);
         } catch (err) {
             console.error(err);
             setError('Failed to create room. Please try again.');
@@ -59,17 +58,6 @@ const CreateRoomPage: React.FC = () => {
                         type="text"
                         value={issueId}
                         onChange={(e) => setIssueId(e.target.value)}
-                        required
-                        style={{ width: '100%', padding: '8px', marginBottom: '10px' }}
-                    />
-                </div>
-                <div style={{ marginBottom: '10px' }}>
-                    <label htmlFor="adminEmail">Admin Email: </label>
-                    <input
-                        id="adminEmail"
-                        type="email"
-                        value={adminEmail}
-                        onChange={(e) => setAdminEmail(e.target.value)}
                         required
                         style={{ width: '100%', padding: '8px', marginBottom: '10px' }}
                     />
