@@ -12,6 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 var services = builder.Services;
 
+// builder.WebHost.UseUrls("http://0.0.0.0:5099"); // пока так
 
 services.AddControllers();
 // Add services to the container.
@@ -39,7 +40,7 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policyBuilder =>
     {
-        policyBuilder.WithOrigins("http://localhost:5099")
+        policyBuilder.WithOrigins("http://localhost:5173")
             .AllowAnyHeader()
             .AllowCredentials()
             .AllowAnyMethod();

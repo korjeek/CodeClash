@@ -9,6 +9,7 @@ import Rooms from './components/Rooms';
 import Page from './components/Page';
 import HomePage from './components/HomePage';
 import RegisterPage from './components/RegisterPage';
+import CreateRoomPage from './components/CreateRoomPage';
 
 const App: React.FC = () => {
     const rooms = [
@@ -37,6 +38,7 @@ const App: React.FC = () => {
                 <Route path="/ranks" element={<Page navBarIndex={2}></Page>} />
                 <Route path="/test" element={<HomePage/>} />
                 <Route path="/login1" element={<RegisterPage/>} />
+                <Route path="/createRoom" element={<CreateRoomPage/>} />
             </Routes>
         </Router>
     );

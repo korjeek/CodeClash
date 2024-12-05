@@ -1,11 +1,13 @@
 ﻿using CodeClash.API.Services;
-using CodeClash.Core.Models;
 using CodeClash.Core.Models.RoomsRequests;
+using CodeClash.Core.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 
 namespace CodeClash.API.Hubs;
 
-public class RoomHub(RoomService roomService) : Hub
+[Authorize]
+public class RoomHub(RoomService roomService, TestUserSolutionService testUserSolutionService) : Hub
 {
     public async Task<(string, string)> CreateRoom(CreateRoomRequest request)
     {
@@ -13,7 +15,13 @@ public class RoomHub(RoomService roomService) : Hub
         // await Groups.AddToGroupAsync(Context.ConnectionId, request.);
         //
         // return (result.Id.ToString(), result.Admin.ToString());
+        Console.WriteLine("HUI");
         throw new NotImplementedException();
+    }
+    
+    public async Task Send(string message)
+    {
+        await Clients.All.SendAsync("Receive", message);
     }
     
     public async Task JoinRoom(string userEmail, Guid roomId)
@@ -27,8 +35,8 @@ public class RoomHub(RoomService roomService) : Hub
         throw new NotImplementedException();
     }
 
-    // public async Task<Answer> CheckSolution(string solution)
-    // {
-    //     
-    // }
+    public async Task CheckSolution(string solution)
+    {
+        await testUserSolutionService.CheckSolution(solution);
+    }
 }
