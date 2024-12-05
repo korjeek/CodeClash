@@ -1,9 +1,10 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
+using CodeClash.Persistence.Interfaces;
 
 namespace CodeClash.Core.Models;
 
-public class User
+public class UserEntity : IEntity
 {
     public Guid Id { get; init; }
     
@@ -19,12 +20,12 @@ public class User
     public string Name { get; set; }
     public string? RefreshToken { get; set; }
     
-    public Room? Room { get; set; }
+    public RoomEntity? Room { get; set; }
     public Guid? RoomId { get; set; }
     public bool IsAdmin { get; set; }
     
 
-    public User(string name, string email, string passwordHash)
+    public UserEntity(string name, string email, string passwordHash)
     {
         Email = email;
         Name = name;

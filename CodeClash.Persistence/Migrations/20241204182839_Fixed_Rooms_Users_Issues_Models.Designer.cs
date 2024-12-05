@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CodeClash.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241128133452_Fixed_Rooms_Users_Issues_Models")]
+    [Migration("20241204182839_Fixed_Rooms_Users_Issues_Models")]
     partial class Fixed_Rooms_Users_Issues_Models
     {
         /// <inheritdoc />

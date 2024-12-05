@@ -17,19 +17,28 @@ public class RoomHub(RoomService roomService) : Hub
     {
         var userId = Context.User!.GetUserIdFromAccessToken();
         var room =  await roomService.CreateRoom(request.Time, request.IssueId, userId);
+        
+        await Groups.AddToGroupAsync(Context.ConnectionId, room.Id.ToString());
+
 
         // Что то вернули на какую то функцию
         await Clients.User(Context.ConnectionId).SendAsync("FunctionName", room);
     }
     
-    public async Task<Room?> JoinRoom(Guid roomId)
+    public async Task<RoomEntity?> JoinRoom(Guid roomId)
     {
+        await Groups.AddToGroupAsync(Context.ConnectionId, roomId.ToString());
+        
         var userId = Context.User!.GetUserIdFromAccessToken();
         return await roomService.JoinRoom(roomId, userId);
     }
 
-    public async Task QuitRoom(Guid roomId)
+    public async Task<RoomEntity?> QuitRoom(Guid roomId)
     {
+        await Groups.RemoveFromGroupAsync(Context.ConnectionId, roomId.ToString());
+        
+        // var userId = Context.User
+        // return await roomService.QuitRoom(roomId,);
         throw new NotImplementedException();
     }
 

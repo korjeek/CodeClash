@@ -12,7 +12,7 @@ public class IssueController(IssuesRepository issuesRepository) : ControllerBase
         Console.WriteLine(description);
         Console.WriteLine(issueAdminPasswd);
         
-        var issue = new Issue(description);
+        var issue = new IssueEntity(description);
         await issuesRepository.Add(issue);
 
         return Ok(issue);

@@ -3,6 +3,10 @@ import * as signalR from "@microsoft/signalr";
 
 const API_URL = 'https://localhost:7282/room';
 
+export interface Room{
+    
+}
+
 export interface CreateRoomData {
     time: string,
     issueId: string,

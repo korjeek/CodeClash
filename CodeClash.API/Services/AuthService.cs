@@ -11,7 +11,7 @@ public class AuthService(UsersRepository usersRepository, TokenService tokenServ
 {
     
     //TODO: Переписать сигнатуру методов. Нехорошо, что они принимают реквесты, они должны быть только в Controllers
-    public async Task<User?> GetUser(LoginRequest request)
+    public async Task<UserEntity?> GetUser(LoginRequest request)
     {
         var user = await usersRepository.FindUserByEmail(request.Email);
         if (user is null)
@@ -27,7 +27,7 @@ public class AuthService(UsersRepository usersRepository, TokenService tokenServ
         return await usersRepository.AddUser(newUser);
     }
 
-    public async Task<User?> GetUserByPrincipalClaims(JwtToken tokenModel)
+    public async Task<UserEntity?> GetUserByPrincipalClaims(JwtToken tokenModel)
     {
         var principal = tokenService.GetPrincipalClaims(tokenModel.AccessToken);
         
@@ -37,18 +37,18 @@ public class AuthService(UsersRepository usersRepository, TokenService tokenServ
             .First(claim => claim.Type == ClaimTypes.Email).Value);
     }
 
-    public async Task<JwtToken> UpdateUsersTokens(User user)
+    public async Task<JwtToken> UpdateUsersTokens(UserEntity userEntity)
     {
-        var tokens = tokenService.UpdateTokens(user);
-        UpdateUsersRefreshTokenProperties(user, tokens.RefreshToken);
-        await usersRepository.UpdateUserRefreshToken(user);
+        var tokens = tokenService.UpdateTokens(userEntity);
+        UpdateUsersRefreshTokenProperties(userEntity, tokens.RefreshToken);
+        await usersRepository.UpdateUserRefreshToken(userEntity);
         
         return tokens;
     }
 
-    private void UpdateUsersRefreshTokenProperties(User user, string refreshToken)
+    private void UpdateUsersRefreshTokenProperties(UserEntity userEntity, string refreshToken)
     {
-        user.RefreshToken = refreshToken;
-        user.RefreshTokenExpiryTime = DateTime.UtcNow.AddHours(12);
+        userEntity.RefreshToken = refreshToken;
+        userEntity.RefreshTokenExpiryTime = DateTime.UtcNow.AddHours(12);
     }
 }

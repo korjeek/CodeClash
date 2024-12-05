@@ -1,27 +1,29 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using CodeClash.Persistence.Interfaces;
 
 namespace CodeClash.Core.Models;
 
-public class Room
+public class RoomEntity : IEntity
 {
     public Guid Id { get; init; }
 
-    [Required] public TimeOnly Time { get; init; }
+    [Required] 
+    public TimeOnly Time { get; init; }
     public RoomStatus Status { get; set; }
-    public List<User> Participants { get; init; } = null!;
+    public List<UserEntity> Participants { get; init; } = null!;
 
     [Required] 
-    public Issue Issue { get; init; } = null!;
+    public IssueEntity IssueEntity { get; init; } = null!;
     public Guid IssueId { get; init; }
 
-    private Room()
+    private RoomEntity()
     {
     }
 
-    public Room(TimeOnly time, Issue issue)
+    public RoomEntity(TimeOnly time, IssueEntity issueEntity)
     {
         Time = time;
-        Issue = issue;
+        IssueEntity = issueEntity;
         Participants = [];
     }
     

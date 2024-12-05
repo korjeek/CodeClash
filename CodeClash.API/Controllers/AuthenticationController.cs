@@ -15,7 +15,8 @@ public class AuthenticationController(AuthService authService) : ControllerBase
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterRequest request)
     {
-        if (!ModelState.IsValid)
+        if (!ModelState.IsValid) //TODO: Можно сделать передачу конкретных ошибок через Result<object>,
+                                //TODO: и проверять здесь в if Rsult.isFailure и выводить конкретный Result.Error
             return BadRequest(ModelState);
         
         var user = await authService.CreateUser(request);
