@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as signalR from "@microsoft/signalr";
+import { RoomOptions, Room } from "../interfaces/roomInterfaces.ts";
 
 const API_URL = 'https://localhost:7282/room';
 

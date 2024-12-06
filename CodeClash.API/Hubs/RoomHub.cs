@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using CodeClash.API.Extensions;
 using CodeClash.API.Services;
+using CodeClash.Core;
 using CodeClash.Core.Models;
 using CodeClash.Core.Models.RoomsRequests;
 using Microsoft.AspNetCore.Authorization;
@@ -13,7 +14,7 @@ namespace CodeClash.API.Hubs;
 [EnableCors("CorsPolicy")]
 public class RoomHub(RoomService roomService) : Hub
 {
-    public async Task CreateRoom(CreateRoomRequest request)
+    public async Task<Room?> CreateRoom(CreateRoomRequest request)
     {
         var userId = Context.User!.GetUserIdFromAccessToken();
         var room =  await roomService.CreateRoom(request.Time, request.IssueId, userId);
@@ -22,7 +23,8 @@ public class RoomHub(RoomService roomService) : Hub
 
 
         // Что то вернули на какую то функцию
-        await Clients.User(Context.ConnectionId).SendAsync("FunctionName", room);
+        //await Clients.User(Context.ConnectionId).SendAsync("createRoom", room);
+        return room;
     }
     
     public async Task<RoomEntity?> JoinRoom(Guid roomId)
