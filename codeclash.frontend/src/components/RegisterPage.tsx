@@ -29,9 +29,25 @@ export default function RegisterPage() {
                                     <span className="">Sign Up</span>
                                 </h1>
                                 <div className="input-field-container">
-                                    <div className="input-box">
-                                        <input type="text" required/>
-                                        <label>Username</label>
+                                    <div className="input-box type-md">
+                                        <input type='text' required name="name" id="name"/>
+                                        <label htmlFor="name">Username</label>
+                                        <span className="border"></span>
+                                    </div>
+                                    <div className="input-box type-md">
+                                        <input type="email" required name="email" id="email"/>
+                                        <label htmlFor="email">Email</label>
+                                        <span className="border"></span>
+                                    </div>
+                                    <div className="input-box type-md">
+                                        <input type="password" required name="password" id="password"/>
+                                        <label htmlFor="password">Password</label>
+                                        <span className="border"></span>
+                                    </div>
+                                    <div className="input-box type-md">
+                                        <input type="password" required name="confirm-pw" id="confirm-pw"/>
+                                        <label htmlFor="confirm-pw">Confirm Password</label>
+                                        <span className="border"></span>
                                     </div>
                                 </div>
                             </div>

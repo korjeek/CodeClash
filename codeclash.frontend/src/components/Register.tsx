@@ -1,7 +1,7 @@
 // src/components/Register.tsx
 import React, { useState } from 'react';
 import {Link} from "react-router-dom"
-import { register } from '../services/authService';
+import { register } from '../services/authService.ts';
 
 const Register: React.FC = () => {
   const [username, setUsername] = useState('');

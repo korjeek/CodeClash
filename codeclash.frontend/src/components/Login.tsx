@@ -1,7 +1,7 @@
 // src/components/Login.tsx
 import React, { useState } from 'react';
 import {Link} from 'react-router-dom'
-import { login } from '../services/authService';
+import { login } from '../services/authService.ts';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');

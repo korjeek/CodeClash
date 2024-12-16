@@ -1,39 +1,50 @@
 .input-box{
     position: relative;
-    margin-top: 40px;
 }
 
 .input-box input{
-    width: 350px;
-    height: 60px;
-    border: 2px solid white;
-    background: transparent;
-    border-radius: 6px;
-    outline: none;
+    margin: 0;
+    font-size: 1.1rem;
+    background-color: black;
     color: white;
-    font-size: 18px;
+    border: none;
+    outline: none;
+    border-radius: 0;
+    width: 100%;
+}
+
+.input-box.type-md input{
+    border-bottom: .05rem solid white;
 }
 
 .input-box label{
     position: absolute;
-    left: 15px;
     top: 50%;
     transform: translateY(-50%);
     color: white;
-    font-size: 19px;
-    pointer-events: none;
-    transition: .3s ease;
+    font-size: 1.1rem;
+    transition: .2s ease-in-out;
 }
 
-.input:focus{
-    border: 2px solid #04FAA4;
+.input-box.type-md label{
+    left: 0;
 }
 
-.input:focus ~ label,
-.input:valid ~ label{
-    top: 0;
-    font-size: 16px;
-    padding: 0 10px;
-    background: transparent;
-    border-left: 1px solid #04FAA4;
+.input-box input:focus + label,
+.input-box input:valid + label{
+    top: 5%;
+    color: cyan;
+    font-size: .8rem;
+}
+
+.input-box input:not(:focus) + label{
+    color: #aaaaaa;
+}
+
+.input-box .border{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: .1rem;
+    width: 100%;
 }
