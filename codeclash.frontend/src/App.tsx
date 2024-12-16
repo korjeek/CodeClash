@@ -9,8 +9,10 @@ import Rooms from './components/Rooms';
 import Page from './components/Page';
 import HomePage from './components/HomePage';
 import { CodePallete } from './components/CodePallete';
-import RegisterPage from './components/RegisterPage';
+import RegisterPage from './components/Auth/RegisterPage.tsx';
+import LoginPage from './components/Auth/LoginPage.tsx';
 import CreateRoomPage from './components/CreateRoomPage';
+import AuthPage from "./components/Auth/AuthPage.tsx";
 
 const App: React.FC = () => {
     const rooms = [
@@ -31,7 +33,8 @@ const App: React.FC = () => {
                     <Route path="/ranks" element={<Page navBarIndex={2}></Page>} />
                     <Route path="/submit" element={<Page navBarIndex={-1}><CodePallete/></Page>} />
                     <Route path="/test" element={<HomePage/>} />
-                    <Route path="/login1" element={<RegisterPage/>} />
+                    <Route path="/reg1" element={<AuthPage AuthPageElement={<RegisterPage />} />} />
+                    <Route path="/login1" element={<AuthPage AuthPageElement={<LoginPage />}/>} />
                     <Route path="/createRoom" element={<CreateRoomPage/>} />
             </Routes>
         </Router>

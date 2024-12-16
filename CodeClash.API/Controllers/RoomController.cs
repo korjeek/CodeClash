@@ -16,7 +16,6 @@ public class RoomController(RoomsRepository roomsRepository) : ControllerBase
     {
         //TODO: Get list of active rooms
         var rooms = await roomsRepository.GetRooms();
-        rooms.Select(room => new {room.Id, room.Issue.Id, room})
         return Ok();
     }
 }
