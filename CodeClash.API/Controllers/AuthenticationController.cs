@@ -1,5 +1,6 @@
 ﻿using CodeClash.API.Services;
 using CodeClash.Core.Models.Identity;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using LoginRequest = CodeClash.Core.Models.Identity.LoginRequest;
 using RegisterRequest = CodeClash.Core.Models.Identity.RegisterRequest;
@@ -7,6 +8,7 @@ using RegisterRequest = CodeClash.Core.Models.Identity.RegisterRequest;
 namespace CodeClash.API.Controllers;
 
 [ApiController]
+[EnableCors("CorsPolicy")]
 [Route("auth")]
 public class AuthenticationController(AuthService authService) : ControllerBase
 {
@@ -22,7 +24,7 @@ public class AuthenticationController(AuthService authService) : ControllerBase
         
         return await Login(new LoginRequest(request.Email, request.Password));
     }
-
+    
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginRequest request)
     {

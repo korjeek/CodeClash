@@ -13,10 +13,10 @@ public static class JwtBearerExtensions
 {
     public static List<Claim> CreateClaims(this User user) =>
     [
-        new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-        new(ClaimTypes.NameIdentifier, user.Id.ToString()),
-        new(ClaimTypes.Name, user.Name),
-        new(ClaimTypes.Email, user.Email)
+        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+        new Claim(ClaimTypes.Name, user.Name),
+        new Claim(ClaimTypes.Email, user.Email)
     ];
 
     private static SigningCredentials CreateSigningCredentials(this IConfiguration configuration)

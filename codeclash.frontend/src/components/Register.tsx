@@ -27,7 +27,7 @@ const Register: React.FC = () => {
 
             <form onSubmit={handleRegister}>
                 <input 
-                    type="text"
+                    type="text"   
                     placeholder='Username'
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
@@ -74,7 +74,7 @@ const Register: React.FC = () => {
             </form>
 
             <div id="formFooter">
-                <Link to="/login">Already have an acount?</Link>
+                <Link to="/login">Already have an account?</Link>
             </div>
         </div>
   );
