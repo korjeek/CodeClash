@@ -1,27 +1,32 @@
-﻿using CodeClash.Core.Interfaces;
-
+﻿using static CodeClash.Core.Constants.Constants;
+using CSharpFunctionalExtensions;
 namespace CodeClash.Core.Models;
 
-public class Room(TimeOnly time, string issue, string name) : IModel<RoomEntity>
+public class Room
 {
-    public Guid Id { get; } = Guid.NewGuid();
-
-    public TimeOnly Time { get; init; } = time;
-
-    public string Name { get; set; } = name;
-
-    public string IssueName { get; init; } = issue;
-
-    public static Room GetModel(RoomEntity roomEntity)
+    public Guid Id { get; }
+    public string Name { get; private set; }
+    public TimeOnly Time { get; private set; }
+    public Issue Issue { get; private set;}
+    public List<User> Participants { get; private set; }
+    
+    private Room(Guid id, string name, TimeOnly time, Issue issue)
     {
-        return new Room(
-            roomEntity.Time,
-            Issue.GetModel(roomEntity.IssueEntity).Name,
-            roomEntity.Name);
+        Id = id;
+        Name = name;
+        Issue = issue;
+        Time = time;
+        Participants = [];
     }
 
-    public RoomEntity GetEntity()
+    public static Result<Room> Create(Guid id, string name, TimeOnly time, Issue issue)
     {
-        throw new NotImplementedException();
+        if (string.IsNullOrWhiteSpace(name) || name.Length > MaxNameLength)
+            return Result.Failure<Room>("Incorrect name length.");
+        var room = new Room(id, name, time, issue);
+        return Result.Success(room);
     }
+
+    public void AddParticipant(User participant) => Participants.Add(participant);
+    
 }

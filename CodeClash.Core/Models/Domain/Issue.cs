@@ -1,27 +1,27 @@
-﻿using CodeClash.Core.Interfaces;
+﻿using CSharpFunctionalExtensions;
+using static CodeClash.Core.Constants.Constants;
 
 namespace CodeClash.Core.Models;
 
 // подумать над тем, какой тип тестовых данных использовать
-public class Issue(Guid id, string description, string name) : IModel<IssueEntity>
+public class Issue
 {
-    public Guid Id { get; } = id;
-    public string Description { get; } = description;
-    public string Name { get; } = name;
+    public Guid Id { get; private set; }
+    public string Description { get; private set; }
+    public string Name { get; private set; }
 
-
-    public IssueEntity GetEntity()
+    private Issue(Guid id, string description, string name)
     {
-        return new IssueEntity
-        {
-            Id = Id,
-            Description = Description,
-            Name = Name
-        };
+        Id = id;
+        Description = description;
+        Name = name;
     }
 
-    public static Issue GetModel(IssueEntity issueEntity)
-    { 
-      return new Issue(issueEntity.Id, issueEntity.Description, issueEntity.Name);
+    public static Result<Issue> Create(Guid id, string description, string name)
+    {
+        if (string.IsNullOrWhiteSpace(name) || name.Length > MaxNameLength)
+            return Result.Failure<Issue>("Incorrect name.");
+        var issue = new Issue(id, description, name);
+        return Result.Success(issue);
     }
 }

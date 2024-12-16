@@ -2,8 +2,11 @@
 using CodeClash.API.Extensions;
 using CodeClash.API.Services;
 using CodeClash.Core;
+using CodeClash.Core.Extensions;
 using CodeClash.Core.Models;
+using CodeClash.Core.Models.DTOs;
 using CodeClash.Core.Models.RoomsRequests;
+using CSharpFunctionalExtensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.SignalR;
@@ -14,25 +17,32 @@ namespace CodeClash.API.Hubs;
 [EnableCors("CorsPolicy")]
 public class RoomHub(RoomService roomService) : Hub
 {
-    public async Task<Room?> CreateRoom(CreateRoomRequest request)
+    public async Task<Result<RoomDTO>> CreateRoom(CreateRoomRequest request)
     {
-        var userId = Context.User!.GetUserIdFromAccessToken();
-        var room =  await roomService.CreateRoom(request.Time, request.IssueId, userId);
-        
+        var userId = Context.User.GetUserIdFromAccessToken();
+        var roomResult =  await roomService.CreateRoom(request.RoomName, request.Time, request.IssueId, userId);
+        if (roomResult.IsFailure)
+            return Result.Failure<RoomDTO>(roomResult.Error);
+
+        var room = roomResult.Value;
         await Groups.AddToGroupAsync(Context.ConnectionId, room.Id.ToString());
 
 
         // Что то вернули на какую то функцию
         //await Clients.User(Context.ConnectionId).SendAsync("createRoom", room);
-        return room;
+        return Result.Success(room.GetRoomDTO());
     }
     
-    public async Task<RoomEntity?> JoinRoom(Guid roomId)
+    public async Task<Result<RoomDTO>> JoinRoom(Guid roomId)
     {
         await Groups.AddToGroupAsync(Context.ConnectionId, roomId.ToString());
         
-        var userId = Context.User!.GetUserIdFromAccessToken();
-        return await roomService.JoinRoom(roomId, userId);
+        var userId = Context.User.GetUserIdFromAccessToken();
+        
+        var roomResult = await roomService.JoinRoom(roomId, userId);
+        if (roomResult.IsFailure)
+            return Result.Failure<RoomDTO>(roomResult.Error);
+        return roomResult.Value.GetRoomDTO();
     }
 
     public async Task<RoomEntity?> QuitRoom(Guid roomId)

@@ -4,6 +4,7 @@ using CodeClash.Core.Models;
 using CodeClash.Core.Models.Identity;
 using CodeClash.Core.Services;
 using CodeClash.Persistence.Repositories;
+using CSharpFunctionalExtensions;
 
 namespace CodeClash.API.Services;
 
@@ -11,45 +12,53 @@ public class AuthService(UsersRepository usersRepository, TokenService tokenServ
 {
     
     //TODO: Переписать сигнатуру методов. Нехорошо, что они принимают реквесты, они должны быть только в Controllers
-    public async Task<User?> GetUser(LoginRequest request)
+    public async Task<Result<User>> GetUser(string email, string password)
     {
-        var user = (await usersRepository.FindUserByEmail(request.Email));
+        var user = await usersRepository.FindUserByEmail(email);
         if (user is null)
-            return null;
+            return Result.Failure<User>($"User with {email} email does not exist.");
 
-        return PasswordHasher.Verify(request.Password, user.PasswordHash) ? user : null;
+        return PasswordHasher.Verify(password, user.PasswordHash) ? 
+            Result.Success(user) : Result.Failure<User>("Password is incorrect.");
     }
 
-    public async Task<User?> CreateUser(RegisterRequest request)
+    public async Task<Result<User>> CreateUser(string name, string email, string password)
     {
-        var passwordHash = PasswordHasher.Generate(request.Password);
-        var newUser = new User(request.UserName, request.Email, passwordHash);
-        return await usersRepository.AddUser(newUser);
+        var passwordHash = PasswordHasher.Generate(password);
+        var newUserResult = User.Create(Guid.NewGuid(), email, passwordHash, name);
+        if (newUserResult.IsFailure)
+            return Result.Failure<User>(newUserResult.Error);
+        var user = await usersRepository.AddUser(newUserResult.Value);
+        if (user is null)
+            return Result.Failure<User>($"User with {email} email already exists.");
+        return Result.Success(user);
     }
 
-    public async Task<UserEntity?> GetUserByPrincipalClaims(JwtToken tokenModel)
+    public async Task<Result<User>> GetUserByPrincipalClaims(JwtToken tokenModel)
     {
         var principal = tokenService.GetPrincipalClaims(tokenModel.AccessToken);
         
         if (principal is null)
-            return null;
-        return await usersRepository.FindUserByEmail(principal.Claims
+            return Result.Failure<User>("Complex refresh token error is occured.");
+        var user = await usersRepository.FindUserByEmail(principal.Claims
             .First(claim => claim.Type == ClaimTypes.Email).Value);
+        if (user is null)
+            return Result.Failure<User>($"EMAIL НЕТУ");
+        return Result.Success(user);
     }
 
     public async Task<JwtToken> UpdateUsersTokens(User user)
     {
         var tokens = tokenService.UpdateTokens(user);
         UpdateUsersRefreshTokenProperties(user, tokens.RefreshToken);
-        var userEntity = user.GetEntity();
-        await usersRepository.UpdateUserRefreshToken(userEntity);
+        await usersRepository.UpdateUserRefreshToken(user);
         
         return tokens;
     }
 
     private void UpdateUsersRefreshTokenProperties(User user, string refreshToken)
     {
-        user.RefreshToken = refreshToken;
-        user.RefreshTokenExpiryTime = DateTime.UtcNow.AddHours(12);
+        user.UpdateRefreshToken(refreshToken);
+        user.UpdateRefreshTokenExpiryTime(DateTime.UtcNow.AddHours(12));
     }
 }

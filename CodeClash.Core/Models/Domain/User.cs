@@ -1,42 +1,42 @@
-﻿using System.ComponentModel.DataAnnotations;
-using CodeClash.Core.Interfaces;
+﻿using CSharpFunctionalExtensions;
+using static CodeClash.Core.Constants.Constants;
+
 
 namespace CodeClash.Core.Models;
-
-public class User(string name, string email, string passwordHash, DateTime refreshTokenExpiryTime, string refreshToken) : IModel<UserEntity>
+public class User
 {
-    public Guid Id { get; } = Guid.NewGuid();
-
-    public string Email { get; } = email;
-
-    public string PasswordHash { get; } = passwordHash;
-
-    public string Name { get; } = name;
-
-    public DateTime RefreshTokenExpiryTime { get; set; }
-
-    public string? RefreshToken { get; set; }
-
-    public UserEntity GetEntity()
+    public Guid Id { get; private set; }
+    public string Email { get; private set;}
+    public string PasswordHash { get; private set;} 
+    public string Name { get; private set; }
+    public DateTime RefreshTokenExpiryTime { get; private set; }
+    public string? RefreshToken { get; private set; }
+    
+    public bool IsAdmin { get; private set; }
+    
+    private User(Guid id, string email, string passwordHash, string name, bool isAdmin)
     {
-        return new UserEntity
-        {
-            Id = Id,
-            Name = Name,
-            Email = Email,
-            PasswordHash = PasswordHash,
-            RefreshTokenExpiryTime = RefreshTokenExpiryTime,
-            RefreshToken = RefreshToken
-        };
+        Id = id;
+        Email = email;
+        PasswordHash = passwordHash;
+        Name = name;
+        IsAdmin = isAdmin;
     }
 
-    public static User GetModel(UserEntity userEntity)
+    public static Result<User> Create(Guid id, string email, string passwordHash, string name, bool isAdmin = false)
     {
-        return new User(
-            userEntity.PasswordHash,
-            userEntity.Email,
-            userEntity.PasswordHash,
-            userEntity.RefreshTokenExpiryTime,
-            userEntity.RefreshToken);
+        if (string.IsNullOrWhiteSpace(email) || email.Length > MaxEmailLength)
+            return Result.Failure<User>("Incorrect email length.");
+        if (string.IsNullOrWhiteSpace(name) || name.Length > MaxNameLength)
+            return Result.Failure<User>("Incorrect name length.");
+        
+        return Result.Success(new User(id, email, passwordHash, name, isAdmin));
     }
+
+    public void UpdateRoomAdminStatus(bool isAdmin) => IsAdmin = isAdmin;
+    
+    public void UpdateRefreshToken(string refreshToken) => RefreshToken = refreshToken;
+
+    public void UpdateRefreshTokenExpiryTime(DateTime refreshTokenExpiryTime) =>
+        RefreshTokenExpiryTime = refreshTokenExpiryTime;
 }

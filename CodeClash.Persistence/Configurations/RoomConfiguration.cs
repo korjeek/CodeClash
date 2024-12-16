@@ -9,15 +9,12 @@ public class RoomConfiguration : IEntityTypeConfiguration<RoomEntity>
     public void Configure(EntityTypeBuilder<RoomEntity> builder)
     {
         builder.HasKey(room => room.Id);
-
         builder
-            .HasMany(r => r.Participants)
-            .WithOne(u => u.Room)
-            .HasForeignKey(u => u.RoomId);
-
-        builder
-            .HasOne(r => r.IssueEntity)
+            .HasOne<IssueEntity>()
             .WithMany()
             .HasForeignKey(r => r.IssueId);
+        builder
+            .HasMany<UserEntity>()
+            .WithOne();
     }
 }
