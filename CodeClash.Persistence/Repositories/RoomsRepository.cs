@@ -1,20 +1,17 @@
-﻿using CodeClash.Core.Models;
+﻿using CodeClash.Core.Extensions;
+using CodeClash.Core.Models;
+using CodeClash.Core.Models.Enums;
+using CSharpFunctionalExtensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace CodeClash.Persistence.Repositories;
 
 public class RoomsRepository(ApplicationDbContext dbContext)
 {
-    public async Task<Room?> Add(Room room, Guid userId)
+    public async Task<Room> Add(Room room)
     {
-        var admin = await dbContext.Users.FindAsync(userId);
-        if (admin!.IsAdmin)
-            return null;
-        
-        dbContext.Rooms.Attach(room);
-        admin.IsAdmin = true;
-        admin.Room = room;
-        
+        var roomEntity = room.GetRoomEntity();
+        dbContext.Rooms.Attach(roomEntity);
         await dbContext.SaveChangesAsync();
         
         return room;
@@ -22,37 +19,16 @@ public class RoomsRepository(ApplicationDbContext dbContext)
 
     public async Task<Room?> GetRoomById(Guid roomId)
     {
-        return await dbContext.Rooms
-            .Include(r => r.Participants)
-            .Include(r => r.Issue)
-            .FirstOrDefaultAsync(r => r.Id == roomId);
-    }
-    
-    public async Task<Room?> AddUserToRoom(Guid userId, Guid roomId)
-    {
-        var room = await GetRoomById(roomId);
-        if (room is null || room.Status is Room.RoomStatus.CompetitionInProgress)
-            return null;
-
-        var user = await dbContext.Users.FindAsync(userId);
-        room.Participants.Add(user!); 
-        await dbContext.SaveChangesAsync();
-        return room;
-    }
-
-    public async Task<Room?> RemoveUserFromRoom(Guid userId, Guid roomId)
-    {
-        var user = await dbContext.Users.FindAsync(userId);
-        var room = await GetRoomById(roomId);
+        var room = await dbContext.Rooms.FindAsync(roomId);
         if (room is null)
             return null;
-        room.Participants.Remove(user!);
-        if (user!.IsAdmin)
-            user.IsAdmin = false;
-        await dbContext.SaveChangesAsync();
-        return room;
-    }
+        var issue = await dbContext.Issues.FindAsync(room.IssueId);
+        if (issue is null)
+            return null;
 
+        return Room.Create(roomId, room.Name, room.Time, issue.GetIssueFromEntity()).Value;
+    }
+    
     public async Task<List<Room>?> GetRooms()
     {
         //TODO: get list of active rooms

@@ -9,9 +9,9 @@ namespace CodeClash.Persistence;
 
 public class ApplicationDbContext(IConfiguration configuration) : DbContext
 {
-    public DbSet<User> Users { get; set; }
-    public DbSet<Room> Rooms { get; set; }
-    public DbSet<Issue> Issues { get; set; }
+    public DbSet<UserEntity> Users { get; set; }
+    public DbSet<RoomEntity> Rooms { get; set; }
+    public DbSet<IssueEntity> Issues { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

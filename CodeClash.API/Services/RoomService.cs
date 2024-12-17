@@ -1,57 +1,82 @@
 ﻿using CodeClash.Core.Models;
+using CodeClash.Core.Models.Enums;
 using CodeClash.Core.Models.RoomsRequests;
 using CodeClash.Persistence.Repositories;
+using CSharpFunctionalExtensions;
 
 namespace CodeClash.API.Services;
 
 public class RoomService(RoomsRepository roomsRepository, IssuesRepository issuesRepository, UsersRepository usersRepository)
 {
-    public async Task<Room?> CreateRoom(TimeOnly time, Guid issueId, Guid userId)
+    public async Task<Result<Room>> CreateRoom(string roomName, TimeOnly time, Guid issueId, Guid userId)
     {
         var issue = await issuesRepository.GetIssueById(issueId); // Guid.Parse(request.IssueId)
-        if (issue == null)
-            return null;
+        if (issue is null)
+            return Result.Failure<Room>($"Issue does not exist.");
+
+        var newRoomResult = Room.Create(Guid.NewGuid(), roomName, time, issue);
+        if (newRoomResult.IsFailure)
+            return Result.Failure<Room>(newRoomResult.Error);
         
-        return await roomsRepository.Add(new Room(time, issue), userId);
+        
+        var adminUser = await usersRepository.GetUserById(userId);
+        if (adminUser is null)
+            return Result.Failure<Room>($"User with {userId} id does not exist");
+        if (adminUser.IsAdmin)
+            return Result.Failure<Room>("User is already admin");
+        adminUser.UpdateRoomAdminStatus(true);
+        
+        var room = await roomsRepository.Add(newRoomResult.Value);
+        await usersRepository.UpdateUser(adminUser);
+
+        return Result.Success(room);
     }
     
-    public async Task<Room?> JoinRoom(Guid roomId, Guid userId)
+    public async Task<Result<Room>> JoinRoom(Guid roomId, Guid userId)
     {
-        return await roomsRepository.AddUserToRoom(userId, roomId);
+        var room = await roomsRepository.GetRoomById(roomId);
+        if (room is null)
+            return Result.Failure<Room>($"Room with {roomId} id does not exist");
+
+        var user = await usersRepository.GetUserById(userId);
+        if (user is null)
+            return Result.Failure<Room>($"User with {userId} id does not exist");
+        await usersRepository.UpdateUser(user, roomId);
+
+        return Result.Success(room);
     }
     
-    public async Task<Room?> QuitRoom(Guid roomId, Guid userId)
+    public async Task<RoomEntity?> QuitRoom(Guid roomId, Guid userId)
     {
-        return await roomsRepository.RemoveUserFromRoom(userId, roomId);
+        // return await roomsRepository.RemoveUserFromRoom(userId, roomId);
+        throw new NotImplementedException();
     }
 
-    public async Task<Room?> CloseRoom(Guid roomId)
+    public async Task<RoomEntity?> CloseRoom(Guid roomId)
     {
         throw new NotImplementedException();
     }
     
     
-    
-    
-    
-    
-    public async Task<Room?> StartCompetition(Guid roomId)
+    public async Task<RoomEntity?> StartCompetition(Guid roomId)
     {
-        var room = await roomsRepository.GetRoomById(roomId);
-        if (room == null)
-            return null;
-        if (room.Status == Room.RoomStatus.CompetitionInProgress) return null;
-        room.Status = Room.RoomStatus.CompetitionInProgress;
-        return room;
+        // var room = await roomsRepository.GetRoomById(roomId);
+        // if (room == null)
+        //     return null;
+        // if (room.Status == RoomStatus.CompetitionInProgress) return null;
+        // room.Status = RoomStatus.CompetitionInProgress;
+        // return room;
+        throw new NotImplementedException();
     }
 
-    public async Task<Room?> FinishCompetition(Guid roomId)
+    public async Task<RoomEntity?> FinishCompetition(Guid roomId)
     {
-        var room = await roomsRepository.GetRoomById(roomId);
-        if (room == null)
-            return null;
-        if (room.Status == Room.RoomStatus.WaitingForParticipants) return null;
-        room.Status = Room.RoomStatus.WaitingForParticipants;
-        return room;
+        // var room = await roomsRepository.GetRoomById(roomId);
+        // if (room == null)
+        //     return null;
+        // if (room.Status == RoomStatus.WaitingForParticipants) return null;
+        // room.Status = RoomStatus.WaitingForParticipants;
+        // return room;
+        throw new NotImplementedException();
     }
 }

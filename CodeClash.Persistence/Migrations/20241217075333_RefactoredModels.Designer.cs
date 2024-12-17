@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CodeClash.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241126122245_AddedRoomsIssuesUpdatedUsers")]
-    partial class AddedRoomsIssuesUpdatedUsers
+    [Migration("20241217075333_RefactoredModels")]
+    partial class RefactoredModels
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace CodeClash.Persistence.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("CodeClash.Core.Models.Issue", b =>
+            modelBuilder.Entity("CodeClash.Core.Models.IssueEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -35,12 +35,16 @@ namespace CodeClash.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
                     b.ToTable("Issues");
                 });
 
-            modelBuilder.Entity("CodeClash.Core.Models.Room", b =>
+            modelBuilder.Entity("CodeClash.Core.Models.RoomEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -48,6 +52,10 @@ namespace CodeClash.Persistence.Migrations
 
                     b.Property<Guid>("IssueId")
                         .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<int>("Status")
                         .HasColumnType("integer");
@@ -57,13 +65,12 @@ namespace CodeClash.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IssueId")
-                        .IsUnique();
+                    b.HasIndex("IssueId");
 
                     b.ToTable("Rooms");
                 });
 
-            modelBuilder.Entity("CodeClash.Core.Models.User", b =>
+            modelBuilder.Entity("CodeClash.Core.Models.UserEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -95,35 +102,26 @@ namespace CodeClash.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RoomId", "IsAdmin");
+                    b.HasIndex("RoomId");
 
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("CodeClash.Core.Models.Room", b =>
+            modelBuilder.Entity("CodeClash.Core.Models.RoomEntity", b =>
                 {
-                    b.HasOne("CodeClash.Core.Models.Issue", "Issue")
-                        .WithOne()
-                        .HasForeignKey("CodeClash.Core.Models.Room", "IssueId")
+                    b.HasOne("CodeClash.Core.Models.IssueEntity", null)
+                        .WithMany()
+                        .HasForeignKey("IssueId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Issue");
                 });
 
-            modelBuilder.Entity("CodeClash.Core.Models.User", b =>
+            modelBuilder.Entity("CodeClash.Core.Models.UserEntity", b =>
                 {
-                    b.HasOne("CodeClash.Core.Models.Room", "Room")
-                        .WithMany("Participants")
+                    b.HasOne("CodeClash.Core.Models.RoomEntity", null)
+                        .WithMany()
                         .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("Room");
-                });
-
-            modelBuilder.Entity("CodeClash.Core.Models.Room", b =>
-                {
-                    b.Navigation("Participants");
                 });
 #pragma warning restore 612, 618
         }

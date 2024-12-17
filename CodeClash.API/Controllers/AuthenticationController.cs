@@ -15,12 +15,11 @@ public class AuthenticationController(AuthService authService) : ControllerBase
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterRequest request)
     {
-        if (!ModelState.IsValid)
+        if (!ModelState.IsValid) 
             return BadRequest(ModelState);
-        
-        var user = await authService.CreateUser(request);
-        if (user is null)
-            return BadRequest(AuthRequestErrorType.ExistedAccount.ToString());
+        var userResult = await authService.CreateUser(request.UserName, request.Email, request.Password);
+        if (userResult.IsFailure)
+            return BadRequest(userResult.Error);
         
         return await Login(new LoginRequest(request.Email, request.Password));
     }
@@ -30,29 +29,30 @@ public class AuthenticationController(AuthService authService) : ControllerBase
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
-
-        var user = await authService.GetUser(request);
-        if (user is null)
-            return BadRequest(AuthRequestErrorType.WrongCredentials.ToString());
-        
+        var userResult = await authService.GetUser(request.Email, request.Password);
+        if (userResult.IsFailure)
+            return BadRequest(userResult.Error);
+        var user = userResult.Value;
         var tokens = await authService.UpdateUsersTokens(user);
         HttpContext.Response.Cookies.Append("spooky-cookies", tokens.AccessToken);
         
         return Ok(new AuthResponse(user.Name, user.Email, tokens.AccessToken, tokens.RefreshToken));
     }
     
-    [HttpPost]
+    [HttpPut] // TODO: Может изменить на PUT? Обычно именно его используют для обновления данных на сервере, а использовать везде только POST это КОЛХОЗ, ну и плохо в целом, так Ваня сказал
     [Route("refresh-token")]
     public async Task<IActionResult> RefreshToken(JwtToken? tokenModel)
     {
         if (tokenModel is null)
             return BadRequest(AuthRequestErrorType.InvalidTokenModel.ToString());
 
-        var user = await authService.GetUserByPrincipalClaims(tokenModel);
-        if (user == null || user.RefreshToken != tokenModel.RefreshToken || user.RefreshTokenExpiryTime <= DateTime.UtcNow)
+        var userResult = await authService.GetUserByPrincipalClaims(tokenModel);
+        if (userResult.IsFailure || 
+            userResult.Value.RefreshToken != tokenModel.RefreshToken || 
+            userResult.Value.RefreshTokenExpiryTime <= DateTime.UtcNow)
             return BadRequest(AuthRequestErrorType.ComplexRefreshTokenError);
         
-        var tokens = await authService.UpdateUsersTokens(user);
+        var tokens = await authService.UpdateUsersTokens(userResult.Value);
         return new ObjectResult(tokens);
     }
 }

@@ -4,16 +4,15 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CodeClash.Persistence.Configurations;
 
-public class UserConfiguration : IEntityTypeConfiguration<User>
+public class UserConfiguration : IEntityTypeConfiguration<UserEntity>
 {
-    public void Configure(EntityTypeBuilder<User> builder)
+    public void Configure(EntityTypeBuilder<UserEntity> builder)
     {
         builder.HasKey(user => user.Id);
-        
         builder
-            .HasOne(u => u.Room)
-            .WithMany(r => r.Participants)
+            .HasOne<RoomEntity>()
+            .WithMany()
             .HasForeignKey(u => u.RoomId)
-            .OnDelete(DeleteBehavior.SetNull); // при удалении комнаты Room обнуляется
+            .OnDelete(DeleteBehavior.SetNull);
     }
 }

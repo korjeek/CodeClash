@@ -1,4 +1,5 @@
 import { Room } from "../interfaces/roomInterfaces.ts";
+import {getRoomsList} from "../services/roomService.ts";
 
 /*interface Room {
     key: number;
@@ -12,10 +13,11 @@ interface RoomsProp {
     Rooms: Room[];
 }
 
-export default function Rooms ({Rooms} : RoomsProp) {
+export default function Rooms() {
+    
     return (
         <div id="roomsScroll">
-            {Rooms.map((room) => (
+            {rooms.map((room) => (
                 <div className="roomListItem">
                     <div>{room.id}</div>
                     <div style={{ "flex": "right"}}>Task: {room.issue.id}</div>

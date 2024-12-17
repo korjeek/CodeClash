@@ -1,7 +1,7 @@
 // src/components/CreateRoomPage.tsx
 import React, { useState } from 'react';
-import { RoomService } from "../services/roomService.ts"
-import { RoomOptions, Room } from '../interfaces/roomInterfaces.ts';
+import { RoomService} from '../services/roomService.ts';
+import { Room } from '../interfaces/roomInterfaces.ts'
 
 const CreateRoomPage: React.FC = () => {
     const [time, setTime] = useState<string>('');
@@ -27,8 +27,8 @@ const CreateRoomPage: React.FC = () => {
             await roomService.startConnection();
 
             const result = await roomService.createRoom(createRoomData);
-            setRoomKey(result.id);
-            alert(`Room created successfully! Room Key: ${result.id}`);
+            // setRoomKey(result.id);
+            alert(`Room created successfully! Room Key: ${result}`);
         } catch (err) {
             console.error(err);
             setError('Failed to create room. Please try again.');

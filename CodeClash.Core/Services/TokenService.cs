@@ -30,8 +30,8 @@ public class TokenService(IConfiguration configuration)
 
     private string UpdateRefreshToken(User user)
     {
-        user.RefreshToken = JwtBearerExtensions.GenerateRefreshToken();
-        user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
+        user.UpdateRefreshToken(JwtBearerExtensions.GenerateRefreshToken());
+        user.UpdateRefreshTokenExpiryTime(DateTime.UtcNow.AddDays(7));
         return user.RefreshToken;
     }
 

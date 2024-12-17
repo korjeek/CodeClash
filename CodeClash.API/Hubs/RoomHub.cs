@@ -1,11 +1,16 @@
 using System.Security.Claims;
 using CodeClash.API.Extensions;
 using CodeClash.API.Services;
+using CodeClash.Core.Extensions;
 using CodeClash.Core.Models;
+using CodeClash.Core.Models.DTOs;
 using CodeClash.Core.Models.RoomsRequests;
 using CodeClash.Core.Services;
+using CSharpFunctionalExtensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 
 namespace CodeClash.API.Hubs;
@@ -14,27 +19,40 @@ namespace CodeClash.API.Hubs;
 [EnableCors("CorsPolicy")]
 public class RoomHub(RoomService roomService, TestUserSolutionService testUserSolutionService) : Hub
 {
-    public async Task<string?> CreateRoom(CreateRoomRequest request)
+    public async Task<ApiResponse<RoomDTO>> CreateRoom(CreateRoomRequest request)
     {
-        var userId = Context.User!.GetUserIdFromAccessToken();
-        var room = await roomService.CreateRoom(request.Time, request.IssueId, userId);
-        // ошибочное решение await testUserSolutionService.CheckSolution("namespace CodeClash.UserSolutionTest;\npublic class SolutionTask\n{\n\tpublic int[] FindSum(int[] nums, int target)\n\t{\n\t\tvar result = new int[2];\n\t\tfor(var i = 0; i < nums.Length; i++)\n\t\t\tfor (var j = i + 1; j < nums.Length; j++)\n\t\t\t{\n\t\t\t\tif (nums[i] + nums[j] == target)\n\t\t\t\t{\n\t\t\t\t\tresult[0] = i;\n\t\t\t\t\tresult[1] = i;\n\t\t\t\t}\n\t\t\t}\n\t\treturn result;\n\t}\n}\n");
-        await testUserSolutionService.CheckSolution("namespace CodeClash.UserSolutionTest;\npublic class SolutionTask\n{\n\tpublic int[] FindSum(int[] nums, int target)\n\t{\n\t\tvar result = new int[2];\n\t\tfor(var i = 0; i < nums.Length; i++)\n\t\t\tfor (var j = i + 1; j < nums.Length; j++)\n\t\t\t{\n\t\t\t\tif (nums[i] + nums[j] == target)\n\t\t\t\t{\n\t\t\t\t\tresult[0] = i;\n\t\t\t\t\tresult[1] = j;\n\t\t\t\t}\n\t\t\t}\n\t\treturn result;\n\t}\n}\n",
-            "FindSum");
+        var userId = Context.User.GetUserIdFromAccessToken();
+        var roomResult =  await roomService.CreateRoom(request.RoomName, request.Time, request.IssueId, userId);
+        if (roomResult.IsFailure)
+            return new ApiResponse<RoomDTO>(false, null, roomResult.Error);
+
+        var room = roomResult.Value;
+        await Groups.AddToGroupAsync(Context.ConnectionId, room.Id.ToString());
+
 
         // Что то вернули на какую то функцию
         //await Clients.User(Context.ConnectionId).SendAsync("createRoom", room);
-        return "";
+        return new ApiResponse<RoomDTO>(true, roomResult.Value.GetRoomDTO(), null);
     }
     
-    public async Task<Room?> JoinRoom(Guid roomId)
+    public async Task<ApiResponse<RoomDTO>> JoinRoom(Guid roomId)
     {
-        var userId = Context.User!.GetUserIdFromAccessToken();
-        return await roomService.JoinRoom(roomId, userId);
+        await Groups.AddToGroupAsync(Context.ConnectionId, roomId.ToString());
+        
+        var userId = Context.User.GetUserIdFromAccessToken();
+        
+        var roomResult = await roomService.JoinRoom(roomId, userId);
+        if (roomResult.IsFailure)
+            return new ApiResponse<RoomDTO>(false, null, roomResult.Error);
+        return new ApiResponse<RoomDTO>(true, roomResult.Value.GetRoomDTO(), null);
     }
     
     public async Task QuitRoom(Guid roomId)
     {
+        await Groups.RemoveFromGroupAsync(Context.ConnectionId, roomId.ToString());
+        
+        // var userId = Context.User
+        // return await roomService.QuitRoom(roomId,);
         throw new NotImplementedException();
     }
     

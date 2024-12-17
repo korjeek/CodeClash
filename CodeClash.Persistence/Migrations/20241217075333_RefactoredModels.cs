@@ -6,35 +6,18 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CodeClash.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class AddedRoomsIssuesUpdatedUsers : Migration
+    public partial class RefactoredModels : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "UserName",
-                table: "Users",
-                newName: "Name");
-
-            migrationBuilder.AddColumn<bool>(
-                name: "IsAdmin",
-                table: "Users",
-                type: "boolean",
-                nullable: false,
-                defaultValue: false);
-
-            migrationBuilder.AddColumn<Guid>(
-                name: "RoomId",
-                table: "Users",
-                type: "uuid",
-                nullable: true);
-
             migrationBuilder.CreateTable(
                 name: "Issues",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false)
+                    Description = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -46,6 +29,7 @@ namespace CodeClash.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
                     Time = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
                     Status = table.Column<int>(type: "integer", nullable: false),
                     IssueId = table.Column<Guid>(type: "uuid", nullable: false)
@@ -61,55 +45,52 @@ namespace CodeClash.Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_RoomId_IsAdmin",
-                table: "Users",
-                columns: new[] { "RoomId", "IsAdmin" });
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Email = table.Column<string>(type: "text", nullable: false),
+                    PasswordHash = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    RefreshTokenExpiryTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    RefreshToken = table.Column<string>(type: "text", nullable: true),
+                    IsAdmin = table.Column<bool>(type: "boolean", nullable: false),
+                    RoomId = table.Column<Guid>(type: "uuid", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Users_Rooms_RoomId",
+                        column: x => x.RoomId,
+                        principalTable: "Rooms",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Rooms_IssueId",
                 table: "Rooms",
-                column: "IssueId",
-                unique: true);
+                column: "IssueId");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_Users_Rooms_RoomId",
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_RoomId",
                 table: "Users",
-                column: "RoomId",
-                principalTable: "Rooms",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.SetNull);
+                column: "RoomId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Users_Rooms_RoomId",
-                table: "Users");
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Rooms");
 
             migrationBuilder.DropTable(
                 name: "Issues");
-
-            migrationBuilder.DropIndex(
-                name: "IX_Users_RoomId_IsAdmin",
-                table: "Users");
-
-            migrationBuilder.DropColumn(
-                name: "IsAdmin",
-                table: "Users");
-
-            migrationBuilder.DropColumn(
-                name: "RoomId",
-                table: "Users");
-
-            migrationBuilder.RenameColumn(
-                name: "Name",
-                table: "Users",
-                newName: "UserName");
         }
     }
 }

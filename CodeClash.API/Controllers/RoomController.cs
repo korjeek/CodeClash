@@ -15,6 +15,6 @@ public class RoomController(RoomsRepository roomsRepository) : ControllerBase
     public async Task<IActionResult> GetRooms()
     {
         //TODO: Get list of active rooms
-        return Ok(await roomsRepository.GetRooms());
+        throw new NotImplementedException();
     }
 }

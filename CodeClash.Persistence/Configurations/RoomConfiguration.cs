@@ -4,19 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CodeClash.Persistence.Configuration;
 
-public class RoomConfiguration : IEntityTypeConfiguration<Room>
+public class RoomConfiguration : IEntityTypeConfiguration<RoomEntity>
 {
-    public void Configure(EntityTypeBuilder<Room> builder)
+    public void Configure(EntityTypeBuilder<RoomEntity> builder)
     {
         builder.HasKey(room => room.Id);
-
         builder
-            .HasMany(r => r.Participants)
-            .WithOne(u => u.Room)
-            .HasForeignKey(u => u.RoomId);
-
-        builder
-            .HasOne(r => r.Issue)
+            .HasOne<IssueEntity>()
             .WithMany()
             .HasForeignKey(r => r.IssueId);
     }
