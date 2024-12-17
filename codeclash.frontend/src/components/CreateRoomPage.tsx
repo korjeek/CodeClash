@@ -1,6 +1,7 @@
 // src/components/CreateRoomPage.tsx
 import React, { useState } from 'react';
-import { RoomService, RoomOptions, Room } from '../services/roomService.ts';
+import { RoomService } from "../services/roomService.ts"
+import { RoomOptions, Room } from '../interfaces/roomInterfaces.ts';
 
 const CreateRoomPage: React.FC = () => {
     const [time, setTime] = useState<string>('');

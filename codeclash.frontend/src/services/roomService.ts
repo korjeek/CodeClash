@@ -84,7 +84,7 @@ export class RoomService {
 
     async sendSolution(solution: UserSolution): Promise<SolutionResponse> {
         try {
-            return await this.connection.invoke<SolutionResponse>("CheckSolution", solution.solution, solution.issueId, solution.roomId);
+            return await this.connection.invoke<SolutionResponse>("CheckSolution", solution.solution, solution.issueId);
         }
         catch (error) {
             console.log(error);
@@ -93,6 +93,6 @@ export class RoomService {
     }
 }
 
-export const getRoomsList = async () => {
-    response = await axios.get('')
-}
+// export const getRoomsList = async () => {
+//     response = await axios.get('')
+// }

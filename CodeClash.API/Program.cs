@@ -30,6 +30,7 @@ services.AddScoped<AuthService>();
 services.AddScoped<TokenService>();
 services.AddScoped<RoomService>();
 services.AddScoped<IssueService>();
+services.AddScoped<TestUserSolutionService>();
 
 services.AddScoped<UsersRepository>();
 services.AddScoped<RoomsRepository>();

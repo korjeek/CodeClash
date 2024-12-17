@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using NUnit.Framework.Legacy;
 
 namespace CodeClash.UserSolutionTest
@@ -13,7 +13,7 @@ namespace CodeClash.UserSolutionTest
 			CollectionAssert.AreEqual(expected, result);
 		}
 		
-		[Test]
+		[TestCase]
 		public void FindSumTest_Example1()
 		{
 			var nums = new []{ 1, 1 };
@@ -22,7 +22,7 @@ namespace CodeClash.UserSolutionTest
 			RunTest(nums, target, expected);
 		}
 		
-		[Test]
+		[TestCase]
 		public void FindSumTest_Example2()
 		{
 			var nums = new []{ 2, 7, 11, 3 };
@@ -31,7 +31,7 @@ namespace CodeClash.UserSolutionTest
 			RunTest(nums, target , expected);
 		}
 		
-		[Test]
+		[TestCase]
 		public void FindSumTest_Example3()
 		{
 			var nums = new [] { 1, 2, 3, 4 };
@@ -40,7 +40,7 @@ namespace CodeClash.UserSolutionTest
 			RunTest(nums, target, expected);
 		}
 		
-		[Test]
+		[TestCase]
 		public void OneElementIsZero()
 		{
 			var nums = new [] { 5, 0, 3, 4 };
@@ -49,7 +49,7 @@ namespace CodeClash.UserSolutionTest
 			RunTest(nums, target, expected);
 		}
 		
-		[Test]
+		[TestCase]
 		public void OneElementIsNegative()
 		{
 			var nums = new [] { 11, 9, -5, 3, 20 };
@@ -58,7 +58,7 @@ namespace CodeClash.UserSolutionTest
 			RunTest(nums, target, expected);
 		}
 		
-		[Test]
+		[TestCase]
 		public void AllElementsIsNegative()
 		{
 			var nums = new [] { -3, -1, -5, -9, -2 };
@@ -68,3 +68,46 @@ namespace CodeClash.UserSolutionTest
 		}
 	}
 }
+
+// using NUnit.Framework;
+// using Task.Palindrome;
+//
+// namespace CodeClash.UserSolutionTest
+// {
+//     [TestFixture]
+//     public class SolutionTaskTests
+//     {
+//         private SolutionTask solution = new SolutionTask();
+//         private void RunTest(int number, bool expected)
+//         {
+//             var result = solution.IsPalindrome(number);
+//             Assert.That(expected, Is.EqualTo(result));
+//         }
+//
+//         [Test]
+//         public void PalindromeTest_Example1()
+//         {
+//             var number = 101;
+//             RunTest(number, true);
+//         }
+//
+//         [Test]
+//         public void PalindromeTest_Example2() => RunTest(205, false);
+//
+//         [Test]
+//         public void PalindromeTest_Example3() => RunTest(-101, false);
+//
+//
+//         [Test]
+//         public void PalindromeTest_ZeroValue() => RunTest(0, true);
+//
+//         [Test]
+//         public void PalindromeTest_OneValue() => RunTest(01, true);
+//
+//         [Test]
+//         public void PalindromeTest_BigValue() => RunTest(999999999, true);
+//
+//         [Test]
+//         public void PalindromeTest_MirrorValue() => RunTest(1234321, true);
+//     }
+// }
