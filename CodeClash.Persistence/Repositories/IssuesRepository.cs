@@ -6,8 +6,9 @@ namespace CodeClash.Persistence.Repositories;
 
 public class IssuesRepository(ApplicationDbContext dbContext)
 {
-    public async Task Add(IssueEntity issueEntity)
+    public async Task Add(Issue issue)
     {
+        var issueEntity = issue.GetIssueEntity();
         await dbContext.Issues.AddAsync(issueEntity);
         await dbContext.SaveChangesAsync();
     }

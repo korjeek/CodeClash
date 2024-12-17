@@ -18,12 +18,15 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
         if (newRoomResult.IsFailure)
             return Result.Failure<Room>(newRoomResult.Error);
         
-        var room = await roomsRepository.Add(newRoomResult.Value);
-
+        
         var adminUser = await usersRepository.GetUserById(userId);
         if (adminUser is null)
             return Result.Failure<Room>($"User with {userId} id does not exist");
+        if (adminUser.IsAdmin)
+            return Result.Failure<Room>("User is already admin");
         adminUser.UpdateRoomAdminStatus(true);
+        
+        var room = await roomsRepository.Add(newRoomResult.Value);
         await usersRepository.UpdateUser(adminUser);
 
         return Result.Success(room);

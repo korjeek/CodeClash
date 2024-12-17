@@ -13,8 +13,5 @@ public class RoomConfiguration : IEntityTypeConfiguration<RoomEntity>
             .HasOne<IssueEntity>()
             .WithMany()
             .HasForeignKey(r => r.IssueId);
-        builder
-            .HasMany<UserEntity>()
-            .WithOne();
     }
 }

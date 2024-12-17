@@ -22,7 +22,7 @@ namespace CodeClash.Persistence.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("CodeClash.Core.Models.Issue", b =>
+            modelBuilder.Entity("CodeClash.Core.Models.IssueEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -32,12 +32,16 @@ namespace CodeClash.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
                     b.ToTable("Issues");
                 });
 
-            modelBuilder.Entity("CodeClash.Core.Models.Room", b =>
+            modelBuilder.Entity("CodeClash.Core.Models.RoomEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -45,6 +49,10 @@ namespace CodeClash.Persistence.Migrations
 
                     b.Property<Guid>("IssueId")
                         .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<int>("Status")
                         .HasColumnType("integer");
@@ -59,7 +67,7 @@ namespace CodeClash.Persistence.Migrations
                     b.ToTable("Rooms");
                 });
 
-            modelBuilder.Entity("CodeClash.Core.Models.User", b =>
+            modelBuilder.Entity("CodeClash.Core.Models.UserEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -67,16 +75,14 @@ namespace CodeClash.Persistence.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(320)
-                        .HasColumnType("character varying(320)");
+                        .HasColumnType("text");
 
                     b.Property<bool>("IsAdmin")
                         .HasColumnType("boolean");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
+                        .HasColumnType("text");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
@@ -98,30 +104,21 @@ namespace CodeClash.Persistence.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("CodeClash.Core.Models.Room", b =>
+            modelBuilder.Entity("CodeClash.Core.Models.RoomEntity", b =>
                 {
-                    b.HasOne("CodeClash.Core.Models.Issue", "Issue")
+                    b.HasOne("CodeClash.Core.Models.IssueEntity", null)
                         .WithMany()
                         .HasForeignKey("IssueId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Issue");
                 });
 
-            modelBuilder.Entity("CodeClash.Core.Models.User", b =>
+            modelBuilder.Entity("CodeClash.Core.Models.UserEntity", b =>
                 {
-                    b.HasOne("CodeClash.Core.Models.Room", "Room")
-                        .WithMany("Participants")
+                    b.HasOne("CodeClash.Core.Models.RoomEntity", null)
+                        .WithMany()
                         .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("Room");
-                });
-
-            modelBuilder.Entity("CodeClash.Core.Models.Room", b =>
-                {
-                    b.Navigation("Participants");
                 });
 #pragma warning restore 612, 618
         }

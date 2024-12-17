@@ -1,5 +1,9 @@
-﻿using CodeClash.Core.Models;
+﻿using CodeClash.Core.Extensions;
+using CodeClash.Core.Models;
+using CodeClash.Core.Models.DTOs;
+using CodeClash.Core.Requests.IssueRequest;
 using CodeClash.Persistence.Repositories;
+using CSharpFunctionalExtensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodeClash.API.Controllers;
@@ -7,8 +11,13 @@ namespace CodeClash.API.Controllers;
 public class IssueController(IssuesRepository issuesRepository) : ControllerBase
 {
     [HttpPost("add-issue")]
-    public async Task<IActionResult> AddIssue([FromBody] string description, [FromBody] string issueAdminPasswd)
+    public async Task<IActionResult> AddIssue([FromBody] CreateIssueRequest request)
     {
-        throw new NotImplementedException();
+        // TODO: добавить проверку на пароль админа по задачам, может придумать другой способ добавлять задачи
+        var newIssueResult = Issue.Create(Guid.NewGuid(), request.Description, request.Name);
+        if (newIssueResult.IsFailure)
+            return BadRequest(newIssueResult.Error);
+        await issuesRepository.Add(newIssueResult.Value);
+        return Ok(newIssueResult.Value.GetIssueDTO());
     }
 }

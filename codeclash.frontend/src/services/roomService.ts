@@ -1,17 +1,13 @@
 import axios from 'axios';
 import * as signalR from "@microsoft/signalr";
-import { RoomOptions, Room } from "../interfaces/roomInterfaces.ts";
+import  {Room}  from "../interfaces/roomInterfaces.ts";
 
 const API_URL = 'https://localhost:7282/room';
 
-export interface Room{
-    
-}
 
 export interface CreateRoomData {
     time: string,
     issueId: string,
-    adminEmail: string
 }
 
 export interface JoinQuitRoomData {
@@ -33,6 +29,9 @@ export interface UserSolution {
     issueId: string,
     roomId: string
 }
+
+
+
 
 export class RoomService {
     private connection: signalR.HubConnection;
@@ -59,14 +58,14 @@ export class RoomService {
         }
     }
 
-    async createRoom(createRoomData: CreateRoomData): Promise<{ roomKey: string;  }> {
+    async createRoom(createRoomData: CreateRoomData): Promise<{ room: Room;  }> {
         try {
-            const roomData = await this.connection.invoke<{ roomKey: string; }>(
+            const roomData = await this.connection.invoke<{ room: Room; }>(
                 "CreateRoom",
                 createRoomData
             );
 
-            console.log("Room created");
+            console.log(roomData.room.id, roomData.room.issue, roomData.room.participants, roomData.room.time);
             return roomData;
         }
         catch (error) {

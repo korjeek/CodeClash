@@ -1,7 +1,5 @@
-﻿using System.Security.Claims;
-using CodeClash.API.Extensions;
+﻿using CodeClash.API.Extensions;
 using CodeClash.API.Services;
-using CodeClash.Core;
 using CodeClash.Core.Extensions;
 using CodeClash.Core.Models;
 using CodeClash.Core.Models.DTOs;
@@ -9,6 +7,8 @@ using CodeClash.Core.Models.RoomsRequests;
 using CSharpFunctionalExtensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 
 namespace CodeClash.API.Hubs;
@@ -17,12 +17,12 @@ namespace CodeClash.API.Hubs;
 [EnableCors("CorsPolicy")]
 public class RoomHub(RoomService roomService) : Hub
 {
-    public async Task<Result<RoomDTO>> CreateRoom(CreateRoomRequest request)
+    public async Task<ApiResponse<RoomDTO>> CreateRoom(CreateRoomRequest request)
     {
         var userId = Context.User.GetUserIdFromAccessToken();
         var roomResult =  await roomService.CreateRoom(request.RoomName, request.Time, request.IssueId, userId);
         if (roomResult.IsFailure)
-            return Result.Failure<RoomDTO>(roomResult.Error);
+            return new ApiResponse<RoomDTO>(false, null, roomResult.Error);
 
         var room = roomResult.Value;
         await Groups.AddToGroupAsync(Context.ConnectionId, room.Id.ToString());
@@ -30,10 +30,10 @@ public class RoomHub(RoomService roomService) : Hub
 
         // Что то вернули на какую то функцию
         //await Clients.User(Context.ConnectionId).SendAsync("createRoom", room);
-        return Result.Success(room.GetRoomDTO());
+        return new ApiResponse<RoomDTO>(true, roomResult.Value.GetRoomDTO(), null);
     }
     
-    public async Task<Result<RoomDTO>> JoinRoom(Guid roomId)
+    public async Task<ApiResponse<RoomDTO>> JoinRoom(Guid roomId)
     {
         await Groups.AddToGroupAsync(Context.ConnectionId, roomId.ToString());
         
@@ -41,8 +41,8 @@ public class RoomHub(RoomService roomService) : Hub
         
         var roomResult = await roomService.JoinRoom(roomId, userId);
         if (roomResult.IsFailure)
-            return Result.Failure<RoomDTO>(roomResult.Error);
-        return roomResult.Value.GetRoomDTO();
+            return new ApiResponse<RoomDTO>(false, null, roomResult.Error);
+        return new ApiResponse<RoomDTO>(true, roomResult.Value.GetRoomDTO(), null);
     }
 
     public async Task<RoomEntity?> QuitRoom(Guid roomId)
