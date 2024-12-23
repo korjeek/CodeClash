@@ -1,7 +1,5 @@
-﻿using CodeClash.Application.Extensions;
-using CodeClash.Application.Services;
+﻿using CodeClash.Application.Services;
 using CodeClash.Core.Models.DTOs;
-using CSharpFunctionalExtensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodeClash.API.Controllers;
