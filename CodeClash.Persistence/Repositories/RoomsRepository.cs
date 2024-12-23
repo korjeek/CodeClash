@@ -24,9 +24,13 @@ public class RoomsRepository(ApplicationDbContext dbContext)
         // return Room.Create(roomId, room.Name, room.Time, issue.GetIssueFromEntity()).Value;
     }
     
-    public async Task<List<RoomEntity>?> GetRooms()
+    public Task<List<RoomEntity>> GetRooms()
     {
-        //TODO: get list of active rooms
-        throw new NotImplementedException();
+        return Task.FromResult(dbContext.Rooms.ToList());
+    }
+
+    public Task<List<UserEntity>> GetRoomUsers(Guid roomId)
+    {
+        return Task.FromResult(dbContext.Users.Where(u => u.RoomId == roomId).ToList());
     }
 }

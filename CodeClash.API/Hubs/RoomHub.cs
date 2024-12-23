@@ -26,7 +26,7 @@ public class RoomHub(RoomService roomService, TestUserSolutionService testUserSo
 
         // Что то вернули на какую то функцию
         //await Clients.User(Context.ConnectionId).SendAsync("createRoom", room);
-        return new ApiResponse<RoomDTO>(true, roomResult.Value.GetRoomDTO(), null);
+        return new ApiResponse<RoomDTO>(true, roomResult.Value.GetRoomDTOFromRoom(), null);
     }
     
     public async Task<ApiResponse<RoomDTO>> JoinRoom(Guid roomId)
@@ -38,7 +38,7 @@ public class RoomHub(RoomService roomService, TestUserSolutionService testUserSo
         var roomResult = await roomService.JoinRoom(roomId, userId);
         if (roomResult.IsFailure)
             return new ApiResponse<RoomDTO>(false, null, roomResult.Error);
-        return new ApiResponse<RoomDTO>(true, roomResult.Value.GetRoomDTO(), null);
+        return new ApiResponse<RoomDTO>(true, roomResult.Value.GetRoomDTOFromRoom(), null);
     }
     
     public async Task QuitRoom(Guid roomId)

@@ -29,5 +29,5 @@ public class Room
     }
 
     public void AddParticipant(User participant) => Participants.Add(participant);
-    
+    public void SetParticipants(List<User> participants) => Participants = participants;
 }

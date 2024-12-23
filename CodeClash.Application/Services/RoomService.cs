@@ -1,5 +1,6 @@
 ﻿using CodeClash.Application.Extensions;
 using CodeClash.Core.Models.Domain;
+using CodeClash.Core.Models.DTOs;
 using CodeClash.Persistence.Entities;
 using CodeClash.Persistence.Repositories;
 using CSharpFunctionalExtensions;
@@ -46,10 +47,17 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
         var room = roomEntity.GetRoomFromEntity(issue!.GetIssueFromEntity());
         return Result.Success(room);
     }
+
+    public async Task<Result<List<RoomDTO>>> GetAllWaitingRoomDTOs()
+    {
+        var roomEntities = await roomsRepository.GetRooms();
+        return Result.Success(roomEntities.Select(r => r.GetRoomDTOFromRoomEntity()).ToList());
+    }
     
-    public async Task<RoomEntity?> QuitRoom(Guid roomId, Guid userId)
+    public async Task<RoomEntity?> QuitRoom(Guid userId)
     {
         // return await roomsRepository.RemoveUserFromRoom(userId, roomId);
+        
         throw new NotImplementedException();
     }
 

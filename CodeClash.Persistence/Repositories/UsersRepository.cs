@@ -2,10 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 
 namespace CodeClash.Persistence.Repositories;
-// TODO: подумать над тем, а нужны ли нам вообще в репозиториях эти Result<>?
+
 public class UsersRepository(ApplicationDbContext dbContext)
 {
-    // TODO: Подумать, можно ли в этом метде обойтись без Result?
     public async Task<UserEntity?> AddUser(UserEntity user)
     {
         var isUserEmailContainsInDb = await dbContext.Users
@@ -52,6 +51,16 @@ public class UsersRepository(ApplicationDbContext dbContext)
     {
         var user = await dbContext.Users
             .FindAsync(userId);
+        return user;
+    }
+    
+    public async Task<UserEntity?> RemoveUserFromRoom(Guid userId)
+    {
+        var user = await dbContext.Users.FindAsync(userId);
+        if (user is null)
+            return null;
+        user.RoomId = null;
+        await dbContext.SaveChangesAsync();
         return user;
     }
 }
