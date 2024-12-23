@@ -1,6 +1,5 @@
 using CodeClash.API.Extensions;
 using CodeClash.API.Hubs;
-using CodeClash.API.Services;
 using CodeClash.Application;
 using CodeClash.Application.Services;
 using CodeClash.Persistence;
@@ -31,6 +30,7 @@ services.AddScoped<TokenService>();
 services.AddScoped<RoomService>();
 services.AddScoped<IssueService>();
 services.AddScoped<TestUserSolutionService>();
+services.AddScoped<CompetitionService>();
 
 services.AddScoped<UsersRepository>();
 services.AddScoped<RoomsRepository>();

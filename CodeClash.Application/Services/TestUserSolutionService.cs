@@ -16,8 +16,6 @@ public class TestUserSolutionService
         ["MergeTwoSortedLists"] = "../TestSources/MergeTwoSortedLists/SolutionTaskTests.cs",
     };
     
-    
-    
     public async Task<Result<string>> CheckSolution(string userSolution, string issueName)
     {
         if (!MSBuildLocator.IsRegistered)
