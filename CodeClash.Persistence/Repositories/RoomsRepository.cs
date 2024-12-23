@@ -1,4 +1,5 @@
 ﻿using CodeClash.Persistence.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace CodeClash.Persistence.Repositories;
 
@@ -29,5 +30,13 @@ public class RoomsRepository(ApplicationDbContext dbContext)
     public Task<List<UserEntity>> GetRoomUsers(Guid roomId)
     {
         return Task.FromResult(dbContext.Users.Where(u => u.RoomId == roomId).ToList());
+    }
+
+    public async Task UpdateRoom(RoomEntity roomEntity)
+    {
+        await dbContext.Rooms
+            .Where(r => r.Id == roomEntity.Id)
+            .ExecuteUpdateAsync(s => s.
+                SetProperty(r => r.Status, roomEntity.Status));
     }
 }
