@@ -12,7 +12,7 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
 {
     public async Task<Result<Room>> CreateRoom(string roomName, TimeOnly time, Guid issueId, Guid userId)
     {
-        var issue = await issuesRepository.GetIssueById(issueId); // Guid.Parse(request.IssueId)
+        var issue = await issuesRepository.GetIssueById(issueId);
         if (issue is null)
             return Result.Failure<Room>("Issue does not exist.");
 
@@ -92,27 +92,5 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
         }
 
         return Result.Success("Quited room successfully.");
-    }
-
-    public async Task<RoomEntity?> StartCompetition(Guid roomId)
-    {
-        // var room = await roomsRepository.GetRoomById(roomId);
-        // if (room == null)
-        //     return null;
-        // if (room.Status == RoomStatus.CompetitionInProgress) return null;
-        // room.Status = RoomStatus.CompetitionInProgress;
-        // return room;
-        throw new NotImplementedException();
-    }
-
-    public async Task<RoomEntity?> FinishCompetition(Guid roomId)
-    {
-        // var room = await roomsRepository.GetRoomById(roomId);
-        // if (room == null)
-        //     return null;
-        // if (room.Status == RoomStatus.WaitingForParticipants) return null;
-        // room.Status = RoomStatus.WaitingForParticipants;
-        // return room;
-        throw new NotImplementedException();
     }
 }

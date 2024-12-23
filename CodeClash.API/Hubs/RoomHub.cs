@@ -1,8 +1,6 @@
-using System.Collections.Concurrent;
 using CodeClash.API.Extensions;
 using CodeClash.Application.Extensions;
 using CodeClash.Application.Services;
-using CodeClash.Core.Models.Domain;
 using CodeClash.Core.Models.DTOs;
 using CodeClash.Core.Models.RoomsRequests;
 using CodeClash.Persistence.Entities;
@@ -51,6 +49,7 @@ public class RoomHub(RoomService roomService, TestUserSolutionService testUserSo
     
     public async Task<ApiResponse<string>> StartCompetition(Guid roomId, TimeOnly duration)
     {
+        // TODO: Подумать, как это УВЛАЖНИТЬ)))) (убрать DRY)
         var roomStatus = await competitionService.GetRoomStatus(roomId);
         if (roomStatus.IsFailure)
             return new ApiResponse<string>(false, null, roomStatus.Error);
