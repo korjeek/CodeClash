@@ -1,4 +1,4 @@
-﻿namespace CodeClash.UserSolutionTest;
+namespace CodeClash.UserSolutionTest;
 public class SolutionTask
 {
 	public int[] FindSum(int[] nums, int target)
@@ -10,8 +10,8 @@ public class SolutionTask
 				if (nums[i] + nums[j] == target)
 				{
 					result[0] = i;
-					result[1] = j; 
-				}	
+					result[1] = j;
+				}
 			}
 		return result;
 	}

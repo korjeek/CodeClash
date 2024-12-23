@@ -9,24 +9,26 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.10"/>
+        <PackageReference Include="Microsoft.Build" Version="17.11.4" ExcludeAssets="runtime" />
+        <PackageReference Include="Microsoft.Build.Locator" Version="1.7.8" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0-rc.2.24474.1">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2"/>
+        <PackageReference Include="System.CodeDom" Version="8.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\CodeClash.Application\CodeClash.Application.csproj" />
+      <ProjectReference Include="..\CodeClash.Core\CodeClash.Core.csproj" />
+      <ProjectReference Include="..\CodeClash.Persistence\CodeClash.Persistence.csproj" />
     </ItemGroup>
 
     <ItemGroup>
       <Content Include="..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\CodeClash.Application\CodeClash.Application.csproj" />
-      <ProjectReference Include="..\CodeClash.Core\CodeClash.Core.csproj" />
-      <ProjectReference Include="..\CodeClash.Infrastructure\CodeClash.Infrastructure.csproj" />
-      <ProjectReference Include="..\CodeClash.Persistence\CodeClash.Persistence.csproj" />
     </ItemGroup>
 
 </Project>

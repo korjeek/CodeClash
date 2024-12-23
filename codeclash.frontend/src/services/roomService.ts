@@ -49,14 +49,15 @@ export class RoomService {
         }
     }
 
-    async createRoom(roomOptions: RoomOptions): Promise<Room> {
-        const methodName = "CreateRoom";
+    async createRoom(createRoomData: CreateRoomData): Promise<{ room: Room;  }> {
         try {
-            const room = await this.connection.invoke<Room>(methodName, roomOptions);
+            const roomData = await this.connection.invoke<{ room: Room; }>(
+                "CreateRoom",
+                createRoomData
+            );
 
-            console.log(room);
-            console.log("Room created");
-            return room;
+            console.log(roomData.room.id, roomData.room.issue, roomData.room.participants, roomData.room.time);
+            return roomData;
         }
         catch (error) {
             console.log(error);
@@ -64,27 +65,40 @@ export class RoomService {
         }
     }
 
-    async joinRoom(room: Room): Promise<void> {
+    async joinRoom(joinRoomData: JoinQuitRoomData): Promise<void> {
         try {
-            await this.connection.invoke("JoinRoom", room.id);
+            await this.connection.invoke(
+                "JoinRoom",
+                joinRoomData.userEmail,
+                joinRoomData.roomId
+            );
         }
         catch (error) {
             console.log(error);
         }
     }
 
-    async quitRoom(room: Room): Promise<void> {
+    async quitRoom(quitRoomData: JoinQuitRoomData): Promise<void> {
         try {
-            await this.connection.invoke("QuitRoom", room.id);
+            await this.connection.invoke(
+                "QuitRoom",
+                quitRoomData.userEmail,
+                quitRoomData.roomId
+            );
         }
         catch (error) {
             console.log(error);
         }
     }
 
-    async sendSolution(solution: UserSolution): Promise<SolutionResponse> {
+    async sendSolution(solution: UserSolution): Promise<SolutionResponse> { // использовать ли отдельный класс?
         try {
-            return await this.connection.invoke<SolutionResponse>("CheckSolution", solution.solution, solution.issueId, solution.roomId);
+            return await this.connection.invoke<SolutionResponse>(
+                "CheckSolution",
+                solution.solution,
+                solution.issueId,
+                solution.roomId
+            );
         }
         catch (error) {
             console.log(error);
@@ -93,7 +107,6 @@ export class RoomService {
     }
 }
 
-export const getRoomsList = async () => {
-    const response = await axios.get<Room[]>(`${API_URL}/get-rooms`)
-    return response.data;
-}
+// export const getRoomsList = async () => {
+//     response = await axios.get('')
+// }

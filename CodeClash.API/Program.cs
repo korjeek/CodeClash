@@ -1,10 +1,11 @@
 using CodeClash.API.Extensions;
 using CodeClash.API.Hubs;
-using CodeClash.API.Services;
 using CodeClash.Application;
-using CodeClash.Core.Services;
+using CodeClash.Application.Services;
 using CodeClash.Persistence;
 using CodeClash.Persistence.Repositories;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -28,6 +29,7 @@ services.AddScoped<AuthService>();
 services.AddScoped<TokenService>();
 services.AddScoped<RoomService>();
 services.AddScoped<IssueService>();
+services.AddScoped<TestUserSolutionService>();
 
 services.AddScoped<UsersRepository>();
 services.AddScoped<RoomsRepository>();

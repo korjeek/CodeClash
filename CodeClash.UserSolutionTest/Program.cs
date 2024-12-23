@@ -1,6 +1,6 @@
-﻿using System.Diagnostics;
-using Newtonsoft.Json;
-using NUnit.Framework;
+﻿using System.Globalization;
+using System.Xml;
+using NUnit.Engine;
 
 namespace CodeClash.UserSolutionTest;
 
@@ -8,57 +8,50 @@ public class Program
 {
 	public static void Main(string[] args)
 	{
-		RunAllTests();
-		Console.WriteLine("Test execution completed.");
-	}
-
-	private static void RunAllTests()
-	{
-		var testClass = new SolutionTaskTests();
-
-		RunTest(testClass.FindSumTest_Example1);
-		RunTest(testClass.FindSumTest_Example2);
-		RunTest(testClass.FindSumTest_Example3);
-		RunTest(testClass.OneElementIsZero);
-		RunTest(testClass.OneElementIsNegative);
-		RunTest(testClass.AllElementsIsNegative);
-	}
-
-	private static void RunTest(Action testMethod)
-	{
-		var stopwatch = Stopwatch.StartNew();
-		long initialMemory = GC.GetTotalMemory(true);
-
-		try
+		var currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+		var testAssemblies = Directory.GetFiles(currentDirectory, "*CodeClash.UserSolutionTest.dll");
+		
+		if (testAssemblies.Length == 0)
 		{
-			testMethod(); // Запуск теста
-			stopwatch.Stop();
-			long finalMemory = GC.GetTotalMemory(false); // Память после теста
-
-			// Лог успешного выполнения
-			Console.WriteLine($"Test {testMethod.Method.Name} passed in {stopwatch.ElapsedMilliseconds} ms.");
+			Console.WriteLine("Test assembly not found.");
+			return;
 		}
-		catch (AssertionException ex)
+		
+		using var testEngine = TestEngineActivator.CreateInstance();
+		var testPackage = new TestPackage(testAssemblies)
 		{
-			stopwatch.Stop();
-			long finalMemory = GC.GetTotalMemory(false); // Память после теста
-
-			// Запись данных о неудавшемся тесте в jconfig1.json
-			var failureInfo = new
-			{
-				FailedTest = testMethod.Method.Name,
-				ExecutionTimeMs = stopwatch.ElapsedMilliseconds,
-				MemoryUsedBytes = finalMemory - initialMemory,
-				ErrorMessage = ex.Message
-			};
-
-			// Вывод информации в консоль перед записью в файл
-			Console.WriteLine("Writing failure info to jconfig1.json...");
-
-			// Запись в файл
-			File.WriteAllText("jsconfig1.json", JsonConvert.SerializeObject(failureInfo, Formatting.Indented));
-
-			Console.WriteLine($"Test {testMethod.Method.Name} failed: {ex.Message}");
+			Settings = { ["InternalTraceLevel"] = "Off" }
+		};	
+		var runner = testEngine.GetRunner(testPackage);
+		var filter = TestFilter.Empty;
+		
+		var result = runner.Run(null, filter);
+		var amountTestCases = runner.CountTestCases(filter);
+		ParseResults(result, amountTestCases);
+	}
+	
+	private static void ParseResults(XmlNode? result, int amountTestCases)
+	{
+		var totalTime = 0.0f;
+		
+		foreach (XmlNode test in result?.SelectNodes("//test-case")!)
+		{
+			var testName = test.Attributes?["name"]?.Value;
+			var testResult = test.Attributes?["result"]?.Value;
+			
+			float.TryParse(
+				test.Attributes?["duration"]?.Value, 
+				CultureInfo.InvariantCulture, 
+				out var duration);
+			
+			totalTime += duration * 1000;
+			
+			if (testResult != "Failed") continue;
+			var failureMessage = test.SelectSingleNode("failure/message")?.InnerText;
+			Console.WriteLine($"{testResult}\n{testName}\n{failureMessage}");
+			return;
 		}
+		Console.WriteLine("OK");
+		Console.WriteLine($"Time: {totalTime / amountTestCases:F2} ms.");
 	}
 }
