@@ -13,6 +13,7 @@ import RegisterPage from './components/Auth/RegisterPage.tsx';
 import LoginPage from './components/Auth/LoginPage.tsx';
 import CreateRoomPage from './components/CreateRoomPage';
 import AuthPage from "./components/Auth/AuthPage.tsx";
+import Menu from "./components/Menu/Menu.tsx";
 
 const App: React.FC = () => {
     const rooms = [
@@ -25,17 +26,18 @@ const App: React.FC = () => {
     return (
         <Router>
             <Routes>
-                    <Route path="/" element={<Page navBarIndex={0}><link rel="stylesheet" href="./src/style/Home.css"></link><Home/></Page>} />
-                    <Route path="/home" element={<Page navBarIndex={0}><link rel="stylesheet" href="./src/style/Home.css"></link><Home/></Page>} />
-                    <Route path="/login" element={<Page><Auth><Login/></Auth></Page>} />
-                    <Route path="/register" element={<Page><Auth><Register/></Auth></Page>} />
-                    <Route path="/rooms" element={<Page navBarIndex={1}><link rel="stylesheet" href="./src/style/Home.css"></link><Rooms/></Page>} />
-                    <Route path="/ranks" element={<Page navBarIndex={2}></Page>} />
-                    <Route path="/submit" element={<Page navBarIndex={-1}><CodePallete/></Page>} />
-                    <Route path="/test" element={<HomePage/>} />
-                    <Route path="/reg1" element={<AuthPage AuthPageElement={<RegisterPage />} />} />
-                    <Route path="/login1" element={<AuthPage AuthPageElement={<LoginPage />}/>} />
-                    <Route path="/createRoom" element={<CreateRoomPage/>} />
+                <Route path="/" element={<Page navBarIndex={0}><link rel="stylesheet" href="./src/style/Home.css"></link><Home/></Page>} />
+                <Route path="/home" element={<Page navBarIndex={0}><link rel="stylesheet" href="./src/style/Home.css"></link><Home/></Page>} />
+                <Route path="/login" element={<Page><Auth><Login/></Auth></Page>} />
+                <Route path="/register" element={<Page><Auth><Register/></Auth></Page>} />
+                <Route path="/rooms" element={<Page navBarIndex={1}><link rel="stylesheet" href="./src/style/Home.css"></link><Rooms/></Page>} />
+                <Route path="/ranks" element={<Page navBarIndex={2}></Page>} />
+                <Route path="/submit" element={<Page navBarIndex={-1}><CodePallete/></Page>} />
+                <Route path="/test" element={<HomePage/>} />
+                <Route path="/reg1" element={<AuthPage AuthPageElement={<RegisterPage/>} />} />
+                <Route path="/login1" element={<AuthPage AuthPageElement={<LoginPage/>}/>} />
+                <Route path="/createRoom" element={<CreateRoomPage/>} />
+                <Route path="/menu" element={<Menu/>} />
             </Routes>
         </Router>
     );

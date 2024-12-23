@@ -1,0 +1,72 @@
+.menu-page{
+    position: relative;
+    background: black;
+    display: flex;
+    overflow: hidden;
+    max-height: 100vh;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.content-wrapper{
+    min-height: 79vh;
+    position: relative;
+    margin: 10.5vh;
+    padding: 5vh;
+    width: 100%;
+    height: 100%;
+}
+
+.grid-container{
+    display: grid;
+    gap: 1rem;
+    min-height: 69vh;
+    grid-template-rows: 1fr 10fr;
+    grid-template-columns: 1fr 3fr 2fr;
+    grid-template-areas:
+        'creator finder info'
+        'main main info';
+    justify-items: center;
+    align-items: center;
+}
+
+.item-1{
+    width: 100%;
+    height: 100%;
+    grid-area: creator;
+}
+
+.item-2{
+    width: 100%;
+    height: 100%;
+    grid-area: finder;
+}
+
+.item-3{
+    width: 100%;
+    height: 100%;
+    grid-area: info;
+}
+
+.item-4{
+    grid-area: main;
+    width: 100%;
+    height: 100%;
+}
+
+.item-3 .content-container{
+    height: 100%;
+    border: 0.5vh solid transparent;
+    border-radius: 3vh;
+    background-image: linear-gradient(#1A1A1A, #1A1A1A), linear-gradient(90deg, #A64AFF, #FFB1FF);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+
+.item-4 .rooms-container{
+    height: 100%;
+    border: 0.5vh solid transparent;
+    border-radius: 3vh;
+    background-image: linear-gradient(#1A1A1A, #1A1A1A), linear-gradient(90deg, #6A00FF, #A64AFF);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}

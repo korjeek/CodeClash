@@ -21,6 +21,5 @@ public class RoomController(RoomService roomService) : ControllerBase
             roomsResult.Value,
             null
         );
-
     }
 }

@@ -2,7 +2,7 @@ import axios from 'axios';
 import * as signalR from "@microsoft/signalr";
 import { RoomOptions, Room } from "../interfaces/roomInterfaces.ts";
 
-const API_URL = 'https://localhost:7282/room';
+const API_URL = 'https://localhost:7282/rooms';
 
 export interface JoinQuitRoomData {
     roomId: string,
@@ -107,6 +107,7 @@ export class RoomService {
     }
 }
 
-// export const getRoomsList = async () => {
-//     response = await axios.get('')
-// }
+export const getRoomsList = async () => {
+    const response = await axios.get<Room[]>(`${API_URL}/get-rooms`);
+    return response.data;
+}
