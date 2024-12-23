@@ -1,8 +1,7 @@
 using CodeClash.API.Extensions;
 using CodeClash.API.Hubs;
-using CodeClash.API.Services;
 using CodeClash.Application;
-using CodeClash.Core.Services;
+using CodeClash.Application.Services;
 using CodeClash.Persistence;
 using CodeClash.Persistence.Repositories;
 using Microsoft.AspNetCore.Mvc.Formatters;

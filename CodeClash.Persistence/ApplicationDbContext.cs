@@ -1,8 +1,6 @@
-﻿using CodeClash.Core.Models;
-using CodeClash.Persistence.Configuration;
-using CodeClash.Persistence.Configurations;
+﻿using CodeClash.Persistence.Configurations;
+using CodeClash.Persistence.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Configuration;
 
 namespace CodeClash.Persistence;

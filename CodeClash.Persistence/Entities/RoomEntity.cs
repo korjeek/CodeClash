@@ -1,6 +1,4 @@
-﻿using CodeClash.Core.Models.Enums;
-
-namespace CodeClash.Core.Models;
+﻿namespace CodeClash.Persistence.Entities;
 
 public class RoomEntity
 {

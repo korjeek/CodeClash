@@ -1,5 +1,5 @@
 ﻿
-namespace CodeClash.Core.Models;
+namespace CodeClash.Persistence.Entities;
 
 public class UserEntity
 {

@@ -1,11 +1,11 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using CodeClash.Core.Extensions;
+using CodeClash.Application.Extensions;
 using CodeClash.Core.Models;
 using CodeClash.Core.Models.Identity;
 using Microsoft.Extensions.Configuration;
 
-namespace CodeClash.Core.Services;
+namespace CodeClash.Application.Services;
 
 public class TokenService(IConfiguration configuration)
 {

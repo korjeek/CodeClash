@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeClash.API", "CodeClash.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeClash.Application", "CodeClash.Application\CodeClash.Application.csproj", "{7B47E8DA-43FC-420B-82E9-B0A3E1AB0DF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeClash.Infrastructure", "CodeClash.Infrastructure\CodeClash.Infrastructure.csproj", "{EE79BAC7-968F-4997-BE86-B7AB78B76D3D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeClash.Persistence", "CodeClash.Persistence\CodeClash.Persistence.csproj", "{56627737-B966-4D47-BD33-006801C0D27F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeClash.Core", "CodeClash.Core\CodeClash.Core.csproj", "{002569E9-F157-4A91-880C-B882EA8E942D}"
@@ -31,10 +29,6 @@ Global
 		{7B47E8DA-43FC-420B-82E9-B0A3E1AB0DF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B47E8DA-43FC-420B-82E9-B0A3E1AB0DF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B47E8DA-43FC-420B-82E9-B0A3E1AB0DF3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EE79BAC7-968F-4997-BE86-B7AB78B76D3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EE79BAC7-968F-4997-BE86-B7AB78B76D3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EE79BAC7-968F-4997-BE86-B7AB78B76D3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EE79BAC7-968F-4997-BE86-B7AB78B76D3D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{56627737-B966-4D47-BD33-006801C0D27F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{56627737-B966-4D47-BD33-006801C0D27F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56627737-B966-4D47-BD33-006801C0D27F}.Release|Any CPU.ActiveCfg = Release|Any CPU

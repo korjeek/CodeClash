@@ -1,7 +1,9 @@
 ﻿using CodeClash.Core.Models;
 using CodeClash.Core.Models.DTOs;
+using CodeClash.Persistence.Entities;
 
-namespace CodeClash.Core.Extensions;
+
+namespace CodeClash.Application.Extensions;
 
 public static class UserExtensions
 {

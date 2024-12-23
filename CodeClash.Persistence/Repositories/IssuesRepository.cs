@@ -1,22 +1,19 @@
-﻿using CodeClash.Core.Extensions;
-using CodeClash.Core.Models;
-using CSharpFunctionalExtensions;
+﻿using CodeClash.Persistence.Entities;
 
 namespace CodeClash.Persistence.Repositories;
 
 public class IssuesRepository(ApplicationDbContext dbContext)
 {
-    public async Task Add(Issue issue)
+    public async Task Add(IssueEntity issue)
     {
-        var issueEntity = issue.GetIssueEntity();
-        await dbContext.Issues.AddAsync(issueEntity);
+        await dbContext.Issues.AddAsync(issue);
         await dbContext.SaveChangesAsync();
     }
 
-    public async Task<Issue?> GetIssueById(Guid issueId)
+    public async Task<IssueEntity?> GetIssueById(Guid issueId)
     {
         var issueEntity =  await dbContext.Issues
             .FindAsync(issueId);
-        return issueEntity?.GetIssueFromEntity();
+        return issueEntity;
     }
 }

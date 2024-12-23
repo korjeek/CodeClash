@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames;
 
-namespace CodeClash.Core.Extensions;
+namespace CodeClash.Application.Extensions;
 
 public static class JwtBearerExtensions
 {

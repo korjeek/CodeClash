@@ -22,7 +22,6 @@
     <ItemGroup>
       <ProjectReference Include="..\CodeClash.Application\CodeClash.Application.csproj" />
       <ProjectReference Include="..\CodeClash.Core\CodeClash.Core.csproj" />
-      <ProjectReference Include="..\CodeClash.Infrastructure\CodeClash.Infrastructure.csproj" />
       <ProjectReference Include="..\CodeClash.Persistence\CodeClash.Persistence.csproj" />
     </ItemGroup>
 

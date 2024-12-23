@@ -16,7 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\CodeClash.Infrastructure\CodeClash.Infrastructure.csproj" />
+      <Folder Include="Models\Enums\" />
     </ItemGroup>
 
 </Project>

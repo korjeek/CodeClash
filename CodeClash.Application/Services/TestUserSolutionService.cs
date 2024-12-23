@@ -1,10 +1,11 @@
-﻿using Microsoft.Build.Locator;
+﻿using CSharpFunctionalExtensions;
+using Microsoft.Build.Locator;
 
-namespace CodeClash.Core.Services;
+namespace CodeClash.Application.Services;
 
 public class TestUserSolutionService
 {
-    private Dictionary<string, string> issueTestsLocations = new()
+    private readonly Dictionary<string, string> issueTestsLocations = new()
     {
         ["FindSum"] = "../TestSources/FindSum/SolutionTaskTests.cs",
         ["RomanToInteger"] = "../TestSources/RomanToInteger/SolutionTaskTests.cs",
@@ -15,7 +16,9 @@ public class TestUserSolutionService
         ["MergeTwoSortedLists"] = "../TestSources/MergeTwoSortedLists/SolutionTaskTests.cs",
     };
     
-    public async Task<string> CheckSolution(string userSolution, string issueName)
+    
+    
+    public async Task<Result<string>> CheckSolution(string userSolution, string issueName)
     {
         if (!MSBuildLocator.IsRegistered)
             MSBuildLocator.RegisterDefaults();
@@ -26,7 +29,8 @@ public class TestUserSolutionService
         
         var solutionPath = @"C:\FIIT\normalProject\CodeClash";
         var projectName = "CodeClash.UserSolutionTest";
-        return RuntimeProjectExecutor.HandleProject(projectName, solutionPath);
+        
+        return Result.Success(RuntimeProjectExecutor.HandleProject(projectName, solutionPath));
         // просто отправляем этот ответ, только для статистики в конце надо сохранить пользователя и его результат
     }
 }

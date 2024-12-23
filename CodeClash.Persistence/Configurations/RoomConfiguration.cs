@@ -1,8 +1,8 @@
-﻿using CodeClash.Core.Models;
+﻿using CodeClash.Persistence.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CodeClash.Persistence.Configuration;
+namespace CodeClash.Persistence.Configurations;
 
 public class RoomConfiguration : IEntityTypeConfiguration<RoomEntity>
 {
