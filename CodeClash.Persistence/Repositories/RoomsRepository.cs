@@ -4,24 +4,21 @@ namespace CodeClash.Persistence.Repositories;
 
 public class RoomsRepository(ApplicationDbContext dbContext)
 {
-    public async Task<RoomEntity> Add(RoomEntity room)
+    public async Task Add(RoomEntity room)
     {
         dbContext.Rooms.Add(room);
         await dbContext.SaveChangesAsync();
-        
-        return room;
+    }
+
+    public async Task Delete(RoomEntity room)
+    {
+        dbContext.Rooms.Remove(room);
+        await dbContext.SaveChangesAsync();
     }
 
     public async Task<RoomEntity?> GetRoomById(Guid roomId)
     {
         return await dbContext.Rooms.FindAsync(roomId);
-        // if (room is null)
-        //     return null;
-        // var issue = await dbContext.Issues.FindAsync(room.IssueId);
-        // if (issue is null)
-        //     return null;
-        //
-        // return Room.Create(roomId, room.Name, room.Time, issue.GetIssueFromEntity()).Value;
     }
     
     public Task<List<RoomEntity>> GetRooms()

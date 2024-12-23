@@ -61,19 +61,29 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
             .Select(r => r.GetRoomDTOFromRoomEntity()).ToList());
     }
     
-    public async Task<RoomEntity?> QuitRoom(Guid userId)
+    public async Task<Result<string>> QuitRoom(Guid userId)
     {
-        // return await roomsRepository.RemoveUserFromRoom(userId, roomId);
-        
-        throw new NotImplementedException();
+        var user = await usersRepository.GetUserById(userId);
+        if (user is null)
+            return Result.Failure<string>($"User with {userId} id does not exist");
+        user.RoomId = null;
+        await usersRepository.UpdateUser(user);
+
+        return Result.Success("Quited room successfully.");
     }
 
-    public async Task<RoomEntity?> CloseRoom(Guid roomId)
+
+    public async Task<Result<string>> CloseRoom(Guid roomId)
     {
-        throw new NotImplementedException();
+        var room = await roomsRepository.GetRoomById(roomId);
+        if (room is null)
+            return Result.Failure<string>($"Room with {roomId} id does not exist");
+        await roomsRepository.Delete(room);
+        
+        return Result.Success("Room is closed successfully.");
     }
-    
-    
+
+
     public async Task<RoomEntity?> StartCompetition(Guid roomId)
     {
         // var room = await roomsRepository.GetRoomById(roomId);

@@ -5,7 +5,6 @@ using CodeClash.Core.Models.DTOs;
 using CodeClash.Core.Models.RoomsRequests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 
 namespace CodeClash.API.Hubs;
@@ -22,39 +21,45 @@ public class RoomHub(RoomService roomService, TestUserSolutionService testUserSo
             return new ApiResponse<RoomDTO>(false, null, roomResult.Error);
 
         var room = roomResult.Value;
-        await Groups.AddToGroupAsync(Context.ConnectionId, room.Id.ToString());
-
 
         // Что то вернули на какую то функцию
         //await Clients.User(Context.ConnectionId).SendAsync("createRoom", room);
+
+        await Groups.AddToGroupAsync(Context.ConnectionId, room.Id.ToString());
         return new ApiResponse<RoomDTO>(true, roomResult.Value.GetRoomDTOFromRoom(), null);
     }
     
     public async Task<ApiResponse<RoomDTO>> JoinRoom(Guid roomId)
     {
-        await Groups.AddToGroupAsync(Context.ConnectionId, roomId.ToString());
-        
         var userId = Context.User.GetUserIdFromAccessToken();
-        
         var roomResult = await roomService.JoinRoom(roomId, userId);
         if (roomResult.IsFailure)
             return new ApiResponse<RoomDTO>(false, null, roomResult.Error);
-        
+
         // TODO: сообщить другим пользователям, нужна специальная функция на фронте:
         // await 
         // await Clients.Group(roomId.ToString()).SendCoreAsync()
         
+        await Groups.AddToGroupAsync(Context.ConnectionId, roomId.ToString());
+        await Clients.Group(roomId.ToString()).SendAsync("UserJoined", "HELLO MOUTHERFUCKERS!!!!");
         return new ApiResponse<RoomDTO>(true, roomResult.Value.GetRoomDTOFromRoom(), null);
     }
     
-    public async Task QuitRoom(Guid roomId)
+    public async Task<ApiResponse<string>> QuitRoom(Guid roomId)
     {
-        await Groups.RemoveFromGroupAsync(Context.ConnectionId, roomId.ToString());
+        var userId = Context.User.GetUserIdFromAccessToken();
+        var result = await roomService.QuitRoom(userId);
+        if (result.IsFailure)
+            return new ApiResponse<string>(false, null, result.Error);
         
-        // var userId = Context.User
-        // return await roomService.QuitRoom(roomId,);
-        throw new NotImplementedException();
+        await Groups.RemoveFromGroupAsync(Context.ConnectionId, roomId.ToString());
+        return new ApiResponse<string>(true, result.Value, null);
     }
+
+    // public async Task<ApiResponse<>> StartCompetition(Guid roomId)
+    // {
+    //     var userId = Context.User.GetUserIdFromAccessToken();
+    // }
     
     public async Task<ApiResponse<string>> CheckSolution(string solution, string issueName)
     {
