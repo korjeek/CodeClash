@@ -1,4 +1,4 @@
-﻿using CSharpFunctionalExtensions;
+using CSharpFunctionalExtensions;
 using Microsoft.Build.Locator;
 
 namespace CodeClash.Application.Services;
@@ -15,8 +15,6 @@ public class TestUserSolutionService
         ["Palindrome"] = "../TestSources/Palindrome/SolutionTaskTests.cs",
         ["MergeTwoSortedLists"] = "../TestSources/MergeTwoSortedLists/SolutionTaskTests.cs",
     };
-    
-    
     
     public async Task<Result<string>> CheckSolution(string userSolution, string issueName)
     {
