@@ -10,6 +10,7 @@ const CreateRoomPage: React.FC = () => {
     const [roomKey, setRoomKey] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
+    const [name, setName] = useState('');
 
     const roomService = new RoomService();
 
@@ -18,15 +19,10 @@ const CreateRoomPage: React.FC = () => {
         setLoading(true);
         setError(null);
 
-        const createRoomData: RoomOptions = {
-            time,
-            issueId
-        };
-
         try {
             await roomService.startConnection();
 
-            const result = await roomService.createRoom(createRoomData);
+            const result = await roomService.createRoom({name, time, issueId});
             // setRoomKey(result.id);
             alert(`Room created successfully! Room Key: ${result}`);
         } catch (err) {
@@ -40,8 +36,19 @@ const CreateRoomPage: React.FC = () => {
     return (
         <div style={{ padding: '20px' }}>
             <h1>Create Room</h1>
-            <form onSubmit={handleCreateRoom} style={{ maxWidth: '400px', margin: '0 auto' }}>
-                <div style={{ marginBottom: '10px' }}>
+            <form onSubmit={handleCreateRoom} style={{maxWidth: '400px', margin: '0 auto'}}>
+                <div style={{marginBottom: '10px'}}>
+                    <label htmlFor="time">Name: </label>
+                    <input
+                        id="name"
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                        style={{width: '100%', padding: '8px', marginBottom: '10px'}}
+                    />
+                </div>
+                <div style={{marginBottom: '10px'}}>
                     <label htmlFor="time">Competition Time (e.g., 30m, 1h): </label>
                     <input
                         id="time"
@@ -49,10 +56,10 @@ const CreateRoomPage: React.FC = () => {
                         value={time}
                         onChange={(e) => setTime(e.target.value)}
                         required
-                        style={{ width: '100%', padding: '8px', marginBottom: '10px' }}
+                        style={{width: '100%', padding: '8px', marginBottom: '10px'}}
                     />
                 </div>
-                <div style={{ marginBottom: '10px' }}>
+                <div style={{marginBottom: '10px'}}>
                     <label htmlFor="issueId">Issue ID: </label>
                     <input
                         id="issueId"
@@ -60,20 +67,20 @@ const CreateRoomPage: React.FC = () => {
                         value={issueId}
                         onChange={(e) => setIssueId(e.target.value)}
                         required
-                        style={{ width: '100%', padding: '8px', marginBottom: '10px' }}
+                        style={{width: '100%', padding: '8px', marginBottom: '10px'}}
                     />
                 </div>
-                <button type="submit" disabled={loading} style={{ padding: '10px 20px' }}>
+                <button type="submit" disabled={loading} style={{padding: '10px 20px'}}>
                     {loading ? 'Creating Room...' : 'Create Room'}
                 </button>
             </form>
             {roomKey && (
-                <div style={{ marginTop: '20px', color: 'green' }}>
+                <div style={{marginTop: '20px', color: 'green'}}>
                     <strong>Room Created:</strong> {roomKey}
                 </div>
             )}
             {error && (
-                <div style={{ marginTop: '20px', color: 'red' }}>
+                <div style={{marginTop: '20px', color: 'red'}}>
                     <strong>Error:</strong> {error}
                 </div>
             )}
