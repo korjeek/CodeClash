@@ -1,6 +1,7 @@
 import axios from 'axios';
 import * as signalR from "@microsoft/signalr";
 import { RoomOptions, Room } from "../interfaces/roomInterfaces.ts";
+import {DTO, RoomsDTO} from "../interfaces/DTOinterdace.ts";
 
 const API_URL = 'https://localhost:7282/rooms';
 
@@ -43,6 +44,10 @@ export class RoomService {
         this.connection.onclose(() => {
             console.error("Connection closed. Reconnecting...")
         })
+
+        this.connection.on("UserJoined", (userId: string) => {
+            console.log(`User joined: ${userId}`);
+        })
     }
 
     async startConnection(): Promise<void> {
@@ -72,13 +77,9 @@ export class RoomService {
         }
     }
 
-    async joinRoom(joinRoomData: JoinQuitRoomData): Promise<void> {
+    async joinRoom(roomId: string): Promise<void> {
         try {
-            await this.connection.invoke(
-                "JoinRoom",
-                joinRoomData.userEmail,
-                joinRoomData.roomId
-            );
+            await this.connection.invoke("JoinRoom", roomId);
         }
         catch (error) {
             console.log(error);
@@ -115,6 +116,6 @@ export class RoomService {
 }
 
 export const getRoomsList = async () => {
-    const response = await axios.get<Room[]>(`${API_URL}/get-rooms`);
-    return response.data;
+    const response = await axios.get<RoomsDTO>(`${API_URL}/get-rooms`);
+    return response.data.data;
 }

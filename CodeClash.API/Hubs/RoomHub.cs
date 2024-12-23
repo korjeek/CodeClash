@@ -40,8 +40,6 @@ public class RoomHub(RoomService roomService, TestUserSolutionService testUserSo
         // await 
         // await Clients.Group(roomId.ToString()).SendCoreAsync()
         
-        await Groups.AddToGroupAsync(Context.ConnectionId, roomId.ToString());
-        await Clients.Group(roomId.ToString()).SendAsync("UserJoined", "HELLO MOUTHERFUCKERS!!!!");
         return new ApiResponse<RoomDTO>(true, roomResult.Value.GetRoomDTOFromRoom(), null);
     }
     
@@ -51,7 +49,7 @@ public class RoomHub(RoomService roomService, TestUserSolutionService testUserSo
         var result = await roomService.QuitRoom(userId);
         if (result.IsFailure)
             return new ApiResponse<string>(false, null, result.Error);
-        
+
         await Groups.RemoveFromGroupAsync(Context.ConnectionId, roomId.ToString());
         return new ApiResponse<string>(true, result.Value, null);
     }
@@ -60,7 +58,7 @@ public class RoomHub(RoomService roomService, TestUserSolutionService testUserSo
     // {
     //     var userId = Context.User.GetUserIdFromAccessToken();
     // }
-    
+
     public async Task<ApiResponse<string>> CheckSolution(string solution, string issueName)
     {
         // var userId = Context.User.GetUserIdFromAccessToken();
