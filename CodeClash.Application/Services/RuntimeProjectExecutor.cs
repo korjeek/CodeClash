@@ -3,7 +3,7 @@ using Microsoft.Build.Evaluation;
 using Microsoft.Build.Execution;
 using Microsoft.Build.Logging;
 
-namespace CodeClash.Core.Services;
+namespace CodeClash.Application.Services;
 
 public static class RuntimeProjectExecutor
 {

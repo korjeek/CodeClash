@@ -1,4 +1,4 @@
-﻿namespace CodeClash.Core.Models.Enums;
+﻿namespace CodeClash.Persistence.Entities;
 
 public enum RoomStatus
 {

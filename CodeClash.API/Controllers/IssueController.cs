@@ -1,9 +1,7 @@
-﻿using CodeClash.Core.Extensions;
+﻿using CodeClash.Application.Extensions;
 using CodeClash.Core.Models;
-using CodeClash.Core.Models.DTOs;
 using CodeClash.Core.Requests.IssueRequest;
 using CodeClash.Persistence.Repositories;
-using CSharpFunctionalExtensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodeClash.API.Controllers;
@@ -17,7 +15,7 @@ public class IssueController(IssuesRepository issuesRepository) : ControllerBase
         var newIssueResult = Issue.Create(Guid.NewGuid(), request.Description, request.Name);
         if (newIssueResult.IsFailure)
             return BadRequest(newIssueResult.Error);
-        await issuesRepository.Add(newIssueResult.Value);
+        await issuesRepository.Add(newIssueResult.Value.GetIssueEntity());
         return Ok(newIssueResult.Value.GetIssueDTO());
     }
 }

@@ -1,6 +1,7 @@
-﻿using static CodeClash.Core.Constants.Constants;
-using CSharpFunctionalExtensions;
-namespace CodeClash.Core.Models;
+﻿using CSharpFunctionalExtensions;
+using static CodeClash.Core.Constants.Constants;
+
+namespace CodeClash.Core.Models.Domain;
 
 public class Room
 {

@@ -1,8 +1,8 @@
 ﻿using CodeClash.Core.Models;
 using CodeClash.Core.Models.DTOs;
-using CSharpFunctionalExtensions;
+using CodeClash.Persistence.Entities;
 
-namespace CodeClash.Core.Extensions;
+namespace CodeClash.Application.Extensions;
 
 public static class IssueExtensions
 {

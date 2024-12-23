@@ -1,10 +1,10 @@
-﻿using CodeClash.Core.Models;
-using CodeClash.Core.Models.Enums;
-using CodeClash.Core.Models.RoomsRequests;
+﻿using CodeClash.Application.Extensions;
+using CodeClash.Core.Models.Domain;
+using CodeClash.Persistence.Entities;
 using CodeClash.Persistence.Repositories;
 using CSharpFunctionalExtensions;
 
-namespace CodeClash.API.Services;
+namespace CodeClash.Application.Services;
 
 public class RoomService(RoomsRepository roomsRepository, IssuesRepository issuesRepository, UsersRepository usersRepository)
 {
@@ -12,30 +12,29 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
     {
         var issue = await issuesRepository.GetIssueById(issueId); // Guid.Parse(request.IssueId)
         if (issue is null)
-            return Result.Failure<Room>($"Issue does not exist.");
+            return Result.Failure<Room>("Issue does not exist.");
 
-        var newRoomResult = Room.Create(Guid.NewGuid(), roomName, time, issue);
+        var newRoomResult = Room.Create(Guid.NewGuid(), roomName, time, issue.GetIssueFromEntity());
         if (newRoomResult.IsFailure)
             return Result.Failure<Room>(newRoomResult.Error);
-        
         
         var adminUser = await usersRepository.GetUserById(userId);
         if (adminUser is null)
             return Result.Failure<Room>($"User with {userId} id does not exist");
         if (adminUser.IsAdmin)
             return Result.Failure<Room>("User is already admin");
-        adminUser.UpdateRoomAdminStatus(true);
+        adminUser.IsAdmin = true;
         
-        var room = await roomsRepository.Add(newRoomResult.Value);
+        await roomsRepository.Add(newRoomResult.Value.GetRoomEntity());
         await usersRepository.UpdateUser(adminUser);
 
-        return Result.Success(room);
+        return newRoomResult;
     }
     
     public async Task<Result<Room>> JoinRoom(Guid roomId, Guid userId)
     {
-        var room = await roomsRepository.GetRoomById(roomId);
-        if (room is null)
+        var roomEntity = await roomsRepository.GetRoomById(roomId);
+        if (roomEntity is null)
             return Result.Failure<Room>($"Room with {roomId} id does not exist");
 
         var user = await usersRepository.GetUserById(userId);
@@ -43,6 +42,8 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
             return Result.Failure<Room>($"User with {userId} id does not exist");
         await usersRepository.UpdateUser(user, roomId);
 
+        var issue = await issuesRepository.GetIssueById(roomEntity.IssueId);
+        var room = roomEntity.GetRoomFromEntity(issue!.GetIssueFromEntity());
         return Result.Success(room);
     }
     

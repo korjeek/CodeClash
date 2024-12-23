@@ -1,5 +1,4 @@
 ﻿using CodeClash.API.Extensions;
-using CodeClash.API.Services;
 using CodeClash.Core.Models.RoomsRequests;
 using CodeClash.Persistence.Repositories;
 using Microsoft.AspNetCore.Authorization;

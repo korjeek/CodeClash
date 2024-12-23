@@ -1,7 +1,6 @@
-﻿using CodeClash.Core.Models;
-using CodeClash.Persistence.Repositories;
+﻿using CodeClash.Persistence.Repositories;
 
-namespace CodeClash.API.Services;
+namespace CodeClash.Application.Services;
 
 public class CompetitionService(RoomsRepository repository)
 {

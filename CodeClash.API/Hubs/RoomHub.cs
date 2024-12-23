@@ -1,11 +1,8 @@
 using CodeClash.API.Extensions;
-using CodeClash.API.Services;
+using CodeClash.Application.Extensions;
 using CodeClash.Application.Services;
-using CodeClash.Core.Extensions;
 using CodeClash.Core.Models.DTOs;
 using CodeClash.Core.Models.RoomsRequests;
-using CodeClash.Core.Services;
-using CSharpFunctionalExtensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.SignalR;
@@ -53,13 +50,20 @@ public class RoomHub(RoomService roomService, TestUserSolutionService testUserSo
         throw new NotImplementedException();
     }
     
-    public async Task<ApiResponse<Result<string>>> CheckSolution(string solution, string issueName)
+    public async Task<ApiResponse<string>> CheckSolution(string solution, string issueName)
     {
+        // var userId = Context.User.GetUserIdFromAccessToken();
+        
+        
+        
         // await testUserSolutionService.CheckSolution("namespace CodeClash.UserSolutionTest;\npublic class SolutionTask\n{\n\tpublic int[] FindSum(int[] nums, int target)\n\t{\n\t\tvar result = new int[2];\n\t\tfor(var i = 0; i < nums.Length; i++)\n\t\t\tfor (var j = i + 1; j < nums.Length; j++)\n\t\t\t{\n\t\t\t\tif (nums[i] + nums[j] == target)\n\t\t\t\t{\n\t\t\t\t\tresult[0] = i;\n\t\t\t\t\tresult[1] = j;\n\t\t\t\t}\n\t\t\t}\n\t\treturn result;\n\t}\n}\n");
-        var answer = await testUserSolutionService.CheckSolution(solution, issueName);
-        
-        return new ApiResponse<Result<string>>(true, answer, null);
-        
+
+
+        var resultString = await testUserSolutionService.CheckSolution(solution, issueName);
+        if (resultString.IsFailure)
+            return new ApiResponse<string>(false, null, resultString.Error);
+
+        return new ApiResponse<string>(true, resultString.Value, null);
         // Нужно:
         //      - чтобы по истечении таймера нельзя было попасть на страницу соревнования
         //      - чтобы по истечении таймера всех выкинуло в комнату

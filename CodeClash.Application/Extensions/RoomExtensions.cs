@@ -1,7 +1,9 @@
 ﻿using CodeClash.Core.Models;
+using CodeClash.Core.Models.Domain;
 using CodeClash.Core.Models.DTOs;
+using CodeClash.Persistence.Entities;
 
-namespace CodeClash.Core.Extensions;
+namespace CodeClash.Application.Extensions;
 
 public static class RoomExtensions
 {
@@ -19,11 +21,11 @@ public static class RoomExtensions
         Time = room.Time,
         IssueId = room.Issue.Id
     };
-    
-    // public static Room GetRoomFromEntity(this RoomEntity roomEntity) => Room.Create(
-    //     roomEntity.Id,
-    //     roomEntity.Name,
-    //     roomEntity.Time,
-    //     roomEntity.
-    //     )
+
+    public static Room GetRoomFromEntity(this RoomEntity roomEntity, Issue issue) => Room.Create(
+        roomEntity.Id,
+        roomEntity.Name,
+        roomEntity.Time,
+        issue
+    ).Value;
 }
