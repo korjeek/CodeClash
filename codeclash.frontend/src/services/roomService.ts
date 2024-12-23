@@ -15,6 +15,12 @@ export interface SolutionResponse {
     //               нет - высылаем ответ тому, кто послал запрос
 }
 
+interface CreateRoomData{
+    name: string,
+    time: string,
+    issueId: string
+}
+
 // по истечении таймера выслать всем сообщение, что соревнование закончено
 // вывести результаты
 
@@ -49,15 +55,15 @@ export class RoomService {
         }
     }
 
-    async createRoom(createRoomData: CreateRoomData): Promise<{ room: Room;  }> {
+    async createRoom(createRoomData: CreateRoomData): Promise<Room> {
         try {
-            const roomData = await this.connection.invoke<{ room: Room; }>(
+            const room = await this.connection.invoke<Room>(
                 "CreateRoom",
                 createRoomData
             );
 
-            console.log(roomData.room.id, roomData.room.issue, roomData.room.participants, roomData.room.time);
-            return roomData;
+            console.log(room);
+            return room;
         }
         catch (error) {
             console.log(error);
