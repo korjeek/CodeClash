@@ -25,9 +25,11 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
         if (adminUser.IsAdmin)
             return Result.Failure<Room>("User is already admin");
         adminUser.IsAdmin = true;
-        
+        adminUser.RoomId = newRoomResult.Value.Id;
         await roomsRepository.Add(newRoomResult.Value.GetRoomEntity());
         await usersRepository.UpdateUser(adminUser);
+        
+        newRoomResult.Value.AddParticipant(adminUser.GetUserFromEntity());
 
         return newRoomResult;
     }
@@ -41,17 +43,22 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
         var user = await usersRepository.GetUserById(userId);
         if (user is null)
             return Result.Failure<Room>($"User with {userId} id does not exist");
-        await usersRepository.UpdateUser(user, roomId);
+        user.RoomId = roomId;
+        await usersRepository.UpdateUser(user);
 
         var issue = await issuesRepository.GetIssueById(roomEntity.IssueId);
+        var roomParticipants = await roomsRepository.GetRoomUsers(roomId);
         var room = roomEntity.GetRoomFromEntity(issue!.GetIssueFromEntity());
+        room.SetParticipants(roomParticipants.Select(p => p.GetUserFromEntity()).ToList());
         return Result.Success(room);
     }
 
     public async Task<Result<List<RoomDTO>>> GetAllWaitingRoomDTOs()
     {
         var roomEntities = await roomsRepository.GetRooms();
-        return Result.Success(roomEntities.Select(r => r.GetRoomDTOFromRoomEntity()).ToList());
+        return Result.Success(roomEntities
+            .Where(r => r.Status == RoomStatus.WaitingForParticipants)
+            .Select(r => r.GetRoomDTOFromRoomEntity()).ToList());
     }
     
     public async Task<RoomEntity?> QuitRoom(Guid userId)

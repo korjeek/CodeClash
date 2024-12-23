@@ -6,7 +6,7 @@ public class RoomsRepository(ApplicationDbContext dbContext)
 {
     public async Task<RoomEntity> Add(RoomEntity room)
     {
-        dbContext.Rooms.Attach(room);
+        dbContext.Rooms.Add(room);
         await dbContext.SaveChangesAsync();
         
         return room;

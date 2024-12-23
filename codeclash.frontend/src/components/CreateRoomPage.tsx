@@ -10,7 +10,7 @@ const CreateRoomPage: React.FC = () => {
     const [roomKey, setRoomKey] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
-    const [name, setName] = useState('');
+    const [roomName, setName] = useState('');
 
     const roomService = new RoomService();
 
@@ -22,7 +22,8 @@ const CreateRoomPage: React.FC = () => {
         try {
             await roomService.startConnection();
 
-            const result = await roomService.createRoom({name, time, issueId});
+            console.log({roomName, time, issueId})
+            const result = await roomService.createRoom({roomName, time, issueId});
             // setRoomKey(result.id);
             alert(`Room created successfully! Room Key: ${result}`);
         } catch (err) {
@@ -40,9 +41,9 @@ const CreateRoomPage: React.FC = () => {
                 <div style={{marginBottom: '10px'}}>
                     <label htmlFor="time">Name: </label>
                     <input
-                        id="name"
+                        id="roomName"
                         type="text"
-                        value={name}
+                        value={roomName}
                         onChange={(e) => setName(e.target.value)}
                         required
                         style={{width: '100%', padding: '8px', marginBottom: '10px'}}

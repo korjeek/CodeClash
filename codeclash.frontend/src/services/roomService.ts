@@ -16,7 +16,7 @@ export interface SolutionResponse {
 }
 
 interface CreateRoomData{
-    name: string,
+    roomName: string,
     time: string,
     issueId: string
 }
@@ -57,6 +57,7 @@ export class RoomService {
 
     async createRoom(createRoomData: CreateRoomData): Promise<Room> {
         try {
+            console.log(createRoomData)
             const room = await this.connection.invoke<Room>(
                 "CreateRoom",
                 createRoomData

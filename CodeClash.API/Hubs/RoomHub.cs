@@ -5,6 +5,7 @@ using CodeClash.Core.Models.DTOs;
 using CodeClash.Core.Models.RoomsRequests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 
 namespace CodeClash.API.Hubs;
@@ -38,6 +39,11 @@ public class RoomHub(RoomService roomService, TestUserSolutionService testUserSo
         var roomResult = await roomService.JoinRoom(roomId, userId);
         if (roomResult.IsFailure)
             return new ApiResponse<RoomDTO>(false, null, roomResult.Error);
+        
+        // TODO: сообщить другим пользователям, нужна специальная функция на фронте:
+        // await 
+        // await Clients.Group(roomId.ToString()).SendCoreAsync()
+        
         return new ApiResponse<RoomDTO>(true, roomResult.Value.GetRoomDTOFromRoom(), null);
     }
     

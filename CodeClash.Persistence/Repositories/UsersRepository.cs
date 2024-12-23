@@ -34,7 +34,7 @@ public class UsersRepository(ApplicationDbContext dbContext)
                 .SetProperty(u => u.RefreshTokenExpiryTime, user.RefreshTokenExpiryTime));
     }
 
-    public async Task UpdateUser(UserEntity user, Guid? roomId = null)
+    public async Task UpdateUser(UserEntity user)
     {
         await dbContext.Users
             .Where(u => u.Id == user.Id)
@@ -44,7 +44,7 @@ public class UsersRepository(ApplicationDbContext dbContext)
                 .SetProperty(u => u.RefreshToken, user.RefreshToken)
                 .SetProperty(u => u.RefreshTokenExpiryTime, user.RefreshTokenExpiryTime)
                 .SetProperty(u => u.IsAdmin, user.IsAdmin)
-                .SetProperty(u => u.RoomId, roomId));
+                .SetProperty(u => u.RoomId, user.RoomId));
     }
 
     public async Task<UserEntity?> GetUserById(Guid userId)

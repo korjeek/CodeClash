@@ -71,6 +71,6 @@ app.UseCookiePolicy(new CookiePolicyOptions
 });
 
 app.MapControllers();
-app.MapHub<RoomHub>("/room"); // как сделать для разных комнат?
+app.MapHub<RoomHub>("/rooms"); // как сделать для разных комнат?
 
 app.Run();
