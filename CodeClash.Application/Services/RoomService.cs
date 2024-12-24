@@ -93,4 +93,12 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
 
         return Result.Success("Quited room successfully.");
     }
+
+    public async Task<Result<bool>> IsUserAdmin(Guid userId)
+    {
+        var userEntity = await usersRepository.GetUserById(userId);
+        if (userEntity is null)
+            return Result.Failure<bool>($"User with {userId} does not exist.");
+        return Result.Success(userEntity.IsAdmin);
+    }
 }
