@@ -1,27 +1,36 @@
-// src/components/CreateRoomPage.tsx
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
+import {getRoomsList, RoomMethods, RoomService} from "../../services/roomService.ts";
+import {useLocation} from "react-router-dom";
+import {Room} from "../../interfaces/roomInterfaces.ts";
 
-const Lobby: React.FC = () => {
-    const [time, setTime] = useState<string>('');
-    const [issueId, setIssueId] = useState<string>('');
-    const [loading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string | null>(null);
-    const [roomName, setName] = useState('');
+export default function Lobby() {
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const roomId = queryParams.get('roomId')!;
+    const [room, setRoom] = useState<Room>()
+    const roomService = new RoomService();
 
-    const handleCreateRoom = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setLoading(true);
-        setError(null);
-    };
+    useEffect(() => {
+        async function fetchRoom() {
+            await roomService.startConnection();
+            const room = await roomService.actionWithRoom(roomId, RoomMethods.JoinRoom)
+            setRoom(room)
+        }
+
+        fetchRoom();
+    }, [])
+    console.log(room)
+
+    const quitRoom = async () => {
+        await roomService.actionWithRoom(roomId, RoomMethods.QuitRoom)
+        window.location.href = '/menu';
+    }
 
     return (
-        <div style={{ padding: '20px' }}>
+        <div style={{padding: '20px'}}>
             <h1>Lobby</h1>
-            <button type="submit" disabled={loading} style={{padding: '10px 20px'}}>
-                {loading ? 'Creating Room...' : 'Create Room'}
-            </button>
+            <button style={{padding: '10px 20px'}} onClick={quitRoom}>Quit Room</button>
+            <button style={{padding: '10px 20px'}}>Create Room</button>
         </div>
     );
 };
-
-export default Lobby;

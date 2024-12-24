@@ -5,8 +5,8 @@ export interface DTOObject{
 
 }
 
-export interface RoomsDTO {
-    data: Room[];
+export interface Response<T> {
+    data: T;
     error: string;
     success: boolean;
 }

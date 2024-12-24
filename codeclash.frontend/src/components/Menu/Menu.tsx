@@ -20,9 +20,7 @@ export default function Menu() {
     }, [])
 
     const joinRoom = async (roomId: string) => {
-        const roomService = new RoomService();
-        await roomService.startConnection();
-        await roomService.joinRoom(roomId)
+        window.location.href = `/lobby?=roomId=${roomId}`;
     }
 
     return (
