@@ -2,12 +2,13 @@ import React, {useEffect, useState} from "react";
 import '../../style/MenuPage/Main.css'
 import '../../style/MenuPage/Input.css'
 import '../../style/MenuPage/Buttons.css'
+import '../../style/MenuPage/Rooms.css'
 import {Room} from "../../interfaces/roomInterfaces.ts";
-import {getRoomsList} from "../../services/roomService.ts";
+import {getRoomsList, RoomService} from "../../services/roomService.ts";
 
 
 export default function Menu() {
-    const [rooms, setRooms] = useState([]);
+    const [rooms, setRooms] = useState<Room[]>([]);
 
     useEffect(() => {
         async function fetchRooms() {
@@ -17,6 +18,10 @@ export default function Menu() {
 
         fetchRooms();
     }, [])
+
+    const joinRoom = async (roomId: string) => {
+        window.location.href = `/lobby?=roomId=${roomId}`;
+    }
 
     return (
         <div className="menu-page">
@@ -41,12 +46,12 @@ export default function Menu() {
                     </div>
                     <div className="item item-4">
                         <div className="rooms-container">
-                            {rooms.map((room: Room) => (
-                                <div className="room-item" key={room.id}>
+                            {rooms.map((room) => (
+                                <button className="room-item" key={room.id} onClick={() => joinRoom(room.id)}>
                                     <div>{room.id}</div>
                                     <div style={{"flex": "right"}}>Name: {room.name}</div>
-                                    <div style={{"flex": "right"}}>People: {room.users.length}</div>
-                                </div>
+                                    <div style={{"flex": "right"}}>People: {room.users?.length ?? 0}</div>
+                                </button>
                             ))}
                         </div>
                     </div>

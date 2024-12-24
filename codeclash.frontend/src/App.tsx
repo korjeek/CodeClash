@@ -14,6 +14,7 @@ import LoginPage from './components/Auth/LoginPage.tsx';
 import CreateRoomPage from './components/CreateRoomPage';
 import AuthPage from "./components/Auth/AuthPage.tsx";
 import Menu from "./components/Menu/Menu.tsx";
+import Lobby from "./components/Lobby/Lobby.tsx";
 
 const App: React.FC = () => {
     const rooms = [
@@ -38,6 +39,7 @@ const App: React.FC = () => {
                 <Route path="/login1" element={<AuthPage AuthPageElement={<LoginPage/>}/>} />
                 <Route path="/createRoom" element={<CreateRoomPage/>} />
                 <Route path="/menu" element={<Menu/>} />
+                <Route path="/lobby" element={<Lobby/>} />
             </Routes>
         </Router>
     );

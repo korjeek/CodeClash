@@ -1,6 +1,7 @@
 import axios from 'axios';
 import * as signalR from "@microsoft/signalr";
 import { RoomOptions, Room } from "../interfaces/roomInterfaces.ts";
+import {DTO, Response} from "../interfaces/ResponseInterface.ts";
 
 const API_URL = 'https://localhost:7282/rooms';
 
@@ -43,6 +44,10 @@ export class RoomService {
         this.connection.onclose(() => {
             console.error("Connection closed. Reconnecting...")
         })
+
+        this.connection.on("UserJoined", (userId: string) => {
+            console.log(`User joined: ${userId}`);
+        })
     }
 
     async startConnection(): Promise<void> {
@@ -58,10 +63,7 @@ export class RoomService {
     async createRoom(createRoomData: CreateRoomData): Promise<Room> {
         try {
             console.log(createRoomData)
-            const room = await this.connection.invoke<Room>(
-                "CreateRoom",
-                createRoomData
-            );
+            const room = await this.connection.invoke<Room>("CreateRoom", createRoomData);
 
             console.log(room);
             return room;
@@ -72,26 +74,12 @@ export class RoomService {
         }
     }
 
-    async joinRoom(joinRoomData: JoinQuitRoomData): Promise<void> {
+    async actionWithRoom(roomId: string, method: string){
         try {
-            await this.connection.invoke(
-                "JoinRoom",
-                joinRoomData.userEmail,
-                joinRoomData.roomId
-            );
-        }
-        catch (error) {
-            console.log(error);
-        }
-    }
-
-    async quitRoom(quitRoomData: JoinQuitRoomData): Promise<void> {
-        try {
-            await this.connection.invoke(
-                "QuitRoom",
-                quitRoomData.userEmail,
-                quitRoomData.roomId
-            );
+            const room = await this.connection.invoke<Response<Room>>(method, roomId);
+            if (room.success)
+                return room.data;
+            console.log(room.error)
         }
         catch (error) {
             console.log(error);
@@ -114,7 +102,12 @@ export class RoomService {
     }
 }
 
+export enum RoomMethods {
+    JoinRoom = "JoinRoom",
+    QuitRoom = "QuitRoom"
+}
+
 export const getRoomsList = async () => {
-    const response = await axios.get<Room[]>(`${API_URL}/get-rooms`);
-    return response.data;
+    const response = await axios.get<Response<Room[]>>(`${API_URL}/get-rooms`);
+    return response.data.data;
 }
