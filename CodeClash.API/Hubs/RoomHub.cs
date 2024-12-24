@@ -49,6 +49,13 @@ public class RoomHub(RoomService roomService, TestUserSolutionService testUserSo
     
     public async Task<ApiResponse<string>> StartCompetition(Guid roomId, TimeOnly duration)
     {
+        var userId = Context.User.GetUserIdFromAccessToken();
+        var userIsAdmin = await competitionService.GetUserStatus(userId);
+        if (userIsAdmin.IsFailure)
+            return new ApiResponse<string>(false, null, userIsAdmin.Error);
+        if (!userIsAdmin.Value)
+            return new ApiResponse<string>(false, null, "User is not admin");
+        
         // TODO: Подумать, как это УВЛАЖНИТЬ)))) (убрать DRY)
         var roomStatus = await competitionService.GetRoomStatus(roomId);
         if (roomStatus.IsFailure)
@@ -66,14 +73,7 @@ public class RoomHub(RoomService roomService, TestUserSolutionService testUserSo
     
     public async Task<ApiResponse<string>> CheckSolution(Guid roomId, string solution, string issueName)
     {
-        // await testUserSolutionService.CheckSolution("namespace CodeClash.UserSolutionTest;\npublic class SolutionTask\n{\n\tpublic int[] FindSum(int[] nums, int target)\n\t{\n\t\tvar result = new int[2];\n\t\tfor(var i = 0; i < nums.Length; i++)\n\t\t\tfor (var j = i + 1; j < nums.Length; j++)\n\t\t\t{\n\t\t\t\tif (nums[i] + nums[j] == target)\n\t\t\t\t{\n\t\t\t\t\tresult[0] = i;\n\t\t\t\t\tresult[1] = j;\n\t\t\t\t}\n\t\t\t}\n\t\treturn result;\n\t}\n}\n");
-        var roomStatus = await competitionService.GetRoomStatus(roomId);
-        if (roomStatus.IsFailure)
-            return new ApiResponse<string>(false, null, roomStatus.Error);
-        if (roomStatus.Value == RoomStatus.CompetitionInProgress)
-            return new ApiResponse<string>(false, null, "Competition in progress.");
-
-        var resultString = await testUserSolutionService.CheckSolution(solution, issueName);
+        var resultString = await testUserSolutionService.CheckSolution(roomId, solution, issueName);
         if (resultString.IsFailure)
             return new ApiResponse<string>(false, null, resultString.Error);
         

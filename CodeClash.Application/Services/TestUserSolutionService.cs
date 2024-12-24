@@ -1,9 +1,11 @@
+using CodeClash.Persistence.Entities;
+using CodeClash.Persistence.Repositories;
 using CSharpFunctionalExtensions;
 using Microsoft.Build.Locator;
 
 namespace CodeClash.Application.Services;
 
-public class TestUserSolutionService
+public class TestUserSolutionService(RoomsRepository repository)
 {
     private readonly Dictionary<string, string> issueTestsLocations = new()
     {
@@ -16,19 +18,25 @@ public class TestUserSolutionService
         ["MergeTwoSortedLists"] = "../TestSources/MergeTwoSortedLists/SolutionTaskTests.cs",
     };
     
-    public async Task<Result<string>> CheckSolution(string userSolution, string issueName)
+    public async Task<Result<string>> CheckSolution(Guid roomId, string userSolution, string issueName)
     {
         if (!MSBuildLocator.IsRegistered)
             MSBuildLocator.RegisterDefaults();
+
+        var result = await repository.GetRoomById(roomId);;
+        if (result is null)
+            return Result.Failure<string>("Room does not exist.");
+        if (result.Status != RoomStatus.CompetitionInProgress)
+            return Result.Failure<string>("Competition hasn't started yet");
         
         var tests = await File.ReadAllTextAsync(issueTestsLocations[issueName]);
         await File.WriteAllTextAsync("../CodeClash.UserSolutionTest/SolutionTaskTests.cs", tests);
         await File.WriteAllTextAsync("../CodeClash.UserSolutionTest/SolutionTask.cs", userSolution);
         
-        var solutionPath = @"C:\FIIT\normalProject\CodeClash";
+        // var solutionPath = @"C:\FIIT\normalProject\CodeClash";
+        var solutionPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../.."));
         var projectName = "CodeClash.UserSolutionTest";
         
         return Result.Success(RuntimeProjectExecutor.HandleProject(projectName, solutionPath));
-        // просто отправляем этот ответ, только для статистики в конце надо сохранить пользователя и его результат
     }
 }
