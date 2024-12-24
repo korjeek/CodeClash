@@ -56,7 +56,6 @@ public class RoomHub(RoomService roomService, TestUserSolutionService testUserSo
         if (!userIsAdmin.Value)
             return new ApiResponse<string>(false, null, "User is not admin");
         
-        // TODO: Подумать, как это УВЛАЖНИТЬ)))) (убрать DRY)
         var roomStatus = await competitionService.GetRoomStatus(roomId);
         if (roomStatus.IsFailure)
             return new ApiResponse<string>(false, null, roomStatus.Error);
@@ -68,7 +67,7 @@ public class RoomHub(RoomService roomService, TestUserSolutionService testUserSo
             return new ApiResponse<string>(false, null, result.Error);
         _ = competitionService.SyncTimers(Clients.Group(roomId.ToString()), duration, roomId);
 
-        return new ApiResponse<string>(true, "Sol GoodMan", null);
+        return new ApiResponse<string>(true, "Competition is started", null);
     }
     
     public async Task<ApiResponse<string>> CheckSolution(Guid roomId, string solution, string issueName)
