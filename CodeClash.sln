@@ -1,19 +1,24 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{68C4F14F-2289-4E02-BA1B-F4DC5964AA5B}"
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yml = docker-compose.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeClash.API", "CodeClash.API\CodeClash.API.csproj", "{B23E67C7-F1CC-478D-A114-235C867DB39F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeClash.API", "CodeClash.API\CodeClash.API.csproj", "{B23E67C7-F1CC-478D-A114-235C867DB39F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeClash.Application", "CodeClash.Application\CodeClash.Application.csproj", "{7B47E8DA-43FC-420B-82E9-B0A3E1AB0DF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeClash.Application", "CodeClash.Application\CodeClash.Application.csproj", "{7B47E8DA-43FC-420B-82E9-B0A3E1AB0DF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeClash.Persistence", "CodeClash.Persistence\CodeClash.Persistence.csproj", "{56627737-B966-4D47-BD33-006801C0D27F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeClash.Persistence", "CodeClash.Persistence\CodeClash.Persistence.csproj", "{56627737-B966-4D47-BD33-006801C0D27F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeClash.Core", "CodeClash.Core\CodeClash.Core.csproj", "{002569E9-F157-4A91-880C-B882EA8E942D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeClash.Core", "CodeClash.Core\CodeClash.Core.csproj", "{002569E9-F157-4A91-880C-B882EA8E942D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeClash.UserSolutionTest", "CodeClash.UserSolutionTest\CodeClash.UserSolutionTest.csproj", "{252623AC-064B-4073-B317-32B7D8D18055}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeClash.UserSolutionTest", "CodeClash.UserSolutionTest\CodeClash.UserSolutionTest.csproj", "{252623AC-064B-4073-B317-32B7D8D18055}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeClash.Tests", "CodeClash.Tests\CodeClash.Tests.csproj", "{AE61BCE6-2F9D-47D2-8D6B-DEEF6D4E9F87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,11 +38,23 @@ Global
 		{56627737-B966-4D47-BD33-006801C0D27F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56627737-B966-4D47-BD33-006801C0D27F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56627737-B966-4D47-BD33-006801C0D27F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{002569E9-F157-4A91-880C-B882EA8E942D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{002569E9-F157-4A91-880C-B882EA8E942D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{002569E9-F157-4A91-880C-B882EA8E942D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{002569E9-F157-4A91-880C-B882EA8E942D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{252623AC-064B-4073-B317-32B7D8D18055}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{252623AC-064B-4073-B317-32B7D8D18055}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{252623AC-064B-4073-B317-32B7D8D18055}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{252623AC-064B-4073-B317-32B7D8D18055}.Release|Any CPU.Build.0 = Release|Any CPU
-		{002569E9-F157-4A91-880C-B882EA8E942D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{002569E9-F157-4A91-880C-B882EA8E942D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE61BCE6-2F9D-47D2-8D6B-DEEF6D4E9F87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE61BCE6-2F9D-47D2-8D6B-DEEF6D4E9F87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE61BCE6-2F9D-47D2-8D6B-DEEF6D4E9F87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE61BCE6-2F9D-47D2-8D6B-DEEF6D4E9F87}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9AF71699-C85A-4352-8F71-8E1A65C5614A}
 	EndGlobalSection
 EndGlobal
