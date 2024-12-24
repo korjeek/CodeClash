@@ -47,7 +47,7 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
         if (userEntity.IsAdmin)
             return Result.Failure<Room>($"User is already admin.");
 
-        if (userEntity.RoomId is null)
+        if (userEntity.RoomId is not null)
             return Result.Failure<Room>("User is already in room.");
         
         
