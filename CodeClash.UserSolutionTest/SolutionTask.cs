@@ -5,14 +5,14 @@ public class SolutionTask
 	{
 		var result = new int[2];
 		for(var i = 0; i < nums.Length; i++)
-			for (var j = i + 1; j < nums.Length; j++)
+		for (var j = i + 1; j < nums.Length; j++)
+		{
+			if (nums[i] + nums[j] == target)
 			{
-				if (nums[i] + nums[j] == target)
-				{
-					result[0] = i;
-					result[1] = j;
-				}
+				result[0] = i;
+				result[1] = j;
 			}
+		}
 		return result;
 	}
 }

@@ -5,6 +5,7 @@ import '../../style/MenuPage/Buttons.css'
 import '../../style/MenuPage/Rooms.css'
 import {Room} from "../../interfaces/roomInterfaces.ts";
 import {getRoomsList, RoomService} from "../../services/roomService.ts";
+import {useRoomService} from "../RoomServiceContext.tsx";
 
 
 export default function Menu() {
@@ -20,8 +21,10 @@ export default function Menu() {
     }, [])
 
     const joinRoom = async (roomId: string) => {
-        window.location.href = `/lobby?=roomId=${roomId}`;
+        window.location.href = `/lobby?roomId=${roomId}`;
     }
+
+    const createRoom = async () => window.location.href = `/createRoom`;
 
     return (
         <div className="menu-page">
@@ -29,7 +32,7 @@ export default function Menu() {
             <div className="content-wrapper">
                 <div className="grid-container">
                     <div className="item item-1">
-                        <button className="create-room-btn">Create Room +</button>
+                        <button className="create-room-btn" onClick={createRoom}>Create Room +</button>
                     </div>
                     <div className="item item-2">
                         <div className="input-wrapper">
