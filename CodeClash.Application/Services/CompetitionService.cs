@@ -1,4 +1,6 @@
-﻿using CodeClash.Persistence.Entities;
+﻿using CodeClash.Application.Extensions;
+using CodeClash.Core.Models.Domain;
+using CodeClash.Persistence.Entities;
 using CodeClash.Persistence.Repositories;
 using CSharpFunctionalExtensions;
 using Microsoft.AspNetCore.SignalR;
@@ -7,14 +9,14 @@ namespace CodeClash.Application.Services;
 
 public class CompetitionService(RoomsRepository roomsRepository, UsersRepository usersRepository)
 {
-    public async Task<Result> UpdateRoomStatus(Guid roomId, RoomStatus status)
+    public async Task<Result<RoomEntity>> UpdateRoomStatus(Guid roomId, RoomStatus status)
     {
-        var room = await roomsRepository.GetRoomById(roomId);
-        if (room is null)
-            return Result.Failure("Room does not exist.");
-        room.Status = status;
-        await roomsRepository.UpdateRoom(room);
-        return Result.Success();
+        var roomEntity = await roomsRepository.GetRoomById(roomId);
+        if (roomEntity is null)
+            return Result.Failure<RoomEntity>("Room does not exist.");
+        roomEntity.Status = status;
+        await roomsRepository.UpdateRoom(roomEntity);
+        return Result.Success(roomEntity);
     }
 
     public async Task<Result<bool>> GetUserStatus(Guid userId)

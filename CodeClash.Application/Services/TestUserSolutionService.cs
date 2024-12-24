@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using CodeClash.Persistence.Entities;
 using CodeClash.Persistence.Repositories;
 using CSharpFunctionalExtensions;
@@ -7,6 +8,18 @@ namespace CodeClash.Application.Services;
 
 public class TestUserSolutionService(RoomsRepository repository)
 {
+    public readonly ConcurrentDictionary<string, string> startCodeLocations = new()
+    {
+        ["FindSum"] = "../TestSources/FindSum/SolutionTask.cs",
+        ["RomanToInteger"] = "../TestSources/RomanToInteger/SolutionTask.cs",
+        ["DeleteDuplicates"] = "../TestSources/DeleteDuplicates/SolutionTask.cs",
+        ["LongestCommonPrefix"] = "../TestSources/LongestCommonPrefix/SolutionTask.cs",
+        ["ValidParentheses"] = "../TestSources/ValidParentheses/SolutionTask.cs",
+        ["Palindrome"] = "../TestSources/Palindrome/SolutionTask.cs",
+        ["MergeTwoSortedLists"] = "../TestSources/MergeTwoSortedLists/SolutionTask.cs",
+    };
+
+    
     private readonly Dictionary<string, string> issueTestsLocations = new()
     {
         ["FindSum"] = "../TestSources/FindSum/SolutionTaskTests.cs",

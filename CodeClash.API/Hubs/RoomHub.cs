@@ -12,7 +12,10 @@ namespace CodeClash.API.Hubs;
 
 [Authorize]
 [EnableCors("CorsPolicy")]
-public class RoomHub(RoomService roomService, TestUserSolutionService testUserSolutionService, CompetitionService competitionService) : Hub
+public class RoomHub(RoomService roomService, 
+    TestUserSolutionService testUserSolutionService, 
+    CompetitionService competitionService, 
+    IssueService issueService) : Hub
 {
     public async Task<ApiResponse<RoomDTO>> CreateRoom(CreateRoomRequest request)
     {
@@ -62,12 +65,25 @@ public class RoomHub(RoomService roomService, TestUserSolutionService testUserSo
         if (roomStatus.Value is RoomStatus.CompetitionInProgress)
             return new ApiResponse<string>(false, null, "Competition in progress");
         
-        var result = await competitionService.UpdateRoomStatus(roomId, RoomStatus.CompetitionInProgress);
-        if (result.IsFailure)
-            return new ApiResponse<string>(false, null, result.Error);
-        _ = competitionService.SyncTimers(Clients.Group(roomId.ToString()), duration, roomId);
+        var roomEntityResult = await competitionService.UpdateRoomStatus(roomId, RoomStatus.CompetitionInProgress);
+        if (roomEntityResult.IsFailure)
+            return new ApiResponse<string>(false, null, roomEntityResult.Error);
 
+        await Clients.Group(roomId.ToString()).SendAsync("CompetitionStarted", $"/problem/{roomEntityResult.Value.IssueId}");
+        _ = competitionService.SyncTimers(Clients.Group(roomId.ToString()), duration, roomId);
+        
         return new ApiResponse<string>(true, "Competition is started", null);
+    }
+
+    public async Task<ApiResponse<IssueDTO>> GetIssue(Guid issueId)
+    {
+        var issueResult = await issueService.GetIssue(issueId);
+        if (issueResult.IsFailure)
+            return new ApiResponse<IssueDTO>(false, null, issueResult.Error);
+
+        var issueDTO = issueResult.Value.GetIssueDTO();
+        issueDTO.InitialCode = await File.ReadAllTextAsync(testUserSolutionService.startCodeLocations[issueResult.Value.Name]);
+        return new ApiResponse<IssueDTO>(true, issueDTO , null);
     }
     
     public async Task<ApiResponse<string>> CheckSolution(Guid roomId, string solution, string issueName)
