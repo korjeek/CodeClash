@@ -49,6 +49,13 @@ public class RoomHub(RoomService roomService, TestUserSolutionService testUserSo
     
     public async Task<ApiResponse<string>> StartCompetition(Guid roomId, TimeOnly duration)
     {
+        var userId = Context.User.GetUserIdFromAccessToken();
+        var userIsAdmin = await competitionService.GetUserStatus(userId);
+        if (userIsAdmin.IsFailure)
+            return new ApiResponse<string>(false, null, userIsAdmin.Error);
+        if (!userIsAdmin.Value)
+            return new ApiResponse<string>(false, null, "User is not admin");
+        
         // TODO: Подумать, как это УВЛАЖНИТЬ)))) (убрать DRY)
         var roomStatus = await competitionService.GetRoomStatus(roomId);
         if (roomStatus.IsFailure)

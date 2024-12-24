@@ -5,21 +5,29 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace CodeClash.Application.Services;
 
-public class CompetitionService(RoomsRepository repository)
+public class CompetitionService(RoomsRepository roomsRepository, UsersRepository usersRepository)
 {
     public async Task<Result> UpdateRoomStatus(Guid roomId, RoomStatus status)
     {
-        var room = await repository.GetRoomById(roomId);
+        var room = await roomsRepository.GetRoomById(roomId);
         if (room is null)
             return Result.Failure("Room does not exist.");
         room.Status = status;
-        await repository.UpdateRoom(room);
+        await roomsRepository.UpdateRoom(room);
         return Result.Success();
     }
 
+    public async Task<Result<bool>> GetUserStatus(Guid userId)
+    {
+        var user = await usersRepository.GetUserById(userId);
+        if (user is null)
+            return Result.Failure<bool>("User does not exist.");
+        return Result.Success(user.IsAdmin);
+    }
+    
     public async Task<Result<RoomStatus>> GetRoomStatus(Guid roomId)
     {
-        var room = await repository.GetRoomById(roomId);
+        var room = await roomsRepository.GetRoomById(roomId);
         if (room is null)
             return Result.Failure<RoomStatus>("Room does not exist.");
         return Result.Success(room.Status);
