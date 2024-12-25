@@ -5,6 +5,7 @@ using CodeClash.Application.Services;
 using CodeClash.Persistence;
 using CodeClash.Persistence.Repositories;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +20,7 @@ services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
     
 services.AddSignalR();
+services.AddScoped<IUserIdProvider, UserConnectionIdProvider>();
 
 services.AddDbContext<ApplicationDbContext>();
 //TODO Сделать, чтобы добавлялись только интерфесы с нужными методами. Интерфейсы реализовываются через Services, которые можно менять
