@@ -6,8 +6,6 @@ import {RoomServiceProvider} from "./components/RoomServiceContext.tsx";
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-      <RoomServiceProvider>
-        <App />
-      </RoomServiceProvider>
+      <App />
   </StrictMode>,
 )

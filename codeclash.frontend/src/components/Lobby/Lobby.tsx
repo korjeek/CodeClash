@@ -1,50 +1,57 @@
 import React, {useContext, useEffect, useMemo, useState} from 'react';
 import {getRoomsList, RoomMethods, RoomService, StartCompetitionData} from "../../services/roomService.ts";
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {Room} from "../../interfaces/roomInterfaces.ts";
 import {RoomServiceContext, useRoomService} from "../RoomServiceContext.tsx";
 import {HubConnectionState} from "@microsoft/signalr";
+import {useSignalR} from "../SignalRContext.tsx";
+import SignalRService from "../SignalRService.ts";
+import {checkForAdmin} from "../RoomService.ts";
 
 export default function Lobby() {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const roomId = queryParams.get('roomId')!;
     const [room, setRoom] = useState<Room>()
-    const [admin, setAdmin] = useState<boolean>(false)
-    const roomService = useRoomService();
+    const [isAdmin, setIsAdmin] = useState<boolean>(false)
+    const signalR = useMemo(() => new SignalRService(), []);
+    const navigate = useNavigate();
 
     useEffect(() =>{
-        const CheckUserForAdmin = async () => {
-            const isUserAdmin = await roomService.checkIsUserAdmin();
-            setAdmin(isUserAdmin);
+        const fetchAdminStatus = async () => {
+            const isAdmin = await checkForAdmin();
+            setIsAdmin(isAdmin);
         }
+
         const connectToRoom = async () => {
-            await roomService.startConnection();
-            const room = await roomService.actionWithRoom<string>(roomId, RoomMethods.JoinRoom)
+            await signalR.startConnection();
+            const room = await signalR.invoke<string, Room>("JoinRoom", roomId)
             setRoom(room)
         };
 
-        if (!roomService)
-            connectToRoom();
-        CheckUserForAdmin();
-    }, [roomId, roomService]);
+        connectToRoom();
+        fetchAdminStatus();
+    }, [roomId, signalR]);
 
     const quitRoom = async () => {
-        await roomService.actionWithRoom<string>(roomId, RoomMethods.QuitRoom)
-        await roomService.closeConnection();
+        const response = await signalR.invoke<string, Room>("QuitRoom", roomId)
+        console.log(response)
+        await signalR.stopConnection()
+        navigate('/menu');
     }
 
     const startCompetition = async () => {
-        const id = room!.id
-        const time = room!.time
-        await roomService.actionWithRoom<StartCompetitionData>({id, time}, RoomMethods.StartCompetition)
+        if (room)
+            await signalR.invoke<Room, Room>("StartCompetition", room)
+        else
+            console.log("Can't start competition. Room doesn't exist.")
     }
 
     return (
         <div style={{padding: '20px'}}>
             <h1>Lobby</h1>
             <button style={{padding: '10px 20px'}} onClick={quitRoom}>Quit Room</button>
-            {admin && <button style={{padding: '10px 20px'}}>Start Competition</button>}
+            {isAdmin && <button style={{padding: '10px 20px'}} onClick={startCompetition}>Start Competition</button>}
         </div>
     );
 };

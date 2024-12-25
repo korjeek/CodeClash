@@ -132,6 +132,6 @@ export enum RoomMethods {
 }
 
 export const getRoomsList = async () => {
-    const response = await axios.get<Response<Room[]>>(`${API_URL}/get-rooms`);
+    const response = await axios.get<Response<Room[]>>(`${API_URL}/get-rooms`, { withCredentials: true });
     return response.data.data;
 }

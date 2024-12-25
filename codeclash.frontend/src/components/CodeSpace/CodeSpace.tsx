@@ -6,6 +6,7 @@ import ReactMarkdown from 'react-markdown';
 
 export default function CodeSpace(){
     const { param } = useParams();
+    console.log(param);
 
     return (
         <div className="container">

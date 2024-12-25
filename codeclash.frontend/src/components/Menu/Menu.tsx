@@ -4,12 +4,13 @@ import '../../style/MenuPage/Input.css'
 import '../../style/MenuPage/Buttons.css'
 import '../../style/MenuPage/Rooms.css'
 import {Room} from "../../interfaces/roomInterfaces.ts";
-import {getRoomsList, RoomService} from "../../services/roomService.ts";
-import {useRoomService} from "../RoomServiceContext.tsx";
+import {getRoomsList} from "../../services/roomService.ts";
+import {useNavigate} from "react-router-dom";
 
 
 export default function Menu() {
     const [rooms, setRooms] = useState<Room[]>([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         async function fetchRooms() {
@@ -20,11 +21,8 @@ export default function Menu() {
         fetchRooms();
     }, [])
 
-    const joinRoom = async (roomId: string) => {
-        window.location.href = `/lobby?roomId=${roomId}`;
-    }
-
-    const createRoom = async () => window.location.href = `/createRoom`;
+    const joinRoom = async (roomId: string) => navigate(`/lobby?roomId=${roomId}`);
+    const createRoom = async () => navigate(`/createRoom`);
 
     return (
         <div className="menu-page">

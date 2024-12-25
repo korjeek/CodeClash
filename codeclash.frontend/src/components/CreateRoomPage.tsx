@@ -3,39 +3,38 @@ import React, {useContext, useState} from 'react';
 import {CreateRoomData, RoomMethods, RoomService} from '../services/roomService.ts';
 import { Room } from '../interfaces/roomInterfaces.ts'
 import {RoomServiceContext, useRoomService} from "./RoomServiceContext.tsx";
+import {useSignalR} from "./SignalRContext.tsx";
+import SignalRService from "./SignalRService.ts";
+import {useNavigate} from "react-router-dom";
 
 const CreateRoomPage: React.FC = () => {
     const [time, setTime] = useState<string>('');
     const [issueId, setIssueId] = useState<string>('');
-    const [adminEmail, setAdminEmail] = useState<string>('');
     const [roomKey, setRoomKey] = useState<string | null>(null);
-    const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
     const [roomName, setName] = useState('');
-    const roomService = useRoomService();
+    const signalR = new SignalRService()
+    const navigate = useNavigate();
 
     const handleCreateRoom = async (e: React.FormEvent) => {
         e.preventDefault();
-        setLoading(true);
         setError(null);
 
         try {
-            await roomService.startConnection();
             console.log({roomName, time, issueId})
             const room = {roomName, time, issueId}
-            const createdRoom = await roomService.actionWithRoom<CreateRoomData>(room, RoomMethods.CreateRoom);
-            await joinRoom(createdRoom!.id)
-            // setRoomKey(result.id);
-            alert(`Room created successfully! Room Key: ${createdRoom}`);
-        } catch (err) {
+            await signalR.startConnection()
+            const createdRoom = await signalR.invoke<CreateRoomData, Room>("CreateRoom", room);
+            if (createdRoom)
+                await joinRoom(createdRoom.id)
+        }
+        catch (err) {
             console.error(err);
             setError('Failed to create room. Please try again.');
-        } finally {
-            setLoading(false);
         }
     };
 
-    const joinRoom = async (roomId: string) => window.location.href = `/lobby?roomId=${roomId}`;
+    const joinRoom = async (roomId: string) => navigate(`/lobby?roomId=${roomId}`);
 
     return (
         <div style={{ padding: '20px' }}>

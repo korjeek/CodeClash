@@ -15,7 +15,6 @@ import CreateRoomPage from './components/CreateRoomPage';
 import AuthPage from "./components/Auth/AuthPage.tsx";
 import Menu from "./components/Menu/Menu.tsx";
 import Lobby from "./components/Lobby/Lobby.tsx";
-import {RoomServiceProvider} from "./components/RoomServiceContext.tsx";
 import CodeSpace from "./components/CodeSpace/CodeSpace.tsx";
 
 const App: React.FC = () => {
@@ -42,7 +41,7 @@ const App: React.FC = () => {
                 <Route path="/menu" element={<Menu/>} />
                 <Route path="/createRoom" element={<CreateRoomPage/>} />
                 <Route path="/lobby" element={<Lobby/>} />
-                <Route path="/editor/:param" element={<CodeSpace/>} />
+                <Route path="/problem/:param" element={<CodeSpace/>} />
             </Routes>
         </Router>
     );
