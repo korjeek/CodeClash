@@ -1,12 +1,4 @@
-﻿using CodeClash.Core.Requests.IssueRequest;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using System.Threading.Tasks;
-using CodeClash.Core.Models;
+﻿using CodeClash.Core.Models;
 using CodeClash.Core.Constants;
 
 namespace CodeClash.Tests

@@ -1,27 +1,25 @@
 ﻿using CodeClash.Persistence.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace CodeClash.Persistence.Repositories;
 
 public class RoomsRepository(ApplicationDbContext dbContext)
 {
-    public async Task<RoomEntity> Add(RoomEntity room)
+    public async Task Add(RoomEntity room)
     {
         dbContext.Rooms.Add(room);
         await dbContext.SaveChangesAsync();
-        
-        return room;
+    }
+
+    public async Task Delete(RoomEntity room)
+    {
+        dbContext.Rooms.Remove(room);
+        await dbContext.SaveChangesAsync();
     }
 
     public async Task<RoomEntity?> GetRoomById(Guid roomId)
     {
         return await dbContext.Rooms.FindAsync(roomId);
-        // if (room is null)
-        //     return null;
-        // var issue = await dbContext.Issues.FindAsync(room.IssueId);
-        // if (issue is null)
-        //     return null;
-        //
-        // return Room.Create(roomId, room.Name, room.Time, issue.GetIssueFromEntity()).Value;
     }
     
     public Task<List<RoomEntity>> GetRooms()
@@ -32,5 +30,13 @@ public class RoomsRepository(ApplicationDbContext dbContext)
     public Task<List<UserEntity>> GetRoomUsers(Guid roomId)
     {
         return Task.FromResult(dbContext.Users.Where(u => u.RoomId == roomId).ToList());
+    }
+
+    public async Task UpdateRoom(RoomEntity roomEntity)
+    {
+        await dbContext.Rooms
+            .Where(r => r.Id == roomEntity.Id)
+            .ExecuteUpdateAsync(s => s.
+                SetProperty(r => r.Status, roomEntity.Status));
     }
 }

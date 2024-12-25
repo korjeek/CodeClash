@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using CodeClash.Application;
 
 namespace CodeClash.Tests

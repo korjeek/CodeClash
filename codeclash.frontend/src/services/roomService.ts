@@ -1,6 +1,8 @@
 import axios from 'axios';
 import * as signalR from "@microsoft/signalr";
-import { RoomOptions, Room } from "../interfaces/roomInterfaces.ts";
+import {HubConnectionState} from "@microsoft/signalr";
+import {Room} from "../interfaces/roomInterfaces.ts";
+import {Response} from "../interfaces/ResponseInterface.ts";
 
 const API_URL = 'https://localhost:7282/rooms';
 
@@ -15,10 +17,15 @@ export interface SolutionResponse {
     //               нет - высылаем ответ тому, кто послал запрос
 }
 
-interface CreateRoomData{
+export interface CreateRoomData{
     roomName: string,
     time: string,
     issueId: string
+}
+
+export interface StartCompetitionData{
+    id: string,
+    time: string
 }
 
 // по истечении таймера выслать всем сообщение, что соревнование закончено
@@ -32,6 +39,7 @@ export interface UserSolution {
 
 export class RoomService {
     private connection: signalR.HubConnection;
+    public room!: Room;
 
     constructor() {
         this.connection = new signalR.HubConnectionBuilder()
@@ -41,57 +49,58 @@ export class RoomService {
             .build();
         
         this.connection.onclose(() => {
-            console.error("Connection closed. Reconnecting...")
+            console.error("Connection closed")
+        })
+
+        this.connection.on("UserJoined", (userId: string) => {
+            console.log(`User joined: ${userId}`);
+        })
+
+        this.connection.on("UserLeft", (userId: string) => {
+            console.log(`User left: ${userId}`);
+        })
+
+        this.connection.on("CompetitionStarted", (url) => {
+            console.log(`Competition started: ${url}`);
+            window.location.href = url;
         })
     }
 
     async startConnection(): Promise<void> {
         try {
-            await this.connection.start();
-            console.log("Connected to hub");
+            if (this.connection.state == HubConnectionState.Disconnected)
+                await this.connection.start();
+            console.log(`Status: ${this.connection.state}`);
         }
         catch (error) {
             console.log(error);
         }
     }
 
-    async createRoom(createRoomData: CreateRoomData): Promise<Room> {
-        try {
-            console.log(createRoomData)
-            const room = await this.connection.invoke<Room>(
-                "CreateRoom",
-                createRoomData
-            );
-
-            console.log(room);
-            return room;
-        }
-        catch (error) {
-            console.log(error);
-            throw error;
-        }
+    async checkIsUserAdmin(): Promise<boolean> {
+        console.log(this.connection.state)
+        const result = await this.connection.invoke<Response<boolean>>(RoomMethods.CheckIsUserAdmin)
+        return result.data;
     }
 
-    async joinRoom(joinRoomData: JoinQuitRoomData): Promise<void> {
+    async closeConnection(): Promise<void> {
         try {
-            await this.connection.invoke(
-                "JoinRoom",
-                joinRoomData.userEmail,
-                joinRoomData.roomId
-            );
+            await this.connection.stop();
+            console.log("Connection closed")
+            console.log(this.connection.state)
         }
         catch (error) {
             console.log(error);
         }
     }
 
-    async quitRoom(quitRoomData: JoinQuitRoomData): Promise<void> {
+    async actionWithRoom<T>(requestData: T, method: string): Promise<Room | undefined> {
         try {
-            await this.connection.invoke(
-                "QuitRoom",
-                quitRoomData.userEmail,
-                quitRoomData.roomId
-            );
+            const room = await this.connection.invoke<Response<Room>>(method, requestData);
+            console.log(this.connection.state)
+            if (room.success)
+                return room.data;
+            console.log(room.error)
         }
         catch (error) {
             console.log(error);
@@ -114,7 +123,15 @@ export class RoomService {
     }
 }
 
+export enum RoomMethods {
+    JoinRoom = "JoinRoom",
+    QuitRoom = "QuitRoom",
+    CreateRoom = "CreateRoom",
+    CheckIsUserAdmin = "CheckIsUserAdmin",
+    StartCompetition = "StartCompetition",
+}
+
 export const getRoomsList = async () => {
-    const response = await axios.get<Room[]>(`${API_URL}/get-rooms`);
-    return response.data;
+    const response = await axios.get<Response<Room[]>>(`${API_URL}/get-rooms`);
+    return response.data.data;
 }

@@ -1,11 +1,6 @@
 ﻿using CodeClash.Application.Extensions;
 using CodeClash.Core.Models;
 using CodeClash.Persistence.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CodeClash.Tests
 {

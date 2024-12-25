@@ -1,7 +1,8 @@
 // src/components/CreateRoomPage.tsx
-import React, { useState } from 'react';
-import { RoomService} from '../services/roomService.ts';
+import React, {useContext, useState} from 'react';
+import {CreateRoomData, RoomMethods, RoomService} from '../services/roomService.ts';
 import { Room } from '../interfaces/roomInterfaces.ts'
+import {RoomServiceContext, useRoomService} from "./RoomServiceContext.tsx";
 
 const CreateRoomPage: React.FC = () => {
     const [time, setTime] = useState<string>('');
@@ -11,8 +12,7 @@ const CreateRoomPage: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
     const [roomName, setName] = useState('');
-
-    const roomService = new RoomService();
+    const roomService = useRoomService();
 
     const handleCreateRoom = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -21,11 +21,12 @@ const CreateRoomPage: React.FC = () => {
 
         try {
             await roomService.startConnection();
-
             console.log({roomName, time, issueId})
-            const result = await roomService.createRoom({roomName, time, issueId});
+            const room = {roomName, time, issueId}
+            const createdRoom = await roomService.actionWithRoom<CreateRoomData>(room, RoomMethods.CreateRoom);
+            await joinRoom(createdRoom!.id)
             // setRoomKey(result.id);
-            alert(`Room created successfully! Room Key: ${result}`);
+            alert(`Room created successfully! Room Key: ${createdRoom}`);
         } catch (err) {
             console.error(err);
             setError('Failed to create room. Please try again.');
@@ -33,6 +34,8 @@ const CreateRoomPage: React.FC = () => {
             setLoading(false);
         }
     };
+
+    const joinRoom = async (roomId: string) => window.location.href = `/lobby?roomId=${roomId}`;
 
     return (
         <div style={{ padding: '20px' }}>
@@ -71,8 +74,8 @@ const CreateRoomPage: React.FC = () => {
                         style={{width: '100%', padding: '8px', marginBottom: '10px'}}
                     />
                 </div>
-                <button type="submit" disabled={loading} style={{padding: '10px 20px'}}>
-                    {loading ? 'Creating Room...' : 'Create Room'}
+                <button type="submit" style={{padding: '10px 20px'}}>
+                    Create Room
                 </button>
             </form>
             {roomKey && (

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
 using CodeClash.Application.Extensions;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using NUnit.Framework;
 using CodeClash.Core.Models;
 
 namespace CodeClash.Tests

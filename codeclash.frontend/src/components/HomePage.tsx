@@ -5,7 +5,7 @@ import HomeNavBar from "./HomeNavBar.tsx";
 
 
 export default function HomePage() {
-    const getStartedClick = () => window.location.href = '/reg1';
+    const getStartedClick = async () => window.location.href = '/reg1';
 
     return (
         <div className="home-page">

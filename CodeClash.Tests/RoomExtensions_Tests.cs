@@ -1,7 +1,4 @@
-﻿using NUnit.Framework;
-using CodeClash.Core.Models.Domain;
-using CodeClash.Core.Models.DTOs;
-using System;
+﻿using CodeClash.Core.Models.Domain;
 using CodeClash.Application.Extensions;
 using CodeClash.Core.Models;
 using CodeClash.Persistence.Entities;
