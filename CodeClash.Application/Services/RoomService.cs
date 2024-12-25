@@ -25,8 +25,8 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
             return Result.Failure<Room>($"User with {userId} id does not exist");
         if (adminUser.IsAdmin)
             return Result.Failure<Room>("User is already admin");
+        
         adminUser.IsAdmin = true;
-        adminUser.RoomId = newRoomResult.Value.Id;
         await roomsRepository.Add(newRoomResult.Value.GetRoomEntity());
         await usersRepository.UpdateUser(adminUser);
         
@@ -44,12 +44,9 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
         var userEntity = await usersRepository.GetUserById(userId);
         if (userEntity is null)
             return Result.Failure<Room>($"User with {userId} id does not exist.");
-        if (userEntity.IsAdmin)
-            return Result.Failure<Room>($"User is already admin.");
 
         if (userEntity.RoomId is not null)
             return Result.Failure<Room>("User is already in room.");
-        
         
         userEntity.RoomId = roomId;
         await usersRepository.UpdateUser(userEntity);
