@@ -138,8 +138,7 @@
               "RelativeToolTip": "CodeClash.Tests\\IssueExtensions_Tests.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAEEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-24T10:20:14.627Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-24T10:20:14.627Z"
             },
             {
               "$type": "Document",
@@ -151,8 +150,7 @@
               "RelativeToolTip": "CodeClash.Tests\\JwtBearerExtensions_Tests.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAAFQAAABqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-24T10:24:56.82Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-24T10:24:56.82Z"
             },
             {
               "$type": "Document",
@@ -164,8 +162,7 @@
               "RelativeToolTip": "CodeClash.Tests\\PasswordHasher_Tests.cs",
               "ViewState": "AQIAAAIAAAAAAAAAAAAjwBEAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-23T18:44:11.325Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-23T18:44:11.325Z"
             },
             {
               "$type": "Document",
@@ -177,8 +174,7 @@
               "RelativeToolTip": "CodeClash.Tests\\RoomExtensions_Tests.cs",
               "ViewState": "AQIAADMAAAAAAAAAAAAYwEQAAAA3AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-24T10:51:18.958Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-24T10:51:18.958Z"
             },
             {
               "$type": "Document",
@@ -190,8 +186,7 @@
               "RelativeToolTip": "CodeClash.Tests\\UserExtensions_Tests.cs",
               "ViewState": "AQIAADgAAAAAAAAAAAAgwEEAAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-24T11:12:49.579Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-24T11:12:49.579Z"
             },
             {
               "$type": "Document",
@@ -201,7 +196,7 @@
               "RelativeDocumentMoniker": "CodeClash.Core\\Models\\Domain\\Issue.cs",
               "ToolTip": "D:\\CodeClash\\CodeClash\\CodeClash.Core\\Models\\Domain\\Issue.cs",
               "RelativeToolTip": "CodeClash.Core\\Models\\Domain\\Issue.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAsAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-24T10:11:10.39Z",
               "EditorCaption": ""
@@ -216,8 +211,7 @@
               "RelativeToolTip": "CodeClash.Tests\\EnterQuitRoomRequest_Tests.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAADkAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-24T09:42:10.431Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-24T09:42:10.431Z"
             },
             {
               "$type": "Document",
@@ -229,8 +223,7 @@
               "RelativeToolTip": "CodeClash.Tests\\CreateRoomRequest_Tests.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAFUAAABFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-24T07:43:29.234Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-24T07:43:29.234Z"
             },
             {
               "$type": "Document",
@@ -242,8 +235,7 @@
               "RelativeToolTip": "CodeClash.Tests\\CreateIssueRequest_Tests.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAAAoAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-24T10:10:11.316Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-24T10:10:11.316Z"
             },
             {
               "$type": "Document",
@@ -254,8 +246,7 @@
               "ToolTip": "D:\\CodeClash\\CodeClash\\CodeClash.Tests\\CodeClash.Tests.csproj",
               "RelativeToolTip": "CodeClash.Tests\\CodeClash.Tests.csproj",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-12-24T11:37:24.135Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-24T11:37:24.135Z"
             },
             {
               "$type": "Document",
@@ -267,8 +258,7 @@
               "RelativeToolTip": "CodeClash.Tests\\CodeClash.Tests.csproj",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAOAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-12-23T18:53:02.324Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-23T18:53:02.324Z"
             },
             {
               "$type": "Document",
@@ -280,8 +270,7 @@
               "RelativeToolTip": "CodeClash.Application\\Services\\RuntimeProjectExecutor.cs",
               "ViewState": "AQIAABYAAAAAAAAAAAAxwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-23T19:15:42.65Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-23T19:15:42.65Z"
             },
             {
               "$type": "Document",
@@ -293,8 +282,7 @@
               "RelativeToolTip": "CodeClash.Application\\Services\\RoomService.cs",
               "ViewState": "AQIAAAQAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-23T19:13:54.96Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-23T19:13:54.96Z"
             },
             {
               "$type": "Document",
@@ -306,8 +294,7 @@
               "RelativeToolTip": "CodeClash.Application\\Services\\AuthService.cs",
               "ViewState": "AQIAABQAAAAAAAAAAAAiwDEAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-23T19:09:55.717Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-23T19:09:55.717Z"
             },
             {
               "$type": "Document",
@@ -319,8 +306,7 @@
               "RelativeToolTip": "CodeClash.Application\\Services\\IssueService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-23T19:15:39.585Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-23T19:15:39.585Z"
             },
             {
               "$type": "Document",
@@ -332,8 +318,7 @@
               "RelativeToolTip": "CodeClash.Core\\Models\\Domain\\User.cs",
               "ViewState": "AQIAAAoAAAAAAAAAAAA5wCIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-23T19:21:30.085Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-23T19:21:30.085Z"
             },
             {
               "$type": "Document",
@@ -345,8 +330,7 @@
               "RelativeToolTip": "CodeClash.Core\\Models\\CompetitionRequests\\SolutionRequest.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-24T07:31:43.882Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-24T07:31:43.882Z"
             },
             {
               "$type": "Document",
@@ -358,8 +342,7 @@
               "RelativeToolTip": "CodeClash.Core\\Models\\Domain\\Room.cs",
               "ViewState": "AQIAAAYAAAAAAAAAAAAiwBwAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-24T11:00:03.199Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-24T11:00:03.199Z"
             },
             {
               "$type": "Document",
@@ -371,8 +354,7 @@
               "RelativeToolTip": "CodeClash.Application\\Extensions\\RoomExtensions.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-24T10:49:42.048Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-24T10:49:42.048Z"
             },
             {
               "$type": "Document",
@@ -384,8 +366,7 @@
               "RelativeToolTip": "CodeClash.Core\\Constants\\Constants.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-24T10:15:19.461Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-24T10:15:19.461Z"
             },
             {
               "$type": "Document",
@@ -397,8 +378,7 @@
               "RelativeToolTip": "CodeClash.Core\\Requests\\RoomsRequests\\EnterQuitRoomRequest.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-24T09:40:08.385Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-24T09:40:08.385Z"
             },
             {
               "$type": "Document",
@@ -410,8 +390,7 @@
               "RelativeToolTip": "CodeClash.Core\\Requests\\IssueRequest\\CreateIssueRequest.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-24T07:32:13.648Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-24T07:32:13.648Z"
             },
             {
               "$type": "Document",
@@ -423,8 +402,7 @@
               "RelativeToolTip": "CodeClash.Core\\Models\\CompetitionRequests\\SolutionResponse.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-24T07:31:49.864Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-24T07:31:49.864Z"
             },
             {
               "$type": "Document",
@@ -436,8 +414,7 @@
               "RelativeToolTip": "CodeClash.Core\\Models\\Domain\\Competition.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-24T07:31:59.428Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-24T07:31:59.428Z"
             },
             {
               "$type": "Document",
@@ -449,8 +426,7 @@
               "RelativeToolTip": "CodeClash.Application\\PasswordHasher.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-23T18:47:18.256Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-23T18:47:18.256Z"
             },
             {
               "$type": "Document",
@@ -462,8 +438,7 @@
               "RelativeToolTip": "CodeClash.UserSolutionTest\\CodeClash.UserSolutionTest.csproj",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-12-23T17:38:42.773Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-23T17:38:42.773Z"
             },
             {
               "$type": "Document",
@@ -475,8 +450,7 @@
               "RelativeToolTip": "CodeClash.UserSolutionTest\\SolutionTaskTests.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAADAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-23T17:38:00.433Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-23T17:38:00.433Z"
             }
           ]
         }
