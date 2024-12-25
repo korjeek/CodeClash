@@ -17,6 +17,8 @@ public class RoomHub(RoomService roomService,
     CompetitionService competitionService, 
     IssueService issueService) : Hub
 {
+    // TODO: добавить метод, что если ты отключился и ты Admin удаляем комнату и надо всез проинформаировать
+    
     public async Task<ApiResponse<RoomDTO>> CreateRoom(CreateRoomRequest request)
     {
         var userId = Context.User.GetUserIdFromAccessToken();
