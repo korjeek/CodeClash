@@ -11,6 +11,14 @@ namespace CodeClash.Application.Extensions;
 
 public static class JwtBearerExtensions
 {
+    public static IEnumerable<Claim> GetClaimsFromToken(this string token)
+    {
+        var tokenHandler = new JwtSecurityTokenHandler();
+        if (tokenHandler.CanReadToken(token)) 
+            return tokenHandler.ReadJwtToken(token).Claims;
+        return Enumerable.Empty<Claim>();
+    }
+    
     public static List<Claim> CreateClaims(this User user) =>
     [
         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),

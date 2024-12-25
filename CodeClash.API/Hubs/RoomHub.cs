@@ -96,19 +96,9 @@ public class RoomHub(RoomService roomService,
         return new ApiResponse<string>(true, resultString.Value, null);
     }
 
-    public async Task<ApiResponse<bool?>> CheckIsUserAdmin()
-    {
-        var userId = Context.User.GetUserIdFromAccessToken();
-        var isAdminResult = await roomService.IsUserAdmin(userId);
-        if (isAdminResult.IsFailure)
-            return new ApiResponse<bool?>(false, null, isAdminResult.Error);
-        return new ApiResponse<bool?>(true, isAdminResult.Value, null);
-    }
-
     private async Task AddUserToGroup(Guid roomId) => 
         await Groups.AddToGroupAsync(Context.UserIdentifier!, roomId.ToString());
     
-
     private async Task SendMessageToAllUsersInGroup<T>(Guid roomId,  T message, string methodName) =>
         await Clients.Group(roomId.ToString()).SendAsync(methodName, message);
     

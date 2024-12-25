@@ -1,10 +1,14 @@
-﻿using CodeClash.Application.Services;
+﻿using System.Security.Claims;
+using CodeClash.Application.Extensions;
+using CodeClash.Application.Services;
 using CodeClash.Core.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodeClash.API.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("rooms")]
 public class RoomController(RoomService roomService) : ControllerBase
 {
@@ -19,5 +23,16 @@ public class RoomController(RoomService roomService) : ControllerBase
             roomsResult.Value,
             null
         );
+    }
+    
+    [HttpGet("check-for-admin")]
+    public async Task<ApiResponse<bool?>> CheckUserIsAdmin()
+    {
+        Request.Cookies.TryGetValue("spooky-cookies", out string? cookie);
+        var userId = new Guid(cookie!.GetClaimsFromToken().First(c => c.Type == ClaimTypes.NameIdentifier).Value);
+        var isUserAdminResult = await roomService.IsUserAdmin(userId);
+        if (isUserAdminResult.IsFailure)
+            return new ApiResponse<bool?>(false, null, isUserAdminResult.Error);
+        return new ApiResponse<bool?>(true, isUserAdminResult.Value, null);
     }
 }
