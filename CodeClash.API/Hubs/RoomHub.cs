@@ -52,8 +52,10 @@ public class RoomHub(RoomService roomService,
         return new ApiResponse<string>(true, result.Value, null);
     }
     
-    public async Task<ApiResponse<string>> StartCompetition(Guid roomId, TimeOnly duration)
+    public async Task<ApiResponse<string>> StartCompetition(RoomDTO roomDto)
     {
+        var roomId = new Guid(roomDto.Id);
+        var duration = roomDto.Time;
         var userId = Context.User.GetUserIdFromAccessToken();
         var userIsAdmin = await competitionService.GetUserStatus(userId);
         if (userIsAdmin.IsFailure)
