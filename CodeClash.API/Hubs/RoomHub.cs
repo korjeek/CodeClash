@@ -27,7 +27,7 @@ public class RoomHub(RoomService roomService,
             return new ApiResponse<RoomDTO>(false, null, roomResult.Error);
         
         var room = roomResult.Value;
-        await Groups.AddToGroupAsync(Context.ConnectionId, room.Id.ToString());
+        await AddUserToGroup(room.Id);
         return new ApiResponse<RoomDTO>(true, room.GetRoomDTOFromRoom(), null);
     }
     
@@ -38,8 +38,8 @@ public class RoomHub(RoomService roomService,
         if (roomResult.IsFailure)
             return new ApiResponse<RoomDTO>(false, null, roomResult.Error);
         
-        await Clients.Group(roomId.ToString()).SendAsync("UserJoined", roomResult.Value.GetRoomDTOFromRoom());
-        await Groups.AddToGroupAsync(Context.ConnectionId, roomId.ToString());
+        await SendMessageToAllUsersInGroup(roomResult.Value.Id, roomResult.Value.GetRoomDTOFromRoom(), "UserJoined");
+        await AddUserToGroup(roomResult.Value.Id);
         return new ApiResponse<RoomDTO>(true, roomResult.Value.GetRoomDTOFromRoom(), null);
     }
     
@@ -71,7 +71,7 @@ public class RoomHub(RoomService roomService,
         if (roomEntityResult.IsFailure)
             return new ApiResponse<string>(false, null, roomEntityResult.Error);
 
-        await Clients.Group(roomId.ToString()).SendAsync("CompetitionStarted", $"/problem/{roomEntityResult.Value.IssueId}");
+        await SendMessageToAllUsersInGroup(roomId,$"/problem/{roomEntityResult.Value.IssueId}", "CompetitionStarted");
         _ = competitionService.SyncTimers(Clients.Group(roomId.ToString()), duration, roomId);
         
         return new ApiResponse<string>(true, "Competition is started", null);
@@ -93,7 +93,6 @@ public class RoomHub(RoomService roomService,
         var resultString = await testUserSolutionService.CheckSolution(roomId, solution, issueName);
         if (resultString.IsFailure)
             return new ApiResponse<string>(false, null, resultString.Error);
-        
         return new ApiResponse<string>(true, resultString.Value, null);
     }
 
@@ -105,4 +104,12 @@ public class RoomHub(RoomService roomService,
             return new ApiResponse<bool?>(false, null, isAdminResult.Error);
         return new ApiResponse<bool?>(true, isAdminResult.Value, null);
     }
+
+    private async Task AddUserToGroup(Guid roomId) => 
+        await Groups.AddToGroupAsync(Context.UserIdentifier!, roomId.ToString());
+    
+
+    private async Task SendMessageToAllUsersInGroup<T>(Guid roomId,  T message, string methodName) =>
+        await Clients.Group(roomId.ToString()).SendAsync(methodName, message);
+    
 }

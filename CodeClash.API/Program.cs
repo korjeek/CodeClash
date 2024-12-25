@@ -20,7 +20,7 @@ services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
     
 services.AddSignalR();
-services.AddScoped<IUserIdProvider, UserConnectionIdProvider>();
+services.AddSingleton<IUserIdProvider, UserConnectionIdProvider>();
 
 services.AddDbContext<ApplicationDbContext>();
 //TODO Сделать, чтобы добавлялись только интерфесы с нужными методами. Интерфейсы реализовываются через Services, которые можно менять
