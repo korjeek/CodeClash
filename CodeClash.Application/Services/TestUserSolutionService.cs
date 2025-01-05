@@ -28,7 +28,7 @@ public class TestUserSolutionService(RoomsRepository repository)
         ["LongestCommonPrefix"] = "../TestSources/LongestCommonPrefix/SolutionTaskTests.cs",
         ["ValidParentheses"] = "../TestSources/ValidParentheses/SolutionTaskTests.cs",
         ["Palindrome"] = "../TestSources/Palindrome/SolutionTaskTests.cs",
-        ["MergeTwoSortedLists"] = "../TestSources/MergeTwoSortedLists/SolutionTaskTests.cs",
+        ["MergeTwoSortedLists"] = "../TestSources/MergeTwoSortedLists/SolutionTaskTests.cs"
     };
     
     public async Task<Result<string>> CheckSolution(Guid roomId, string userSolution, string issueName)
