@@ -6,29 +6,29 @@ using Microsoft.Build.Locator;
 
 namespace CodeClash.Application.Services;
 
-public class TestUserSolutionService(RoomsRepository repository)
+public class TestUserSolutionService(RoomsRepository roomsRepository)
 {
     public readonly ConcurrentDictionary<string, string> startCodeLocations = new()
     {
-        ["FindSum"] = "../TestSources/FindSum/SolutionTask.cs",
-        ["RomanToInteger"] = "../TestSources/RomanToInteger/SolutionTask.cs",
-        ["DeleteDuplicates"] = "../TestSources/DeleteDuplicates/SolutionTask.cs",
-        ["LongestCommonPrefix"] = "../TestSources/LongestCommonPrefix/SolutionTask.cs",
-        ["ValidParentheses"] = "../TestSources/ValidParentheses/SolutionTask.cs",
+        ["Find sum"] = "../TestSources/FindSum/SolutionTask.cs",
+        ["Roman to integer"] = "../TestSources/RomanToInteger/SolutionTask.cs",
+        ["Delete duplicates"] = "../TestSources/DeleteDuplicates/SolutionTask.cs",
+        ["Longest common prefix"] = "../TestSources/LongestCommonPrefix/SolutionTask.cs",
+        ["Valid parentheses"] = "../TestSources/ValidParentheses/SolutionTask.cs",
         ["Palindrome"] = "../TestSources/Palindrome/SolutionTask.cs",
-        ["MergeTwoSortedLists"] = "../TestSources/MergeTwoSortedLists/SolutionTask.cs",
+        ["Merge two sorted lists"] = "../TestSources/MergeTwoSortedLists/SolutionTask.cs",
     };
 
     
     private readonly Dictionary<string, string> issueTestsLocations = new()
     {
-        ["FindSum"] = "../TestSources/FindSum/SolutionTaskTests.cs",
-        ["RomanToInteger"] = "../TestSources/RomanToInteger/SolutionTaskTests.cs",
-        ["DeleteDuplicates"] = "../TestSources/DeleteDuplicates/SolutionTaskTests.cs",
-        ["LongestCommonPrefix"] = "../TestSources/LongestCommonPrefix/SolutionTaskTests.cs",
-        ["ValidParentheses"] = "../TestSources/ValidParentheses/SolutionTaskTests.cs",
+        ["Find sum"] = "../TestSources/FindSum/SolutionTaskTests.cs",
+        ["Roman to integer"] = "../TestSources/RomanToInteger/SolutionTaskTests.cs",
+        ["Delete duplicates"] = "../TestSources/DeleteDuplicates/SolutionTaskTests.cs",
+        ["Longest common prefix"] = "../TestSources/LongestCommonPrefix/SolutionTaskTests.cs",
+        ["Valid parentheses"] = "../TestSources/ValidParentheses/SolutionTaskTests.cs",
         ["Palindrome"] = "../TestSources/Palindrome/SolutionTaskTests.cs",
-        ["MergeTwoSortedLists"] = "../TestSources/MergeTwoSortedLists/SolutionTaskTests.cs"
+        ["Merge two sorted lists"] = "../TestSources/MergeTwoSortedLists/SolutionTaskTests.cs"
     };
     
     public async Task<Result<string>> CheckSolution(Guid roomId, string userSolution, string issueName)
@@ -36,7 +36,7 @@ public class TestUserSolutionService(RoomsRepository repository)
         if (!MSBuildLocator.IsRegistered)
             MSBuildLocator.RegisterDefaults();
 
-        var result = await repository.GetRoomById(roomId);;
+        var result = await roomsRepository.GetRoomById(roomId);;
         if (result is null)
             return Result.Failure<string>("Room does not exist.");
         if (result.Status != RoomStatus.CompetitionInProgress)

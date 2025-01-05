@@ -12,6 +12,7 @@ public static class RoomExtensions
         Id = room.Id.ToString(),
         Name = room.Name,
         Time = room.Time,
+        IssueName = room.Issue.Name,
         Users = room.Participants.Select(u => u.GetUserDTO()).ToList()
     };
 
