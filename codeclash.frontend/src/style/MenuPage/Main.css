@@ -13,6 +13,7 @@
     flex-direction: column;
     gap: 5vh;
     text-align: center;
+    align-items: center;
     min-height: 79vh;
     position: relative;
     margin: 10.5vh;

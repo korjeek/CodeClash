@@ -1,26 +1,24 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {CreateRoomData} from '../services/roomService.ts';
 import { Room } from '../interfaces/roomInterfaces.ts'
+import SignalRService from "./SignalRService.ts";
+import {useNavigate} from "react-router-dom";
+import BaseNavBar from "./NavBars/BaseNavBar.tsx";
+import { motion } from "framer-motion";
+import {getProblems} from "../services/ProblemService.ts";
+import {Issue} from "../interfaces/issueInterfaces.ts";
 import '../style/Default/BaseNavBar.css'
 import '../style/CreateLobby/Main.css'
 import '../style/CreateLobby/Inputs.css'
 import '../style/CreateLobby/Buttons.css'
 import '../style/CreateLobby/ProblemsList.css'
-import {RoomServiceContext, useRoomService} from "./RoomServiceContext.tsx";
-import {useSignalR} from "./SignalRContext.tsx";
-import SignalRService from "./SignalRService.ts";
-import {useNavigate} from "react-router-dom";
-import BaseNavBar from "./NavBars/BaseNavBar.tsx";
-import { motion } from "framer-motion";
 
-const minutes = ["5 min", "10 min", "30 min", "60 min"]
-const problems = ["Two Sum", "More than one!", "Find most massive subarray", "I like this one!", "Binary Search"]
+const minutes = ["5", "10", "30", "60"]
 
 const CreateRoomPage: React.FC = () => {
-    const [time, setTime] = useState<string>('');
-    const [issueId, setIssueId] = useState<string>('');
-    const [roomKey, setRoomKey] = useState<string | null>(null);
-    const [roomName, setName] = useState('');
+    const [isSlided, setIsSlided] = useState(false);
+    const [problems, setProblems] = useState<Issue[]>([]);
+    const [roomName, setRoomName] = useState('');
     const [activeMin, setActiveMin] = useState(minutes[0]);
     const [activeProblem, setActiveProblem] = useState(null);
     const [inputValue, setInputValue] = useState<string>('');
@@ -29,37 +27,33 @@ const CreateRoomPage: React.FC = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        async function fetchRooms() {
-            //TODO: необходимо получать список существующих задач
+        async function getIssues() {
+            const problems = await getProblems()
+            setProblems(problems)
         }
 
-        fetchRooms();
+        getIssues();
     }, [])
 
-    const handleCreateRoom = async (e: React.FormEvent) => {
-        e.preventDefault();
-
+    const createRoom = async () => {
         try {
-            console.log({roomName, time, issueId})
-            const room = {roomName, time, issueId}
+            const room = {roomName, time: `00:${activeMin}:00`, issueId: activeProblem!}
             await signalR.startConnection()
             const createdRoom = await signalR.invoke<CreateRoomData, Room>("CreateRoom", room);
+            console.log(createdRoom)
             if (createdRoom)
-                await joinRoom(createdRoom.id)
+                navigate(`/lobby?roomId=${createdRoom.id}`);
         }
         catch {
             console.error('Failed to create room. Please try again.');
         }
     };
 
-    const joinRoom = async (roomId: string) => navigate(`/lobby?roomId=${roomId}`);
-    const [isSlided, setIsSlided] = useState(false);
-    const handleSlide = () => {
-        setIsSlided(!isSlided);
-    };
+    const handleSlide = () => setIsSlided(!isSlided);
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(event.target.value);
-    };
+        setRoomName(event.target.value);
+    }
 
     return (
         <div className="menu-page">
@@ -69,7 +63,7 @@ const CreateRoomPage: React.FC = () => {
                 animate={{y: isSlided ? '-100%' : 0}}
                 transition={{duration: 0.5}}
                 className="content-wrapper">
-                <form onSubmit={handleCreateRoom} className="grid-create-container">
+                <div className="grid-create-container">
                     <div className="step-container step-1">
                         <div className="step-description">
                             <h1>STEP 1</h1>
@@ -118,11 +112,12 @@ const CreateRoomPage: React.FC = () => {
                             </button>
                         </div>
                     </div>
-                </form>
+                </div>
                 <button
                     className={selectedTask && (inputValue.trim() !== '' ? 'lightgreen' : '')
                         ? "active-acc-create-room-btn" : "acc-create-room-btn"}
-                    disabled={selectedTask}
+                    disabled={!selectedTask || !inputValue.trim()}
+                    onClick={createRoom}
                 >
                     Create Room</button>
             </motion.div>
@@ -137,12 +132,12 @@ const CreateRoomPage: React.FC = () => {
                     <div>
                         {problems.map((problem) => (
                             <TaskButton
-                                text={problem}
-                                active={activeProblem === problem}
+                                issue={problem}
+                                active={activeProblem === problem.id}
                                 setActive={setActiveProblem}
                                 setTask={setSelectedTask}
                                 handleSlide={handleSlide}
-                                key={problem}
+                                key={problem.id}
                             />
                         ))}
                     </div>
@@ -159,18 +154,18 @@ const MinuteButton = ({text, active, setActive}) => {
         <button
             onClick={() => setActive(text)}
             className={active ? "active-time-choose-button" : "time-choose-button"}
-        >{text}
+        >{text} min
         </button>
     )
 }
 
-const TaskButton = ({text, active, setActive, setTask, handleSlide}) => {
+const TaskButton = ({issue, active, setActive, setTask, handleSlide}) => {
     return (
         <div className="problem-item">
-            <div className="problem-item-description">{text}</div>
+            <div className="problem-item-description">{issue.name}</div>
             <button
                 onClick={() => {
-                    setActive(text)
+                    setActive(issue.id)
                     handleSlide()
                     setTask(true)
                 }}

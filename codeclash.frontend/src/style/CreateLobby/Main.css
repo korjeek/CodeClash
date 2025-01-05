@@ -1,6 +1,7 @@
 .grid-create-container{
     display: grid;
     gap: 5rem;
+    width: 100%;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas:
         'step-1 step-2 step-3';
