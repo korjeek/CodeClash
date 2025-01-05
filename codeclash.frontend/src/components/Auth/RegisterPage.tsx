@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../../style/HomeAndAuthDefault/BackGround.css'
+import '../../style/Default/BackGround.css'
 import '../../style/AuthPage/AuthField.css'
 import '../../style/AuthPage/Input.css'
 import { register } from '../../services/authService.ts';

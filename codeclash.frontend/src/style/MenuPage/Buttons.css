@@ -1,18 +1,39 @@
 .item-1 .create-room-btn{
     width: 100%;
     height: 100%;
-    border: 0.5vh solid #6A00FF;
+    border: 0.3vh solid #5EFC8D;
     border-radius: 3vh;
     padding: 7px 40px;
-    background: #000;
-    color: #6A00FF;
+    background: #0F0F0F;
+    color: #5EFC8D;
     font-weight: 600;
     font-size: 1.25rem;
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 .item-1 .create-room-btn:hover{
-    border: 0.5vh solid #6A00FF;
-    background-color: #6A00FF;
+    border: 0.3vh solid #5EFC8D;
+    background-color: #5EFC8D;
+    color: black;
+}
+
+.item-5 .pagination-container{
+    display: flex;
+    height: 100%;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.page-button{
+    border: 0.3vh solid #A64AFF;
+    border-radius: 3vh;
+    color: #A64AFF;
+    background-color: #070707;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.page-button:hover{
+    border: 0.3vh solid #A64AFF;
+    background-color: #A64AFF;
     color: white;
 }

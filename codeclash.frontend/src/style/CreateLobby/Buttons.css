@@ -1,0 +1,61 @@
+.time-choose-button{
+    border-radius: 3vh;
+    background-color: #0F0F0F;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border 0.3s ease-in-out ;
+    color: #DA4167;
+    border: 0.3vh solid #DA4167;
+}
+
+.time-choose-button:hover{
+    background-color: #DA4167;
+    border: 0.3vh solid #DA4167;
+    color: black;
+}
+
+.active-time-choose-button{
+    border-radius: 3vh;
+    background-color: #5EFC8D;
+    border: 0.3vh solid #5EFC8D;
+    color: black;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border 0.3s ease-in-out;
+}
+
+.active-time-choose-button:hover{
+    border-radius: 3vh;
+    background-color: #5EFC8D;
+    border: 0.3vh solid #5EFC8D;
+    color: black;
+}
+
+.acc-create-room-btn{
+    border-radius: 3vh;
+    background-color: #0F0F0F;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border 0.3s ease-in-out ;
+    color: #616161;
+    border: 0.3vh solid #616161;
+    font-weight: bold;
+    font-size: 2vh;
+    margin: 0 80vh;
+}
+
+.acc-create-room-btn:hover{
+    color: #616161;
+    border: 0.3vh solid #616161;
+}
+
+.active-acc-create-room-btn{
+    margin: 0 80vh;
+    font-weight: bold;
+    font-size: 2vh;
+    border-radius: 3vh;
+    background-color: #0F0F0F;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border 0.3s ease-in-out ;
+    color: #5EFC8D;
+    border: 0.3vh solid #5EFC8D;
+}
+
+.active-acc-create-room-btn:hover{
+    background-color: #5EFC8D;
+    border: 0.3vh solid #5EFC8D;
+    color: black;
+}

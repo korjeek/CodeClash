@@ -1,18 +1,22 @@
 .menu-page{
     position: relative;
-    background: black;
+    background: #0F0F0F;
     display: flex;
+    flex-direction: column;
     overflow: hidden;
-    max-height: 100vh;
+    height: 100vh;
     animation: fadeIn 1s ease-in-out;
 }
 
 .content-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 5vh;
+    text-align: center;
     min-height: 79vh;
     position: relative;
     margin: 10.5vh;
-    padding: 5vh;
-    width: 100%;
+    padding: 10vh 3vh;
     height: 100%;
 }
 
@@ -20,11 +24,12 @@
     display: grid;
     gap: 1rem;
     min-height: 69vh;
-    grid-template-rows: 1fr 10fr;
-    grid-template-columns: 1fr 3fr 2fr;
+    grid-template-rows: 1.2fr 10fr 1fr;
+    grid-template-columns: 1fr 3fr 3fr;
     grid-template-areas:
         'creator finder info'
-        'main main info';
+        'main main info'
+        'empty-1 pagination empty-2';
     justify-items: center;
     align-items: center;
 }
@@ -48,29 +53,34 @@
 }
 
 .item-4{
-    grid-area: main;
     width: 100%;
     height: 100%;
+    grid-area: main;
+}
+
+.item-5{
+    width: 100%;
+    height: 100%;
+    grid-area: pagination;
 }
 
 .item-3 .content-container{
-    height: 100%;
-    border: 0.5vh solid transparent;
+    height: calc(100% - 0.75vh);
+    border: 0.3vh solid transparent;
     border-radius: 3vh;
-    background-image: linear-gradient(#1A1A1A, #1A1A1A), linear-gradient(90deg, #A64AFF, #FFB1FF);
+    background-image: linear-gradient(#0F0F0F, #0F0F0F), linear-gradient(90deg, #A64AFF, #FFB1FF);
     background-origin: border-box;
     background-clip: padding-box, border-box;
 }
 
 .item-4 .rooms-container{
-    height: 100%;
-    border: 0.5vh solid transparent;
+    height: calc(100% - 0.75vh);
+    border: 0.3vh solid transparent;
     border-radius: 3vh;
-    background-image: linear-gradient(black, black), linear-gradient(90deg, #6A00FF, #A64AFF);
+    background-image: linear-gradient(#0F0F0F, #0F0F0F), linear-gradient(90deg, #6A00FF, #A64AFF);
     background-origin: border-box;
     background-clip: padding-box, border-box;
     display: grid;
-    grid-template-rows: repeat(8, 1fr);
+    grid-template-rows: repeat(6, 1fr);
     gap: .5rem;
-    padding: .5rem .5rem;
 }

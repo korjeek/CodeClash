@@ -1,0 +1,70 @@
+.grid-create-container{
+    display: grid;
+    gap: 5rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas:
+        'step-1 step-2 step-3';
+    justify-items: center;
+    align-items: center;
+}
+
+.step-container{
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+    width: 100%;
+    height: 100%;
+}
+
+.spacer{
+    margin: 0 8vh;
+    border-bottom: 0.3vh solid transparent;
+    background-image: linear-gradient(#1A1A1A, #1A1A1A), linear-gradient(90deg, #6A00FF 0%, #A64AFF 50%, #FFB1FF 100%);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+
+.step-1{
+    grid-area: step-1;
+    border: 0.3vh solid transparent;
+    border-radius: 3vh;
+    background-image: linear-gradient(#0F0F0F, #0F0F0F), linear-gradient(90deg, #6A00FF, #A64AFF);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+
+.step-2{
+    grid-area: step-2;
+    border: 0.3vh solid #A64AFF;
+    border-radius: 3vh;
+}
+
+.step-3{
+    grid-area: step-3;
+    border: 0.3vh solid transparent;
+    border-radius: 3vh;
+    background-image: linear-gradient(#0F0F0F, #0F0F0F), linear-gradient(90deg, #A64AFF, #FFB1FF);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+
+.step-description{
+    display: flex;
+    flex-direction: column;
+}
+
+.description{
+    margin: 0 5vh;
+}
+
+.time-choose{
+    margin-bottom: 3vh;
+    display: flex;
+    gap: 2vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.scrollable {
+    overflow-y: auto;
+}

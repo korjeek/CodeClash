@@ -1,6 +1,6 @@
 import React from 'react';
-import HomeNavBar from "../HomeNavBar.tsx";
-import '../../style/HomeAndAuthDefault/BackGround.css'
+import AuthNavBar from "../NavBars/AuthNavBar.tsx";
+import '../../style/Default/BackGround.css'
 import '../../style/AuthPage/Main.css'
 import '../../style/AuthPage/AuthField.css'
 import '../../style/AuthPage/Input.css'
@@ -23,7 +23,7 @@ const AuthPage: React.FC<AuthPageProps> = ({ AuthPageElement }) => {
             </div>
             <div className="main-container">
                 <div className="glass-effect"/>
-                <HomeNavBar/>
+                <AuthNavBar/>
                 <main className="auth-main-wrapper">
                     <div className="auth-container">
                         <div className="auth-section">

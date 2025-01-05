@@ -1,0 +1,32 @@
+.lobby-btn{
+    background: #0F0F0F;
+    border-radius: 3vh;
+    padding: 7px 40px;
+    font-weight: 600;
+    font-size: 1.25rem;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.lobby-btn:hover{
+    color: black;
+}
+
+.start-competition-btn{
+    border: 0.3vh solid #5EFC8D;
+    color: #5EFC8D;
+}
+
+.start-competition-btn:hover{
+    border: 0.3vh solid #5EFC8D;
+    background-color: #5EFC8D;
+}
+
+.quit-room-btn{
+    border: 0.3vh solid #DA4167;
+    color: #DA4167;
+}
+
+.quit-room-btn:hover{
+    border: 0.3vh solid #DA4167;
+    background-color: #DA4167;
+}

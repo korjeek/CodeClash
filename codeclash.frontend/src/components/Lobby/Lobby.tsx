@@ -7,6 +7,9 @@ import {HubConnectionState} from "@microsoft/signalr";
 import {useSignalR} from "../SignalRContext.tsx";
 import SignalRService from "../SignalRService.ts";
 import {checkForAdmin} from "../RoomService.ts";
+import BaseNavBar from "../NavBars/BaseNavBar.tsx";
+import '../../style/Lobby/Buttons.css';
+import '../../style/Lobby/Main.css';
 
 export default function Lobby() {
     const location = useLocation();
@@ -47,11 +50,18 @@ export default function Lobby() {
             console.log("Can't start competition. Room doesn't exist.")
     }
 
+    console.log(room)
     return (
-        <div style={{padding: '20px'}}>
-            <h1>Lobby</h1>
-            <button style={{padding: '10px 20px'}} onClick={quitRoom}>Quit Room</button>
-            {isAdmin && <button style={{padding: '10px 20px'}} onClick={startCompetition}>Start Competition</button>}
+        <div className="menu-page">
+            <BaseNavBar/>
+            <div className="content-wrapper">
+                <h1>Lobby</h1>
+                <div className="btn-container">
+                    <button className="lobby-btn quit-room-btn" onClick={quitRoom}>Quit Room</button>
+                    {isAdmin &&
+                        <button className="lobby-btn start-competition-btn" onClick={startCompetition}>Start Competition</button>}
+                </div>
+            </div>
         </div>
     );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import '../style/HomePage/Main.css'
-import '../style/HomeAndAuthDefault/BackGround.css'
-import HomeNavBar from "./HomeNavBar.tsx";
+import '../style/Default/BackGround.css'
+import AuthNavBar from "./NavBars/AuthNavBar.tsx";
 
 
 export default function HomePage() {
@@ -9,7 +9,7 @@ export default function HomePage() {
 
     return (
         <div className="home-page">
-            <HomeNavBar/>
+            <AuthNavBar/>
             <main className="home-main-wrapper">
                 <header className="section_header position-relative">
                     <div className="text-align-center">

@@ -1,0 +1,29 @@
+.step-container .input-wrapper{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    margin: 0 5vh;
+    gap: 1vh;
+    border: 0.3vh solid transparent;
+    background-color: #1A1A1A;
+    border-radius: 3vh;
+}
+
+.step-container .input-wrapper input{
+    padding: .1rem 1rem;
+    color: white;
+    font-size: 1.3rem;
+    line-height: 1;
+    outline: none;
+    width: calc(100% - 1rem - 1vh);
+    height: 100%;
+    border: 0.3vh solid #DA4167;
+    background-color: #1A1A1A;
+    border-radius: 3vh;
+    background-size: 200% 100%;
+    transition: border .3s ease-in-out;
+}
+
+.step-container .input-wrapper input:not(:placeholder-shown){
+    border: 0.3vh solid #5EFC8D;
+}

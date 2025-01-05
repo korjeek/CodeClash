@@ -3,19 +3,27 @@ import '../../style/MenuPage/Main.css'
 import '../../style/MenuPage/Input.css'
 import '../../style/MenuPage/Buttons.css'
 import '../../style/MenuPage/Rooms.css'
+import '../../style/Default/AuthNavBar.css'
+import '../../style/Default/BaseNavBar.css'
 import {Room} from "../../interfaces/roomInterfaces.ts";
 import {getRoomsList} from "../../services/roomService.ts";
 import {useNavigate} from "react-router-dom";
+import BaseNavBar from "../NavBars/BaseNavBar.tsx";
 
 
 export default function Menu() {
     const [rooms, setRooms] = useState<Room[]>([]);
+    const [pages, setPages] = useState<number[]>([1]);
+    const [search, setSearch] = useState<string>('');
+    const [currentPage, setCurrentPage] = useState<number>(1);
     const navigate = useNavigate();
 
     useEffect(() => {
         async function fetchRooms() {
             const roomsList = await getRoomsList();
+            const paginationRange = await getPaginationRange(currentPage, Math.ceil(roomsList.length / 6));
             setRooms(roomsList);
+            setPages(paginationRange);
         }
 
         fetchRooms();
@@ -26,7 +34,7 @@ export default function Menu() {
 
     return (
         <div className="menu-page">
-            <div className="menu nav-bar"></div>
+            <BaseNavBar/>
             <div className="content-wrapper">
                 <div className="grid-container">
                     <div className="item item-1">
@@ -38,7 +46,8 @@ export default function Menu() {
                                 type="text"
                                 name="room-id"
                                 id="room-id"
-                                placeholder="Find by ID"
+                                placeholder="Find room by id or name"
+                                onChange={(e) => setSearch(e.target.value)}
                             />
                         </div>
                     </div>
@@ -47,11 +56,21 @@ export default function Menu() {
                     </div>
                     <div className="item item-4">
                         <div className="rooms-container">
-                            {rooms.map((room) => (
+                            {rooms.filter((room) => searchRoom(room, search)).map((room) => (
                                 <button className="room-item" key={room.id} onClick={() => joinRoom(room.id)}>
                                     <div>{room.id}</div>
                                     <div style={{"flex": "right"}}>Name: {room.name}</div>
                                     <div style={{"flex": "right"}}>People: {room.users?.length ?? 0}</div>
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="item item-5">
+                        <div className="pagination-container">
+                            {pages.map((page) => (
+                                <button className="page-button" key={page} onClick={
+                                    () => setCurrentPage(page)}>
+                                    {page}
                                 </button>
                             ))}
                         </div>
@@ -61,6 +80,25 @@ export default function Menu() {
         </div>
     )
 };
+
+async function getPaginationRange(currentPage: number, totalPages: number){
+    let startPage = Math.max(currentPage - 2, 1);
+    let endPage = Math.min(currentPage + 2, totalPages);
+
+    if (startPage === 1) {
+        endPage = Math.min(5, totalPages);
+    }
+
+    if (endPage === totalPages) {
+        startPage = Math.max(totalPages - 4, 1);
+    }
+
+    return Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
+}
+
+function searchRoom(room: Room, search: string){
+    return search.toLowerCase() === '' ? room : room.name.toLowerCase().includes(search)
+}
 
 
 
