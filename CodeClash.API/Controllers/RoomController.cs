@@ -35,4 +35,15 @@ public class RoomController(RoomService roomService) : ControllerBase
             return new ApiResponse<bool?>(false, null, isUserAdminResult.Error);
         return new ApiResponse<bool?>(true, isUserAdminResult.Value, null);
     }
+
+    [HttpGet("get-room-info")]
+    public async Task<ApiResponse<RoomDTO>> GetRoomInfo()
+    {
+        Request.Cookies.TryGetValue("spooky-cookies", out string? cookie);
+        var userId = new Guid(cookie!.GetClaimsFromToken().First(c => c.Type == ClaimTypes.NameIdentifier).Value);
+        var roomResult = await roomService.GetUserRoom(userId);
+        if (roomResult.IsFailure)
+            return new ApiResponse<RoomDTO>(false, null, roomResult.Error);
+        return new ApiResponse<RoomDTO>(true, roomResult.Value.GetRoomDTOFromRoom(), null);
+    }
 }

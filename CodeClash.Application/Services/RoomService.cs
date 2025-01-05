@@ -1,4 +1,5 @@
-﻿using CodeClash.Application.Extensions;
+﻿using System.Reflection;
+using CodeClash.Application.Extensions;
 using CodeClash.Core.Models.Domain;
 using CodeClash.Core.Models.DTOs;
 using CodeClash.Persistence.Entities;
@@ -97,5 +98,28 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
         if (userEntity is null)
             return Result.Failure<bool>($"User with {userId} does not exist.");
         return Result.Success(userEntity.IsAdmin);
+    }
+    
+    public async Task<Result<Room>> GetUserRoom(Guid userId)
+    {
+        var userEntity = await usersRepository.GetUserById(userId);
+        if (userEntity is null)
+            return Result.Failure<Room>("User does not exist.");
+        if (!userEntity.RoomId.HasValue)
+            return Result.Failure<Room>("User is not in room.");
+        
+        var roomEntity = await roomsRepository.GetRoomById(userEntity.RoomId.Value);
+        if (roomEntity is null)
+            return Result.Failure<Room>("Room does not exist.");
+        
+        var issue = (await issuesRepository.GetIssueById(roomEntity.IssueId))!.GetIssueFromEntity();
+        var room = roomEntity.GetRoomFromEntity(issue);
+
+        var participants = (await roomsRepository.GetRoomUsers(userEntity.RoomId.Value))
+            .Select(u => u.GetUserFromEntity())
+            .ToList();
+        room.SetParticipants(participants);
+        
+        return Result.Success(room);
     }
 }
