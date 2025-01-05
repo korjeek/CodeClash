@@ -5,3 +5,29 @@
     justify-content: center;
     gap: 5vh;
 }
+
+.users-container{
+    padding: 1vh 0;
+    height: 30vh;
+    width: 50vh;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    border: 0.3vh solid transparent;
+    border-radius: 3vh;
+    background-image: linear-gradient(#0F0F0F, #0F0F0F), linear-gradient(90deg, #6A00FF, #A64AFF, #FFB1FF);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+
+.user-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #1A1A1A;
+    border: .3vh solid #1E1E1E;
+    border-radius: 3vh;
+    padding: 1vh 5vh;
+    margin: .5vh 1vh;
+    font-weight: bold;
+}

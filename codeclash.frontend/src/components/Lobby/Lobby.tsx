@@ -1,12 +1,8 @@
-import React, {useContext, useEffect, useMemo, useState} from 'react';
-import {getRoomsList, RoomMethods, RoomService, StartCompetitionData} from "../../services/roomService.ts";
+import React, {useEffect, useMemo, useState} from 'react';
 import {useLocation, useNavigate} from "react-router-dom";
 import {Room} from "../../interfaces/roomInterfaces.ts";
-import {RoomServiceContext, useRoomService} from "../RoomServiceContext.tsx";
-import {HubConnectionState} from "@microsoft/signalr";
-import {useSignalR} from "../SignalRContext.tsx";
 import SignalRService from "../SignalRService.ts";
-import {checkForAdmin} from "../RoomService.ts";
+import {checkForAdmin, getRoom} from "../RoomService.ts";
 import BaseNavBar from "../NavBars/BaseNavBar.tsx";
 import '../../style/Lobby/Buttons.css';
 import '../../style/Lobby/Main.css';
@@ -28,7 +24,8 @@ export default function Lobby() {
 
         const connectToRoom = async () => {
             await signalR.startConnection();
-            const room = await signalR.invoke<string, Room>("JoinRoom", roomId)
+            await signalR.invoke<string, Room>("JoinRoom", roomId)
+            const room = await getRoom()
             setRoom(room)
         };
 
@@ -50,12 +47,20 @@ export default function Lobby() {
             console.log("Can't start competition. Room doesn't exist.")
     }
 
-    console.log(room)
+    if (!room)
+        return null;
+
     return (
         <div className="menu-page">
             <BaseNavBar/>
             <div className="content-wrapper">
-                <h1>Lobby</h1>
+                <h1>{room.name} lobby</h1>
+                <h3>Competitive time: {room.time.split(':')[1]} min</h3>
+                <div className="users-container">
+                    {room.users.map((user) => (
+                        <div key={user.email} className="user-item">{user.name}</div>
+                    ))}
+                </div>
                 <div className="btn-container">
                     <button className="lobby-btn quit-room-btn" onClick={quitRoom}>Quit Room</button>
                     {isAdmin &&
