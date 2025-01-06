@@ -33,6 +33,7 @@ services.AddScoped<RoomService>();
 services.AddScoped<IssueService>();
 services.AddScoped<TestUserSolutionService>();
 services.AddScoped<CompetitionService>();
+services.AddScoped<UserService>();
 
 services.AddScoped<UsersRepository>();
 services.AddScoped<RoomsRepository>();
@@ -74,6 +75,6 @@ app.UseCookiePolicy(new CookiePolicyOptions
 });
 
 app.MapControllers();
-app.MapHub<RoomHub>("/rooms"); // как сделать для разных комнат?
+app.MapHub<RoomHub>("/rooms");
 
 app.Run();

@@ -15,8 +15,18 @@ namespace CodeClash.API.Hubs;
 public class RoomHub(RoomService roomService, 
     TestUserSolutionService testUserSolutionService, 
     CompetitionService competitionService, 
-    IssueService issueService) : Hub
+    IssueService issueService,
+    UserService userService) : Hub
 {
+    public override Task OnConnectedAsync()
+    {
+        var userId = new Guid(Context.UserIdentifier!);
+        var roomId = userService.GetUserRoomId(userId).Result;
+        if (roomId.HasValue)
+            AddUserToGroup(roomId.Value).Wait();
+        return base.OnConnectedAsync();
+    }
+
     // TODO: добавить метод, что если ты отключился и ты Admin удаляем комнату и надо всез проинформаировать
     
     public async Task<ApiResponse<RoomDTO>> CreateRoom(CreateRoomRequest request)
@@ -72,7 +82,9 @@ public class RoomHub(RoomService roomService,
         var roomEntityResult = await competitionService.UpdateRoomStatus(roomId, RoomStatus.CompetitionInProgress);
         if (roomEntityResult.IsFailure)
             return new ApiResponse<string>(false, null, roomEntityResult.Error);
-
+        
+        Console.WriteLine(Clients.Groups(roomId.ToString()));
+        
         await SendMessageToAllUsersInGroup(roomId,$"/problem/{roomEntityResult.Value.IssueId}", "CompetitionStarted");
         _ = competitionService.SyncTimers(Clients.Group(roomId.ToString()), duration, roomId);
         
