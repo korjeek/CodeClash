@@ -111,7 +111,7 @@ public class RoomHub(RoomService roomService,
     }
 
     private async Task AddUserToGroup(Guid roomId) => 
-        await Groups.AddToGroupAsync(Context.UserIdentifier!, roomId.ToString());
+        await Groups.AddToGroupAsync(Context.ConnectionId, roomId.ToString());
     
     private async Task SendMessageToAllUsersInGroup<T>(Guid roomId,  T message, string methodName) =>
         await Clients.Group(roomId.ToString()).SendAsync(methodName, message);
