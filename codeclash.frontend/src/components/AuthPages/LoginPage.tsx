@@ -2,17 +2,19 @@ import React, {useState} from 'react';
 import '../../style/Default/BackGround.css'
 import '../../style/AuthPage/AuthField.css'
 import '../../style/AuthPage/Input.css'
-import {login} from "../../services/authService.ts";
+import {login} from "../../services/AuthService.ts";
+import {useNavigate} from "react-router-dom";
 
 export default function RegisterPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const handleLogin = async (event: React.FormEvent) => {
         event.preventDefault();
         try {
-            const result = await login({ email, password });
-            console.log('Login successful:', result);
+            await login({ email, password });
+            navigate('/competitions')
         }
         catch (error) {
             console.error('Login failed:', error);
@@ -51,8 +53,8 @@ export default function RegisterPage() {
                 </div>
             </div>
             <div className="auth-confirm">
-                <button className="auth-button">Log In</button>
-                <h5>Don't have an account? <a href="/reg1" aria-current="page">Sign Up</a></h5>
+                <button type="submit" className="auth-button">Log In</button>
+                <h5>Don't have an account? <a href="/reg" aria-current="page">Sign Up</a></h5>
             </div>
         </form>
     )

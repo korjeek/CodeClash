@@ -1,16 +1,16 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import {useLocation, useNavigate} from "react-router-dom";
-import {Room} from "../../interfaces/roomInterfaces.ts";
-import SignalRService from "../SignalRService.ts";
-import {checkForAdmin, getRoom} from "../RoomService.ts";
+import {Room} from "../../interfaces/RoomInterfaces.ts";
+import SignalRService from "../../services/SignalRService.ts";
 import BaseNavBar from "../NavBars/BaseNavBar.tsx";
 import '../../style/Lobby/Buttons.css';
 import '../../style/Lobby/Main.css';
+import {checkForAdmin, getRoom} from "../../services/RoomService.ts";
 
 export default function Lobby() {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
-    const roomId = queryParams.get('roomId')!;
+    const roomId = queryParams.get('id')!;
     const [room, setRoom] = useState<Room>()
     const [isAdmin, setIsAdmin] = useState<boolean>(false)
     const signalR = useMemo(() => new SignalRService(), []);
@@ -37,7 +37,7 @@ export default function Lobby() {
         const response = await signalR.invoke<string, Room>("QuitRoom", roomId)
         console.log(response)
         await signalR.stopConnection()
-        navigate('/menu');
+        navigate('/competitions');
     }
 
     const startCompetition = async () => {

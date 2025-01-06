@@ -2,19 +2,21 @@ import React, { useState } from 'react';
 import '../../style/Default/BackGround.css'
 import '../../style/AuthPage/AuthField.css'
 import '../../style/AuthPage/Input.css'
-import { register } from '../../services/authService.ts';
+import { register } from '../../services/AuthService.ts';
+import {useNavigate} from "react-router-dom";
 
 export default function RegisterPage() {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
+    const navigate = useNavigate();
 
     const handleRegister = async (event: React.FormEvent) => {
         event.preventDefault()
         try{
-            const result = await register({ username, email, password, passwordConfirm })
-            console.log('Register successful:', result);
+            await register({ username, email, password, passwordConfirm })
+            navigate('/competitions')
         }
         catch(error) {
             console.error('Register failed:', error);
@@ -78,7 +80,7 @@ export default function RegisterPage() {
             </div>
             <div className="auth-confirm">
                 <button className="auth-button">Sign Up</button>
-                <h5>Already have an account? <a href="/login1" aria-current="page">Log In</a></h5>
+                <h5>Already have an account? <a href="/login" aria-current="page">Log In</a></h5>
             </div>
         </form>
     )

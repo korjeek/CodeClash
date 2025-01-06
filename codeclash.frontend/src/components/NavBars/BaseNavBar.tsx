@@ -1,6 +1,7 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useState} from "react";
 import '../../style/Default/BaseNavBar.css'
 import { motion } from "framer-motion";
+import {ChipProps} from "../../interfaces/ButtonsProps.ts";
 
 const tabs = ["Competitions", "Problems", "Leaderboard"];
 
@@ -11,7 +12,7 @@ export default function BaseNavBar() {
         <div className="navbar_container">
             <div className="navbar-content">
                 <div className="navbar-text-content">
-                    <a href="/public" aria-current="page" className="navbar-logo">CodeClash</a>
+                    <a href="/" aria-current="page" className="navbar-logo">CodeClash</a>
                     <nav className="menu-navbar">
                         {tabs.map((tab) => (
                             <Chip
@@ -28,7 +29,7 @@ export default function BaseNavBar() {
     );
 };
 
-const Chip = ({text, selected, setSelected}) => {
+const Chip: React.FC<ChipProps> = ({text, selected, setSelected}) => {
     return (
         <button
             onClick={() => setSelected(text)}

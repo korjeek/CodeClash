@@ -1,4 +1,4 @@
-import {Issue} from "../interfaces/issueInterfaces.ts";
+import {Issue} from "../interfaces/IssueInterfaces.ts";
 import axios from "axios";
 
 const API_URL = 'https://localhost:7282/issue';

@@ -1,11 +1,13 @@
-import React from "react";
-import '../style/HomePage/Main.css'
-import '../style/Default/BackGround.css'
-import AuthNavBar from "./NavBars/AuthNavBar.tsx";
+import '../../style/HomePage/Main.css'
+import '../../style/Default/BackGround.css'
+import AuthNavBar from "../NavBars/AuthNavBar.tsx";
+import {useNavigate} from "react-router-dom";
 
 
-export default function HomePage() {
-    const getStartedClick = async () => window.location.href = '/reg1';
+export default function StartPage() {
+    const navigate = useNavigate();
+
+    const getStartedClick = async () => navigate('/login');
 
     return (
         <div className="home-page">

@@ -1,6 +1,6 @@
 import * as signalR from '@microsoft/signalr';
 import {Response} from "../interfaces/ResponseInterface.ts";
-import {Room} from "../interfaces/roomInterfaces.ts";
+import {Room} from "../interfaces/RoomInterfaces.ts";
 
 const SIGNALR_API_URL = 'https://localhost:7282/rooms'
 

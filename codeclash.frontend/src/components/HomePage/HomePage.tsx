@@ -1,17 +1,17 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import '../../style/MenuPage/Main.css'
 import '../../style/MenuPage/Input.css'
 import '../../style/MenuPage/Buttons.css'
 import '../../style/MenuPage/Rooms.css'
 import '../../style/Default/AuthNavBar.css'
 import '../../style/Default/BaseNavBar.css'
-import {Room} from "../../interfaces/roomInterfaces.ts";
-import {getRoomsList} from "../../services/roomService.ts";
+import {Room} from "../../interfaces/RoomInterfaces.ts";
 import {useNavigate} from "react-router-dom";
 import BaseNavBar from "../NavBars/BaseNavBar.tsx";
+import {getRoomsList} from "../../services/RoomService.ts";
 
 
-export default function Menu() {
+export default function HomePage() {
     const [rooms, setRooms] = useState<Room[]>([]);
     const [pages, setPages] = useState<number[]>([1]);
     const [search, setSearch] = useState<string>('');
@@ -27,10 +27,10 @@ export default function Menu() {
         }
 
         fetchRooms();
-    }, [])
+    }, [currentPage])
 
-    const joinRoom = async (roomId: string) => navigate(`/lobby?roomId=${roomId}`);
-    const createRoom = async () => navigate(`/createRoom`);
+    const joinRoom = async (roomId: string) => navigate(`/lobby?id=${roomId}`);
+    const createRoom = async () => navigate(`/create-competition`);
 
     return (
         <div className="menu-page">

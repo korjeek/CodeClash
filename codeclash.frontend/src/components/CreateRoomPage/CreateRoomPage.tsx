@@ -1,26 +1,26 @@
 import React, {useEffect, useState} from 'react';
-import {CreateRoomData} from '../services/roomService.ts';
-import { Room } from '../interfaces/roomInterfaces.ts'
-import SignalRService from "./SignalRService.ts";
+import {CreateRoomData, Room} from '../../interfaces/RoomInterfaces.ts'
+import SignalRService from "../../services/SignalRService.ts";
 import {useNavigate} from "react-router-dom";
-import BaseNavBar from "./NavBars/BaseNavBar.tsx";
+import BaseNavBar from "../NavBars/BaseNavBar.tsx";
 import { motion } from "framer-motion";
-import {getProblems} from "../services/ProblemService.ts";
-import {Issue} from "../interfaces/issueInterfaces.ts";
-import '../style/Default/BaseNavBar.css'
-import '../style/CreateLobby/Main.css'
-import '../style/CreateLobby/Inputs.css'
-import '../style/CreateLobby/Buttons.css'
-import '../style/CreateLobby/ProblemsList.css'
+import {getProblems} from "../../services/ProblemService.ts";
+import {Issue} from "../../interfaces/IssueInterfaces.ts";
+import '../../style/Default/BaseNavBar.css'
+import '../../style/CreateLobby/Main.css'
+import '../../style/CreateLobby/Inputs.css'
+import '../../style/CreateLobby/Buttons.css'
+import '../../style/CreateLobby/ProblemsList.css'
+import {MinuteButtonProps, TaskButtonProps} from "../../interfaces/ButtonsProps.ts";
 
 const minutes = ["5", "10", "30", "60"]
 
-const CreateRoomPage: React.FC = () => {
+export default function CreateRoomPage() {
     const [isSlided, setIsSlided] = useState(false);
     const [problems, setProblems] = useState<Issue[]>([]);
     const [roomName, setRoomName] = useState('');
     const [activeMin, setActiveMin] = useState(minutes[0]);
-    const [activeProblem, setActiveProblem] = useState(null);
+    const [activeProblem, setActiveProblem] = useState('');
     const [inputValue, setInputValue] = useState<string>('');
     const [selectedTask, setSelectedTask] = useState(false);
     const signalR = new SignalRService()
@@ -40,16 +40,14 @@ const CreateRoomPage: React.FC = () => {
             const room = {roomName, time: `00:${activeMin}:00`, issueId: activeProblem!}
             await signalR.startConnection()
             const createdRoom = await signalR.invoke<CreateRoomData, Room>("CreateRoom", room);
-            console.log(createdRoom)
             if (createdRoom)
-                navigate(`/lobby?roomId=${createdRoom.id}`);
+                navigate(`/lobby?id=${createdRoom.id}`);
         }
         catch {
             console.error('Failed to create room. Please try again.');
         }
     };
 
-    const handleSlide = () => setIsSlided(!isSlided);
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(event.target.value);
         setRoomName(event.target.value);
@@ -107,7 +105,7 @@ const CreateRoomPage: React.FC = () => {
                         <div className="spacer"></div>
                         <div className="time-choose">
                             <button
-                                onClick={handleSlide}
+                                onClick={() => setIsSlided(!isSlided)}
                                 className={selectedTask ? "active-time-choose-button" : "time-choose-button"}>Select problem
                             </button>
                         </div>
@@ -136,7 +134,7 @@ const CreateRoomPage: React.FC = () => {
                                 active={activeProblem === problem.id}
                                 setActive={setActiveProblem}
                                 setTask={setSelectedTask}
-                                handleSlide={handleSlide}
+                                handleSlide={() => setIsSlided(!isSlided)}
                                 key={problem.id}
                             />
                         ))}
@@ -147,9 +145,7 @@ const CreateRoomPage: React.FC = () => {
     );
 };
 
-export default CreateRoomPage;
-
-const MinuteButton = ({text, active, setActive}) => {
+const MinuteButton: React.FC<MinuteButtonProps> = ({text, active, setActive}) => {
     return (
         <button
             onClick={() => setActive(text)}
@@ -159,14 +155,14 @@ const MinuteButton = ({text, active, setActive}) => {
     )
 }
 
-const TaskButton = ({issue, active, setActive, setTask, handleSlide}) => {
+const TaskButton: React.FC<TaskButtonProps> = ({issue, active, setActive, setTask, handleSlide}) => {
     return (
         <div className="problem-item">
             <div className="problem-item-description">{issue.name}</div>
             <button
                 onClick={() => {
                     setActive(issue.id)
-                    handleSlide()
+                    handleSlide();
                     setTask(true)
                 }}
                 className={active ? "active-time-choose-button" : "time-choose-button"}>Select</button>
