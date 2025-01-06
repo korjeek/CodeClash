@@ -90,17 +90,6 @@ public class RoomHub(RoomService roomService,
         
         return new ApiResponse<string>(true, "Competition is started", null);
     }
-
-    public async Task<ApiResponse<IssueDTO>> GetIssue(Guid issueId)
-    {
-        var issueResult = await issueService.GetIssue(issueId);
-        if (issueResult.IsFailure)
-            return new ApiResponse<IssueDTO>(false, null, issueResult.Error);
-
-        var issueDTO = issueResult.Value.GetIssueDTO();
-        issueDTO.InitialCode = await File.ReadAllTextAsync(testUserSolutionService.startCodeLocations[issueResult.Value.Name]);
-        return new ApiResponse<IssueDTO>(true, issueDTO , null);
-    }
     
     public async Task<ApiResponse<string>> CheckSolution(Guid roomId, string solution, string issueName)
     {
