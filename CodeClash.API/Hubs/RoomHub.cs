@@ -15,8 +15,18 @@ namespace CodeClash.API.Hubs;
 public class RoomHub(RoomService roomService, 
     TestUserSolutionService testUserSolutionService, 
     CompetitionService competitionService, 
-    IssueService issueService) : Hub
+    IssueService issueService,
+    UserService userService) : Hub
 {
+    public override Task OnConnectedAsync()
+    {
+        var userId = new Guid(Context.UserIdentifier!);
+        var roomId = userService.GetUserRoomId(userId).Result;
+        if (roomId.HasValue)
+            AddUserToGroup(roomId.Value).Wait();
+        return base.OnConnectedAsync();
+    }
+
     // TODO: добавить метод, что если ты отключился и ты Admin удаляем комнату и надо всез проинформаировать
     
     public async Task<ApiResponse<RoomDTO>> CreateRoom(CreateRoomRequest request)
@@ -72,22 +82,13 @@ public class RoomHub(RoomService roomService,
         var roomEntityResult = await competitionService.UpdateRoomStatus(roomId, RoomStatus.CompetitionInProgress);
         if (roomEntityResult.IsFailure)
             return new ApiResponse<string>(false, null, roomEntityResult.Error);
-
+        
+        Console.WriteLine(Clients.Groups(roomId.ToString()));
+        
         await SendMessageToAllUsersInGroup(roomId,$"/problem/{roomEntityResult.Value.IssueId}", "CompetitionStarted");
         _ = competitionService.SyncTimers(Clients.Group(roomId.ToString()), duration, roomId);
         
         return new ApiResponse<string>(true, "Competition is started", null);
-    }
-
-    public async Task<ApiResponse<IssueDTO>> GetIssue(Guid issueId)
-    {
-        var issueResult = await issueService.GetIssue(issueId);
-        if (issueResult.IsFailure)
-            return new ApiResponse<IssueDTO>(false, null, issueResult.Error);
-
-        var issueDTO = issueResult.Value.GetIssueDTO();
-        issueDTO.InitialCode = await File.ReadAllTextAsync(testUserSolutionService.startCodeLocations[issueResult.Value.Name]);
-        return new ApiResponse<IssueDTO>(true, issueDTO , null);
     }
     
     public async Task<ApiResponse<string>> CheckSolution(Guid roomId, string solution, string issueName)
@@ -99,7 +100,7 @@ public class RoomHub(RoomService roomService,
     }
 
     private async Task AddUserToGroup(Guid roomId) => 
-        await Groups.AddToGroupAsync(Context.UserIdentifier!, roomId.ToString());
+        await Groups.AddToGroupAsync(Context.ConnectionId, roomId.ToString());
     
     private async Task SendMessageToAllUsersInGroup<T>(Guid roomId,  T message, string methodName) =>
         await Clients.Group(roomId.ToString()).SendAsync(methodName, message);

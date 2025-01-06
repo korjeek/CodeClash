@@ -1,14 +1,14 @@
 ﻿using CodeClash.Application.Extensions;
+using CodeClash.Application.Services;
 using CodeClash.Core.Models;
 using CodeClash.Core.Models.DTOs;
 using CodeClash.Core.Requests.IssueRequest;
-using CodeClash.Persistence.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodeClash.API.Controllers;
 
 [Route("issue")]
-public class IssueController(IssuesRepository issuesRepository) : ControllerBase
+public class IssueController(IssueService issueService, TestUserSolutionService testUserSolutionService) : ControllerBase
 {
     [HttpPost("add-issue")]
     public async Task<IActionResult> AddIssue([FromBody] CreateIssueRequest request)
@@ -17,14 +17,26 @@ public class IssueController(IssuesRepository issuesRepository) : ControllerBase
         var newIssueResult = Issue.Create(Guid.NewGuid(), request.Description, request.Name);
         if (newIssueResult.IsFailure)
             return BadRequest(newIssueResult.Error);
-        await issuesRepository.Add(newIssueResult.Value.GetIssueEntity());
+        await issueService.AddIssueToDb(newIssueResult.Value);
         return Ok(newIssueResult.Value.GetIssueDTO());
     }
 
-    [HttpGet("get-issues")]
+    [HttpGet("get-all-issues")]
     public async Task<IActionResult> GetIssues()
     {
-        var issues = await issuesRepository.GetAllIssues();
+        var issues = await issueService.GetAllIssues();
         return Ok(issues.Select(i => new IssueDTO {Id = i.Id.ToString(), Name = i.Name}).ToList());
+    }
+
+    [HttpGet("get-issue")]
+    public async Task<ApiResponse<IssueDTO>> GetIssue(Guid issueId)
+    {
+        var issueResult = await issueService.GetIssueFromDb(issueId);
+        if (issueResult.IsFailure)
+            return new ApiResponse<IssueDTO>(false, null, issueResult.Error);
+
+        var issueDTO = issueResult.Value.GetIssueDTO();
+        issueDTO.InitialCode = await System.IO.File.ReadAllTextAsync(testUserSolutionService.startCodeLocations[issueResult.Value.Name]);
+        return new ApiResponse<IssueDTO>(true, issueDTO , null);
     }
 }
