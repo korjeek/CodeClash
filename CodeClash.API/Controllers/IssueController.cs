@@ -30,14 +30,14 @@ public class IssueController(IssueService issueService,
     }
 
     [HttpPost("get-issue")]
-    public async Task<ApiResponse<IssueDTO>> GetIssue(string issueId)
+    public async Task<ApiResponse<IssueDTO>> GetIssue([FromBody] IssueDTO issueDto)
     {
-        var issueResult = await issueService.GetIssueFromDb(new Guid(issueId));
+        var issueResult = await issueService.GetIssueFromDb(new Guid(issueDto.Id));
         if (issueResult.IsFailure)
             return new ApiResponse<IssueDTO>(false, null, issueResult.Error);
 
-        var issueDTO = issueResult.Value.GetIssueDTO();
-        issueDTO.InitialCode = await System.IO.File.ReadAllTextAsync(testUserSolutionService.startCodeLocations[issueResult.Value.Name]);
-        return new ApiResponse<IssueDTO>(true, issueDTO , null);
+        var issueDtoResponse = issueResult.Value.GetIssueDTO();
+        issueDtoResponse.InitialCode = await System.IO.File.ReadAllTextAsync(testUserSolutionService.startCodeLocations[issueResult.Value.Name]);
+        return new ApiResponse<IssueDTO>(true, issueDtoResponse , null);
     }
 }
