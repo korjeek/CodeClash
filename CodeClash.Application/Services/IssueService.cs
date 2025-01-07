@@ -24,4 +24,9 @@ public class IssueService(IssuesRepository repository)
     {
         return (await repository.GetAllIssues()).Select(i => i.GetIssueFromEntity()).ToList();
     }
+
+    public async Task<Result<string>> AddNewIssuesFromPath(string path)
+    {
+        throw new NotImplementedException();
+    }
 }

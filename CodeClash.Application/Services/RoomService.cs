@@ -100,7 +100,7 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
         return Result.Success(userEntity.IsAdmin);
     }
     
-    public async Task<Result<Room>> GetUserRoom(Guid userId)
+    public async Task<Result<Room>> GetRoom(Guid userId)
     {
         var userEntity = await usersRepository.GetUserById(userId);
         if (userEntity is null)

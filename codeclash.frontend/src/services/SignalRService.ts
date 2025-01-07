@@ -15,6 +15,7 @@ export default class SignalRService {
 
         this.connection.on("UserJoined", (room: Room) => {
             console.log(`User joined: ${room}`);
+            console.log(room.users);
         })
 
         this.connection.on("CompetitionStarted", (url: string) => {
