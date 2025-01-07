@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace CodeClash.API.Controllers;
 
 [Route("issue")]
-public class IssueController(IssueService issueService, TestUserSolutionService testUserSolutionService) : ControllerBase
+public class IssueController(IssueService issueService, 
+    TestUserSolutionService testUserSolutionService) : ControllerBase
 {
     [HttpPost("add-issue")]
     public async Task<IActionResult> AddIssue([FromBody] CreateIssueRequest request)
@@ -29,9 +30,9 @@ public class IssueController(IssueService issueService, TestUserSolutionService 
     }
 
     [HttpPost("get-issue")]
-    public async Task<ApiResponse<IssueDTO>> GetIssue(Guid issueId)
+    public async Task<ApiResponse<IssueDTO>> GetIssue(string issueId)
     {
-        var issueResult = await issueService.GetIssueFromDb(issueId);
+        var issueResult = await issueService.GetIssueFromDb(new Guid(issueId));
         if (issueResult.IsFailure)
             return new ApiResponse<IssueDTO>(false, null, issueResult.Error);
 

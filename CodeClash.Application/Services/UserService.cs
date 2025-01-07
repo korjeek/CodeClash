@@ -1,9 +1,8 @@
 ﻿using CodeClash.Persistence.Repositories;
-using CSharpFunctionalExtensions;
 
 namespace CodeClash.Application.Services;
 
-public class UserService(RoomsRepository roomsRepository, UsersRepository usersRepository)
+public class UserService(UsersRepository usersRepository)
 {
     public async Task<Guid?> GetUserRoomId(Guid userId)
     {
