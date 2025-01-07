@@ -16,6 +16,7 @@ export default function CodeSpace(){
     useEffect(() => {
         const fetchProblem = async () => {
             const problem = await getProblem(param!);
+            console.log(problem);
             setProblem(problem);
         }
 

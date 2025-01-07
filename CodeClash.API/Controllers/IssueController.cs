@@ -28,7 +28,7 @@ public class IssueController(IssueService issueService, TestUserSolutionService 
         return Ok(issues.Select(i => new IssueDTO {Id = i.Id.ToString(), Name = i.Name}).ToList());
     }
 
-    [HttpGet("get-issue")]
+    [HttpPost("get-issue")]
     public async Task<ApiResponse<IssueDTO>> GetIssue(Guid issueId)
     {
         var issueResult = await issueService.GetIssueFromDb(issueId);

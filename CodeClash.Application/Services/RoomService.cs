@@ -109,7 +109,7 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
         var issue = (await issuesRepository.GetIssueById(roomEntity.IssueId))!.GetIssueFromEntity();
         var room = roomEntity.GetRoomFromEntity(issue);
 
-        var participants = (await roomsRepository.GetRoпшеomUsers(roomId))
+        var participants = (await roomsRepository.GetRoomUsers(roomId))
             .Select(u => u.GetUserFromEntity())
             .ToList();
         room.SetParticipants(participants);
