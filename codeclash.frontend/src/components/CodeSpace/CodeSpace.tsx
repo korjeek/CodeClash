@@ -14,7 +14,8 @@ export default function CodeSpace(){
     const { param } = useParams<string>();
 
     useEffect(() => {
-        const fetchProblem = async () => {
+        const fetchProblem = async ()    => {
+            console.log(param, 'xfd')
             const problem = await getProblem(param!);
             console.log(problem);
             setProblem(problem);
@@ -25,7 +26,9 @@ export default function CodeSpace(){
         }, "UpdateTimer")
 
         fetchProblem();
-    }, []);
+    }, [param, signalR]);
+
+
 
     if (!problem)
         return null;

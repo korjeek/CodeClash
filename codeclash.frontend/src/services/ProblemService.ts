@@ -8,7 +8,8 @@ export const getAllProblems = async (): Promise<Issue[]> => {
     return response.data
 }
 
-export const getProblem = async (id: string): Promise<Issue> => {
-    const response = await axios.get(`${API_URL}/get-issue`, { withCredentials: true, data: id });
+export const getProblem = async (issueId: string): Promise<Issue> => {
+    const response = await axios.post(`${API_URL}/get-issue`, issueId, { withCredentials: true });
+    console.log(response.data);
     return response.data.data;
 }
