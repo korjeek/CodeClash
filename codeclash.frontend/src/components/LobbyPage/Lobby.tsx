@@ -26,7 +26,6 @@ export default function Lobby() {
         }, "CompetitionStarted");
 
         signalR.onUserAction<Room>((room: Room) => {
-            console.log('hahah')
             setRoom(room);
         }, "UserLeave");
 
@@ -55,7 +54,7 @@ export default function Lobby() {
 
     const startCompetition = async () => {
         if (room)
-            await signalR.invoke<string, Room>("StartCompetition", room.id)
+            await signalR.invoke<Room, Room>("StartCompetition", room)
         else
             console.log("Can't start competition. Room doesn't exist.")
     }
