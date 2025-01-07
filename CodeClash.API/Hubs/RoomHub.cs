@@ -88,8 +88,6 @@ public class RoomHub(RoomService roomService,
         if (roomEntityResult.IsFailure)
             return new ApiResponse<string>(false, null, roomEntityResult.Error);
         
-        Console.WriteLine(Clients.Groups(roomId.ToString()));
-        
         await SendMessageToAllUsersInGroup(roomId,$"/problem/{roomEntityResult.Value.IssueId}", "CompetitionStarted");
         _ = competitionService.SyncTimers(Clients.Group(roomId.ToString()), duration, roomId);
         

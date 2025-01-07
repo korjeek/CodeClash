@@ -100,22 +100,16 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
         return Result.Success(userEntity.IsAdmin);
     }
     
-    public async Task<Result<Room>> GetRoom(Guid userId)
+    public async Task<Result<Room>> GetRoom(Guid roomId)
     {
-        var userEntity = await usersRepository.GetUserById(userId);
-        if (userEntity is null)
-            return Result.Failure<Room>("User does not exist.");
-        if (!userEntity.RoomId.HasValue)
-            return Result.Failure<Room>("User is not in room.");
-        
-        var roomEntity = await roomsRepository.GetRoomById(userEntity.RoomId.Value);
+        var roomEntity = await roomsRepository.GetRoomById(roomId);
         if (roomEntity is null)
             return Result.Failure<Room>("Room does not exist.");
         
         var issue = (await issuesRepository.GetIssueById(roomEntity.IssueId))!.GetIssueFromEntity();
         var room = roomEntity.GetRoomFromEntity(issue);
 
-        var participants = (await roomsRepository.GetRoomUsers(userEntity.RoomId.Value))
+        var participants = (await roomsRepository.GetRoпшеomUsers(roomId))
             .Select(u => u.GetUserFromEntity())
             .ToList();
         room.SetParticipants(participants);

@@ -10,7 +10,7 @@ namespace CodeClash.API.Controllers;
 [ApiController]
 [Authorize]
 [Route("rooms")]
-public class RoomController(RoomService roomService) : ControllerBase
+public class RoomController(RoomService roomService, UserService userService) : ControllerBase
 {
     [HttpGet("get-rooms")]
     public async Task<ApiResponse<List<RoomDTO>>> GetRooms()
@@ -41,7 +41,10 @@ public class RoomController(RoomService roomService) : ControllerBase
     {
         Request.Cookies.TryGetValue("spooky-cookies", out string? cookie);
         var userId = new Guid(cookie!.GetClaimsFromToken().First(c => c.Type == ClaimTypes.NameIdentifier).Value);
-        var roomResult = await roomService.GetRoom(userId);
+        var roomId = await userService.GetUserRoomId(userId);
+        if (!roomId.HasValue)
+            return new ApiResponse<RoomDTO>(false, null, "User has not room.");
+        var roomResult = await roomService.GetRoom(roomId.Value);
         if (roomResult.IsFailure)
             return new ApiResponse<RoomDTO>(false, null, roomResult.Error);
         return new ApiResponse<RoomDTO>(true, roomResult.Value.GetRoomDTOFromRoom(), null);
