@@ -11,12 +11,11 @@ export default function CodeSpace(){
     const [problem, setProblem] = useState<Issue>();
     const [time, setTime] = useState('');
     const signalR = useMemo(() => new SignalRService(), []);
-    const { param } = useParams();
-    console.log(param);
+    const { param } = useParams<string>();
 
     useEffect(() => {
         const fetchProblem = async () => {
-            const problem = await getProblem();
+            const problem = await getProblem(param!);
             setProblem(problem);
         }
 

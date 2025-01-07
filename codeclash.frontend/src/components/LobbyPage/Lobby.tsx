@@ -27,7 +27,6 @@ export default function Lobby() {
         }, "CompetitionStarted");
 
         signalR.onUserAction<Room>((room: Room) => {
-            console.log('hahah')
             setRoom(room);
         }, "UserLeave");
 
