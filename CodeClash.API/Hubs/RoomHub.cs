@@ -15,7 +15,6 @@ namespace CodeClash.API.Hubs;
 public class RoomHub(RoomService roomService, 
     TestUserSolutionService testUserSolutionService, 
     CompetitionService competitionService, 
-    IssueService issueService,
     UserService userService) : Hub
 {
     public override Task OnConnectedAsync()
@@ -59,6 +58,12 @@ public class RoomHub(RoomService roomService,
         var result = await roomService.QuitRoom(userId, roomId, Context, Groups);
         if (result.IsFailure)
             return new ApiResponse<string>(false, null, result.Error);
+        
+        var userRoom = await roomService.GetRoom(roomId);
+        if (userRoom.IsFailure)
+            return new ApiResponse<string>(false, null, userRoom.Error);
+
+        await SendMessageToAllUsersInGroup(roomId, userRoom.Value.GetRoomDTOFromRoom(), "UserLeave");
         return new ApiResponse<string>(true, result.Value, null);
     }
     
@@ -97,6 +102,18 @@ public class RoomHub(RoomService roomService,
         if (resultString.IsFailure)
             return new ApiResponse<string>(false, null, resultString.Error);
         return new ApiResponse<string>(true, resultString.Value, null);
+    }
+
+    public async Task<ApiResponse<string>> EndCompetition()
+    {
+        /*
+         На беке:
+         1. Изменить статус комнаты
+         На фронте:
+         1. Загрузить страницу лобби с результатами
+         2. Как будто бы и всё...
+         */
+        throw new NotImplementedException();
     }
 
     private async Task AddUserToGroup(Guid roomId) => 
