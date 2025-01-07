@@ -4,7 +4,7 @@ import SignalRService from "../../services/SignalRService.ts";
 import {useNavigate} from "react-router-dom";
 import BaseNavBar from "../NavBars/BaseNavBar.tsx";
 import { motion } from "framer-motion";
-import {getProblems} from "../../services/ProblemService.ts";
+import {getAllProblems} from "../../services/ProblemService.ts";
 import {Issue} from "../../interfaces/IssueInterfaces.ts";
 import '../../style/Default/BaseNavBar.css'
 import '../../style/CreateLobby/Main.css'
@@ -28,7 +28,7 @@ export default function CreateRoomPage() {
 
     useEffect(() => {
         async function getIssues() {
-            const problems = await getProblems()
+            const problems = await getAllProblems()
             setProblems(problems)
         }
 

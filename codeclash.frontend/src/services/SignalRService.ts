@@ -1,28 +1,20 @@
 import * as signalR from '@microsoft/signalr';
 import {Response} from "../interfaces/ResponseInterface.ts";
-import {Room} from "../interfaces/RoomInterfaces.ts";
 
 const SIGNALR_API_URL = 'https://localhost:7282/rooms'
 
 export default class SignalRService {
     private readonly connection: signalR.HubConnection;
-
     constructor() {
         this.connection = new signalR.HubConnectionBuilder()
             .withUrl(SIGNALR_API_URL)
             .withAutomaticReconnect()
             .build();
-
-        this.connection.on("UserJoined", (room: Room) => {
-            console.log(`User joined: ${room}`);
-            console.log(room.users);
-        })
-
-        this.connection.on("CompetitionStarted", (url: string) => {
-            console.log("Competition started");
-            window.location.href = url;
-        })
     }
+
+    public onUserAction = <T>(callback: (...args: T[]) => void, method: string) => {
+        this.connection.on(method, callback);
+    };
 
     public async startConnection(): Promise<void> {
         try {

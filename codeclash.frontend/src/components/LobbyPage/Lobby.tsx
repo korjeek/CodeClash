@@ -16,7 +16,20 @@ export default function Lobby() {
     const signalR = useMemo(() => new SignalRService(), []);
     const navigate = useNavigate();
 
-    useEffect(() =>{
+    useEffect(() => {
+        signalR.onUserAction<Room>((room: Room) => {
+            setRoom(room);
+        }, "UserJoined");
+
+        signalR.onUserAction<string>((url: string) => {
+            navigate(url);
+        }, "CompetitionStarted");
+
+        signalR.onUserAction<Room>((room: Room) => {
+            console.log('hahah')
+            setRoom(room);
+        }, "UserLeave");
+
         const fetchAdminStatus = async () => {
             const isAdmin = await checkForAdmin();
             setIsAdmin(isAdmin);
@@ -42,7 +55,7 @@ export default function Lobby() {
 
     const startCompetition = async () => {
         if (room)
-            await signalR.invoke<Room, Room>("StartCompetition", room)
+            await signalR.invoke<string, Room>("StartCompetition", room.id)
         else
             console.log("Can't start competition. Room doesn't exist.")
     }
@@ -54,17 +67,29 @@ export default function Lobby() {
         <div className="menu-page">
             <BaseNavBar/>
             <div className="content-wrapper">
-                <h1>{room.name} lobby</h1>
-                <h3>Competitive time: {room.time.split(':')[1]} min</h3>
-                <div className="users-container">
-                    {room.users.map((user) => (
-                        <div key={user.email} className="user-item">{user.name}</div>
-                    ))}
+                <h1 className="room-header">{room.name} lobby</h1>
+                <div className="lobby-grid">
+                    <div className="online-count">Participants: {room.users.length}</div>
+                    <div className="competition-info">
+                        <h3 className="info-item">Author: {room.time.split(':')[1]} min</h3>
+                        <h3 className="info-item">Task: {room.issueName}</h3>
+                        <h3 className="info-item">Time: {room.time.split(':')[1]} min</h3>
+                    </div>
+                    <div className="users-container">
+                        {room.users.map((user, index) => (
+                            <div className="user-container">
+                                <div className="num-user">{index + 1}</div>
+                                <div key={user.email} className="user-item">{user.name}</div>
+                                {isAdmin && <button className="kick-room-btn">kick</button>}
+                            </div>
+                        ))}
+                    </div>
                 </div>
                 <div className="btn-container">
-                    <button className="lobby-btn quit-room-btn" onClick={quitRoom}>Quit Room</button>
+                <button className="lobby-btn quit-room-btn" onClick={quitRoom}>Quit Room</button>
                     {isAdmin &&
-                        <button className="lobby-btn start-competition-btn" onClick={startCompetition}>Start Competition</button>}
+                        <button className="lobby-btn start-competition-btn" onClick={startCompetition}>Start
+                            Competition</button>}
                 </div>
             </div>
         </div>

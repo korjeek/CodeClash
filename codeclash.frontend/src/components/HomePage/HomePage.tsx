@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
-import '../../style/MenuPage/Main.css'
-import '../../style/MenuPage/Input.css'
-import '../../style/MenuPage/Buttons.css'
-import '../../style/MenuPage/Rooms.css'
+import '../../style/HomePage/Main.css'
+import '../../style/HomePage/Input.css'
+import '../../style/HomePage/Buttons.css'
+import '../../style/HomePage/Rooms.css'
 import '../../style/Default/AuthNavBar.css'
 import '../../style/Default/BaseNavBar.css'
 import {Room} from "../../interfaces/RoomInterfaces.ts";

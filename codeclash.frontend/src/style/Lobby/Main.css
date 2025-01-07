@@ -6,28 +6,83 @@
     gap: 5vh;
 }
 
+.lobby-grid{
+    display: grid;
+    gap: 1rem;
+    grid-template-areas:
+        'online-count empty'
+        'participants competition-info';
+    justify-items: start;
+    align-items: start;
+}
+
 .users-container{
-    padding: 1vh 0;
+    grid-area: participants;
+    padding: 1.5vh 1.5vh;
     height: 30vh;
     width: 50vh;
     display: flex;
     flex-direction: column;
+    gap: .4rem;
     overflow-y: auto;
     border: 0.3vh solid transparent;
     border-radius: 3vh;
-    background-image: linear-gradient(#0F0F0F, #0F0F0F), linear-gradient(90deg, #6A00FF, #A64AFF, #FFB1FF);
+    background-image: linear-gradient(#0F0F0F, #0F0F0F), linear-gradient(90deg, #6A00FF, #A64AFF);
     background-origin: border-box;
     background-clip: padding-box, border-box;
 }
 
-.user-item{
+.user-container{
+    display: flex;
+    flex-direction: row;
+    gap: .4rem;
+}
+
+.num-user{
     display: flex;
     justify-content: center;
     align-items: center;
+    border: .3vh solid #1E1E1E;
+    border-radius: 50%;
+    background: #1A1A1A;
+    padding: 0 1.8vh;
+    font-weight: bold;
+}
+
+.user-item{
+    width: 70vh;
     background: #1A1A1A;
     border: .3vh solid #1E1E1E;
     border-radius: 3vh;
     padding: 1vh 5vh;
-    margin: .5vh 1vh;
     font-weight: bold;
+}
+
+.competition-info{
+    grid-area: competition-info;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.info-item{
+    padding: 1vh 3vh;
+    margin: 0 0;
+    border-radius: 3vh;
+    background-image: linear-gradient(90deg, #6A00FF, #A64AFF);
+}
+
+.online-count{
+    grid-area: online-count;
+    border: 0.3vh solid #5EFC8D;
+    background: #5EFC8D;
+    color: black;
+    border-radius: 3vh;
+    padding: 1vh 2vh;
+    font-weight: bold;
+}
+
+.room-header{
+    margin: 0 0;
 }

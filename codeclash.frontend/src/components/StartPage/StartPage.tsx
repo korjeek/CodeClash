@@ -1,4 +1,4 @@
-import '../../style/HomePage/Main.css'
+import '../../style/StartPage/Main.css'
 import '../../style/Default/BackGround.css'
 import AuthNavBar from "../NavBars/AuthNavBar.tsx";
 import {useNavigate} from "react-router-dom";

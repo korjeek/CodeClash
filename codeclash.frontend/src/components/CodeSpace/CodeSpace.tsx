@@ -1,22 +1,45 @@
-import React from "react";
+import {useEffect, useMemo, useState} from "react";
 import { useParams } from "react-router-dom";
 import { Editor } from "@monaco-editor/react"
 import '../../style/CodeSpace/Main.css'
 import ReactMarkdown from 'react-markdown';
+import {getProblem} from "../../services/ProblemService.ts";
+import {Issue} from "../../interfaces/IssueInterfaces.ts";
+import SignalRService from "../../services/SignalRService.ts";
 
 export default function CodeSpace(){
+    const [problem, setProblem] = useState<Issue>();
+    const [time, setTime] = useState('');
+    const signalR = useMemo(() => new SignalRService(), []);
     const { param } = useParams();
     console.log(param);
+
+    useEffect(() => {
+        const fetchProblem = async () => {
+            const problem = await getProblem();
+            setProblem(problem);
+        }
+
+        signalR.onUserAction<string>((time: string) => {
+            setTime(time);
+        }, "UpdateTimer")
+
+        fetchProblem();
+    }, []);
+
+    if (!problem)
+        return null;
 
     return (
         <div className="container">
             <div className="header">
                 <button>Submit</button>
                 <button>Quit</button>
+                <div>{time}</div>
             </div>
             <div className="content">
                 <div className="markdown-container">
-                    <ReactMarkdown>{'### Markdown Content # This is a sample Markdown content.'}</ReactMarkdown>
+                    <ReactMarkdown>{problem.description}</ReactMarkdown>
                 </div>
                 <div className="editor-container">
                     <div className="editor-wrapper">

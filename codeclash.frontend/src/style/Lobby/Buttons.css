@@ -30,3 +30,17 @@
     border: 0.3vh solid #DA4167;
     background-color: #DA4167;
 }
+
+.kick-room-btn{
+    border-radius: 3vh;
+    background-color: #0F0F0F;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border 0.3s ease-in-out ;
+    color: #DA4167;
+    border: 0.3vh solid #DA4167;
+}
+
+.kick-room-btn:hover{
+    background-color: #DA4167;
+    border: 0.3vh solid #DA4167;
+    color: black;
+}
