@@ -15,9 +15,9 @@ export default function CodeSpace(){
 
     useEffect(() => {
         const fetchProblem = async ()    => {
-            console.log(param, 'xfd')
+            await signalR.startConnection();
+            console.log(signalR.connection.connectionId, signalR.connection.state);
             const problem = await getProblem(param!);
-            console.log(problem);
             setProblem(problem);
         }
 

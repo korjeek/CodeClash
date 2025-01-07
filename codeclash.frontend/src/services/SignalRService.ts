@@ -4,7 +4,7 @@ import {Response} from "../interfaces/ResponseInterface.ts";
 const SIGNALR_API_URL = 'https://localhost:7282/rooms'
 
 export default class SignalRService {
-    private readonly connection: signalR.HubConnection;
+    public readonly connection: signalR.HubConnection;
     constructor() {
         this.connection = new signalR.HubConnectionBuilder()
             .withUrl(SIGNALR_API_URL)
