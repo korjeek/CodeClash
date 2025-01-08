@@ -12,8 +12,8 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    width: calc(100% - 2vh);
-    margin: 10px 0 10px 2vh;
+    width: calc(100%);
+    margin: 10px 0;
     box-sizing: border-box;
 }
 
@@ -34,7 +34,7 @@
 .markdown-container {
     display: flex;
     flex-direction: column;
-    width: calc(50% - 2rem);
+    width: calc(50% - 1rem);
     background-color: #1E1E1E;
     overflow-y: auto;
     color: white;
@@ -46,7 +46,7 @@
 }
 
 .editor-container {
-    width: 50%;
+    width: calc(50% - 1rem);
     display: flex;
     flex-direction: column;
     justify-content: center;

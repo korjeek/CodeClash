@@ -8,6 +8,7 @@ import AuthPage from "./components/AuthPages/AuthPage.tsx";
 import HomePage from "./components/HomePage/HomePage.tsx";
 import Lobby from "./components/LobbyPage/Lobby.tsx";
 import CodeSpace from "./components/CodeSpace/CodeSpace.tsx";
+import CompetitionResultPage from "./components/CompetitionResultPage.tsx";
 
 const App: React.FC = () => {
     return (
@@ -20,6 +21,7 @@ const App: React.FC = () => {
                 <Route path="/create-competition" element={<CreateRoomPage/>} />
                 <Route path="/lobby" element={<Lobby/>} />
                 <Route path="/problem/:param" element={<CodeSpace/>} />
+                <Route path="/competition/result" element={<CompetitionResultPage/>} />
             </Routes>
         </Router>
     );
