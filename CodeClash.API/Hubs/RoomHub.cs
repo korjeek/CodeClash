@@ -1,10 +1,8 @@
 using CodeClash.API.Extensions;
 using CodeClash.Application.Extensions;
 using CodeClash.Application.Services;
-using CodeClash.Core;
 using CodeClash.Core.Models.DTOs;
 using CodeClash.Core.Requests.RoomsRequests;
-using CodeClash.Core.Requests.SolutionsRequests;
 using CodeClash.Persistence.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
