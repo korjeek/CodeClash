@@ -47,7 +47,9 @@ public class CompetitionService(RoomsRepository roomsRepository, UsersRepository
             }
             
             var leftTime = endTime - DateTime.Now;
-            await clients.SendAsync("UpdateTimer", $"{leftTime.Minutes}m {leftTime.Seconds}s"); // Метод, который будет выполняться на фронте
+            
+            await clients.SendAsync("UpdateTimer", 
+                leftTime.Minutes > 0 ? $"{leftTime.Minutes}m {leftTime.Seconds}s" : $"{leftTime.Seconds}s"); // Метод, который будет выполняться на фронте
             await Task.Delay(1000); // Синхронизация раз в секунду
         }
     }
