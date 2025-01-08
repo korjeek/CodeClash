@@ -1,0 +1,38 @@
+.timer{
+    border: 0.3vh solid transparent;
+    border-radius: 3vh;
+    background-image: linear-gradient(90deg, #6A00FF, #A64AFF), linear-gradient(90deg, #6A00FF, #A64AFF);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    font-weight: bolder;
+    padding: 1vh 5vh;
+}
+
+.submit-button{
+    border-radius: 3vh;
+    background-color: #1E1E1E;
+    border: 0.3vh solid #5EFC8D;
+    color: #5EFC8D;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border 0.3s ease-in-out;
+}
+
+.submit-button:hover{
+    border-radius: 3vh;
+    background-color: #5EFC8D;
+    border: 0.3vh solid #5EFC8D;
+    color: black;
+}
+
+.quit-button{
+    border-radius: 3vh;
+    background-color: #1E1E1E;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border 0.3s ease-in-out ;
+    color: #DA4167;
+    border: 0.3vh solid #DA4167;
+}
+
+.quit-button:hover{
+    background-color: #DA4167;
+    border: 0.3vh solid #DA4167;
+    color: black;
+}
