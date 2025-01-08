@@ -14,8 +14,7 @@ namespace CodeClash.API.Hubs;
 
 [Authorize]
 [EnableCors("CorsPolicy")]
-public class RoomHub(RoomService roomService, 
-    TestUserSolutionService testUserSolutionService, 
+public class RoomHub(RoomService roomService,
     CompetitionService competitionService, 
     UserService userService) : Hub
 {
