@@ -48,7 +48,7 @@ public class TestUserSolutionService(RoomsRepository roomsRepository, UsersRepos
         await File.WriteAllTextAsync("../CodeClash.UserSolutionTest/SolutionTask.cs", userSolution);
         
         // var solutionPath = @"C:\FIIT\normalProject\CodeClash";
-        var solutionPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../.."));
+        var solutionPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../../.."));
         var projectName = "CodeClash.UserSolutionTest";
         
         return Result.Success(RuntimeProjectExecutor.HandleProject(projectName, solutionPath));

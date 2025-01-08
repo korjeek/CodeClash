@@ -1,8 +1,13 @@
-﻿namespace CodeClash.Core.Requests.SolutionsRequests;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace CodeClash.Core.Requests.SolutionsRequests;
 
 public class CheckSolutionRequest
 {
-    public string Solution { get; }  
-    public string IssueName { get; }
-    public TimeOnly LeftTime { get; }
+    [Required]
+    public string Solution { get; set; }  
+    [Required]
+    public string IssueName { get; set; }
+    [Required]
+    public TimeOnly LeftTime { get; set; }
 }

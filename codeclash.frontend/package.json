@@ -17,6 +17,7 @@
     "@types/js-cookie": "^3.0.6",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.7",
+    "highlight.js": "^11.11.1",
     "js-cookie": "^3.0.5",
     "motion": "^11.11.17",
     "postcss": "^8.4.49",
@@ -24,12 +25,15 @@
     "react-dom": "^18.3.1",
     "react-markdown": "^9.0.1",
     "react-router-dom": "^6.28.0",
+    "remarkable": "^2.0.1",
     "typeit-react": "^2.7.7"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
+    "@types/node": "^22.10.5",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
+    "@types/remarkable": "^2.0.8",
     "@vitejs/plugin-react": "^4.3.3",
     "eslint": "^9.13.0",
     "eslint-plugin-react-hooks": "^5.0.0",
