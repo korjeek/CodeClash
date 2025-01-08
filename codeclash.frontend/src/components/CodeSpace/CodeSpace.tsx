@@ -1,5 +1,5 @@
 import {useEffect, useMemo, useState} from "react";
-import { useParams } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import { Editor } from "@monaco-editor/react"
 import {getProblem} from "../../services/ProblemService.ts";
 import {Issue} from "../../interfaces/IssueInterfaces.ts";
@@ -11,6 +11,7 @@ import '../../style/CodeSpace/CodeEditor.css'
 import '../../style/CodeSpace/Buttons.css'
 import {sendCode} from "../../services/CompetitionService.ts";
 import {convertTime} from "../../services/TimeConverter.ts";
+import {Room} from "../../interfaces/RoomInterfaces.ts";
 
 export default function CodeSpace(){
     const [problem, setProblem] = useState<Issue>();
@@ -18,6 +19,7 @@ export default function CodeSpace(){
     const [code, setCode] = useState('');
     const signalR = useMemo(() => new SignalRService(), []);
     const { param } = useParams<string>();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchProblem = async ()    => {
@@ -25,6 +27,10 @@ export default function CodeSpace(){
             const problem = await getProblem(param!);
             setProblem(problem);
         }
+
+        signalR.onUserAction(() => {
+            navigate("/competition/result")
+        }, "CompetitionEnded")
 
         signalR.onUserAction<string>((time: string) => {
             setTime(time);
@@ -44,14 +50,21 @@ export default function CodeSpace(){
         console.log(result);
     }
 
+    const quitRoom = async () => {
+        const response = await signalR.invoke<null, Room>("QuitRoom", null)
+        console.log(response)
+        await signalR.stopConnection()
+        navigate('/competitions');
+    }
+
     if (!problem)
         return null;
 
     return (
         <div className="container">
             <div className="header">
-                <button className="quit-button">Quit</button>
-                <div className="timer">{time}</div>
+                <button className="quit-button" onClick={quitRoom}>Quit</button>
+                <div className="timer">10m 30s</div>
                 <button className="submit-button" onClick={submitCode}>Submit</button>
                 </div>
                 <div className="content">
