@@ -31,4 +31,11 @@ public static class UserExtensions
         userEntity.Name,
         userEntity.IsAdmin
     ).Value;
+
+    public static void ClearUserEntityOverhead(this UserEntity userEntity)
+    {
+        userEntity.SentTime = null;
+        userEntity.CompetitionOverhead = null;
+        userEntity.ProgramWorkingTime = null;
+    }
 }

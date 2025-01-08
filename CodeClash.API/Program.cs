@@ -4,9 +4,7 @@ using CodeClash.Application;
 using CodeClash.Application.Services;
 using CodeClash.Persistence;
 using CodeClash.Persistence.Repositories;
-using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.SignalR;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;

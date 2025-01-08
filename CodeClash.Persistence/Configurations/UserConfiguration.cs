@@ -9,6 +9,7 @@ public class UserConfiguration : IEntityTypeConfiguration<UserEntity>
     public void Configure(EntityTypeBuilder<UserEntity> builder)
     {
         builder.HasKey(user => user.Id);
+        builder.HasIndex(u => u.Email).IsUnique();
         builder
             .HasOne<RoomEntity>()
             .WithMany()

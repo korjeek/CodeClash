@@ -37,7 +37,7 @@ public class TestUserSolutionService(RoomsRepository roomsRepository, UsersRepos
         if (!MSBuildLocator.IsRegistered)
             MSBuildLocator.RegisterDefaults();
 
-        var result = await roomsRepository.GetRoomById(roomId);;
+        var result = await roomsRepository.GetRoomById(roomId);
         if (result is null)
             return Result.Failure<string>("Room does not exist.");
         if (result.Status != RoomStatus.CompetitionInProgress)

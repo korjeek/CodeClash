@@ -76,12 +76,14 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
         if (!userEntity.IsAdmin)
         {
             userEntity.RoomId = null;
+            userEntity.ClearUserEntityOverhead();
             await usersRepository.UpdateUser(userEntity);
             await groupManager.RemoveFromGroupAsync(hubCallerContext.ConnectionId, roomId.ToString());
         }
         else
         {
             userEntity.IsAdmin = false;
+            userEntity.ClearUserEntityOverhead();
             await usersRepository.UpdateUser(userEntity);
             var roomEntity = await roomsRepository.GetRoomById(roomId);
             if (roomEntity is null)
