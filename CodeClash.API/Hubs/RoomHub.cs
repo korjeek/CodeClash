@@ -95,23 +95,6 @@ public class RoomHub(RoomService roomService,
         
         return new ApiResponse<string>(true, "Competition is started", null);
     }
-    
-    public async Task<ApiResponse<string>> CheckSolution(CheckSolutionRequest checkSolutionRequest)
-    {
-        var resultString = await testUserSolutionService.CheckSolution(
-            checkSolutionRequest.RoomId, 
-            checkSolutionRequest.Solution, 
-            checkSolutionRequest.IssueName);
-        if (resultString.IsFailure)
-            return new ApiResponse<string>(false, null, resultString.Error);
-        
-        if (CheckSolutionParser.IsResultOk(resultString.Value))
-        {
-            var userId = Context.User.GetUserIdFromAccessToken();
-            await testUserSolutionService.UpdateUserOverhead(resultString.Value, userId, checkSolutionRequest.LeftTime);
-        }
-        return new ApiResponse<string>(true, resultString.Value, null);
-    }
 
     /*
      * Что происходит, когда заканчивается таймер?

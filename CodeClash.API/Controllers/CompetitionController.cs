@@ -14,7 +14,7 @@ namespace CodeClash.API.Controllers;
 public class CompetitionController(TestUserSolutionService testUserSolutionService) : ControllerBase
 {
     [HttpPost("check-solution")]
-    public async Task<ApiResponse<string>> CheckSolution(CheckSolutionRequest checkSolutionRequest)
+    public async Task<ApiResponse<string>> CheckSolution([FromBody] CheckSolutionRequest checkSolutionRequest)
     {
         var resultString = await testUserSolutionService.CheckSolution(
             checkSolutionRequest.RoomId, 
