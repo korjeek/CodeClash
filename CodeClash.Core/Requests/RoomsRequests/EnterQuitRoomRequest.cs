@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CodeClash.Core.Models.RoomsRequests;
+namespace CodeClash.Core.Requests.RoomsRequests;
 
 public class EnterQuitRoomRequest
 {

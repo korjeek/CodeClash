@@ -2,7 +2,7 @@
 using CodeClash.Application.Services;
 using CodeClash.Core.Models;
 using CodeClash.Core.Models.DTOs;
-using CodeClash.Core.Requests.IssueRequest;
+using CodeClash.Core.Requests.IssuesRequests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodeClash.API.Controllers;

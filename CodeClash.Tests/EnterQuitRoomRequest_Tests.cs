@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using CodeClash.Core.Models.RoomsRequests;
+using CodeClash.Core.Requests.RoomsRequests;
 
 namespace CodeClash.Tests
 {

@@ -1,8 +1,10 @@
 using CodeClash.API.Extensions;
 using CodeClash.Application.Extensions;
 using CodeClash.Application.Services;
+using CodeClash.Core;
 using CodeClash.Core.Models.DTOs;
-using CodeClash.Core.Models.RoomsRequests;
+using CodeClash.Core.Requests.RoomsRequests;
+using CodeClash.Core.Requests.SolutionsRequests;
 using CodeClash.Persistence.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
@@ -94,14 +96,30 @@ public class RoomHub(RoomService roomService,
         return new ApiResponse<string>(true, "Competition is started", null);
     }
     
-    public async Task<ApiResponse<string>> CheckSolution(Guid roomId, string solution, string issueName)
+    public async Task<ApiResponse<string>> CheckSolution(CheckSolutionRequest checkSolutionRequest)
     {
-        var resultString = await testUserSolutionService.CheckSolution(roomId, solution, issueName);
+        var resultString = await testUserSolutionService.CheckSolution(
+            checkSolutionRequest.RoomId, 
+            checkSolutionRequest.Solution, 
+            checkSolutionRequest.IssueName);
         if (resultString.IsFailure)
             return new ApiResponse<string>(false, null, resultString.Error);
+        
+        if (CheckSolutionParser.IsResultOk(resultString.Value))
+        {
+            var userId = Context.User.GetUserIdFromAccessToken();
+            await testUserSolutionService.UpdateUserOverhead(resultString.Value, userId, checkSolutionRequest.LeftTime);
+        }
         return new ApiResponse<string>(true, resultString.Value, null);
     }
 
+    /*
+     * Что происходит, когда заканчивается таймер?
+     * 1. Фронт отправляет на бэк запрос о том, что соревновоание законичиось EndCompetition
+     * 2. Бэк изменяет состояние комнаты и формирует список пользователей для доски в отсортированном порядке
+     * 3. 
+     */
+    
     public async Task<ApiResponse<string>> EndCompetition()
     {
         /*

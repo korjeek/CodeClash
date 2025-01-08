@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CodeClash.Core.Requests.IssueRequest;
+namespace CodeClash.Core.Requests.IssuesRequests;
 
 public class CreateIssueRequest
 {

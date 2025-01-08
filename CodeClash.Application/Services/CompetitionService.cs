@@ -1,6 +1,4 @@
-﻿using CodeClash.Application.Extensions;
-using CodeClash.Core.Models.Domain;
-using CodeClash.Persistence.Entities;
+﻿using CodeClash.Persistence.Entities;
 using CodeClash.Persistence.Repositories;
 using CSharpFunctionalExtensions;
 using Microsoft.AspNetCore.SignalR;

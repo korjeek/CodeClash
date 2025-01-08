@@ -53,14 +53,4 @@ public class UsersRepository(ApplicationDbContext dbContext)
             .FindAsync(userId);
         return user;
     }
-    
-    public async Task<UserEntity?> RemoveUserFromRoom(Guid userId)
-    {
-        var user = await dbContext.Users.FindAsync(userId);
-        if (user is null)
-            return null;
-        user.RoomId = null;
-        await dbContext.SaveChangesAsync();
-        return user;
-    }
 }
