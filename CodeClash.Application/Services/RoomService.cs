@@ -119,8 +119,8 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
         return Result.Success(room);
     }
 
-    public async Task<Result<Room>> GetRoomLeadersByRoomId(Guid roomId)
+    public async Task<List<UserEntity>> GetRoomLeadersByRoomId(Guid roomId)
     {
-        throw new NotImplementedException();
+        return await usersRepository.GetUsersByRoomIdInOrderByKey(roomId, user => user.CompetitionOverhead);
     }
 }

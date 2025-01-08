@@ -53,6 +53,7 @@ public class RoomController(RoomService roomService, UserService userService) : 
     [HttpPost("get-room-leaders")]
     public async Task<ApiResponse<List<UserDTO>>> GetRoomLeaders(Guid roomId)
     {
-        throw new NotImplementedException();
+        var result = (await roomService.GetRoomLeadersByRoomId(roomId)).Select(u => u.GetUserDto()).ToList();
+        return new ApiResponse<List<UserDTO>>(true, result, null);
     }
 }

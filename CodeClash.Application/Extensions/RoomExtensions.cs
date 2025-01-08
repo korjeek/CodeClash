@@ -13,7 +13,7 @@ public static class RoomExtensions
         Name = room.Name,
         Time = room.Time,
         IssueName = room.Issue.Name,
-        Users = room.Participants.Select(u => u.GetUserDTO()).ToList()
+        Users = room.Participants.Select(u => u.GetUserDto()).ToList()
     };
 
     public static RoomDTO GetRoomDTOFromRoomEntity(this RoomEntity roomEntity) => new RoomDTO

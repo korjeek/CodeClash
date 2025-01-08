@@ -51,18 +51,22 @@ public class RoomHub(RoomService roomService,
         return new ApiResponse<RoomDTO>(true, roomResult.Value.GetRoomDTOFromRoom(), null);
     }
     
-    public async Task<ApiResponse<string>> QuitRoom(Guid roomId)
+    // 
+    public async Task<ApiResponse<string>> QuitRoom()
     {
         var userId = Context.User.GetUserIdFromAccessToken();
-        var result = await roomService.QuitRoom(userId, roomId, Context, Groups);
+        var roomId = await userService.GetUserRoomId(userId);
+        if (!roomId.HasValue)
+            return new ApiResponse<string>(false, null, "User is not in room.");
+        var result = await roomService.QuitRoom(userId, roomId.Value, Context, Groups);
         if (result.IsFailure)
             return new ApiResponse<string>(false, null, result.Error);
         
-        var userRoom = await roomService.GetRoom(roomId);
+        var userRoom = await roomService.GetRoom(roomId.Value);
         if (userRoom.IsFailure)
             return new ApiResponse<string>(false, null, userRoom.Error);
 
-        await SendMessageToAllUsersInGroup(roomId, userRoom.Value.GetRoomDTOFromRoom(), "UserLeave");
+        await SendMessageToAllUsersInGroup(roomId.Value, userRoom.Value.GetRoomDTOFromRoom(), "UserLeave");
         return new ApiResponse<string>(true, result.Value, null);
     }
     
