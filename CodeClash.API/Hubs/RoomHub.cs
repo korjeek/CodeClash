@@ -119,18 +119,6 @@ public class RoomHub(RoomService roomService,
      * 2. Бэк изменяет состояние комнаты и формирует список пользователей для доски в отсортированном порядке
      * 3. 
      */
-    
-    public async Task<ApiResponse<string>> EndCompetition()
-    {
-        /*
-         На беке:
-         1. Изменить статус комнаты
-         На фронте:
-         1. Загрузить страницу лобби с результатами
-         2. Как будто бы и всё...
-         */
-        throw new NotImplementedException();
-    }
 
     private async Task AddUserToGroup(Guid roomId) => 
         await Groups.AddToGroupAsync(Context.ConnectionId, roomId.ToString());

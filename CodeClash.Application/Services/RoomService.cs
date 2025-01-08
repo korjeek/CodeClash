@@ -53,7 +53,7 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
         await usersRepository.UpdateUser(userEntity);
 
         var issue = await issuesRepository.GetIssueById(roomEntity.IssueId);
-        var roomParticipants = await roomsRepository.GetRoomUsers(roomId);
+        var roomParticipants = await usersRepository.GetUsersByRoomId(roomId);
         var room = roomEntity.GetRoomFromEntity(issue!.GetIssueFromEntity());
         room.SetParticipants(roomParticipants.Select(p => p.GetUserFromEntity()).ToList());
         return Result.Success(room);
@@ -109,11 +109,16 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
         var issue = (await issuesRepository.GetIssueById(roomEntity.IssueId))!.GetIssueFromEntity();
         var room = roomEntity.GetRoomFromEntity(issue);
 
-        var participants = (await roomsRepository.GetRoomUsers(roomId))
+        var participants = (await usersRepository.GetUsersByRoomId(roomId))
             .Select(u => u.GetUserFromEntity())
             .ToList();
         room.SetParticipants(participants);
         
         return Result.Success(room);
+    }
+
+    public async Task<Result<Room>> GetRoomLeadersByRoomId(Guid roomId)
+    {
+        throw new NotImplementedException();
     }
 }

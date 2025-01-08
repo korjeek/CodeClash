@@ -1,4 +1,5 @@
-﻿using CodeClash.Persistence.Entities;
+﻿using System.Linq.Expressions;
+using CodeClash.Persistence.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CodeClash.Persistence.Repositories;
@@ -52,5 +53,18 @@ public class UsersRepository(ApplicationDbContext dbContext)
         var user = await dbContext.Users
             .FindAsync(userId);
         return user;
+    }
+    
+    public async Task<List<UserEntity>> GetUsersByRoomId(Guid roomId)
+    {
+        return await dbContext.Users.Where(u => u.RoomId == roomId).ToListAsync();
+    }
+    
+    public async Task<List<UserEntity>> GetUsersByRoomIdInOrderByKey<TKey>(Guid roomId, 
+        Expression<Func<UserEntity, TKey>> key)
+    {
+        return await dbContext.Users.Where(u => u.RoomId == roomId)
+            .OrderBy(key)
+            .ToListAsync();
     }
 }
