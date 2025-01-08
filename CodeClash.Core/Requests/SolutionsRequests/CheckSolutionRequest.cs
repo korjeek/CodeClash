@@ -2,7 +2,7 @@
 
 public class CheckSolutionRequest
 {
-    public string Solution { get; }  
-    public string IssueName { get; }
-    public TimeOnly LeftTime { get; }
+    public string Solution { get; set; }  
+    public string IssueName { get; set; }
+    public TimeOnly LeftTime { get; set; }
 }
