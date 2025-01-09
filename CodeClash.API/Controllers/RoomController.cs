@@ -46,13 +46,4 @@ public class RoomController(RoomService roomService, UserService userService) : 
             return new ApiResponse<RoomDTO>(false, null, roomResult.Error);
         return new ApiResponse<RoomDTO>(true, roomResult.Value.GetRoomDtoFromRoom(), null);
     }
-
-    
-    // TODO: подумать так ли это надо...
-    [HttpPost("get-room-leaders")]
-    public async Task<ApiResponse<List<UserDTO>>> GetRoomLeaders(Guid roomId)
-    {
-        var result = (await roomService.GetRoomLeadersByRoomId(roomId)).Select(u => u.GetUserDto()).ToList();
-        return new ApiResponse<List<UserDTO>>(true, result, null);
-    }
 }

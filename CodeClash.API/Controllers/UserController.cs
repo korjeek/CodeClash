@@ -11,6 +11,7 @@ namespace CodeClash.API.Controllers;
 [Route("user")]
 public class UserController(UserService userService, RoomService roomService) : ControllerBase
 {
+    [HttpGet]
     public async Task<ApiResponse<UserStateDTO>> GetUserState()
     {
         var userId = Request.GetUserIdFromCookie();
