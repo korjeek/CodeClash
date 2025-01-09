@@ -35,7 +35,7 @@ public class CompetitionService(RoomsRepository roomsRepository, UsersRepository
     
     public async Task SyncTimers(IClientProxy clients, TimeOnly duration, Guid roomId)
     {
-        var endTime = DateTime.Now + duration.ToTimeSpan().Duration();
+        var endTime = DateTime.Now + duration.ToTimeSpan().Duration() + new TimeOnly(0, 0, 3).ToTimeSpan().Duration();
 
         while (true)
         {
