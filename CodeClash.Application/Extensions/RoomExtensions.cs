@@ -7,7 +7,7 @@ namespace CodeClash.Application.Extensions;
 
 public static class RoomExtensions
 {
-    public static RoomDTO GetRoomDTOFromRoom(this Room room) => new RoomDTO
+    public static RoomDTO GetRoomDtoFromRoom(this Room room) => new RoomDTO
     {
         Id = room.Id.ToString(),
         Name = room.Name,
@@ -16,11 +16,12 @@ public static class RoomExtensions
         Users = room.Participants.Select(u => u.GetUserDto()).ToList()
     };
 
-    public static RoomDTO GetRoomDTOFromRoomEntity(this RoomEntity roomEntity) => new RoomDTO
+    public static RoomDTO GetRoomDtoFromRoomEntity(this RoomEntity roomEntity) => new RoomDTO
     {
         Id = roomEntity.Id.ToString(),
         Name = roomEntity.Name,
-        Time = roomEntity.Time
+        Time = roomEntity.Time,
+        ParticipantsCount = roomEntity.ParticipantsCount
     };
 
     public static RoomEntity GetRoomEntity(this Room room) => new RoomEntity

@@ -24,7 +24,7 @@ namespace CodeClash.Tests
 				User.Create(Guid.NewGuid(), "user2@example.com", "hash2", "User2").Value
 			});
 
-			var roomDTO = room.GetRoomDTOFromRoom();
+			var roomDTO = room.GetRoomDtoFromRoom();
 
 			Assert.That(roomDTO.Id, Is.EqualTo(room.Id.ToString()));
 			Assert.That(roomDTO.Name, Is.EqualTo(room.Name));
@@ -42,7 +42,7 @@ namespace CodeClash.Tests
 				Time = new TimeOnly(12, 0)
 			};
 
-			var roomDTO = roomEntity.GetRoomDTOFromRoomEntity();
+			var roomDTO = roomEntity.GetRoomDtoFromRoomEntity();
 
 			Assert.That(roomDTO.Id, Is.EqualTo(roomEntity.Id.ToString()));
 			Assert.That(roomDTO.Name, Is.EqualTo(roomEntity.Name));
