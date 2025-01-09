@@ -68,37 +68,36 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
         return Result.Success(room);
     }
 
-    public async Task<Result<Room>> QuitRoom(Guid userId, Guid roomId, HubCallerContext hubCallerContext, IGroupManager groupManager)
+    public async Task<Result<Room?>> QuitRoom(Guid userId, Guid roomId, HubCallerContext hubCallerContext, IGroupManager groupManager)
     {
         var userEntity = await usersRepository.GetUserById(userId);
         if (userEntity is null)
-            return Result.Failure<Room>($"User with {userId} id does not exist.");
+            return Result.Failure<Room?>($"User with {userId} id does not exist.");
         
         var roomEntity = await roomsRepository.GetRoomById(roomId);
         if (roomEntity is null)
-            return Result.Failure<Room>("Room does not exist.");
+            return Result.Failure<Room?>("Room does not exist.");
         if (roomEntity.Id != roomId)
-            return Result.Failure<Room>($"User is not in room with id {roomId}.");
+            return Result.Failure<Room?>($"User is not in room with id {roomId}.");
 
-        if (!userEntity.IsAdmin)
-        {
-            userEntity.RoomId = null;
-            userEntity.ClearUserEntityOverhead();
-            await usersRepository.UpdateUser(userEntity);
-            await groupManager.RemoveFromGroupAsync(hubCallerContext.ConnectionId, roomId.ToString());
-            roomEntity.ParticipantsCount -= 1;
-            await roomsRepository.UpdateRoom(roomEntity);
-        }
-        else
+        if (userEntity.IsAdmin)
         {
             userEntity.IsAdmin = false;
             userEntity.ClearUserEntityOverhead();
             await usersRepository.UpdateUser(userEntity);
             await roomsRepository.Delete(roomEntity);
+            return Result.Success<Room?>(null);
         }
-        var room = await GetRoomByEntity(roomEntity);
         
-        return Result.Success(room);
+        userEntity.RoomId = null;
+        userEntity.ClearUserEntityOverhead();
+        await usersRepository.UpdateUser(userEntity);
+        await groupManager.RemoveFromGroupAsync(hubCallerContext.ConnectionId, roomId.ToString());
+        roomEntity.ParticipantsCount -= 1;
+        await roomsRepository.UpdateRoom(roomEntity);
+        
+        var room = await GetRoomByEntity(roomEntity);
+        return Result.Success<Room?>(room);
     }
 
     public async Task<Result<List<RoomDTO>>> GetAllWaitingRoomDtos()
