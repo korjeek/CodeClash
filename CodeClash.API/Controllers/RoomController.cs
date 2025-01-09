@@ -1,5 +1,4 @@
-﻿using System.Security.Claims;
-using CodeClash.Application.Extensions;
+﻿using CodeClash.Application.Extensions;
 using CodeClash.Application.Services;
 using CodeClash.Core.Models.DTOs;
 using Microsoft.AspNetCore.Authorization;
@@ -28,8 +27,7 @@ public class RoomController(RoomService roomService, UserService userService) : 
     [HttpGet("check-for-admin")]
     public async Task<ApiResponse<bool?>> CheckUserIsAdmin()
     {
-        Request.Cookies.TryGetValue("spooky-cookies", out string? cookie);
-        var userId = new Guid(cookie!.GetClaimsFromToken().First(c => c.Type == ClaimTypes.NameIdentifier).Value);
+        var userId = Request.GetUserIdFromCookie();
         var isUserAdminResult = await roomService.IsUserAdmin(userId);
         if (isUserAdminResult.IsFailure)
             return new ApiResponse<bool?>(false, null, isUserAdminResult.Error);
@@ -39,8 +37,7 @@ public class RoomController(RoomService roomService, UserService userService) : 
     [HttpGet("get-room-info")]
     public async Task<ApiResponse<RoomDTO>> GetRoomInfo()
     {
-        Request.Cookies.TryGetValue("spooky-cookies", out string? cookie);
-        var userId = new Guid(cookie!.GetClaimsFromToken().First(c => c.Type == ClaimTypes.NameIdentifier).Value);
+        var userId = Request.GetUserIdFromCookie();
         var roomId = await userService.GetUserRoomId(userId);
         if (!roomId.HasValue)
             return new ApiResponse<RoomDTO>(false, null, "User has not room.");
@@ -50,6 +47,8 @@ public class RoomController(RoomService roomService, UserService userService) : 
         return new ApiResponse<RoomDTO>(true, roomResult.Value.GetRoomDtoFromRoom(), null);
     }
 
+    
+    // TODO: подумать так ли это надо...
     [HttpPost("get-room-leaders")]
     public async Task<ApiResponse<List<UserDTO>>> GetRoomLeaders(Guid roomId)
     {

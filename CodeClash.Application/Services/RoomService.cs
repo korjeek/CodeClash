@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using CodeClash.Application.Extensions;
+﻿using CodeClash.Application.Extensions;
 using CodeClash.Core.Models.Domain;
 using CodeClash.Core.Models.DTOs;
 using CodeClash.Persistence.Entities;
@@ -9,7 +8,10 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace CodeClash.Application.Services;
 
-public class RoomService(RoomsRepository roomsRepository, IssuesRepository issuesRepository, UsersRepository usersRepository)
+public class RoomService(
+    RoomsRepository roomsRepository,
+    IssuesRepository issuesRepository,
+    UsersRepository usersRepository)
 {
     public async Task<Result<Room>> CreateRoom(string roomName, TimeOnly time, Guid issueId, Guid userId)
     {
@@ -20,22 +22,22 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
         var newRoomResult = Room.Create(Guid.NewGuid(), roomName, time, issue.GetIssueFromEntity());
         if (newRoomResult.IsFailure)
             return Result.Failure<Room>(newRoomResult.Error);
-        
+
         var adminUser = await usersRepository.GetUserById(userId);
         if (adminUser is null)
             return Result.Failure<Room>($"User with {userId} id does not exist");
         if (adminUser.IsAdmin)
             return Result.Failure<Room>("User is already admin");
-        
+
         adminUser.IsAdmin = true;
         await roomsRepository.Add(newRoomResult.Value.GetRoomEntity());
         await usersRepository.UpdateUser(adminUser);
-        
+
         newRoomResult.Value.AddParticipant(adminUser.GetUserFromEntity());
 
         return newRoomResult;
     }
-    
+
     public async Task<Result<Room>> JoinRoom(Guid roomId, Guid userId)
     {
         // TODO: проверить работает ли это хрень, как задумывалось)
@@ -58,22 +60,18 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
             await roomsRepository.UpdateRoom(roomEntity);
         }
 
-        // var issue = await issuesRepository.GetIssueById(roomEntity.IssueId);
-        // var roomParticipants = await usersRepository.GetUsersByRoomId(roomId);
-        // var room = roomEntity.GetRoomFromEntity(issue!.GetIssueFromEntity());
-        // room.SetParticipants(roomParticipants.Select(p => p.GetUserFromEntity()).ToList());
-        
         var room = await GetRoomByEntity(roomEntity);
-        
+
         return Result.Success(room);
     }
 
-    public async Task<Result<Room?>> QuitRoom(Guid userId, Guid roomId, HubCallerContext hubCallerContext, IGroupManager groupManager)
+    public async Task<Result<Room?>> QuitRoom(Guid userId, Guid roomId, HubCallerContext hubCallerContext,
+        IGroupManager groupManager)
     {
         var userEntity = await usersRepository.GetUserById(userId);
         if (userEntity is null)
             return Result.Failure<Room?>($"User with {userId} id does not exist.");
-        
+
         var roomEntity = await roomsRepository.GetRoomById(roomId);
         if (roomEntity is null)
             return Result.Failure<Room?>("Room does not exist.");
@@ -88,14 +86,14 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
             await roomsRepository.Delete(roomEntity);
             return Result.Success<Room?>(null);
         }
-        
+
         userEntity.RoomId = null;
         userEntity.ClearUserEntityOverhead();
         await usersRepository.UpdateUser(userEntity);
         await groupManager.RemoveFromGroupAsync(hubCallerContext.ConnectionId, roomId.ToString());
         roomEntity.ParticipantsCount -= 1;
         await roomsRepository.UpdateRoom(roomEntity);
-        
+
         var room = await GetRoomByEntity(roomEntity);
         return Result.Success<Room?>(room);
     }
@@ -111,17 +109,17 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
     public async Task<Result<bool>> IsUserAdmin(Guid userId)
     {
         var userEntity = await usersRepository.GetUserById(userId);
-        if (userEntity is null)
-            return Result.Failure<bool>($"User with {userId} does not exist.");
-        return Result.Success(userEntity.IsAdmin);
+        return userEntity is null
+            ? Result.Failure<bool>($"User with {userId} does not exist.")
+            : Result.Success(userEntity.IsAdmin);
     }
-    
+
     public async Task<Result<Room>> GetRoomByRoomId(Guid roomId)
     {
         var roomEntity = await roomsRepository.GetRoomById(roomId);
         if (roomEntity is null)
             return Result.Failure<Room>("Room does not exist.");
-        
+
         var issue = (await issuesRepository.GetIssueById(roomEntity.IssueId))!.GetIssueFromEntity();
         var room = roomEntity.GetRoomFromEntity(issue);
 
@@ -129,8 +127,21 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
             .Select(u => u.GetUserFromEntity())
             .ToList();
         room.SetParticipants(participants);
-        
+
         return Result.Success(room);
+    }
+
+    public async Task<Result<RoomEntity>> GetRoomEntityById(Guid roomId)
+    {
+        var roomEntity = await roomsRepository.GetRoomById(roomId);
+        return roomEntity is null
+            ? Result.Failure<RoomEntity>($"Room with {roomId} does not exist.")
+            : Result.Success(roomEntity);
+    }
+
+    public async Task<List<UserEntity>> GetRoomLeadersByRoomId(Guid roomId)
+    {
+        return await usersRepository.GetUsersByRoomIdInOrderByKey(roomId, user => user.CompetitionOverhead);
     }
 
     private async Task<Room> GetRoomByEntity(RoomEntity roomEntity)
@@ -144,10 +155,5 @@ public class RoomService(RoomsRepository roomsRepository, IssuesRepository issue
         room.SetParticipants(participants);
 
         return room;
-    }
-
-    public async Task<List<UserEntity>> GetRoomLeadersByRoomId(Guid roomId)
-    {
-        return await usersRepository.GetUsersByRoomIdInOrderByKey(roomId, user => user.CompetitionOverhead);
     }
 }

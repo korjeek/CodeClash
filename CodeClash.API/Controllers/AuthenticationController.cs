@@ -39,8 +39,7 @@ public class AuthenticationController(AuthService authService) : ControllerBase
         return Ok(new AuthResponse(user.Name, user.Email, tokens.AccessToken, tokens.RefreshToken));
     }
     
-    [HttpPut] // TODO: Может изменить на PUT? Обычно именно его используют для обновления данных на сервере, а использовать везде только POST это КОЛХОЗ, ну и плохо в целом, так Ваня сказал
-    [Route("refresh-token")]
+    [HttpPut("refresh-token")] // TODO: Может изменить на PUT? Обычно именно его используют для обновления данных на сервере, а использовать везде только POST это КОЛХОЗ, ну и плохо в целом, так Ваня сказал
     public async Task<IActionResult> RefreshToken(JwtToken? tokenModel)
     {
         if (tokenModel is null)
@@ -59,8 +58,6 @@ public class AuthenticationController(AuthService authService) : ControllerBase
 
 internal enum AuthRequestErrorType
 {
-    ExistedAccount,
-    WrongCredentials,
     InvalidTokenModel,
     ComplexRefreshTokenError
 }

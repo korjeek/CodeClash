@@ -3,10 +3,13 @@ using CodeClash.Application.Services;
 using CodeClash.Core.Models;
 using CodeClash.Core.Models.DTOs;
 using CodeClash.Core.Requests.IssuesRequests;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodeClash.API.Controllers;
 
+[ApiController]
+[Authorize]
 [Route("issue")]
 public class IssueController(IssueService issueService, 
     TestUserSolutionService testUserSolutionService) : ControllerBase
