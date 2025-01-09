@@ -31,7 +31,8 @@ public class RoomsRepository(ApplicationDbContext dbContext)
     {
         await dbContext.Rooms
             .Where(r => r.Id == roomEntity.Id)
-            .ExecuteUpdateAsync(s => s.
-                SetProperty(r => r.Status, roomEntity.Status));
+            .ExecuteUpdateAsync(s => s
+                .SetProperty(r => r.Status, roomEntity.Status)
+                .SetProperty(r => r.ParticipantsCount, roomEntity.ParticipantsCount));
     }
 }

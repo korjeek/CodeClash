@@ -45,7 +45,10 @@ public class UsersRepository(ApplicationDbContext dbContext)
                 .SetProperty(u => u.RefreshToken, user.RefreshToken)
                 .SetProperty(u => u.RefreshTokenExpiryTime, user.RefreshTokenExpiryTime)
                 .SetProperty(u => u.IsAdmin, user.IsAdmin)
-                .SetProperty(u => u.RoomId, user.RoomId));
+                .SetProperty(u => u.RoomId, user.RoomId)
+                .SetProperty(u => u.SentTime, user.SentTime)
+                .SetProperty(u => u.ProgramWorkingTime, user.ProgramWorkingTime)
+                .SetProperty(u => u.CompetitionOverhead, user.CompetitionOverhead));
     }
 
     public async Task<UserEntity?> GetUserById(Guid userId)

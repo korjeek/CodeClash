@@ -1,10 +1,8 @@
 using CodeClash.API.Extensions;
 using CodeClash.Application.Extensions;
 using CodeClash.Application.Services;
-using CodeClash.Core;
 using CodeClash.Core.Models.DTOs;
 using CodeClash.Core.Requests.RoomsRequests;
-using CodeClash.Core.Requests.SolutionsRequests;
 using CodeClash.Persistence.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
@@ -38,34 +36,38 @@ public class RoomHub(RoomService roomService,
         
         var room = roomResult.Value;
         await AddUserToGroup(room.Id);
-        return new ApiResponse<RoomDTO>(true, room.GetRoomDTOFromRoom(), null);
+        return new ApiResponse<RoomDTO>(true, room.GetRoomDtoFromRoom(), null);
     }
     
-    public async Task<ApiResponse<RoomDTO>> JoinRoom(Guid roomId)
+    public async Task<ApiResponse<string>> JoinRoom(Guid roomId)
     {
         var userId = Context.User.GetUserIdFromAccessToken();
-        var roomResult = await roomService.JoinRoom(roomId, userId);
-        if (roomResult.IsFailure)
-            return new ApiResponse<RoomDTO>(false, null, roomResult.Error);
+        var joinedRoomResult = await roomService.JoinRoom(roomId, userId);
+        if (joinedRoomResult.IsFailure)
+            return new ApiResponse<string>(false, null, joinedRoomResult.Error);
         
-        await SendMessageToAllUsersInGroup(roomResult.Value.Id, roomResult.Value.GetRoomDTOFromRoom(), "UserJoined");
-        await AddUserToGroup(roomResult.Value.Id);
-        return new ApiResponse<RoomDTO>(true, roomResult.Value.GetRoomDTOFromRoom(), null);
+        await SendMessageToAllUsersInGroup(joinedRoomResult.Value.Id, joinedRoomResult.Value.GetRoomDtoFromRoom(), "UserJoined");
+        await AddUserToGroup(joinedRoomResult.Value.Id);
+        return new ApiResponse<string>(true, "Joined to room successfully.", null);
     }
     
-    public async Task<ApiResponse<string>> QuitRoom(Guid roomId)
+    // 
+    public async Task<ApiResponse<string>> QuitRoom()
     {
         var userId = Context.User.GetUserIdFromAccessToken();
-        var result = await roomService.QuitRoom(userId, roomId, Context, Groups);
-        if (result.IsFailure)
-            return new ApiResponse<string>(false, null, result.Error);
+        var roomId = await userService.GetUserRoomId(userId);
+        if (!roomId.HasValue)
+            return new ApiResponse<string>(false, null, "User is not in room.");
+        var leftRoomResult = await roomService.QuitRoom(userId, roomId.Value, Context, Groups);
+        if (leftRoomResult.IsFailure)
+            return new ApiResponse<string>(false, null, leftRoomResult.Error);
         
-        var userRoom = await roomService.GetRoom(roomId);
-        if (userRoom.IsFailure)
-            return new ApiResponse<string>(false, null, userRoom.Error);
+        // var userRoom = await roomService.GetRoom(roomId.Value);
+        // if (userRoom.IsFailure)
+        //     return new ApiResponse<string>(false, null, userRoom.Error);
 
-        await SendMessageToAllUsersInGroup(roomId, userRoom.Value.GetRoomDTOFromRoom(), "UserLeave");
-        return new ApiResponse<string>(true, result.Value, null);
+        await SendMessageToAllUsersInGroup(roomId.Value, leftRoomResult.Value.GetRoomDtoFromRoom(), "UserLeave");
+        return new ApiResponse<string>(true, "Quited from room successfully.", null);
     }
     
     public async Task<ApiResponse<string>> StartCompetition(RoomDTO roomDto)

@@ -15,7 +15,7 @@ public class RoomController(RoomService roomService, UserService userService) : 
     [HttpGet("get-rooms")]
     public async Task<ApiResponse<List<RoomDTO>>> GetRooms()
     {
-        var roomsResult = await roomService.GetAllWaitingRoomDTOs();
+        var roomsResult = await roomService.GetAllWaitingRoomDtos();
         if (roomsResult.IsFailure)
             return new ApiResponse<List<RoomDTO>>(false, null, roomsResult.Error);
         return new ApiResponse<List<RoomDTO>>(
@@ -44,15 +44,16 @@ public class RoomController(RoomService roomService, UserService userService) : 
         var roomId = await userService.GetUserRoomId(userId);
         if (!roomId.HasValue)
             return new ApiResponse<RoomDTO>(false, null, "User has not room.");
-        var roomResult = await roomService.GetRoom(roomId.Value);
+        var roomResult = await roomService.GetRoomByRoomId(roomId.Value);
         if (roomResult.IsFailure)
             return new ApiResponse<RoomDTO>(false, null, roomResult.Error);
-        return new ApiResponse<RoomDTO>(true, roomResult.Value.GetRoomDTOFromRoom(), null);
+        return new ApiResponse<RoomDTO>(true, roomResult.Value.GetRoomDtoFromRoom(), null);
     }
 
     [HttpPost("get-room-leaders")]
     public async Task<ApiResponse<List<UserDTO>>> GetRoomLeaders(Guid roomId)
     {
-        throw new NotImplementedException();
+        var result = (await roomService.GetRoomLeadersByRoomId(roomId)).Select(u => u.GetUserDto()).ToList();
+        return new ApiResponse<List<UserDTO>>(true, result, null);
     }
 }
