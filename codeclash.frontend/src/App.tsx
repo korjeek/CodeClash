@@ -9,6 +9,7 @@ import HomePage from "./components/HomePage/HomePage.tsx";
 import Lobby from "./components/LobbyPage/Lobby.tsx";
 import CodeSpace from "./components/CodeSpace/CodeSpace.tsx";
 import CompetitionResultPage from "./components/CompetitionResultPage.tsx";
+import ProblemsPage from "./components/ProblemsPage/ProblemsPage.tsx";
 
 const App: React.FC = () => {
     return (
@@ -22,6 +23,7 @@ const App: React.FC = () => {
                 <Route path="/lobby" element={<Lobby/>} />
                 <Route path="/problem/:param" element={<CodeSpace/>} />
                 <Route path="/competition/result" element={<CompetitionResultPage/>} />
+                <Route path="/problems" element={<ProblemsPage/>} />
             </Routes>
         </Router>
     );

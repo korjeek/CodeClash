@@ -11,7 +11,7 @@ import '../../style/CreateLobby/Main.css'
 import '../../style/CreateLobby/Inputs.css'
 import '../../style/CreateLobby/Buttons.css'
 import '../../style/CreateLobby/ProblemsList.css'
-import {MinuteButtonProps, TaskButtonProps} from "../../interfaces/ButtonsProps.ts";
+import {MinuteButtonProps, TaskButtonProps} from "../../Props/ButtonsProps.ts";
 
 const minutes = ["5", "10", "30", "60"]
 

@@ -6,6 +6,7 @@ import BaseNavBar from "../NavBars/BaseNavBar.tsx";
 import '../../style/Lobby/Buttons.css';
 import '../../style/Lobby/Main.css';
 import {checkForAdmin, getRoom} from "../../services/RoomService.ts";
+import {TabItem} from "../../Props/PageStateProps.ts";
 
 export default function Lobby() {
     const location = useLocation();
@@ -31,6 +32,8 @@ export default function Lobby() {
         }, "CompetitionStarted");
 
         signalR.onUserAction<Room>((room: Room) => {
+            if (!room)
+                navigate('/competitions');
             setRoom(room);
         }, "UserLeave");
 
@@ -47,7 +50,7 @@ export default function Lobby() {
 
         connectToRoom();
         fetchAdminStatus();
-    }, [roomId, signalR]);
+    }, [navigate, roomId, signalR]);
 
     useEffect(() => {
         if (ready && count > 0) {
@@ -62,8 +65,7 @@ export default function Lobby() {
     }, [competitionUrl, count, navigate, ready]);
 
     const quitRoom = async () => {
-        const response = await signalR.invoke<string, Room>("QuitRoom", roomId)
-        console.log(response)
+        await signalR.invoke<null, Room>("QuitRoom", null)
         await signalR.stopConnection()
         navigate('/competitions');
     }
@@ -80,7 +82,7 @@ export default function Lobby() {
 
     return (
         <div className="menu-page">
-            <BaseNavBar/>
+            <BaseNavBar tab={TabItem.Competitions}/>
             <div className="content-wrapper">
                 <h1 className="room-header">{room.name} lobby</h1>
                 <div className="lobby-grid">

@@ -10,6 +10,7 @@ import {useNavigate} from "react-router-dom";
 import BaseNavBar from "../NavBars/BaseNavBar.tsx";
 import {getRoomsList} from "../../services/RoomService.ts";
 import SignalRService from "../../services/SignalRService.ts";
+import {TabItem} from "../../Props/PageStateProps.ts";
 
 
 export default function HomePage() {
@@ -22,28 +23,31 @@ export default function HomePage() {
 
     useEffect(() => {
         async function fetchRooms() {
+            await signalR.startConnection();
             const roomsList = await getRoomsList();
             const paginationRange = await getPaginationRange(currentPage, Math.ceil(roomsList.length / 6));
             setRooms(roomsList);
             setPages(paginationRange);
         }
 
+        signalR.onUserAction<string>((url: string) =>
+        {
+            setTimeout(() => {navigate(url)}, 3000);
+        }, "CompetitionStarted");
+
         fetchRooms();
-    }, [currentPage])
+    }, [currentPage, navigate, signalR])
 
     const joinRoom = async (roomId: string) => {
-        await signalR.startConnection();
         const response = await signalR.invoke<string, Room>("JoinRoom", roomId)
         if (response)
             navigate(`/lobby?id=${roomId}`);
-        else
-            await signalR.startConnection();
     }
     const createRoom = async () => navigate(`/create-competition`);
 
     return (
         <div className="menu-page">
-            <BaseNavBar/>
+            <BaseNavBar tab={TabItem.Competitions}/>
             <div className="content-wrapper">
                 <div className="grid-container">
                     <div className="item item-1">
@@ -69,7 +73,7 @@ export default function HomePage() {
                                 <button className="room-item" key={room.id} onClick={() => joinRoom(room.id)}>
                                     <div>{room.id}</div>
                                     <div style={{"flex": "right"}}>Name: {room.name}</div>
-                                    <div style={{"flex": "right"}}>People: {room.users?.length ?? 0}</div>
+                                    <div style={{"flex": "right"}}>People: {room.participantsCount}</div>
                                 </button>
                             ))}
                         </div>
@@ -108,7 +112,3 @@ async function getPaginationRange(currentPage: number, totalPages: number){
 function searchRoom(room: Room, search: string){
     return search.toLowerCase() === '' ? room : room.name.toLowerCase().includes(search)
 }
-
-
-
-

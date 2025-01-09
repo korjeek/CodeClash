@@ -28,7 +28,11 @@ export default class SignalRService {
 
     public async invoke<TArg, TResult>(methodName: string, arg: TArg): Promise<TResult | undefined> {
         try {
-            const response = await this.connection.invoke<Response<TResult>>(methodName, arg);
+            let response: Response<TResult>;
+            if (arg)
+                response = await this.connection.invoke<Response<TResult>>(methodName, arg);
+            else
+                response = await this.connection.invoke<Response<TResult>>(methodName);
             if (response.success)
                 return response.data;
             console.log(response.error);
