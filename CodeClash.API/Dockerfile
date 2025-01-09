@@ -10,7 +10,6 @@ WORKDIR /src
 COPY ["CodeClash.API/CodeClash.API.csproj", "CodeClash.API/"]
 COPY ["CodeClash.Application/CodeClash.Application.csproj", "CodeClash.Application/"]
 COPY ["CodeClash.Core/CodeClash.Core.csproj", "CodeClash.Core/"]
-COPY ["CodeClash.Infrastructure/CodeClash.Infrastructure.csproj", "CodeClash.Infrastructure/"]
 COPY ["CodeClash.Persistence/CodeClash.Persistence.csproj", "CodeClash.Persistence/"]
 COPY ["CodeClash.UserSolutionTest/CodeClash.UserSolutionTest.csproj", "CodeClash.UserSolutionTest/"]
 RUN dotnet restore "CodeClash.API/CodeClash.API.csproj"
