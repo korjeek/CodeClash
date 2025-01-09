@@ -66,7 +66,7 @@ public class RoomHub(RoomService roomService,
         // if (userRoom.IsFailure)
         //     return new ApiResponse<string>(false, null, userRoom.Error);
 
-        await SendMessageToAllUsersInGroup(roomId.Value, leftRoomResult.Value.GetRoomDtoFromRoom(), "UserLeave");
+        await SendMessageToAllUsersInGroup(roomId.Value, leftRoomResult.Value?.GetRoomDtoFromRoom(), "UserLeave");
         return new ApiResponse<string>(true, "Quited from room successfully.", null);
     }
     
