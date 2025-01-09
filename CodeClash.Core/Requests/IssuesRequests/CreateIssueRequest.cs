@@ -10,6 +10,7 @@ public class CreateIssueRequest
     [Required]
     public string Description { get; set; }
     
-    [Required]
-    public string IssueAdminPassword { get; set; }
+    // [Required]
+    // public string IssueAdminPassword { get; set; }
+    // Фича, которая будет, а можеи и нет
 }
