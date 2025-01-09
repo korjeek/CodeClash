@@ -37,7 +37,7 @@ export default function CodeSpace(){
         }, "UpdateTimer")
 
         fetchProblem();
-    }, [param, signalR]);
+    }, [navigate, param, signalR]);
 
     const handleEditorChange = (value: string | undefined) => {
         setCode(value || '');
@@ -64,7 +64,7 @@ export default function CodeSpace(){
         <div className="container">
             <div className="header">
                 <button className="quit-button" onClick={quitRoom}>Quit</button>
-                <div className="timer">10m 30s</div>
+                <div className="timer">{time}</div>
                 <button className="submit-button" onClick={submitCode}>Submit</button>
                 </div>
                 <div className="content">

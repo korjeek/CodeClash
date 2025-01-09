@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import '../../style/HomePage/Main.css'
 import '../../style/HomePage/Input.css'
 import '../../style/HomePage/Buttons.css'
@@ -9,6 +9,7 @@ import {Room} from "../../interfaces/RoomInterfaces.ts";
 import {useNavigate} from "react-router-dom";
 import BaseNavBar from "../NavBars/BaseNavBar.tsx";
 import {getRoomsList} from "../../services/RoomService.ts";
+import SignalRService from "../../services/SignalRService.ts";
 
 
 export default function HomePage() {
@@ -17,6 +18,7 @@ export default function HomePage() {
     const [search, setSearch] = useState<string>('');
     const [currentPage, setCurrentPage] = useState<number>(1);
     const navigate = useNavigate();
+    const signalR = useMemo(() => new SignalRService(), []);
 
     useEffect(() => {
         async function fetchRooms() {
@@ -29,7 +31,14 @@ export default function HomePage() {
         fetchRooms();
     }, [currentPage])
 
-    const joinRoom = async (roomId: string) => navigate(`/lobby?id=${roomId}`);
+    const joinRoom = async (roomId: string) => {
+        await signalR.startConnection();
+        const response = await signalR.invoke<string, Room>("JoinRoom", roomId)
+        if (response)
+            navigate(`/lobby?id=${roomId}`);
+        else
+            await signalR.startConnection();
+    }
     const createRoom = async () => navigate(`/create-competition`);
 
     return (
@@ -46,7 +55,7 @@ export default function HomePage() {
                                 type="text"
                                 name="room-id"
                                 id="room-id"
-                                placeholder="Find room by id or name"
+                                    placeholder="Find room by id or name"
                                 onChange={(e) => setSearch(e.target.value)}
                             />
                         </div>

@@ -11,8 +11,11 @@ export default function Lobby() {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const roomId = queryParams.get('id')!;
-    const [room, setRoom] = useState<Room>()
-    const [isAdmin, setIsAdmin] = useState<boolean>(false)
+    const [room, setRoom] = useState<Room>();
+    const [isAdmin, setIsAdmin] = useState<boolean>(false);
+    const [count, setCount] = useState<number>(3);
+    const [ready, setReady] = useState(false);
+    const [competitionUrl, setCompetitionUrl] = useState<string>('');
     const signalR = useMemo(() => new SignalRService(), []);
     const navigate = useNavigate();
 
@@ -21,8 +24,10 @@ export default function Lobby() {
             setRoom(room);
         }, "UserJoined");
 
-        signalR.onUserAction<string>((url: string) => {
-            navigate(url);
+        signalR.onUserAction<string>((url: string) =>
+        {
+            setReady(true);
+            setCompetitionUrl(url);
         }, "CompetitionStarted");
 
         signalR.onUserAction<Room>((room: Room) => {
@@ -36,7 +41,6 @@ export default function Lobby() {
 
         const connectToRoom = async () => {
             await signalR.startConnection();
-            await signalR.invoke<string, Room>("JoinRoom", roomId)
             const room = await getRoom()
             setRoom(room)
         };
@@ -44,6 +48,18 @@ export default function Lobby() {
         connectToRoom();
         fetchAdminStatus();
     }, [roomId, signalR]);
+
+    useEffect(() => {
+        if (ready && count > 0) {
+            const timer = setTimeout(() => {
+                setCount(count - 1);
+            }, 1000);
+
+            return () => clearTimeout(timer);
+        } else if (ready && count === 0) {
+            navigate(competitionUrl);
+        }
+    }, [competitionUrl, count, navigate, ready]);
 
     const quitRoom = async () => {
         const response = await signalR.invoke<string, Room>("QuitRoom", roomId)
@@ -69,26 +85,30 @@ export default function Lobby() {
                 <h1 className="room-header">{room.name} lobby</h1>
                 <div className="lobby-grid">
                     <div className="online-count">Participants: {room.users.length}</div>
-                    <div className="competition-info">
-                        <h3 className="info-item">Author: {room.time.split(':')[1]} min</h3>
-                        <h3 className="info-item">Task: {room.issueName}</h3>
-                        <h3 className="info-item">Time: {room.time.split(':')[1]} min</h3>
-                    </div>
+                    {/*<div className="competition-info">*/}
+                    {/*    <h3 className="info-item">Author: {room.time.split(':')[1]} min</h3>*/}
+                    {/*    <h3 className="info-item">Task: {room.issueName}</h3>*/}
+                    {/*    <h3 className="info-item">Time: {room.time.split(':')[1]} min</h3>*/}
+                    {/*</div>*/}
                     <div className="users-container">
                         {room.users.map((user, index) => (
-                            <div className="user-container">
+                            <div key={user.email} className="user-container">
                                 <div className="num-user">{index + 1}</div>
-                                <div key={user.email} className="user-item">{user.name}</div>
+                                <div className="user-item">{user.name}</div>
                                 {isAdmin && <button className="kick-room-btn">kick</button>}
                             </div>
                         ))}
                     </div>
+                    <div className={ready ? "ready lobby-status" : "not-ready lobby-status"}>
+                        {!ready && "Waiting for players..."}
+                        {ready && `Starting in ${count}`}
+                    </div>
                 </div>
                 <div className="btn-container">
-                <button className="lobby-btn quit-room-btn" onClick={quitRoom}>Quit Room</button>
-                    {isAdmin &&
-                        <button className="lobby-btn start-competition-btn" onClick={startCompetition}>Start
-                            Competition</button>}
+                    <button className="lobby-btn quit-room-btn" onClick={quitRoom}>Quit Room</button>
+                        {isAdmin &&
+                            <button className="lobby-btn start-competition-btn" onClick={startCompetition}>Start
+                                Competition</button>}
                 </div>
             </div>
         </div>

@@ -41,7 +41,10 @@ export default function CreateRoomPage() {
             await signalR.startConnection()
             const createdRoom = await signalR.invoke<CreateRoomData, Room>("CreateRoom", room);
             if (createdRoom)
+            {
+                await signalR.invoke<string, Room>("JoinRoom", createdRoom.id)
                 navigate(`/lobby?id=${createdRoom.id}`);
+            }
         }
         catch {
             console.error('Failed to create room. Please try again.');
