@@ -11,7 +11,7 @@ import '../../style/CreateLobby/Main.css'
 import '../../style/CreateLobby/Inputs.css'
 import '../../style/CreateLobby/Buttons.css'
 import '../../style/CreateLobby/ProblemsList.css'
-import {MinuteButtonProps, TaskButtonProps} from "../../interfaces/ButtonsProps.ts";
+import {MinuteButtonProps, TaskButtonProps} from "../../Props/ButtonsProps.ts";
 
 const minutes = ["5", "10", "30", "60"]
 
@@ -41,7 +41,10 @@ export default function CreateRoomPage() {
             await signalR.startConnection()
             const createdRoom = await signalR.invoke<CreateRoomData, Room>("CreateRoom", room);
             if (createdRoom)
+            {
+                await signalR.invoke<string, Room>("JoinRoom", createdRoom.id)
                 navigate(`/lobby?id=${createdRoom.id}`);
+            }
         }
         catch {
             console.error('Failed to create room. Please try again.');

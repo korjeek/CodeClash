@@ -1,12 +1,18 @@
-import React, {useState} from "react";
+import React, {useCallback, useState} from "react";
 import '../../style/Default/BaseNavBar.css'
-import { motion } from "framer-motion";
-import {ChipProps} from "../../interfaces/ButtonsProps.ts";
+import {motion} from "framer-motion";
+import {ChipProps} from "../../Props/ButtonsProps.ts";
+import {useNavigate} from "react-router-dom";
+import {initialSelectedTab, TabItem} from "../../Props/PageStateProps.ts";
 
-const tabs = ["Competitions", "Problems", "Leaderboard"];
+const tabs = [
+    { text: TabItem.Competitions, href: "/competitions" },
+    { text: TabItem.Problems, href: "/problems" },
+    { text: TabItem.Leaderboard, href: "/leaderboard" }
+];
 
-export default function BaseNavBar() {
-    const [selected, setSelected] = useState(tabs[0]);
+export default function BaseNavBar({ tab }: initialSelectedTab) {
+    const [selected, setSelected] = useState<string>(tab);
 
     return (
         <div className="navbar_container">
@@ -16,10 +22,11 @@ export default function BaseNavBar() {
                     <nav className="menu-navbar">
                         {tabs.map((tab) => (
                             <Chip
-                                text={tab}
-                                selected={selected === tab}
+                                text={tab.text}
+                                href={tab.href}
+                                selected={selected === tab.text}
                                 setSelected={setSelected}
-                                key={tab}
+                                key={tab.text}
                             />
                         ))}
                     </nav>
@@ -29,10 +36,17 @@ export default function BaseNavBar() {
     );
 };
 
-const Chip: React.FC<ChipProps> = ({text, selected, setSelected}) => {
+const Chip: React.FC<ChipProps> = React.memo(({text, href, selected, setSelected}) => {
+    const navigate = useNavigate();
+
+    const handleClick = useCallback(() => {
+        setSelected(text);
+        navigate(href);
+    }, [text, href, setSelected, navigate]);
+
     return (
         <button
-            onClick={() => setSelected(text)}
+            onClick={() => handleClick()}
             className="nav-bar-button"
         >
             <span className="motion-span">{text}</span>
@@ -45,4 +59,4 @@ const Chip: React.FC<ChipProps> = ({text, selected, setSelected}) => {
             )}
         </button>
     );
-};
+});

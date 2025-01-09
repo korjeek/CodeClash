@@ -10,8 +10,9 @@
     display: grid;
     gap: 1rem;
     grid-template-areas:
-        'online-count empty'
-        'participants competition-info';
+        'online-count'
+        'participants'
+        'status';
     justify-items: start;
     align-items: start;
 }
@@ -85,4 +86,26 @@
 
 .room-header{
     margin: 0 0;
+}
+
+.lobby-status{
+    width: 100%;
+    grid-area: status;
+    background: #0F0F0F;
+    border-radius: 3vh;
+    padding: 7px 40px;
+    font-weight: 600;
+    font-size: 1.25rem;
+    box-sizing: border-box;
+}
+
+.ready{
+    border: 0.3vh solid #5EFC8D;
+    background: #5EFC8D;
+    color: black;
+}
+
+.not-ready{
+    border: 0.3vh solid #616161;
+    color: #616161;
 }
