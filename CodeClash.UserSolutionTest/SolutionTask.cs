@@ -14,6 +14,5 @@ public class SolutionTask
         }
 
         return new int[] { };
-
 	}
 }

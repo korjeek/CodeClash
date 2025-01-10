@@ -12,8 +12,11 @@ import '../../style/CodeSpace/Buttons.css'
 import {convertTime} from "../../services/TimeConverter.ts";
 import {Room} from "../../interfaces/RoomInterfaces.ts";
 import {CheckSolutionRequest} from "../../interfaces/CompetitionInterfaces.ts";
+import {UsersDTO} from "../../interfaces/UserInterfaces.ts";
+import {useCompetitionData} from "../../contexts/CompetitionState.ts";
 
 export default function CodeSpace(){
+    const { setCompetitionResults } = useCompetitionData();
     const [problem, setProblem] = useState<Issue>();
     const [time, setTime] = useState('');
     const [code, setCode] = useState('');
@@ -28,7 +31,8 @@ export default function CodeSpace(){
             setProblem(problem);
         }
 
-        signalR.onUserAction(() => {
+        signalR.onUserAction((usersDTO: UsersDTO) => {
+            setCompetitionResults(usersDTO.data);
             navigate("/competition/result")
         }, "CompetitionEnded")
 
@@ -37,13 +41,14 @@ export default function CodeSpace(){
         }, "UpdateTimer")
 
         fetchProblem();
-    }, [navigate, param, signalR]);
+    }, [navigate, param, setCompetitionResults, signalR]);
 
     const handleEditorChange = (value: string | undefined) => {
         setCode(value || '');
     };
 
     const submitCode = async () => {
+        console.log(convertTime(time))
         const result = signalR.invoke<CheckSolutionRequest, string>("CheckSolution",
             {solution: code, issueName: problem!.name, leftTime: convertTime(time)})
         console.log(result);
@@ -106,21 +111,25 @@ export default function CodeSpace(){
                     <div className="editor-container default-container-border">
                         <div className="code-editor">
                             <div className="content-header code-header-border">
-                                <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="20.000000pt"
-                                     height="20.000000pt" viewBox="0 0 512.000000 512.000000"
-                                     preserveAspectRatio="xMidYMid meet">
-
-                                    <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
-                                       fill="#6A00FF" stroke="none">
-                                        <path
-                                            d="M2890 4248 c-25 -14 -57 -42 -72 -64 -21 -30 -124 -379 -463 -1564 -239 -839 -435 -1541 -435 -1561 0 -52 46 -136 91 -166 54 -35 103 -45 168 -32 44 9 63 20 100 58 l47 46 437 1530 c252 884 437 1547 437 1571 0 58 -44 139 -93 172 -58 39 -155 43 -217 10z"/>
-                                        <path
-                                            d="M1210 3617 c-27 -8 -146 -120 -493 -466 -267 -266 -467 -473 -480 -496 -28 -54 -28 -136 0 -190 13 -23 213 -230 480 -496 391 -389 464 -457 499 -467 83 -24 149 -8 211 52 57 53 78 121 62 199 -11 51 -19 60 -387 429 l-376 378 376 378 c365 366 376 378 386 427 36 169 -112 302 -278 252z"/>
-                                        <path
-                                            d="M3767 3616 c-67 -24 -110 -71 -132 -141 -13 -41 -13 -60 -4 -105 l11 -55 376 -377 376 -378 -376 -378 -376 -377 -11 -55 c-33 -160 109 -292 267 -250 43 12 83 48 505 469 274 272 467 472 479 496 14 26 21 59 21 95 0 36 -7 69 -21 95 -12 24 -205 223 -479 496 -391 389 -464 457 -499 467 -53 15 -89 15 -137 -2z"/>
-                                    </g>
-                                </svg>
-                                Code
+                                <button className="page-code-button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="20.000000pt"
+                                         height="20.000000pt" viewBox="0 0 512.000000 512.000000"
+                                         preserveAspectRatio="xMidYMid meet">
+                                        <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+                                           fill="#6A00FF" stroke="none">
+                                            <path
+                                                d="M2890 4248 c-25 -14 -57 -42 -72 -64 -21 -30 -124 -379 -463 -1564 -239 -839 -435 -1541 -435 -1561 0 -52 46 -136 91 -166 54 -35 103 -45 168 -32 44 9 63 20 100 58 l47 46 437 1530 c252 884 437 1547 437 1571 0 58 -44 139 -93 172 -58 39 -155 43 -217 10z"/>
+                                            <path
+                                                d="M1210 3617 c-27 -8 -146 -120 -493 -466 -267 -266 -467 -473 -480 -496 -28 -54 -28 -136 0 -190 13 -23 213 -230 480 -496 391 -389 464 -457 499 -467 83 -24 149 -8 211 52 57 53 78 121 62 199 -11 51 -19 60 -387 429 l-376 378 376 378 c365 366 376 378 386 427 36 169 -112 302 -278 252z"/>
+                                            <path
+                                                d="M3767 3616 c-67 -24 -110 -71 -132 -141 -13 -41 -13 -60 -4 -105 l11 -55 376 -377 376 -378 -376 -378 -376 -377 -11 -55 c-33 -160 109 -292 267 -250 43 12 83 48 505 469 274 272 467 472 479 496 14 26 21 59 21 95 0 36 -7 69 -21 95 -12 24 -205 223 -479 496 -391 389 -464 457 -499 467 -53 15 -89 15 -137 -2z"/>
+                                        </g>
+                                    </svg>
+                                    Code
+                                </button>
+                                <button className="page-code-button">
+                                    Results
+                                </button>
                             </div>
                             <Editor
                                 className="editor-margin"

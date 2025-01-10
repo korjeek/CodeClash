@@ -68,8 +68,7 @@ export default function BaseNavBar({ tab }: initialSelectedTab) {
                         <div className="navbar-user-container">
                             {roomStatus.hasRoom &&
                                 <button
-                                    className={roomStatus.competitionIssueId ?
-                                        "user-room-status-btn user-room-ready-btn" : "user-room-status-btn user-room-wait-btn"}
+                                    className={"user-room-status-btn"}
                                     onClick={chooseLinkByStatus}>
                                     {roomStatus.competitionIssueId ? 'Go to competition' : 'Return to lobby'}
                                 </button>

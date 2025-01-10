@@ -13,3 +13,7 @@ export const login = async (userData: LoginUser) => {
   const response = await axios.post(`${API_URL}/login`, userData, { withCredentials: true });
   return response.data;
 };
+
+export const refreshToken = async (token: string) => {
+  const response = await axios.put(`${API_URL}/refresh-token`, token, { withCredentials: true })
+}
