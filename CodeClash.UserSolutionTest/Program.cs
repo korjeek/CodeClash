@@ -32,7 +32,10 @@ public class Program
 	
 	private static void ParseResults(XmlNode? result, int amountTestCases)
 	{
-		var totalTime = 0.0f;
+		var totalTime = float.Parse(result?.SelectSingleNode("//test-suite")?.Attributes?["duration"]?.Value!);
+		var passedTestsCount = result?.SelectSingleNode("//test-suite")?.Attributes?["passed"]?.Value;
+		var failedTestsCount = result?.SelectSingleNode("//test-suite")?.Attributes?["failed"]?.Value;
+		var totalTestsCount = result?.SelectSingleNode("//test-suite")?.Attributes?["testcasecount"]?.Value;
 		
 		foreach (XmlNode test in result?.SelectNodes("//test-case")!)
 		{
@@ -44,14 +47,15 @@ public class Program
 				CultureInfo.InvariantCulture, 
 				out var duration);
 			
-			totalTime += duration * 1000;
-			
+			// totalTime += duration * 1000;
 			if (testResult != "Failed") continue;
+			
 			var failureMessage = test.SelectSingleNode("failure/message")?.InnerText;
-			Console.WriteLine($"{testResult}\n{testName}\n{failureMessage}");
+			// имя упавшего теста : количество прошедших тестов : количесвто тестов всего : AssetError сообщение
+			Console.WriteLine($"FAIL::{testName}::{passedTestsCount}::{totalTestsCount}::{failureMessage}");
 			return;
 		}
-		Console.WriteLine("OK");
-		Console.WriteLine($"Time: {totalTime / amountTestCases:F2} ms.");
+		// ОК : среднее время : количество пройденных тестов
+		Console.WriteLine($"OK::{totalTime / amountTestCases:F2}::{passedTestsCount}");
 	}
 }

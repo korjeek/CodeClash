@@ -17,7 +17,7 @@ public static class UserExtensions
     {
         Email = user.Email,
         Name = user.Name,
-        SentTime = user.SentTime.ToString(),
+        SentTime = user.SentTime?.GetTimeStrToSendFront(),
         ProgramWorkingTime = user.ProgramWorkingTime.ToString(),
         CompetitionOverhead = user.CompetitionOverhead.ToString()
     };

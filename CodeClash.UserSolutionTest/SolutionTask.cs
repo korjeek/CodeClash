@@ -1,19 +1,18 @@
 namespace CodeClash.UserSolutionTest;
 public class SolutionTask
 {
-	public int[] FindSum(int[] nums, int target)
-	{
-		Dictionary<int, int> hashtable = new Dictionary<int, int>();
-        int n = nums.Length;
-        for (int i = 0; i < n; i++)
+  public int[] FindSum(int[] nums, int target)
+  {
+    var result = new int[2];
+    for (var i = 0; i < nums.Length; i++)
+      for (var j = i + 1; j < nums.Length; j++)
+      {
+        if (nums[i] + nums[j] == target)
         {
-            int complement = target - nums[i];
-            if (hashtable.TryGetValue(complement, out var value))
-                return new[] { value, i };
-            hashtable[nums[i]] = i;
+          result[0] = i;
+          result[1] = j;
         }
-
-        return new int[] { };
-
-	}
+      }
+    return result;
+  }
 }
