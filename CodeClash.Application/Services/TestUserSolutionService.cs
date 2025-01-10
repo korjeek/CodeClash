@@ -65,8 +65,8 @@ public class TestUserSolutionService(RoomsRepository roomsRepository, UsersRepos
             throw new InvalidOperationException("User does not exist in DB or user is not in room.");
 
         var programWorkingTime = float.Parse(okResultDto.MeanTime);
-        if (userEntity.SentTime is not null && userEntity.ProgramWorkingTime <= programWorkingTime)
-            return;
+        // if (userEntity.SentTime is not null && userEntity.ProgramWorkingTime <= programWorkingTime)
+        //     return;
 
         var totalCompetitionTime = (await roomsRepository.GetRoomById(userEntity.RoomId.Value))!.Time;
         var sentTime = TimeOnly.FromTimeSpan(totalCompetitionTime - leftTime);

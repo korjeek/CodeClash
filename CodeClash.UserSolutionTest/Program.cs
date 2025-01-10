@@ -32,9 +32,8 @@ public class Program
 	
 	private static void ParseResults(XmlNode? result, int amountTestCases)
 	{
-		var totalTime = float.Parse(result?.SelectSingleNode("//test-suite")?.Attributes?["duration"]?.Value!);
+		var totalTime = float.Parse(result?.SelectSingleNode("//test-suite")?.Attributes?["duration"]?.Value!, CultureInfo.InvariantCulture) * 1000;
 		var passedTestsCount = result?.SelectSingleNode("//test-suite")?.Attributes?["passed"]?.Value;
-		var failedTestsCount = result?.SelectSingleNode("//test-suite")?.Attributes?["failed"]?.Value;
 		var totalTestsCount = result?.SelectSingleNode("//test-suite")?.Attributes?["testcasecount"]?.Value;
 		
 		foreach (XmlNode test in result?.SelectNodes("//test-case")!)
@@ -42,20 +41,20 @@ public class Program
 			var testName = test.Attributes?["name"]?.Value;
 			var testResult = test.Attributes?["result"]?.Value;
 			
-			float.TryParse(
-				test.Attributes?["duration"]?.Value, 
-				CultureInfo.InvariantCulture, 
-				out var duration);
+			// float.TryParse(
+			// 	test.Attributes?["duration"]?.Value, 
+			// 	CultureInfo.InvariantCulture, 
+			// 	out var duration);
 			
 			// totalTime += duration * 1000;
 			if (testResult != "Failed") continue;
 			
 			var failureMessage = test.SelectSingleNode("failure/message")?.InnerText;
 			// имя упавшего теста : количество прошедших тестов : количесвто тестов всего : AssetError сообщение
-			Console.WriteLine($"FAIL::{testName}::{passedTestsCount}::{totalTestsCount}::{failureMessage}");
+			Console.Write($"FAIL::{testName}::{passedTestsCount}::{totalTestsCount}::{failureMessage}");
 			return;
 		}
 		// ОК : среднее время : количество пройденных тестов
-		Console.WriteLine($"OK::{totalTime / amountTestCases:F2}::{passedTestsCount}");
+		Console.Write($"OK::{totalTime / amountTestCases:F2}::{passedTestsCount}");
 	}
 }

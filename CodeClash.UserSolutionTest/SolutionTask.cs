@@ -9,7 +9,7 @@ public class SolutionTask
       {
         if (nums[i] + nums[j] == target)
         {
-          result[0] = i;
+          result[0] = j;
           result[1] = j;
         }
       }
