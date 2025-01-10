@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\CodeClash.Application",
+    "\\TestSources",
+    "\\TestSources\\DeleteDuplicates",
+    "\\TestSources\\FindSum",
+    "\\TestSources\\LongestCommonPrefix",
+    "\\TestSources\\MergeTwoSortedLists",
+    "\\TestSources\\Palindrome",
+    "\\TestSources\\RomanToInteger",
+    "\\TestSources\\ValidParentheses"
+  ],
+  "SelectedNode": "\\TestSources\\ValidParentheses\\SolutionTaskTests.cs",
+  "PreviewInSolutionExplorer": false
+}

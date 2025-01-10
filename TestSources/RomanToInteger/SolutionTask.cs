@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace CodeClash.UserSolutionTest;
 
-namespace Task.RomanToInteger
+public class SolutionTask
 {
-	public class SolutionTask
+	public int RomanToInt(string str)
 	{
-		public int RomanToInt(string str)
-		{
-			// Your code...
-		}
+		// Your code...
 	}
 }

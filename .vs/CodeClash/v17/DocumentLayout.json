@@ -3,112 +3,196 @@
   "WorkspaceRootPath": "D:\\CodeClash\\CodeClash\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7B47E8DA-43FC-420B-82E9-B0A3E1AB0DF3}|CodeClash.Application\\CodeClash.Application.csproj|d:\\codeclash\\codeclash\\codeclash.application\\codeclash.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{7B47E8DA-43FC-420B-82E9-B0A3E1AB0DF3}|CodeClash.Application\\CodeClash.Application.csproj|solutionrelative:codeclash.application\\codeclash.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\ValidParentheses\\SolutionTaskTests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\ValidParentheses\\SolutionTaskTests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE61BCE6-2F9D-47D2-8D6B-DEEF6D4E9F87}|CodeClash.Tests\\CodeClash.Tests.csproj|d:\\codeclash\\codeclash\\codeclash.tests\\passwordhasher_tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE61BCE6-2F9D-47D2-8D6B-DEEF6D4E9F87}|CodeClash.Tests\\CodeClash.Tests.csproj|solutionrelative:codeclash.tests\\passwordhasher_tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\ValidParentheses\\SolutionTask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\ValidParentheses\\SolutionTask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE61BCE6-2F9D-47D2-8D6B-DEEF6D4E9F87}|CodeClash.Tests\\CodeClash.Tests.csproj|d:\\codeclash\\codeclash\\codeclash.tests\\codeclash.tests.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{AE61BCE6-2F9D-47D2-8D6B-DEEF6D4E9F87}|CodeClash.Tests\\CodeClash.Tests.csproj|solutionrelative:codeclash.tests\\codeclash.tests.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\RomanToInteger\\SolutionTaskTests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\RomanToInteger\\SolutionTaskTests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE61BCE6-2F9D-47D2-8D6B-DEEF6D4E9F87}|CodeClash.Tests\\CodeClash.Tests.csproj|d:\\codeclash\\codeclash\\codeclash.tests\\issueextensions_tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE61BCE6-2F9D-47D2-8D6B-DEEF6D4E9F87}|CodeClash.Tests\\CodeClash.Tests.csproj|solutionrelative:codeclash.tests\\issueextensions_tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\RomanToInteger\\SolutionTask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\RomanToInteger\\SolutionTask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{002569E9-F157-4A91-880C-B882EA8E942D}|CodeClash.Core\\CodeClash.Core.csproj|d:\\codeclash\\codeclash\\codeclash.core\\models\\domain\\issue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{002569E9-F157-4A91-880C-B882EA8E942D}|CodeClash.Core\\CodeClash.Core.csproj|solutionrelative:codeclash.core\\models\\domain\\issue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\Palindrome\\SolutionTaskTests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\Palindrome\\SolutionTaskTests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE61BCE6-2F9D-47D2-8D6B-DEEF6D4E9F87}|CodeClash.Tests\\CodeClash.Tests.csproj|d:\\codeclash\\codeclash\\codeclash.tests\\userextensions_tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE61BCE6-2F9D-47D2-8D6B-DEEF6D4E9F87}|CodeClash.Tests\\CodeClash.Tests.csproj|solutionrelative:codeclash.tests\\userextensions_tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\Palindrome\\SolutionTask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\Palindrome\\SolutionTask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE61BCE6-2F9D-47D2-8D6B-DEEF6D4E9F87}|CodeClash.Tests\\CodeClash.Tests.csproj|d:\\codeclash\\codeclash\\codeclash.tests\\roomextensions_tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE61BCE6-2F9D-47D2-8D6B-DEEF6D4E9F87}|CodeClash.Tests\\CodeClash.Tests.csproj|solutionrelative:codeclash.tests\\roomextensions_tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\MergeTwoSortedLists\\SolutionTask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\MergeTwoSortedLists\\SolutionTask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE61BCE6-2F9D-47D2-8D6B-DEEF6D4E9F87}|CodeClash.Tests\\CodeClash.Tests.csproj|d:\\codeclash\\codeclash\\codeclash.tests\\jwtbearerextensions_tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE61BCE6-2F9D-47D2-8D6B-DEEF6D4E9F87}|CodeClash.Tests\\CodeClash.Tests.csproj|solutionrelative:codeclash.tests\\jwtbearerextensions_tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\MergeTwoSortedLists\\SolutionTaskTests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\MergeTwoSortedLists\\SolutionTaskTests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE61BCE6-2F9D-47D2-8D6B-DEEF6D4E9F87}|CodeClash.Tests\\CodeClash.Tests.csproj|d:\\codeclash\\codeclash\\codeclash.tests\\enterquitroomrequest_tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE61BCE6-2F9D-47D2-8D6B-DEEF6D4E9F87}|CodeClash.Tests\\CodeClash.Tests.csproj|solutionrelative:codeclash.tests\\enterquitroomrequest_tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\FindSum\\SolutionTask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\FindSum\\SolutionTask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE61BCE6-2F9D-47D2-8D6B-DEEF6D4E9F87}|CodeClash.Tests\\CodeClash.Tests.csproj|d:\\codeclash\\codeclash\\codeclash.tests\\createroomrequest_tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE61BCE6-2F9D-47D2-8D6B-DEEF6D4E9F87}|CodeClash.Tests\\CodeClash.Tests.csproj|solutionrelative:codeclash.tests\\createroomrequest_tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\LongestCommonPrefix\\SolutionTask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\LongestCommonPrefix\\SolutionTask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE61BCE6-2F9D-47D2-8D6B-DEEF6D4E9F87}|CodeClash.Tests\\CodeClash.Tests.csproj|d:\\codeclash\\codeclash\\codeclash.tests\\createissuerequest_tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE61BCE6-2F9D-47D2-8D6B-DEEF6D4E9F87}|CodeClash.Tests\\CodeClash.Tests.csproj|solutionrelative:codeclash.tests\\createissuerequest_tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\LongestCommonPrefix\\SolutionTaskTests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\LongestCommonPrefix\\SolutionTaskTests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE61BCE6-2F9D-47D2-8D6B-DEEF6D4E9F87}|CodeClash.Tests\\CodeClash.Tests.csproj|d:\\codeclash\\codeclash\\codeclash.tests\\codeclash.tests.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
-      "RelativeMoniker": "D:0:0:{AE61BCE6-2F9D-47D2-8D6B-DEEF6D4E9F87}|CodeClash.Tests\\CodeClash.Tests.csproj|solutionrelative:codeclash.tests\\codeclash.tests.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\FindSum\\SolutionTaskTests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\FindSum\\SolutionTaskTests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{002569E9-F157-4A91-880C-B882EA8E942D}|CodeClash.Core\\CodeClash.Core.csproj|d:\\codeclash\\codeclash\\codeclash.core\\models\\competitionrequests\\solutionrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{002569E9-F157-4A91-880C-B882EA8E942D}|CodeClash.Core\\CodeClash.Core.csproj|solutionrelative:codeclash.core\\models\\competitionrequests\\solutionrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\DeleteDuplicates\\SolutionTask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\DeleteDuplicates\\SolutionTask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7B47E8DA-43FC-420B-82E9-B0A3E1AB0DF3}|CodeClash.Application\\CodeClash.Application.csproj|d:\\codeclash\\codeclash\\codeclash.application\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7B47E8DA-43FC-420B-82E9-B0A3E1AB0DF3}|CodeClash.Application\\CodeClash.Application.csproj|solutionrelative:codeclash.application\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\DeleteDuplicates\\SolutionTaskTests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\DeleteDuplicates\\SolutionTaskTests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7B47E8DA-43FC-420B-82E9-B0A3E1AB0DF3}|CodeClash.Application\\CodeClash.Application.csproj|d:\\codeclash\\codeclash\\codeclash.application\\services\\runtimeprojectexecutor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7B47E8DA-43FC-420B-82E9-B0A3E1AB0DF3}|CodeClash.Application\\CodeClash.Application.csproj|solutionrelative:codeclash.application\\services\\runtimeprojectexecutor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\ValidParentheses\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\ValidParentheses\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7B47E8DA-43FC-420B-82E9-B0A3E1AB0DF3}|CodeClash.Application\\CodeClash.Application.csproj|d:\\codeclash\\codeclash\\codeclash.application\\services\\roomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7B47E8DA-43FC-420B-82E9-B0A3E1AB0DF3}|CodeClash.Application\\CodeClash.Application.csproj|solutionrelative:codeclash.application\\services\\roomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\RomanToInteger\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\RomanToInteger\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7B47E8DA-43FC-420B-82E9-B0A3E1AB0DF3}|CodeClash.Application\\CodeClash.Application.csproj|d:\\codeclash\\codeclash\\codeclash.application\\services\\issueservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7B47E8DA-43FC-420B-82E9-B0A3E1AB0DF3}|CodeClash.Application\\CodeClash.Application.csproj|solutionrelative:codeclash.application\\services\\issueservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\Palindrome\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\Palindrome\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{002569E9-F157-4A91-880C-B882EA8E942D}|CodeClash.Core\\CodeClash.Core.csproj|d:\\codeclash\\codeclash\\codeclash.core\\models\\domain\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{002569E9-F157-4A91-880C-B882EA8E942D}|CodeClash.Core\\CodeClash.Core.csproj|solutionrelative:codeclash.core\\models\\domain\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\MergeTwoSortedLists\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\MergeTwoSortedLists\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{002569E9-F157-4A91-880C-B882EA8E942D}|CodeClash.Core\\CodeClash.Core.csproj|d:\\codeclash\\codeclash\\codeclash.core\\models\\domain\\room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{002569E9-F157-4A91-880C-B882EA8E942D}|CodeClash.Core\\CodeClash.Core.csproj|solutionrelative:codeclash.core\\models\\domain\\room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\LongestCommonPrefix\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\LongestCommonPrefix\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7B47E8DA-43FC-420B-82E9-B0A3E1AB0DF3}|CodeClash.Application\\CodeClash.Application.csproj|d:\\codeclash\\codeclash\\codeclash.application\\extensions\\roomextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7B47E8DA-43FC-420B-82E9-B0A3E1AB0DF3}|CodeClash.Application\\CodeClash.Application.csproj|solutionrelative:codeclash.application\\extensions\\roomextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\DeleteDuplicates\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\DeleteDuplicates\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{002569E9-F157-4A91-880C-B882EA8E942D}|CodeClash.Core\\CodeClash.Core.csproj|d:\\codeclash\\codeclash\\codeclash.core\\constants\\constants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{002569E9-F157-4A91-880C-B882EA8E942D}|CodeClash.Core\\CodeClash.Core.csproj|solutionrelative:codeclash.core\\constants\\constants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\FindSum\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\FindSum\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{002569E9-F157-4A91-880C-B882EA8E942D}|CodeClash.Core\\CodeClash.Core.csproj|d:\\codeclash\\codeclash\\codeclash.core\\requests\\issuerequest\\createissuerequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{002569E9-F157-4A91-880C-B882EA8E942D}|CodeClash.Core\\CodeClash.Core.csproj|solutionrelative:codeclash.core\\requests\\issuerequest\\createissuerequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\CodeClash.Application\\CodeClash.Application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CodeClash.Application\\CodeClash.Application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{002569E9-F157-4A91-880C-B882EA8E942D}|CodeClash.Core\\CodeClash.Core.csproj|d:\\codeclash\\codeclash\\codeclash.core\\requests\\roomsrequests\\enterquitroomrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{002569E9-F157-4A91-880C-B882EA8E942D}|CodeClash.Core\\CodeClash.Core.csproj|solutionrelative:codeclash.core\\requests\\roomsrequests\\enterquitroomrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\CodeClash.Tests\\PasswordHasher_Tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CodeClash.Tests\\PasswordHasher_Tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{002569E9-F157-4A91-880C-B882EA8E942D}|CodeClash.Core\\CodeClash.Core.csproj|d:\\codeclash\\codeclash\\codeclash.core\\models\\competitionrequests\\solutionresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{002569E9-F157-4A91-880C-B882EA8E942D}|CodeClash.Core\\CodeClash.Core.csproj|solutionrelative:codeclash.core\\models\\competitionrequests\\solutionresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\CodeClash.Tests\\RoomExtensions_Tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CodeClash.Tests\\RoomExtensions_Tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{002569E9-F157-4A91-880C-B882EA8E942D}|CodeClash.Core\\CodeClash.Core.csproj|d:\\codeclash\\codeclash\\codeclash.core\\models\\domain\\competition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{002569E9-F157-4A91-880C-B882EA8E942D}|CodeClash.Core\\CodeClash.Core.csproj|solutionrelative:codeclash.core\\models\\domain\\competition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\CodeClash.Tests\\UserExtensions_Tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CodeClash.Tests\\UserExtensions_Tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7B47E8DA-43FC-420B-82E9-B0A3E1AB0DF3}|CodeClash.Application\\CodeClash.Application.csproj|d:\\codeclash\\codeclash\\codeclash.application\\passwordhasher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7B47E8DA-43FC-420B-82E9-B0A3E1AB0DF3}|CodeClash.Application\\CodeClash.Application.csproj|solutionrelative:codeclash.application\\passwordhasher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\CodeClash.Core\\Models\\Domain\\Issue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CodeClash.Core\\Models\\Domain\\Issue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{252623AC-064B-4073-B317-32B7D8D18055}|CodeClash.UserSolutionTest\\CodeClash.UserSolutionTest.csproj|d:\\codeclash\\codeclash\\codeclash.usersolutiontest\\solutiontasktests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{252623AC-064B-4073-B317-32B7D8D18055}|CodeClash.UserSolutionTest\\CodeClash.UserSolutionTest.csproj|solutionrelative:codeclash.usersolutiontest\\solutiontasktests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\CodeClash.Tests\\IssueExtensions_Tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CodeClash.Tests\\IssueExtensions_Tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\CodeClash.Tests\\CodeClash.Tests.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CodeClash.Tests\\CodeClash.Tests.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\CodeClash.Tests\\JwtBearerExtensions_Tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CodeClash.Tests\\JwtBearerExtensions_Tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\CodeClash.Tests\\EnterQuitRoomRequest_Tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CodeClash.Tests\\EnterQuitRoomRequest_Tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\CodeClash.Tests\\CreateRoomRequest_Tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CodeClash.Tests\\CreateRoomRequest_Tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\CodeClash.Tests\\CreateIssueRequest_Tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CodeClash.Tests\\CreateIssueRequest_Tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\CodeClash.Tests\\CodeClash.Tests.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CodeClash.Tests\\CodeClash.Tests.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\CodeClash.Application\\Services\\RuntimeProjectExecutor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CodeClash.Application\\Services\\RuntimeProjectExecutor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\CodeClash.Application\\Services\\RoomService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CodeClash.Application\\Services\\RoomService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\CodeClash.Application\\Services\\AuthService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CodeClash.Application\\Services\\AuthService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\CodeClash.Application\\Services\\IssueService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CodeClash.Application\\Services\\IssueService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\CodeClash.Core\\Models\\Domain\\User.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CodeClash.Core\\Models\\Domain\\User.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\CodeClash.Core\\Models\\CompetitionRequests\\SolutionRequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CodeClash.Core\\Models\\CompetitionRequests\\SolutionRequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\CodeClash.Core\\Models\\Domain\\Room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CodeClash.Core\\Models\\Domain\\Room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\CodeClash.Application\\Extensions\\RoomExtensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CodeClash.Application\\Extensions\\RoomExtensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\CodeClash.Core\\Constants\\Constants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CodeClash.Core\\Constants\\Constants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\CodeClash.Core\\Requests\\RoomsRequests\\EnterQuitRoomRequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CodeClash.Core\\Requests\\RoomsRequests\\EnterQuitRoomRequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\CodeClash.Core\\Requests\\IssueRequest\\CreateIssueRequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CodeClash.Core\\Requests\\IssueRequest\\CreateIssueRequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\CodeClash.Core\\Models\\CompetitionRequests\\SolutionResponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CodeClash.Core\\Models\\CompetitionRequests\\SolutionResponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\CodeClash.Core\\Models\\Domain\\Competition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CodeClash.Core\\Models\\Domain\\Competition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\CodeClash.Application\\PasswordHasher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CodeClash.Application\\PasswordHasher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\CodeClash.UserSolutionTest\\SolutionTaskTests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CodeClash.UserSolutionTest\\SolutionTaskTests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -118,7 +202,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -126,15 +210,284 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{269a02dc-6af8-11d3-bdc4-00c04f688e50}"
-            },
-            {
-              "$type": "Bookmark",
               "Name": "ST:0:0:{e506b91c-c606-466a-90a9-123d1d1e12b3}"
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SolutionTask.cs",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\ValidParentheses\\SolutionTask.cs",
+              "RelativeDocumentMoniker": "TestSources\\ValidParentheses\\SolutionTask.cs",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\ValidParentheses\\SolutionTask.cs",
+              "RelativeToolTip": "TestSources\\ValidParentheses\\SolutionTask.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-10T07:39:34.065Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "SolutionTask.cs",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\RomanToInteger\\SolutionTask.cs",
+              "RelativeDocumentMoniker": "TestSources\\RomanToInteger\\SolutionTask.cs",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\RomanToInteger\\SolutionTask.cs",
+              "RelativeToolTip": "TestSources\\RomanToInteger\\SolutionTask.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-10T07:38:59.436Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "SolutionTask.cs",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\Palindrome\\SolutionTask.cs",
+              "RelativeDocumentMoniker": "TestSources\\Palindrome\\SolutionTask.cs",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\Palindrome\\SolutionTask.cs",
+              "RelativeToolTip": "TestSources\\Palindrome\\SolutionTask.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-10T07:38:35.689Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SolutionTask.cs",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\MergeTwoSortedLists\\SolutionTask.cs",
+              "RelativeDocumentMoniker": "TestSources\\MergeTwoSortedLists\\SolutionTask.cs",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\MergeTwoSortedLists\\SolutionTask.cs",
+              "RelativeToolTip": "TestSources\\MergeTwoSortedLists\\SolutionTask.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-10T07:37:53.249Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "SolutionTask.cs",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\LongestCommonPrefix\\SolutionTask.cs",
+              "RelativeDocumentMoniker": "TestSources\\LongestCommonPrefix\\SolutionTask.cs",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\LongestCommonPrefix\\SolutionTask.cs",
+              "RelativeToolTip": "TestSources\\LongestCommonPrefix\\SolutionTask.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-10T07:37:05.01Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "SolutionTask.cs",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\FindSum\\SolutionTask.cs",
+              "RelativeDocumentMoniker": "TestSources\\FindSum\\SolutionTask.cs",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\FindSum\\SolutionTask.cs",
+              "RelativeToolTip": "TestSources\\FindSum\\SolutionTask.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-10T07:36:55.335Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "SolutionTask.cs",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\DeleteDuplicates\\SolutionTask.cs",
+              "RelativeDocumentMoniker": "TestSources\\DeleteDuplicates\\SolutionTask.cs",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\DeleteDuplicates\\SolutionTask.cs",
+              "RelativeToolTip": "TestSources\\DeleteDuplicates\\SolutionTask.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-10T07:36:35.13Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "SolutionTaskTests.cs",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\ValidParentheses\\SolutionTaskTests.cs",
+              "RelativeDocumentMoniker": "TestSources\\ValidParentheses\\SolutionTaskTests.cs",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\ValidParentheses\\SolutionTaskTests.cs",
+              "RelativeToolTip": "TestSources\\ValidParentheses\\SolutionTaskTests.cs",
+              "ViewState": "AQIAACEAAAAAAAAAAAAAAA8AAAADAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-10T07:17:27.741Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SolutionTaskTests.cs",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\RomanToInteger\\SolutionTaskTests.cs",
+              "RelativeDocumentMoniker": "TestSources\\RomanToInteger\\SolutionTaskTests.cs",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\RomanToInteger\\SolutionTaskTests.cs",
+              "RelativeToolTip": "TestSources\\RomanToInteger\\SolutionTaskTests.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-10T07:16:10.852Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Condition.md",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\ValidParentheses\\Condition.md",
+              "RelativeDocumentMoniker": "TestSources\\ValidParentheses\\Condition.md",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\ValidParentheses\\Condition.md",
+              "RelativeToolTip": "TestSources\\ValidParentheses\\Condition.md",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-01-10T07:17:14.259Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "SolutionTaskTests.cs",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\Palindrome\\SolutionTaskTests.cs",
+              "RelativeDocumentMoniker": "TestSources\\Palindrome\\SolutionTaskTests.cs",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\Palindrome\\SolutionTaskTests.cs",
+              "RelativeToolTip": "TestSources\\Palindrome\\SolutionTaskTests.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-10T07:15:17.9Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "SolutionTaskTests.cs",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\MergeTwoSortedLists\\SolutionTaskTests.cs",
+              "RelativeDocumentMoniker": "TestSources\\MergeTwoSortedLists\\SolutionTaskTests.cs",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\MergeTwoSortedLists\\SolutionTaskTests.cs",
+              "RelativeToolTip": "TestSources\\MergeTwoSortedLists\\SolutionTaskTests.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-10T07:13:52.38Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Condition.md",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\RomanToInteger\\Condition.md",
+              "RelativeDocumentMoniker": "TestSources\\RomanToInteger\\Condition.md",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\RomanToInteger\\Condition.md",
+              "RelativeToolTip": "TestSources\\RomanToInteger\\Condition.md",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAAACMAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-01-10T07:15:37.311Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "SolutionTaskTests.cs",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\LongestCommonPrefix\\SolutionTaskTests.cs",
+              "RelativeDocumentMoniker": "TestSources\\LongestCommonPrefix\\SolutionTaskTests.cs",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\LongestCommonPrefix\\SolutionTaskTests.cs",
+              "RelativeToolTip": "TestSources\\LongestCommonPrefix\\SolutionTaskTests.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-10T07:13:16.569Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "SolutionTaskTests.cs",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\FindSum\\SolutionTaskTests.cs",
+              "RelativeDocumentMoniker": "TestSources\\FindSum\\SolutionTaskTests.cs",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\FindSum\\SolutionTaskTests.cs",
+              "RelativeToolTip": "TestSources\\FindSum\\SolutionTaskTests.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-10T07:10:14.505Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Condition.md",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\Palindrome\\Condition.md",
+              "RelativeDocumentMoniker": "TestSources\\Palindrome\\Condition.md",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\Palindrome\\Condition.md",
+              "RelativeToolTip": "TestSources\\Palindrome\\Condition.md",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-01-10T07:14:56.127Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "SolutionTaskTests.cs",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\DeleteDuplicates\\SolutionTaskTests.cs",
+              "RelativeDocumentMoniker": "TestSources\\DeleteDuplicates\\SolutionTaskTests.cs",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\DeleteDuplicates\\SolutionTaskTests.cs",
+              "RelativeToolTip": "TestSources\\DeleteDuplicates\\SolutionTaskTests.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAABPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-10T07:11:56.762Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Condition.md",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\MergeTwoSortedLists\\Condition.md",
+              "RelativeDocumentMoniker": "TestSources\\MergeTwoSortedLists\\Condition.md",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\MergeTwoSortedLists\\Condition.md",
+              "RelativeToolTip": "TestSources\\MergeTwoSortedLists\\Condition.md",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAuwCQAAAA1AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-01-10T07:13:36.967Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Condition.md",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\LongestCommonPrefix\\Condition.md",
+              "RelativeDocumentMoniker": "TestSources\\LongestCommonPrefix\\Condition.md",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\LongestCommonPrefix\\Condition.md",
+              "RelativeToolTip": "TestSources\\LongestCommonPrefix\\Condition.md",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-01-10T07:12:54.401Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Condition.md",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\DeleteDuplicates\\Condition.md",
+              "RelativeDocumentMoniker": "TestSources\\DeleteDuplicates\\Condition.md",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\DeleteDuplicates\\Condition.md",
+              "RelativeToolTip": "TestSources\\DeleteDuplicates\\Condition.md",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-01-10T07:11:35.056Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Condition.md",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\FindSum\\Condition.md",
+              "RelativeDocumentMoniker": "TestSources\\FindSum\\Condition.md",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\FindSum\\Condition.md",
+              "RelativeToolTip": "TestSources\\FindSum\\Condition.md",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-01-10T07:11:07.747Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
               "Title": "CodeClash.Application.csproj",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Application\\CodeClash.Application.csproj",
               "RelativeDocumentMoniker": "CodeClash.Application\\CodeClash.Application.csproj",
@@ -147,7 +500,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 22,
               "Title": "PasswordHasher_Tests.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Tests\\PasswordHasher_Tests.cs",
               "RelativeDocumentMoniker": "CodeClash.Tests\\PasswordHasher_Tests.cs",
@@ -159,7 +512,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 23,
               "Title": "RoomExtensions_Tests.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Tests\\RoomExtensions_Tests.cs",
               "RelativeDocumentMoniker": "CodeClash.Tests\\RoomExtensions_Tests.cs",
@@ -171,7 +524,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 24,
               "Title": "UserExtensions_Tests.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Tests\\UserExtensions_Tests.cs",
               "RelativeDocumentMoniker": "CodeClash.Tests\\UserExtensions_Tests.cs",
@@ -183,7 +536,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 25,
               "Title": "Issue.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Core\\Models\\Domain\\Issue.cs",
               "RelativeDocumentMoniker": "CodeClash.Core\\Models\\Domain\\Issue.cs",
@@ -195,7 +548,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 26,
               "Title": "IssueExtensions_Tests.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Tests\\IssueExtensions_Tests.cs",
               "RelativeDocumentMoniker": "CodeClash.Tests\\IssueExtensions_Tests.cs",
@@ -207,7 +560,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 27,
               "Title": "CodeClash.Tests.csproj",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Tests\\CodeClash.Tests.csproj",
               "RelativeDocumentMoniker": "CodeClash.Tests\\CodeClash.Tests.csproj",
@@ -215,12 +568,11 @@
               "RelativeToolTip": "CodeClash.Tests\\CodeClash.Tests.csproj",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-12-23T18:53:02.324Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-23T18:53:02.324Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 28,
               "Title": "JwtBearerExtensions_Tests.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Tests\\JwtBearerExtensions_Tests.cs",
               "RelativeDocumentMoniker": "CodeClash.Tests\\JwtBearerExtensions_Tests.cs",
@@ -232,7 +584,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 29,
               "Title": "EnterQuitRoomRequest_Tests.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Tests\\EnterQuitRoomRequest_Tests.cs",
               "RelativeDocumentMoniker": "CodeClash.Tests\\EnterQuitRoomRequest_Tests.cs",
@@ -244,7 +596,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 30,
               "Title": "CreateRoomRequest_Tests.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Tests\\CreateRoomRequest_Tests.cs",
               "RelativeDocumentMoniker": "CodeClash.Tests\\CreateRoomRequest_Tests.cs",
@@ -256,7 +608,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 31,
               "Title": "CreateIssueRequest_Tests.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Tests\\CreateIssueRequest_Tests.cs",
               "RelativeDocumentMoniker": "CodeClash.Tests\\CreateIssueRequest_Tests.cs",
@@ -268,19 +620,18 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "CodeClash.Tests",
+              "DocumentIndex": 32,
+              "Title": "CodeClash.Tests.csproj",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Tests\\CodeClash.Tests.csproj",
               "RelativeDocumentMoniker": "CodeClash.Tests\\CodeClash.Tests.csproj",
               "ToolTip": "D:\\CodeClash\\CodeClash\\CodeClash.Tests\\CodeClash.Tests.csproj",
               "RelativeToolTip": "CodeClash.Tests\\CodeClash.Tests.csproj",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-12-24T11:37:24.135Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-24T11:37:24.135Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 33,
               "Title": "RuntimeProjectExecutor.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Application\\Services\\RuntimeProjectExecutor.cs",
               "RelativeDocumentMoniker": "CodeClash.Application\\Services\\RuntimeProjectExecutor.cs",
@@ -292,7 +643,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 34,
               "Title": "RoomService.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Application\\Services\\RoomService.cs",
               "RelativeDocumentMoniker": "CodeClash.Application\\Services\\RoomService.cs",
@@ -304,7 +655,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 35,
               "Title": "AuthService.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Application\\Services\\AuthService.cs",
               "RelativeDocumentMoniker": "CodeClash.Application\\Services\\AuthService.cs",
@@ -316,7 +667,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 36,
               "Title": "IssueService.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Application\\Services\\IssueService.cs",
               "RelativeDocumentMoniker": "CodeClash.Application\\Services\\IssueService.cs",
@@ -328,7 +679,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 37,
               "Title": "User.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Core\\Models\\Domain\\User.cs",
               "RelativeDocumentMoniker": "CodeClash.Core\\Models\\Domain\\User.cs",
@@ -340,7 +691,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 38,
               "Title": "SolutionRequest.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Core\\Models\\CompetitionRequests\\SolutionRequest.cs",
               "RelativeDocumentMoniker": "CodeClash.Core\\Models\\CompetitionRequests\\SolutionRequest.cs",
@@ -352,7 +703,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 39,
               "Title": "Room.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Core\\Models\\Domain\\Room.cs",
               "RelativeDocumentMoniker": "CodeClash.Core\\Models\\Domain\\Room.cs",
@@ -364,7 +715,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 40,
               "Title": "RoomExtensions.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Application\\Extensions\\RoomExtensions.cs",
               "RelativeDocumentMoniker": "CodeClash.Application\\Extensions\\RoomExtensions.cs",
@@ -376,7 +727,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 41,
               "Title": "Constants.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Core\\Constants\\Constants.cs",
               "RelativeDocumentMoniker": "CodeClash.Core\\Constants\\Constants.cs",
@@ -388,7 +739,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 42,
               "Title": "EnterQuitRoomRequest.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Core\\Requests\\RoomsRequests\\EnterQuitRoomRequest.cs",
               "RelativeDocumentMoniker": "CodeClash.Core\\Requests\\RoomsRequests\\EnterQuitRoomRequest.cs",
@@ -400,7 +751,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 43,
               "Title": "CreateIssueRequest.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Core\\Requests\\IssueRequest\\CreateIssueRequest.cs",
               "RelativeDocumentMoniker": "CodeClash.Core\\Requests\\IssueRequest\\CreateIssueRequest.cs",
@@ -412,7 +763,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 44,
               "Title": "SolutionResponse.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Core\\Models\\CompetitionRequests\\SolutionResponse.cs",
               "RelativeDocumentMoniker": "CodeClash.Core\\Models\\CompetitionRequests\\SolutionResponse.cs",
@@ -424,7 +775,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 45,
               "Title": "Competition.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Core\\Models\\Domain\\Competition.cs",
               "RelativeDocumentMoniker": "CodeClash.Core\\Models\\Domain\\Competition.cs",
@@ -436,7 +787,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 46,
               "Title": "PasswordHasher.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Application\\PasswordHasher.cs",
               "RelativeDocumentMoniker": "CodeClash.Application\\PasswordHasher.cs",
@@ -448,7 +799,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 47,
               "Title": "SolutionTaskTests.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.UserSolutionTest\\SolutionTaskTests.cs",
               "RelativeDocumentMoniker": "CodeClash.UserSolutionTest\\SolutionTaskTests.cs",
@@ -457,6 +808,10 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAADAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-23T17:38:00.433Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{269a02dc-6af8-11d3-bdc4-00c04f688e50}"
             }
           ]
         }

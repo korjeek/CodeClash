@@ -1,20 +1,19 @@
-﻿namespace Task.MergeTwoSortedLists
+﻿namespace CodeClash.UserSolutionTest;
+
+public class ListNode
 {
-	public class ListNode
+	public int val;
+	public ListNode next;
+	public ListNode(int val = 0, ListNode next = null)
 	{
-		public int val;
-		public ListNode next;
-		public ListNode(int val = 0, ListNode next = null)
-		{
-			this.val = val;
-			this.next = next;
-		}
+		this.val = val;
+		this.next = next;
 	}
-	public class SolutionTask
+}
+public class SolutionTask
+{
+	public ListNode MergeTwoLists(ListNode list1, ListNode list2)
 	{
-		public ListNode MergeTwoLists(ListNode list1, ListNode list2)
-		{
-			// Your code...
-		}
+		// Your code...
 	}
 }
