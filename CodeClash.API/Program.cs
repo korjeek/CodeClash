@@ -20,7 +20,7 @@ services.AddSwaggerGen();
 services.AddSignalR();
 services.AddSingleton<IUserIdProvider, UserConnectionIdProvider>();
 
-services.AddDbContext<ApplicationDbContext>();
+services.AddDbContextFactory<ApplicationDbContext>();
 //TODO Сделать, чтобы добавлялись только интерфесы с нужными методами. Интерфейсы реализовываются через Services, которые можно менять
 services.AddScoped<PasswordHasher>();
 services.AddApiAuthentication(configuration);
