@@ -20,7 +20,7 @@ public class TestUserSolutionService(RoomsRepository roomsRepository, UsersRepos
         ["Merge two sorted lists"] = "../TestSources/MergeTwoSortedLists/SolutionTask.cs",
     };
 
-    
+
     private readonly Dictionary<string, string> issueTestsLocations = new()
     {
         ["Find sum"] = "../TestSources/FindSum/SolutionTaskTests.cs",
@@ -31,7 +31,7 @@ public class TestUserSolutionService(RoomsRepository roomsRepository, UsersRepos
         ["Palindrome"] = "../TestSources/Palindrome/SolutionTaskTests.cs",
         ["Merge two sorted lists"] = "../TestSources/MergeTwoSortedLists/SolutionTaskTests.cs"
     };
-    
+
     public async Task<Result<string>> CheckSolution(Guid roomId, string userSolution, string issueName)
     {
         if (!MSBuildLocator.IsRegistered)
@@ -42,35 +42,46 @@ public class TestUserSolutionService(RoomsRepository roomsRepository, UsersRepos
             return Result.Failure<string>("Room does not exist.");
         if (result.Status != RoomStatus.CompetitionInProgress)
             return Result.Failure<string>("Competition hasn't started yet.");
-        
+
         var tests = await File.ReadAllTextAsync(issueTestsLocations[issueName]);
         await File.WriteAllTextAsync("../CodeClash.UserSolutionTest/SolutionTaskTests.cs", tests);
         await File.WriteAllTextAsync("../CodeClash.UserSolutionTest/SolutionTask.cs", userSolution);
-        
+
         // var solutionPath = @"C:\FIIT\normalProject\CodeClash";
         var solutionPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../../.."));
         var projectName = "CodeClash.UserSolutionTest";
-        
+
         return Result.Success(RuntimeProjectExecutor.HandleProject(projectName, solutionPath));
     }
 
-    public async Task UpdateUserOverhead(string result, Guid userId, TimeOnly leftTime)
+    public async Task UpdateUserOverhead(string result, Guid userId, Guid roomId, TimeOnly leftTime,
+        ConcurrentDictionary<Guid, CancellationTokenSource> cancellationTokenDict)
     {
         var userEntity = await usersRepository.GetUserById(userId);
-        if (userEntity?.RoomId == null) 
+        if (userEntity?.RoomId == null)
             throw new InvalidOperationException("User does not exist in DB or user is not in room.");
-        
+
         var programWorkingTime = CheckSolutionParser.GetMeanWorkingTime(result);
         if (userEntity.SentTime is not null && userEntity.ProgramWorkingTime <= programWorkingTime)
             return;
-        
+
         var totalCompetitionTime = (await roomsRepository.GetRoomById(userEntity.RoomId.Value))!.Time;
         var sentTime = TimeOnly.FromTimeSpan(totalCompetitionTime - leftTime);
         var competitionOverhead = CompetitionRuleHelper.GetCompetitionOverhead(sentTime.Second, programWorkingTime);
-        
+
         userEntity.SentTime = sentTime;
         userEntity.ProgramWorkingTime = programWorkingTime;
         userEntity.CompetitionOverhead = competitionOverhead;
+        userEntity.IsSentSolution = true;
         await usersRepository.UpdateUser(userEntity);
+
+        if (await IsAllUsersSentSolution(roomId))
+        {
+            // await Task.Delay(5000);
+            await cancellationTokenDict[roomId].CancelAsync();
+        }
     }
+
+    private async Task<bool> IsAllUsersSentSolution(Guid roomId) =>
+        (await usersRepository.GetUsersByRoomId(roomId)).All(u => u.IsSentSolution);
 }

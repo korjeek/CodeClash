@@ -51,6 +51,14 @@ public class UsersRepository(ApplicationDbContext dbContext)
                 .SetProperty(u => u.CompetitionOverhead, user.CompetitionOverhead));
     }
 
+    public async Task UpdateUserSentSolutionByRoomId(Guid roomId)
+    {
+        await dbContext.Users
+            .Where(u => u.RoomId == roomId)
+            .ExecuteUpdateAsync(s => s
+                .SetProperty(u => u.IsSentSolution, false));
+    }
+
     public async Task<UserEntity?> GetUserById(Guid userId)
     {
         var user = await dbContext.Users

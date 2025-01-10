@@ -1,8 +1,11 @@
+using System.Collections.Concurrent;
 using CodeClash.API.Extensions;
 using CodeClash.Application.Extensions;
 using CodeClash.Application.Services;
+using CodeClash.Core;
 using CodeClash.Core.Models.DTOs;
 using CodeClash.Core.Requests.RoomsRequests;
+using CodeClash.Core.Requests.SolutionsRequests;
 using CodeClash.Persistence.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
@@ -15,8 +18,11 @@ namespace CodeClash.API.Hubs;
 public class RoomHub(
     RoomService roomService,
     CompetitionService competitionService,
-    UserService userService) : Hub
+    UserService userService,
+    TestUserSolutionService testUserSolutionService) : Hub
 {
+    private static readonly ConcurrentDictionary<Guid, CancellationTokenSource> CancellationTokenDict = new();
+
     public override Task OnConnectedAsync()
     {
         var userId = new Guid(Context.UserIdentifier!);
@@ -25,8 +31,6 @@ public class RoomHub(
             AddUserToGroup(roomId.Value).Wait();
         return base.OnConnectedAsync();
     }
-
-    // TODO: добавить метод, что если ты отключился и ты Admin удаляем комнату и надо всез проинформаировать
 
     public async Task<ApiResponse<RoomDTO>> CreateRoom(CreateRoomRequest request)
     {
@@ -53,14 +57,13 @@ public class RoomHub(
         return new ApiResponse<string>(true, "Joined to room successfully.", null);
     }
 
-    // 
     public async Task<ApiResponse<string>> QuitRoom()
     {
         var userId = Context.User.GetUserIdFromAccessToken();
         var roomId = await userService.GetUserRoomId(userId);
         if (!roomId.HasValue)
             return new ApiResponse<string>(false, null, "User is not in room.");
-        var leftRoomResult = await roomService.QuitRoom(userId, roomId.Value, Context, Groups);
+        var leftRoomResult = await roomService.QuitRoom(userId, roomId.Value, Context, Groups, CancellationTokenDict);
         if (leftRoomResult.IsFailure)
             return new ApiResponse<string>(false, null, leftRoomResult.Error);
 
@@ -91,10 +94,31 @@ public class RoomHub(
 
         await SendMessageToAllUsersInGroup(roomId, $"/problem/{roomEntityResult.Value.IssueId}", "CompetitionStarted");
         var cts = new CancellationTokenSource();
-        _ = competitionService.SyncTimers(Clients.Group(roomId.ToString()), duration, roomId, cts.Token);
-        
+        CancellationTokenDict[roomId] = cts;
+        _ = competitionService.SyncTimers(Clients.Group(roomId.ToString()), duration, roomId, CancellationTokenDict);
 
         return new ApiResponse<string>(true, "Competition is started", null);
+    }
+
+    public async Task<ApiResponse<string>> CheckSolution(CheckSolutionRequest checkSolutionRequest)
+    {
+        var userId = Context.User.GetUserIdFromAccessToken();
+        var roomId = await userService.GetUserRoomId(userId);
+        if (!roomId.HasValue)
+            return new ApiResponse<string>(false, null, "User is not in room.");
+
+        var resultString = await testUserSolutionService.CheckSolution(
+            roomId.Value,
+            checkSolutionRequest.Solution,
+            checkSolutionRequest.IssueName);
+        if (resultString.IsFailure)
+            return new ApiResponse<string>(false, null, resultString.Error);
+
+        if (CheckSolutionParser.IsResultOk(resultString.Value))
+            await testUserSolutionService.UpdateUserOverhead(resultString.Value, userId, roomId.Value,
+                checkSolutionRequest.LeftTime, CancellationTokenDict);
+
+        return new ApiResponse<string>(true, resultString.Value, null);
     }
 
     private async Task AddUserToGroup(Guid roomId) =>
