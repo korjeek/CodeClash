@@ -3,38 +3,56 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
-    width: 100vw;
-    background-color: #282c34;
+    overflow: hidden;
+    background-color: black;
 }
 
 .header {
-    width: 100vw;
-    text-align: center;
-    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: calc(100%);
+    margin: 10px 0;
+    box-sizing: border-box;
 }
 
 .content {
     display: flex;
     width: 100%;
-    height: calc(100vh - 60px); /* Высота контента минус высота заголовка */
+    height: calc(100vh - 69px);
+    gap: 1rem;
+}
+
+.default-container-border{
+    border: 0.3vh solid transparent;
+    border-radius: 3vh;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
 }
 
 .markdown-container {
-    flex: 1;
-    padding: 20px;
-    background-color: black;
+    display: flex;
+    flex-direction: column;
+    width: calc(50% - 1rem);
+    background-color: #1E1E1E;
     overflow-y: auto;
+    color: white;
+    background-image: linear-gradient(#1E1E1E, #1E1E1E), linear-gradient(90deg, #6A00FF, #A64AFF);
+}
+
+.md-description{
+    padding: 0 20px 20px 20px;
 }
 
 .editor-container {
-    flex: 1;
+    width: calc(50% - 1rem);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #282c34;
-    width: 100vw;
-    height: 100vh;
+    background-image: linear-gradient(#1E1E1E, #1E1E1E), linear-gradient(90deg, #A64AFF, #FFB1FF);
 }
 
 .editor-wrapper {
@@ -46,3 +64,4 @@
 .editor-wrapper button {
     margin-top: 20px;
 }
+

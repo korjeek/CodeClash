@@ -14,7 +14,7 @@ namespace CodeClash.Tests
 			Assert.That(userResult.IsSuccess, Is.True);
 			var user = userResult.Value;
 
-			var userDTO = user.GetUserDTO();
+			var userDTO = user.GetUserDto();
 
 			Assert.That(userDTO.Email, Is.EqualTo(user.Email));
 			Assert.That(userDTO.Name, Is.EqualTo(user.Name));

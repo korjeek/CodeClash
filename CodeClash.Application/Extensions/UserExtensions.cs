@@ -7,10 +7,19 @@ namespace CodeClash.Application.Extensions;
 
 public static class UserExtensions
 {
-    public static UserDTO GetUserDTO(this User user) => new UserDTO
+    public static UserDTO GetUserDto(this User user) => new UserDTO
     {
         Email = user.Email,
         Name = user.Name
+    };
+
+    public static UserDTO GetUserDto(this UserEntity user) => new UserDTO
+    {
+        Email = user.Email,
+        Name = user.Name,
+        SentTime = user.SentTime.ToString(),
+        ProgramWorkingTime = user.ProgramWorkingTime.ToString(),
+        CompetitionOverhead = user.CompetitionOverhead.ToString()
     };
 
     public static UserEntity GetUserEntity(this User user) => new UserEntity
@@ -31,4 +40,11 @@ public static class UserExtensions
         userEntity.Name,
         userEntity.IsAdmin
     ).Value;
+
+    public static void ClearUserEntityOverhead(this UserEntity userEntity)
+    {
+        userEntity.SentTime = null;
+        userEntity.CompetitionOverhead = null;
+        userEntity.ProgramWorkingTime = null;
+    }
 }

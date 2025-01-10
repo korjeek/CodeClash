@@ -4,8 +4,7 @@ using CodeClash.Application;
 using CodeClash.Application.Services;
 using CodeClash.Persistence;
 using CodeClash.Persistence.Repositories;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -19,6 +18,7 @@ services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
     
 services.AddSignalR();
+services.AddSingleton<IUserIdProvider, UserConnectionIdProvider>();
 
 services.AddDbContext<ApplicationDbContext>();
 //TODO Сделать, чтобы добавлялись только интерфесы с нужными методами. Интерфейсы реализовываются через Services, которые можно менять
@@ -31,6 +31,7 @@ services.AddScoped<RoomService>();
 services.AddScoped<IssueService>();
 services.AddScoped<TestUserSolutionService>();
 services.AddScoped<CompetitionService>();
+services.AddScoped<UserService>();
 
 services.AddScoped<UsersRepository>();
 services.AddScoped<RoomsRepository>();
@@ -72,6 +73,6 @@ app.UseCookiePolicy(new CookiePolicyOptions
 });
 
 app.MapControllers();
-app.MapHub<RoomHub>("/rooms"); // как сделать для разных комнат?
+app.MapHub<RoomHub>("/rooms");
 
 app.Run();

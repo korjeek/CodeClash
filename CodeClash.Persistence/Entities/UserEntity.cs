@@ -11,4 +11,7 @@ public class UserEntity
     public string? RefreshToken { get; set; }
     public bool IsAdmin { get; set; }
     public Guid? RoomId { get; set; }
+    public TimeOnly? SentTime { get; set; }
+    public float? ProgramWorkingTime { get; set; }
+    public float? CompetitionOverhead { get; set; } // Чем меньше издержков, тем лучше Типа метрика
 }

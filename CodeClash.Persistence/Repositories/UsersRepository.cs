@@ -1,4 +1,5 @@
-﻿using CodeClash.Persistence.Entities;
+﻿using System.Linq.Expressions;
+using CodeClash.Persistence.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CodeClash.Persistence.Repositories;
@@ -44,7 +45,10 @@ public class UsersRepository(ApplicationDbContext dbContext)
                 .SetProperty(u => u.RefreshToken, user.RefreshToken)
                 .SetProperty(u => u.RefreshTokenExpiryTime, user.RefreshTokenExpiryTime)
                 .SetProperty(u => u.IsAdmin, user.IsAdmin)
-                .SetProperty(u => u.RoomId, user.RoomId));
+                .SetProperty(u => u.RoomId, user.RoomId)
+                .SetProperty(u => u.SentTime, user.SentTime)
+                .SetProperty(u => u.ProgramWorkingTime, user.ProgramWorkingTime)
+                .SetProperty(u => u.CompetitionOverhead, user.CompetitionOverhead));
     }
 
     public async Task<UserEntity?> GetUserById(Guid userId)
@@ -54,13 +58,16 @@ public class UsersRepository(ApplicationDbContext dbContext)
         return user;
     }
     
-    public async Task<UserEntity?> RemoveUserFromRoom(Guid userId)
+    public async Task<List<UserEntity>> GetUsersByRoomId(Guid roomId)
     {
-        var user = await dbContext.Users.FindAsync(userId);
-        if (user is null)
-            return null;
-        user.RoomId = null;
-        await dbContext.SaveChangesAsync();
-        return user;
+        return await dbContext.Users.Where(u => u.RoomId == roomId).ToListAsync();
+    }
+    
+    public async Task<List<UserEntity>> GetUsersByRoomIdInOrderByKey<TKey>(Guid roomId, 
+        Expression<Func<UserEntity, TKey>> key)
+    {
+        return await dbContext.Users.Where(u => u.RoomId == roomId)
+            .OrderBy(key)
+            .ToListAsync();
     }
 }

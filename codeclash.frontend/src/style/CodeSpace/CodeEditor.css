@@ -1,0 +1,38 @@
+.content-header{
+    display: flex;
+    gap: .5rem;
+    width: 100%;
+    height: 5vh;
+    color: #707070;
+    border-top-left-radius: 3vh;
+    border-top-right-radius: 3vh;
+    align-items: center;
+    justify-content: start;
+    font-weight: bold;
+    box-sizing: border-box;
+    padding: 0 5vh;
+    border-bottom: 1px solid transparent;
+}
+
+.md-header-border{
+    background-image: linear-gradient(#1e1e1e, #1e1e1e), linear-gradient(90deg, #6A00FF, #A64AFF);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+
+.code-header-border{
+    background-image: linear-gradient(#1e1e1e, #1e1e1e), linear-gradient(90deg, #A64AFF, #FFB1FF);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+
+.code-editor{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.editor-margin{
+    margin-bottom: 10vh;
+    padding-top: 1rem;
+}

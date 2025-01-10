@@ -1,5 +1,6 @@
-﻿using CodeClash.Application.Extensions;
-using CodeClash.Core.Models.Domain;
+﻿using CodeClash.API;
+using CodeClash.Application.Extensions;
+using CodeClash.Core.Models.DTOs;
 using CodeClash.Persistence.Entities;
 using CodeClash.Persistence.Repositories;
 using CSharpFunctionalExtensions;
@@ -26,7 +27,7 @@ public class CompetitionService(RoomsRepository roomsRepository, UsersRepository
             return Result.Failure<bool>("User does not exist.");
         return Result.Success(user.IsAdmin);
     }
-    
+
     public async Task<Result<RoomStatus>> GetRoomStatus(Guid roomId)
     {
         var room = await roomsRepository.GetRoomById(roomId);
@@ -34,22 +35,35 @@ public class CompetitionService(RoomsRepository roomsRepository, UsersRepository
             return Result.Failure<RoomStatus>("Room does not exist.");
         return Result.Success(room.Status);
     }
-    
-    public async Task SyncTimers(IClientProxy clients, TimeOnly duration, Guid roomId)
+
+    public async Task SyncTimers(IClientProxy clients, TimeOnly duration, Guid roomId,
+        CancellationToken cancellationToken)
     {
-        var endTime = DateTime.Now + duration.ToTimeSpan().Duration();
+        var endTime = DateTime.Now + duration.ToTimeSpan().Duration() + new TimeOnly(0, 0, 3).ToTimeSpan().Duration();
 
         while (true)
         {
-            if (DateTime.Now >= endTime)
+            if (DateTime.Now >= endTime || cancellationToken.IsCancellationRequested)
             {
                 await UpdateRoomStatus(roomId, RoomStatus.WaitingForParticipants);
-                await clients.SendAsync("CompetitionEnded"); // Метод, который будет выполняться на фронте
+                var leaderList = await GetRoomLeaders(roomId);
+                var result = new ApiResponse<List<UserDTO>>(true, leaderList, null);
+                await clients.SendAsync("CompetitionEnded", result); // Метод, который будет выполняться на фронте
                 break;
             }
-            
-            await clients.SendAsync("UpdateTimer", (endTime - DateTime.Now).TotalSeconds); // Метод, который будет выполняться на фронте
+
+            var leftTime = endTime - DateTime.Now;
+
+            await clients.SendAsync("UpdateTimer",
+                leftTime.Minutes > 0
+                    ? $"{leftTime.Minutes}m {leftTime.Seconds}s"
+                    : $"{leftTime.Seconds}s"); // Метод, который будет выполняться на фронте
             await Task.Delay(1000); // Синхронизация раз в секунду
         }
     }
+    
+    private async Task<List<UserDTO>> GetRoomLeaders(Guid roomId) =>
+        (await usersRepository.GetUsersByRoomIdInOrderByKey(roomId, user => user.CompetitionOverhead))
+        .Select(u => u.GetUserDto())
+        .ToList();
 }

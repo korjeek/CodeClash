@@ -16,4 +16,7 @@ public class IssuesRepository(ApplicationDbContext dbContext)
             .FindAsync(issueId);
         return issueEntity;
     }
+
+    public async Task<List<IssueEntity>> GetAllIssues() => dbContext.Issues.ToList();
+    
 }
