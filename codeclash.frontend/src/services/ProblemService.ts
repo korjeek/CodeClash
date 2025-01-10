@@ -9,7 +9,8 @@ export const getAllProblems = async (): Promise<Issue[]> => {
 }
 
 export const getProblem = async (id: string): Promise<Issue> => {
-    const issue = {id: id, name: null, description: null, initialCode: null };
+    const issue = {id: id, name: '', description: '', initialCode: '' };
+    console.log(issue)
     const response = await axios.post(`${API_URL}/get-issue`, issue, { withCredentials: true });
     console.log(response.data);
     return response.data.data;

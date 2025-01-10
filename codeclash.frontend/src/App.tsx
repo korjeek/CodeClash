@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import StartPage from './components/StartPage/StartPage.tsx';
 import RegisterPage from './components/AuthPages/RegisterPage.tsx';
 import LoginPage from './components/AuthPages/LoginPage.tsx';
@@ -13,7 +13,10 @@ import ProblemsPage from "./components/ProblemsPage/ProblemsPage.tsx";
 
 const App: React.FC = () => {
     return (
-        <Router>
+        <Router future={{
+            v7_startTransition: true,
+            v7_relativeSplatPath: true,
+        }}>
             <Routes>
                 <Route path="/" element={<StartPage/>} />
                 <Route path="/reg" element={<AuthPage AuthPageElement={<RegisterPage/>} />} />

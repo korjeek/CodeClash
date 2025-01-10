@@ -11,6 +11,7 @@ import BaseNavBar from "../NavBars/BaseNavBar.tsx";
 import {getRoomsList} from "../../services/RoomService.ts";
 import SignalRService from "../../services/SignalRService.ts";
 import {TabItem} from "../../Props/PageStateProps.ts";
+import {getPaginationRange, searchRoom} from "../../services/PagindationService.ts";
 
 
 export default function HomePage() {
@@ -30,18 +31,13 @@ export default function HomePage() {
             setPages(paginationRange);
         }
 
-        signalR.onUserAction<string>((url: string) =>
-        {
-            setTimeout(() => {navigate(url)}, 3000);
-        }, "CompetitionStarted");
-
         fetchRooms();
     }, [currentPage, navigate, signalR])
 
     const joinRoom = async (roomId: string) => {
         const response = await signalR.invoke<string, Room>("JoinRoom", roomId)
         if (response)
-            navigate(`/lobby?id=${roomId}`);
+            navigate(`/lobby`);
     }
     const createRoom = async () => navigate(`/create-competition`);
 
@@ -93,22 +89,3 @@ export default function HomePage() {
         </div>
     )
 };
-
-async function getPaginationRange(currentPage: number, totalPages: number){
-    let startPage = Math.max(currentPage - 2, 1);
-    let endPage = Math.min(currentPage + 2, totalPages);
-
-    if (startPage === 1) {
-        endPage = Math.min(5, totalPages);
-    }
-
-    if (endPage === totalPages) {
-        startPage = Math.max(totalPages - 4, 1);
-    }
-
-    return Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
-}
-
-function searchRoom(room: Room, search: string){
-    return search.toLowerCase() === '' ? room : room.name.toLowerCase().includes(search)
-}

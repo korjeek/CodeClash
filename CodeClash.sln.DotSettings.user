@@ -24,7 +24,7 @@
   &lt;Assembly Path="C:\Program Files\dotnet\packs\Microsoft.AspNetCore.App.Ref\8.0.8\ref\net8.0\Microsoft.Extensions.FileProviders.Physical.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Users\artem\.nuget\packages\microsoft.build\17.12.6\ref\net472\Microsoft.Build.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
-	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">C:\Users\Maksim Tseshnaty\AppData\Local\JetBrains\Rider2024.1\resharper-host\temp\Rider\vAny\CoverageData\_CodeClash.552613005\Snapshot\snapshot.utdcvr</s:String>
+	
 	
 	
 	

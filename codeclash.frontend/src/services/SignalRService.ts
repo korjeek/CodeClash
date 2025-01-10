@@ -4,7 +4,7 @@ import {Response} from "../interfaces/ResponseInterface.ts";
 const SIGNALR_API_URL = 'https://localhost:7282/rooms'
 
 export default class SignalRService {
-    public readonly connection: signalR.HubConnection;
+    private readonly connection: signalR.HubConnection;
     constructor() {
         this.connection = new signalR.HubConnectionBuilder()
             .withUrl(SIGNALR_API_URL)
@@ -18,8 +18,9 @@ export default class SignalRService {
 
     public async startConnection(): Promise<void> {
         try {
-            await this.connection.start();
-            console.log('SignalR connected');
+            if (this.connection.state == signalR.HubConnectionState.Disconnected){
+                await this.connection.start();
+            }
         }
         catch (err) {
             console.error('Error while establishing SignalR connection:', err);
@@ -29,10 +30,12 @@ export default class SignalRService {
     public async invoke<TArg, TResult>(methodName: string, arg: TArg): Promise<TResult | undefined> {
         try {
             let response: Response<TResult>;
-            if (arg)
+
+            if (arg !== undefined)
                 response = await this.connection.invoke<Response<TResult>>(methodName, arg);
             else
                 response = await this.connection.invoke<Response<TResult>>(methodName);
+
             if (response.success)
                 return response.data;
             console.log(response.error);

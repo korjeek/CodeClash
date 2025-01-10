@@ -2,6 +2,6 @@
 
 public class UserStateDTO
 {
-    public bool IsHasRoom { get; set; }
+    public bool HasRoom { get; set; }
     public string? CompetitionIssueId { get; set; }
 }

@@ -20,7 +20,7 @@ public class UserController(UserService userService, RoomService roomService) : 
             return new ApiResponse<UserStateDTO>(true,
                 new UserStateDTO
                 {
-                    IsHasRoom = false,
+                    HasRoom = false,
                     CompetitionIssueId = null
                 },
                 null);
@@ -33,7 +33,7 @@ public class UserController(UserService userService, RoomService roomService) : 
             : null;
         return new ApiResponse<UserStateDTO>(true, new UserStateDTO
             {
-                IsHasRoom = true,
+                HasRoom = true,
                 CompetitionIssueId = competitionIssueId
             },
             null);

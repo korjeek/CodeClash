@@ -1,5 +1,5 @@
 import {useEffect, useMemo, useState} from 'react';
-import {useLocation, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {Room} from "../../interfaces/RoomInterfaces.ts";
 import SignalRService from "../../services/SignalRService.ts";
 import BaseNavBar from "../NavBars/BaseNavBar.tsx";
@@ -9,9 +9,6 @@ import {checkForAdmin, getRoom} from "../../services/RoomService.ts";
 import {TabItem} from "../../Props/PageStateProps.ts";
 
 export default function Lobby() {
-    const location = useLocation();
-    const queryParams = new URLSearchParams(location.search);
-    const roomId = queryParams.get('id')!;
     const [room, setRoom] = useState<Room>();
     const [isAdmin, setIsAdmin] = useState<boolean>(false);
     const [count, setCount] = useState<number>(3);
@@ -50,7 +47,7 @@ export default function Lobby() {
 
         connectToRoom();
         fetchAdminStatus();
-    }, [navigate, roomId, signalR]);
+    }, [navigate, signalR]);
 
     useEffect(() => {
         if (ready && count > 0) {
@@ -65,7 +62,7 @@ export default function Lobby() {
     }, [competitionUrl, count, navigate, ready]);
 
     const quitRoom = async () => {
-        await signalR.invoke<null, Room>("QuitRoom", null)
+        await signalR.invoke<undefined, Room>("QuitRoom", undefined)
         await signalR.stopConnection()
         navigate('/competitions');
     }
