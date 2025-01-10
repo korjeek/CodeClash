@@ -12,7 +12,7 @@ public class SolutionTask
           result[0] = j;
           result[1] = j;
         }
-      }
-    return result;
-  }
+
+        return new int[] { };
+	}
 }
