@@ -48,7 +48,8 @@ public class UsersRepository(ApplicationDbContext dbContext)
                 .SetProperty(u => u.RoomId, user.RoomId)
                 .SetProperty(u => u.SentTime, user.SentTime)
                 .SetProperty(u => u.ProgramWorkingTime, user.ProgramWorkingTime)
-                .SetProperty(u => u.CompetitionOverhead, user.CompetitionOverhead));
+                .SetProperty(u => u.CompetitionOverhead, user.CompetitionOverhead)
+                .SetProperty(u => u.IsSentSolution, user.IsSentSolution));
     }
 
     public async Task UpdateUserSentSolutionByRoomId(Guid roomId)
