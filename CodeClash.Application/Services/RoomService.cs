@@ -1,4 +1,5 @@
-﻿using CodeClash.Application.Extensions;
+﻿using System.Collections.Concurrent;
+using CodeClash.Application.Extensions;
 using CodeClash.Core.Models.Domain;
 using CodeClash.Core.Models.DTOs;
 using CodeClash.Persistence.Entities;
@@ -66,7 +67,7 @@ public class RoomService(
     }
 
     public async Task<Result<Room?>> QuitRoom(Guid userId, Guid roomId, HubCallerContext hubCallerContext,
-        IGroupManager groupManager)
+        IGroupManager groupManager, ConcurrentDictionary<Guid, CancellationTokenSource> cancellationTokenDict)
     {
         var userEntity = await usersRepository.GetUserById(userId);
         if (userEntity is null)
@@ -84,6 +85,10 @@ public class RoomService(
             userEntity.ClearUserEntityOverhead();
             await usersRepository.UpdateUser(userEntity);
             await roomsRepository.Delete(roomEntity);
+            
+            // Остановка таймера
+            await cancellationTokenDict[roomId].CancelAsync();
+            
             return Result.Success<Room?>(null);
         }
 
@@ -91,6 +96,7 @@ public class RoomService(
         userEntity.ClearUserEntityOverhead();
         await usersRepository.UpdateUser(userEntity);
         await groupManager.RemoveFromGroupAsync(hubCallerContext.ConnectionId, roomId.ToString());
+        
         roomEntity.ParticipantsCount -= 1;
         await roomsRepository.UpdateRoom(roomEntity);
 

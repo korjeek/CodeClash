@@ -1,4 +1,5 @@
-﻿using CodeClash.API;
+﻿using System.Collections.Concurrent;
+using CodeClash.API;
 using CodeClash.Application.Extensions;
 using CodeClash.Core.Models.DTOs;
 using CodeClash.Persistence.Entities;
@@ -37,23 +38,27 @@ public class CompetitionService(RoomsRepository roomsRepository, UsersRepository
     }
 
     public async Task SyncTimers(IClientProxy clients, TimeOnly duration, Guid roomId,
-        CancellationToken cancellationToken)
+        ConcurrentDictionary<Guid, CancellationTokenSource> cancellationTokenDict)
     {
-        var endTime = DateTime.Now + duration.ToTimeSpan().Duration() + new TimeOnly(0, 0, 3).ToTimeSpan().Duration();
-
+        var endTime = DateTime.Now + duration.ToTimeSpan().Duration() +
+                      new TimeOnly(0, 0, 3).ToTimeSpan().Duration();
+        var cancellationToken = cancellationTokenDict[roomId];
         while (true)
         {
             if (DateTime.Now >= endTime || cancellationToken.IsCancellationRequested)
             {
+                cancellationTokenDict.TryRemove(roomId, out _);
+                await usersRepository.UpdateUserSentSolutionByRoomId(roomId);
                 await UpdateRoomStatus(roomId, RoomStatus.WaitingForParticipants);
                 var leaderList = await GetRoomLeaders(roomId);
-                var result = new ApiResponse<List<UserDTO>>(true, leaderList, null);
-                await clients.SendAsync("CompetitionEnded", result); // Метод, который будет выполняться на фронте
+                await clients.SendAsync("CompetitionEnded",
+                    new ApiResponse<List<UserDTO>>(true, leaderList,
+                        null)); // Метод, который будет выполняться на фронте
                 break;
             }
 
             var leftTime = endTime - DateTime.Now;
-
+            Console.WriteLine(leftTime);
             await clients.SendAsync("UpdateTimer",
                 leftTime.Minutes > 0
                     ? $"{leftTime.Minutes}m {leftTime.Seconds}s"
@@ -61,7 +66,7 @@ public class CompetitionService(RoomsRepository roomsRepository, UsersRepository
             await Task.Delay(1000); // Синхронизация раз в секунду
         }
     }
-    
+
     private async Task<List<UserDTO>> GetRoomLeaders(Guid roomId) =>
         (await usersRepository.GetUsersByRoomIdInOrderByKey(roomId, user => user.CompetitionOverhead))
         .Select(u => u.GetUserDto())
