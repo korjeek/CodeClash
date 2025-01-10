@@ -3,6 +3,42 @@
   "WorkspaceRootPath": "D:\\CodeClash\\CodeClash\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\ValidParentheses\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\ValidParentheses\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\RomanToInteger\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\RomanToInteger\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\Palindrome\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\Palindrome\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\MergeTwoSortedLists\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\MergeTwoSortedLists\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\LongestCommonPrefix\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\LongestCommonPrefix\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\FindSum\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\FindSum\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\DeleteDuplicates\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\DeleteDuplicates\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\RomanToInteger\\SolutionTask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\RomanToInteger\\SolutionTask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\CodeClash.API\\CodeClash.API.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CodeClash.API\\CodeClash.API.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\ValidParentheses\\SolutionTaskTests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\ValidParentheses\\SolutionTaskTests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -13,10 +49,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\RomanToInteger\\SolutionTaskTests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\RomanToInteger\\SolutionTaskTests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\RomanToInteger\\SolutionTask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\RomanToInteger\\SolutionTask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\Palindrome\\SolutionTaskTests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -57,34 +89,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\DeleteDuplicates\\SolutionTaskTests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\DeleteDuplicates\\SolutionTaskTests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\ValidParentheses\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\ValidParentheses\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\RomanToInteger\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\RomanToInteger\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\Palindrome\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\Palindrome\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\MergeTwoSortedLists\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\MergeTwoSortedLists\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\LongestCommonPrefix\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\LongestCommonPrefix\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\DeleteDuplicates\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\DeleteDuplicates\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\TestSources\\FindSum\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestSources\\FindSum\\Condition.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CodeClash\\CodeClash\\CodeClash.Application\\CodeClash.Application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
@@ -202,7 +206,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 10,
           "Children": [
             {
               "$type": "Bookmark",
@@ -214,20 +218,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "SolutionTask.cs",
-              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\ValidParentheses\\SolutionTask.cs",
-              "RelativeDocumentMoniker": "TestSources\\ValidParentheses\\SolutionTask.cs",
-              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\ValidParentheses\\SolutionTask.cs",
-              "RelativeToolTip": "TestSources\\ValidParentheses\\SolutionTask.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAACAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-10T07:39:34.065Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "SolutionTask.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\RomanToInteger\\SolutionTask.cs",
               "RelativeDocumentMoniker": "TestSources\\RomanToInteger\\SolutionTask.cs",
@@ -240,46 +231,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "SolutionTask.cs",
-              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\Palindrome\\SolutionTask.cs",
-              "RelativeDocumentMoniker": "TestSources\\Palindrome\\SolutionTask.cs",
-              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\Palindrome\\SolutionTask.cs",
-              "RelativeToolTip": "TestSources\\Palindrome\\SolutionTask.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAACAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-10T07:38:35.689Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "SolutionTask.cs",
-              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\MergeTwoSortedLists\\SolutionTask.cs",
-              "RelativeDocumentMoniker": "TestSources\\MergeTwoSortedLists\\SolutionTask.cs",
-              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\MergeTwoSortedLists\\SolutionTask.cs",
-              "RelativeToolTip": "TestSources\\MergeTwoSortedLists\\SolutionTask.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAACAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-10T07:37:53.249Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "SolutionTask.cs",
-              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\LongestCommonPrefix\\SolutionTask.cs",
-              "RelativeDocumentMoniker": "TestSources\\LongestCommonPrefix\\SolutionTask.cs",
-              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\LongestCommonPrefix\\SolutionTask.cs",
-              "RelativeToolTip": "TestSources\\LongestCommonPrefix\\SolutionTask.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-10T07:37:05.01Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 16,
               "Title": "SolutionTask.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\FindSum\\SolutionTask.cs",
               "RelativeDocumentMoniker": "TestSources\\FindSum\\SolutionTask.cs",
@@ -287,12 +239,167 @@
               "RelativeToolTip": "TestSources\\FindSum\\SolutionTask.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-10T07:36:55.335Z",
+              "WhenOpened": "2025-01-10T07:36:55.335Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Condition.md",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\FindSum\\Condition.md",
+              "RelativeDocumentMoniker": "TestSources\\FindSum\\Condition.md",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\FindSum\\Condition.md",
+              "RelativeToolTip": "TestSources\\FindSum\\Condition.md",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABUAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-01-10T07:11:07.747Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 6,
+              "Title": "Condition.md",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\DeleteDuplicates\\Condition.md",
+              "RelativeDocumentMoniker": "TestSources\\DeleteDuplicates\\Condition.md",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\DeleteDuplicates\\Condition.md",
+              "RelativeToolTip": "TestSources\\DeleteDuplicates\\Condition.md",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABEAAAADAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-01-10T07:11:35.056Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Condition.md",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\LongestCommonPrefix\\Condition.md",
+              "RelativeDocumentMoniker": "TestSources\\LongestCommonPrefix\\Condition.md",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\LongestCommonPrefix\\Condition.md",
+              "RelativeToolTip": "TestSources\\LongestCommonPrefix\\Condition.md",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABgAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-01-10T07:12:54.401Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Condition.md",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\MergeTwoSortedLists\\Condition.md",
+              "RelativeDocumentMoniker": "TestSources\\MergeTwoSortedLists\\Condition.md",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\MergeTwoSortedLists\\Condition.md",
+              "RelativeToolTip": "TestSources\\MergeTwoSortedLists\\Condition.md",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAuwCQAAAADAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-01-10T07:13:36.967Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Condition.md",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\Palindrome\\Condition.md",
+              "RelativeDocumentMoniker": "TestSources\\Palindrome\\Condition.md",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\Palindrome\\Condition.md",
+              "RelativeToolTip": "TestSources\\Palindrome\\Condition.md",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABcAAAADAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-01-10T07:14:56.127Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Condition.md",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\RomanToInteger\\Condition.md",
+              "RelativeDocumentMoniker": "TestSources\\RomanToInteger\\Condition.md",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\RomanToInteger\\Condition.md",
+              "RelativeToolTip": "TestSources\\RomanToInteger\\Condition.md",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAAACMAAAADAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-01-10T07:15:37.311Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Condition.md",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\ValidParentheses\\Condition.md",
+              "RelativeDocumentMoniker": "TestSources\\ValidParentheses\\Condition.md",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\ValidParentheses\\Condition.md",
+              "RelativeToolTip": "TestSources\\ValidParentheses\\Condition.md",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-01-10T07:17:14.259Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "SolutionTask.cs",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\LongestCommonPrefix\\SolutionTask.cs",
+              "RelativeDocumentMoniker": "TestSources\\LongestCommonPrefix\\SolutionTask.cs",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\LongestCommonPrefix\\SolutionTask.cs",
+              "RelativeToolTip": "TestSources\\LongestCommonPrefix\\SolutionTask.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-10T07:37:05.01Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "SolutionTask.cs",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\MergeTwoSortedLists\\SolutionTask.cs",
+              "RelativeDocumentMoniker": "TestSources\\MergeTwoSortedLists\\SolutionTask.cs",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\MergeTwoSortedLists\\SolutionTask.cs",
+              "RelativeToolTip": "TestSources\\MergeTwoSortedLists\\SolutionTask.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-10T07:37:53.249Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "SolutionTask.cs",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\Palindrome\\SolutionTask.cs",
+              "RelativeDocumentMoniker": "TestSources\\Palindrome\\SolutionTask.cs",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\Palindrome\\SolutionTask.cs",
+              "RelativeToolTip": "TestSources\\Palindrome\\SolutionTask.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-10T07:38:35.689Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "SolutionTask.cs",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\ValidParentheses\\SolutionTask.cs",
+              "RelativeDocumentMoniker": "TestSources\\ValidParentheses\\SolutionTask.cs",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\ValidParentheses\\SolutionTask.cs",
+              "RelativeToolTip": "TestSources\\ValidParentheses\\SolutionTask.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-10T07:39:34.065Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "CodeClash.API.csproj",
+              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.API\\CodeClash.API.csproj",
+              "RelativeDocumentMoniker": "CodeClash.API\\CodeClash.API.csproj",
+              "ToolTip": "D:\\CodeClash\\CodeClash\\CodeClash.API\\CodeClash.API.csproj",
+              "RelativeToolTip": "CodeClash.API\\CodeClash.API.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAADAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-01-10T07:58:05.528Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{269a02dc-6af8-11d3-bdc4-00c04f688e50}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
               "Title": "SolutionTask.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\DeleteDuplicates\\SolutionTask.cs",
               "RelativeDocumentMoniker": "TestSources\\DeleteDuplicates\\SolutionTask.cs",
@@ -300,25 +407,24 @@
               "RelativeToolTip": "TestSources\\DeleteDuplicates\\SolutionTask.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-10T07:36:35.13Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-10T07:36:35.13Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 9,
               "Title": "SolutionTaskTests.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\ValidParentheses\\SolutionTaskTests.cs",
               "RelativeDocumentMoniker": "TestSources\\ValidParentheses\\SolutionTaskTests.cs",
               "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\ValidParentheses\\SolutionTaskTests.cs",
               "RelativeToolTip": "TestSources\\ValidParentheses\\SolutionTaskTests.cs",
-              "ViewState": "AQIAACEAAAAAAAAAAAAAAA8AAAADAAAA",
+              "ViewState": "AQIAAB0AAAAAAAAAAAAAACIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-10T07:17:27.741Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 11,
               "Title": "SolutionTaskTests.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\RomanToInteger\\SolutionTaskTests.cs",
               "RelativeDocumentMoniker": "TestSources\\RomanToInteger\\SolutionTaskTests.cs",
@@ -326,25 +432,11 @@
               "RelativeToolTip": "TestSources\\RomanToInteger\\SolutionTaskTests.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-10T07:16:10.852Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-10T07:16:10.852Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Condition.md",
-              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\ValidParentheses\\Condition.md",
-              "RelativeDocumentMoniker": "TestSources\\ValidParentheses\\Condition.md",
-              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\ValidParentheses\\Condition.md",
-              "RelativeToolTip": "TestSources\\ValidParentheses\\Condition.md",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAZAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
-              "WhenOpened": "2025-01-10T07:17:14.259Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 12,
               "Title": "SolutionTaskTests.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\Palindrome\\SolutionTaskTests.cs",
               "RelativeDocumentMoniker": "TestSources\\Palindrome\\SolutionTaskTests.cs",
@@ -352,12 +444,11 @@
               "RelativeToolTip": "TestSources\\Palindrome\\SolutionTaskTests.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAxAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-10T07:15:17.9Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-10T07:15:17.9Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 15,
               "Title": "SolutionTaskTests.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\MergeTwoSortedLists\\SolutionTaskTests.cs",
               "RelativeDocumentMoniker": "TestSources\\MergeTwoSortedLists\\SolutionTaskTests.cs",
@@ -365,25 +456,11 @@
               "RelativeToolTip": "TestSources\\MergeTwoSortedLists\\SolutionTaskTests.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAOAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-10T07:13:52.38Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-10T07:13:52.38Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Condition.md",
-              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\RomanToInteger\\Condition.md",
-              "RelativeDocumentMoniker": "TestSources\\RomanToInteger\\Condition.md",
-              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\RomanToInteger\\Condition.md",
-              "RelativeToolTip": "TestSources\\RomanToInteger\\Condition.md",
-              "ViewState": "AQIAAAUAAAAAAAAAAAAAACMAAAAgAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
-              "WhenOpened": "2025-01-10T07:15:37.311Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 18,
               "Title": "SolutionTaskTests.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\LongestCommonPrefix\\SolutionTaskTests.cs",
               "RelativeDocumentMoniker": "TestSources\\LongestCommonPrefix\\SolutionTaskTests.cs",
@@ -391,12 +468,11 @@
               "RelativeToolTip": "TestSources\\LongestCommonPrefix\\SolutionTaskTests.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAOAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-10T07:13:16.569Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-10T07:13:16.569Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 19,
               "Title": "SolutionTaskTests.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\FindSum\\SolutionTaskTests.cs",
               "RelativeDocumentMoniker": "TestSources\\FindSum\\SolutionTaskTests.cs",
@@ -404,25 +480,11 @@
               "RelativeToolTip": "TestSources\\FindSum\\SolutionTaskTests.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-10T07:10:14.505Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-10T07:10:14.505Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "Condition.md",
-              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\Palindrome\\Condition.md",
-              "RelativeDocumentMoniker": "TestSources\\Palindrome\\Condition.md",
-              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\Palindrome\\Condition.md",
-              "RelativeToolTip": "TestSources\\Palindrome\\Condition.md",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
-              "WhenOpened": "2025-01-10T07:14:56.127Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 21,
               "Title": "SolutionTaskTests.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\DeleteDuplicates\\SolutionTaskTests.cs",
               "RelativeDocumentMoniker": "TestSources\\DeleteDuplicates\\SolutionTaskTests.cs",
@@ -430,64 +492,11 @@
               "RelativeToolTip": "TestSources\\DeleteDuplicates\\SolutionTaskTests.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAABPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-10T07:11:56.762Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-10T07:11:56.762Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "Condition.md",
-              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\MergeTwoSortedLists\\Condition.md",
-              "RelativeDocumentMoniker": "TestSources\\MergeTwoSortedLists\\Condition.md",
-              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\MergeTwoSortedLists\\Condition.md",
-              "RelativeToolTip": "TestSources\\MergeTwoSortedLists\\Condition.md",
-              "ViewState": "AQIAAAsAAAAAAAAAAAAuwCQAAAA1AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
-              "WhenOpened": "2025-01-10T07:13:36.967Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "Condition.md",
-              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\LongestCommonPrefix\\Condition.md",
-              "RelativeDocumentMoniker": "TestSources\\LongestCommonPrefix\\Condition.md",
-              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\LongestCommonPrefix\\Condition.md",
-              "RelativeToolTip": "TestSources\\LongestCommonPrefix\\Condition.md",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAAAkAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
-              "WhenOpened": "2025-01-10T07:12:54.401Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "Condition.md",
-              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\DeleteDuplicates\\Condition.md",
-              "RelativeDocumentMoniker": "TestSources\\DeleteDuplicates\\Condition.md",
-              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\DeleteDuplicates\\Condition.md",
-              "RelativeToolTip": "TestSources\\DeleteDuplicates\\Condition.md",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAmAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
-              "WhenOpened": "2025-01-10T07:11:35.056Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "Condition.md",
-              "DocumentMoniker": "D:\\CodeClash\\CodeClash\\TestSources\\FindSum\\Condition.md",
-              "RelativeDocumentMoniker": "TestSources\\FindSum\\Condition.md",
-              "ToolTip": "D:\\CodeClash\\CodeClash\\TestSources\\FindSum\\Condition.md",
-              "RelativeToolTip": "TestSources\\FindSum\\Condition.md",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
-              "WhenOpened": "2025-01-10T07:11:07.747Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 22,
               "Title": "CodeClash.Application.csproj",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Application\\CodeClash.Application.csproj",
               "RelativeDocumentMoniker": "CodeClash.Application\\CodeClash.Application.csproj",
@@ -495,12 +504,11 @@
               "RelativeToolTip": "CodeClash.Application\\CodeClash.Application.csproj",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAA2AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-12-25T10:01:53.294Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-25T10:01:53.294Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 23,
               "Title": "PasswordHasher_Tests.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Tests\\PasswordHasher_Tests.cs",
               "RelativeDocumentMoniker": "CodeClash.Tests\\PasswordHasher_Tests.cs",
@@ -512,7 +520,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 24,
               "Title": "RoomExtensions_Tests.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Tests\\RoomExtensions_Tests.cs",
               "RelativeDocumentMoniker": "CodeClash.Tests\\RoomExtensions_Tests.cs",
@@ -524,7 +532,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "UserExtensions_Tests.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Tests\\UserExtensions_Tests.cs",
               "RelativeDocumentMoniker": "CodeClash.Tests\\UserExtensions_Tests.cs",
@@ -536,7 +544,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 26,
               "Title": "Issue.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Core\\Models\\Domain\\Issue.cs",
               "RelativeDocumentMoniker": "CodeClash.Core\\Models\\Domain\\Issue.cs",
@@ -548,7 +556,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 27,
               "Title": "IssueExtensions_Tests.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Tests\\IssueExtensions_Tests.cs",
               "RelativeDocumentMoniker": "CodeClash.Tests\\IssueExtensions_Tests.cs",
@@ -560,7 +568,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 28,
               "Title": "CodeClash.Tests.csproj",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Tests\\CodeClash.Tests.csproj",
               "RelativeDocumentMoniker": "CodeClash.Tests\\CodeClash.Tests.csproj",
@@ -572,7 +580,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 29,
               "Title": "JwtBearerExtensions_Tests.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Tests\\JwtBearerExtensions_Tests.cs",
               "RelativeDocumentMoniker": "CodeClash.Tests\\JwtBearerExtensions_Tests.cs",
@@ -584,7 +592,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 30,
               "Title": "EnterQuitRoomRequest_Tests.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Tests\\EnterQuitRoomRequest_Tests.cs",
               "RelativeDocumentMoniker": "CodeClash.Tests\\EnterQuitRoomRequest_Tests.cs",
@@ -596,7 +604,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 31,
               "Title": "CreateRoomRequest_Tests.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Tests\\CreateRoomRequest_Tests.cs",
               "RelativeDocumentMoniker": "CodeClash.Tests\\CreateRoomRequest_Tests.cs",
@@ -608,7 +616,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 32,
               "Title": "CreateIssueRequest_Tests.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Tests\\CreateIssueRequest_Tests.cs",
               "RelativeDocumentMoniker": "CodeClash.Tests\\CreateIssueRequest_Tests.cs",
@@ -620,7 +628,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 33,
               "Title": "CodeClash.Tests.csproj",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Tests\\CodeClash.Tests.csproj",
               "RelativeDocumentMoniker": "CodeClash.Tests\\CodeClash.Tests.csproj",
@@ -631,7 +639,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 34,
               "Title": "RuntimeProjectExecutor.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Application\\Services\\RuntimeProjectExecutor.cs",
               "RelativeDocumentMoniker": "CodeClash.Application\\Services\\RuntimeProjectExecutor.cs",
@@ -643,7 +651,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 35,
               "Title": "RoomService.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Application\\Services\\RoomService.cs",
               "RelativeDocumentMoniker": "CodeClash.Application\\Services\\RoomService.cs",
@@ -655,7 +663,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 36,
               "Title": "AuthService.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Application\\Services\\AuthService.cs",
               "RelativeDocumentMoniker": "CodeClash.Application\\Services\\AuthService.cs",
@@ -667,7 +675,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 37,
               "Title": "IssueService.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Application\\Services\\IssueService.cs",
               "RelativeDocumentMoniker": "CodeClash.Application\\Services\\IssueService.cs",
@@ -679,7 +687,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 38,
               "Title": "User.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Core\\Models\\Domain\\User.cs",
               "RelativeDocumentMoniker": "CodeClash.Core\\Models\\Domain\\User.cs",
@@ -691,7 +699,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 39,
               "Title": "SolutionRequest.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Core\\Models\\CompetitionRequests\\SolutionRequest.cs",
               "RelativeDocumentMoniker": "CodeClash.Core\\Models\\CompetitionRequests\\SolutionRequest.cs",
@@ -703,7 +711,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 40,
               "Title": "Room.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Core\\Models\\Domain\\Room.cs",
               "RelativeDocumentMoniker": "CodeClash.Core\\Models\\Domain\\Room.cs",
@@ -715,7 +723,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 41,
               "Title": "RoomExtensions.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Application\\Extensions\\RoomExtensions.cs",
               "RelativeDocumentMoniker": "CodeClash.Application\\Extensions\\RoomExtensions.cs",
@@ -727,7 +735,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 42,
               "Title": "Constants.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Core\\Constants\\Constants.cs",
               "RelativeDocumentMoniker": "CodeClash.Core\\Constants\\Constants.cs",
@@ -739,7 +747,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 43,
               "Title": "EnterQuitRoomRequest.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Core\\Requests\\RoomsRequests\\EnterQuitRoomRequest.cs",
               "RelativeDocumentMoniker": "CodeClash.Core\\Requests\\RoomsRequests\\EnterQuitRoomRequest.cs",
@@ -751,7 +759,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 44,
               "Title": "CreateIssueRequest.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Core\\Requests\\IssueRequest\\CreateIssueRequest.cs",
               "RelativeDocumentMoniker": "CodeClash.Core\\Requests\\IssueRequest\\CreateIssueRequest.cs",
@@ -763,7 +771,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 45,
               "Title": "SolutionResponse.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Core\\Models\\CompetitionRequests\\SolutionResponse.cs",
               "RelativeDocumentMoniker": "CodeClash.Core\\Models\\CompetitionRequests\\SolutionResponse.cs",
@@ -775,7 +783,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 46,
               "Title": "Competition.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Core\\Models\\Domain\\Competition.cs",
               "RelativeDocumentMoniker": "CodeClash.Core\\Models\\Domain\\Competition.cs",
@@ -787,7 +795,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 47,
               "Title": "PasswordHasher.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.Application\\PasswordHasher.cs",
               "RelativeDocumentMoniker": "CodeClash.Application\\PasswordHasher.cs",
@@ -799,7 +807,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 48,
               "Title": "SolutionTaskTests.cs",
               "DocumentMoniker": "D:\\CodeClash\\CodeClash\\CodeClash.UserSolutionTest\\SolutionTaskTests.cs",
               "RelativeDocumentMoniker": "CodeClash.UserSolutionTest\\SolutionTaskTests.cs",
@@ -808,10 +816,6 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAADAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-23T17:38:00.433Z"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{269a02dc-6af8-11d3-bdc4-00c04f688e50}"
             }
           ]
         }
