@@ -15,8 +15,8 @@ public class UserController(UserService userService, RoomService roomService) : 
     public async Task<ApiResponse<UserStateDTO>> GetUserState()
     {
         var userId = Request.GetUserIdFromCookie();
-        var roomId = await userService.GetUserRoomId(userId);
-        if (roomId is null)
+        var roomIdResult = await userService.GetUserRoomId(userId);
+        if (roomIdResult.IsFailure)
             return new ApiResponse<UserStateDTO>(true,
                 new UserStateDTO
                 {
@@ -24,7 +24,7 @@ public class UserController(UserService userService, RoomService roomService) : 
                     CompetitionIssueId = null
                 },
                 null);
-        var roomEntityResult = await roomService.GetRoomEntityById(roomId.Value);
+        var roomEntityResult = await roomService.GetRoomEntityById(roomIdResult.Value);
         if (roomEntityResult.IsFailure)
             return new ApiResponse<UserStateDTO>(false, null, roomEntityResult.Error);
 
