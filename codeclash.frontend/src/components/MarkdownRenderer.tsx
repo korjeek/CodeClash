@@ -16,8 +16,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ markdown }) => {
             const mathPattern = /\$([^$]+)\$/g;
             const text = token.content;
 
-            return text
-                .replace(mathPattern, (_match, p1) => renderMath(p1))
+            return text.replace(mathPattern, (_match, p1) => renderMath(p1))
         }
         return md.renderer.renderInline([token], md.renderer.options, {});
     };

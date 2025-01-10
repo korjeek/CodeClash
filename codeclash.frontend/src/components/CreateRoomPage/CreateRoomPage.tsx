@@ -12,6 +12,7 @@ import '../../style/CreateLobby/Inputs.css'
 import '../../style/CreateLobby/Buttons.css'
 import '../../style/CreateLobby/ProblemsList.css'
 import {MinuteButtonProps, TaskButtonProps} from "../../Props/ButtonsProps.ts";
+import {TabItem} from "../../Props/PageStateProps.ts";
 
 const minutes = ["5", "10", "30", "60"]
 
@@ -58,7 +59,7 @@ export default function CreateRoomPage() {
 
     return (
         <div className="menu-page">
-            <BaseNavBar/>
+            <BaseNavBar tab={TabItem.Competitions}/>
             <motion.div
                 initial={{y: 0}}
                 animate={{y: isSlided ? '-100%' : 0}}

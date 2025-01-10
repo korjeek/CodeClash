@@ -36,3 +36,19 @@
     border: 0.3vh solid #DA4167;
     color: black;
 }
+
+.page-code-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .3rem;
+    color: #707070;
+    background-color: transparent;
+    padding: .1vh 1vh;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border 0.3s ease-in-out;
+}
+
+.page-code-button:hover{
+    border: 1px solid #88888820;
+    background-color: #88888820;
+}

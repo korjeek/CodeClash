@@ -1,25 +1,16 @@
 .user-room-status-btn{
     background: #1A1A1A;
+    border: .1vh solid #5EFC8D;
     border-radius: 3vh;
     padding: 7px 40px;
-    font-weight: 600;
     font-size: 1rem;
-    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-}
-
-.user-room-ready-btn{
-    border: 0.3vh solid #5EFC8D;
+    transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
     color: #5EFC8D;
 }
 
-.user-room-wait-btn{
-    border: 0.3vh solid #888888;
-    color: #888888;
-}
-
-.user-room-status-btn:hover, .user-room-ready-btn:hover{
-    border: 0.3vh solid #5EFC8D;
+.user-room-status-btn:hover{
     background-color: #5EFC8D;
+    border: .1vh solid #5EFC8D;
     color: black;
 }
 
