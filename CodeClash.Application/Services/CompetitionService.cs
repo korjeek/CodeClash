@@ -58,7 +58,6 @@ public class CompetitionService(RoomsRepository roomsRepository, UsersRepository
             }
 
             var leftTime = endTime - DateTime.Now;
-            Console.WriteLine(leftTime);
             await clients.SendAsync("UpdateTimer",
                 leftTime.Minutes > 0
                     ? $"{leftTime.Minutes}m {leftTime.Seconds}s"
