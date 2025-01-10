@@ -87,7 +87,8 @@ public class RoomService(
             await roomsRepository.Delete(roomEntity);
             
             // Остановка таймера
-            await cancellationTokenDict[roomId].CancelAsync();
+            if (roomEntity.Status is RoomStatus.CompetitionInProgress)
+                await cancellationTokenDict[roomId].CancelAsync();
             
             return Result.Success<Room?>(null);
         }

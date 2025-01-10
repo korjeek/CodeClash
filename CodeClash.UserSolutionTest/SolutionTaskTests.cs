@@ -232,6 +232,5 @@ namespace CodeClash.UserSolutionTest
       var expected = new[] { 3, 5 };
       RunTest(nums, target, expected);
     }
-
   }
 }
