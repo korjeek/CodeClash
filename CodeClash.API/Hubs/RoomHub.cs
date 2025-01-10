@@ -26,9 +26,9 @@ public class RoomHub(
     public override Task OnConnectedAsync()
     {
         var userId = new Guid(Context.UserIdentifier!);
-        var roomId = userService.GetUserRoomId(userId).Result;
-        if (roomId.HasValue)
-            AddUserToGroup(roomId.Value).Wait();
+        var roomIdResult = userService.GetUserRoomId(userId).Result;
+        if (!roomIdResult.IsFailure)
+            AddUserToGroup(roomIdResult.Value).Wait();
         return base.OnConnectedAsync();
     }
 
@@ -60,14 +60,14 @@ public class RoomHub(
     public async Task<ApiResponse<string>> QuitRoom()
     {
         var userId = Context.User.GetUserIdFromAccessToken();
-        var roomId = await userService.GetUserRoomId(userId);
-        if (!roomId.HasValue)
-            return new ApiResponse<string>(false, null, "User is not in room.");
-        var leftRoomResult = await roomService.QuitRoom(userId, roomId.Value, Context, Groups, CancellationTokenDict);
+        var roomIdResult = await userService.GetUserRoomId(userId);
+        if (roomIdResult.IsFailure)
+            return new ApiResponse<string>(false, null, roomIdResult.Error);
+        var leftRoomResult = await roomService.QuitRoom(userId, roomIdResult.Value, Context, Groups, CancellationTokenDict);
         if (leftRoomResult.IsFailure)
             return new ApiResponse<string>(false, null, leftRoomResult.Error);
 
-        await SendMessageToAllUsersInGroup(roomId.Value, leftRoomResult.Value?.GetRoomDtoFromRoom(), "UserLeave");
+        await SendMessageToAllUsersInGroup(roomIdResult.Value, leftRoomResult.Value?.GetRoomDtoFromRoom(), "UserLeave");
         return new ApiResponse<string>(true, "Quited from room successfully.", null);
     }
 
@@ -103,19 +103,19 @@ public class RoomHub(
     public async Task<ApiResponse<string>> CheckSolution(CheckSolutionRequest checkSolutionRequest)
     {
         var userId = Context.User.GetUserIdFromAccessToken();
-        var roomId = await userService.GetUserRoomId(userId);
-        if (!roomId.HasValue)
-            return new ApiResponse<string>(false, null, "User is not in room.");
+        var roomIdResult = await userService.GetUserRoomId(userId);
+        if (roomIdResult.IsFailure)
+            return new ApiResponse<string>(false, null, roomIdResult.Error);
 
         var resultString = await testUserSolutionService.CheckSolution(
-            roomId.Value,
+            roomIdResult.Value,
             checkSolutionRequest.Solution,
             checkSolutionRequest.IssueName);
         if (resultString.IsFailure)
             return new ApiResponse<string>(false, null, resultString.Error);
 
         if (CheckSolutionParser.IsResultOk(resultString.Value))
-            await testUserSolutionService.UpdateUserOverhead(resultString.Value, userId, roomId.Value,
+            await testUserSolutionService.UpdateUserOverhead(resultString.Value, userId, roomIdResult.Value,
                 checkSolutionRequest.LeftTime, CancellationTokenDict);
 
         return new ApiResponse<string>(true, resultString.Value, null);

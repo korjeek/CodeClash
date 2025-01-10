@@ -1,6 +1,7 @@
 ﻿using CodeClash.Application.Extensions;
 using CodeClash.Application.Services;
 using CodeClash.Core.Models.DTOs;
+using CodeClash.Persistence.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -38,12 +39,25 @@ public class RoomController(RoomService roomService, UserService userService) : 
     public async Task<ApiResponse<RoomDTO>> GetRoomInfo()
     {
         var userId = Request.GetUserIdFromCookie();
-        var roomId = await userService.GetUserRoomId(userId);
-        if (!roomId.HasValue)
-            return new ApiResponse<RoomDTO>(false, null, "User has not room.");
-        var roomResult = await roomService.GetRoomByRoomId(roomId.Value);
+        var roomIdResult = await userService.GetUserRoomId(userId);
+        if (roomIdResult.IsFailure)
+            return new ApiResponse<RoomDTO>(false, null, roomIdResult.Error);
+        var roomResult = await roomService.GetRoomByRoomId(roomIdResult.Value);
         if (roomResult.IsFailure)
             return new ApiResponse<RoomDTO>(false, null, roomResult.Error);
         return new ApiResponse<RoomDTO>(true, roomResult.Value.GetRoomDtoFromRoom(), null);
+    }
+
+    [HttpGet("get-room-status")]
+    public async Task<ApiResponse<RoomStatus?>> GetRoomStatus()
+    {
+        var userId = Request.GetUserIdFromCookie();
+        var roomIdResult = await userService.GetUserRoomId(userId);
+        if (roomIdResult.IsFailure)
+            return new ApiResponse<RoomStatus?>(false, null, roomIdResult.Error);
+        var roomEntityResult = await roomService.GetRoomEntityById(roomIdResult.Value);
+        if (roomEntityResult.IsFailure)
+            return new ApiResponse<RoomStatus?>(false, null, roomEntityResult.Error);
+        return new ApiResponse<RoomStatus?>(true, roomEntityResult.Value.Status, null);
     }
 }
