@@ -29,18 +29,18 @@ public class AuthenticationController(AuthService authService) : ControllerBase
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
-        var userResult = await authService.GetUser(request.Email, request.Password);
+        var userResult = await authService.GetVerifiedUser(request.Email, request.Password);
         if (userResult.IsFailure)
             return BadRequest(userResult.Error);
         var user = userResult.Value;
-        var tokens = await authService.UpdateUsersTokens(user);
+        var tokens = await authService.UpdateUserTokens(user);
         HttpContext.Response.Cookies.Append("spooky-cookies", tokens.AccessToken);
         
         return Ok(new AuthResponse(user.Name, user.Email, tokens.AccessToken, tokens.RefreshToken));
     }
     
     [HttpPut("refresh-token")] // TODO: Может изменить на PUT? Обычно именно его используют для обновления данных на сервере, а использовать везде только POST это КОЛХОЗ, ну и плохо в целом, так Ваня сказал
-    public async Task<IActionResult> RefreshToken(JwtToken? tokenModel)
+    public async Task<IActionResult> RefreshToken([FromBody] JwtToken? tokenModel)
     {
         if (tokenModel is null)
             return BadRequest(AuthRequestErrorType.InvalidTokenModel.ToString());
@@ -51,7 +51,7 @@ public class AuthenticationController(AuthService authService) : ControllerBase
             userResult.Value.RefreshTokenExpiryTime <= DateTime.UtcNow)
             return BadRequest(AuthRequestErrorType.ComplexRefreshTokenError);
         
-        var tokens = await authService.UpdateUsersTokens(userResult.Value);
+        var tokens = await authService.UpdateUserTokens(userResult.Value);
         return new ObjectResult(tokens);
     }
 }

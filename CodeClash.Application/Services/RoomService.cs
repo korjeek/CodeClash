@@ -29,6 +29,8 @@ public class RoomService(
             return Result.Failure<Room>($"User with {userId} id does not exist");
         if (adminUser.IsAdmin)
             return Result.Failure<Room>("User is already admin");
+        if (adminUser.RoomId.HasValue)
+            return Result.Failure<Room>("User is already in room");
 
         adminUser.IsAdmin = true;
         await roomsRepository.Add(newRoomResult.Value.GetRoomEntity());

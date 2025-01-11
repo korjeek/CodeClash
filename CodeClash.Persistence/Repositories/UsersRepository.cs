@@ -9,14 +9,15 @@ public class UsersRepository(IDbContextFactory<ApplicationDbContext> dbContextFa
     public async Task<UserEntity?> AddUser(UserEntity user)
     {
         await using var dbContext = await dbContextFactory.CreateDbContextAsync();
-        var isUserEmailContainsInDb = await dbContext.Users
-            .Select(u => u.Email)
-            .ContainsAsync(user.Email);
-        if (isUserEmailContainsInDb)
+        try
+        {
+            await dbContext.AddAsync(user);
+            await dbContext.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
             return null;
-        await dbContext.AddAsync(user);
-        await dbContext.SaveChangesAsync();
-        
+        }
         return user;
     }
 
