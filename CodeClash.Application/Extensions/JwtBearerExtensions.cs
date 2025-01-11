@@ -37,7 +37,7 @@ public static class JwtBearerExtensions
 
     public static JwtSecurityToken CreateJwtToken(this IEnumerable<Claim> claims, IConfiguration configuration)
     {
-        var expire = configuration.GetSection("Jwt:Expire").Get<int>();
+        var expire = configuration.GetSection("Jwt:ExpireInSeconds").Get<int>();
         return new JwtSecurityToken(
             configuration["Jwt:Issuer"],
             configuration["Jwt:Audience"],

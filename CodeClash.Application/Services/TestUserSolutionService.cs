@@ -91,7 +91,7 @@ public class TestUserSolutionService(RoomsRepository roomsRepository, UsersRepos
             return new SolutionTestResultDTO { OkResult = okResultDto };
         if (CheckSolutionParser.TryParseErrorResult(stringResult, out var errorResultDto))
             return new SolutionTestResultDTO { ErrorResult = errorResultDto };
-        return new SolutionTestResultDTO();
+        throw new ArgumentException("We can't parse answer from UserSolutionTest.csproj:(");
     }
 
     private async Task<bool> IsAllUsersSentSolution(Guid roomId) =>
