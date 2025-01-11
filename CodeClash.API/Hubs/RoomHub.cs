@@ -4,6 +4,7 @@ using CodeClash.Application.Extensions;
 using CodeClash.Application.Services;
 using CodeClash.Core;
 using CodeClash.Core.Models.DTOs;
+using CodeClash.Core.Models.DTOs.SolutionTestResult;
 using CodeClash.Core.Requests.RoomsRequests;
 using CodeClash.Core.Requests.SolutionsRequests;
 using CodeClash.Persistence.Entities;
@@ -100,25 +101,25 @@ public class RoomHub(
         return new ApiResponse<string>(true, "Competition is started", null);
     }
 
-    public async Task<ApiResponse<string>> CheckSolution(CheckSolutionRequest checkSolutionRequest)
+    public async Task<ApiResponse<SolutionTestResultDTO>> CheckSolution(CheckSolutionRequest checkSolutionRequest)
     {
         var userId = Context.User.GetUserIdFromAccessToken();
         var roomIdResult = await userService.GetUserRoomId(userId);
         if (roomIdResult.IsFailure)
-            return new ApiResponse<string>(false, null, roomIdResult.Error);
+            return new ApiResponse<SolutionTestResultDTO>(false, null, roomIdResult.Error);
 
-        var resultString = await testUserSolutionService.CheckSolution(
+        var checkSolutionDto = await testUserSolutionService.CheckSolution(
             roomIdResult.Value,
             checkSolutionRequest.Solution,
             checkSolutionRequest.IssueName);
-        if (resultString.IsFailure)
-            return new ApiResponse<string>(false, null, resultString.Error);
+        if (checkSolutionDto.IsFailure)
+            return new ApiResponse<SolutionTestResultDTO>(false, null, checkSolutionDto.Error);
 
-        if (CheckSolutionParser.IsResultOk(resultString.Value))
-            await testUserSolutionService.UpdateUserOverhead(resultString.Value, userId, roomIdResult.Value,
+        if (checkSolutionDto.Value.OkResult is not null)
+            await testUserSolutionService.UpdateUserOverhead(checkSolutionDto.Value.OkResult, userId, roomIdResult.Value,
                 checkSolutionRequest.LeftTime, CancellationTokenDict);
 
-        return new ApiResponse<string>(true, resultString.Value, null);
+        return new ApiResponse<SolutionTestResultDTO>(true, checkSolutionDto.Value, null);
     }
 
     private async Task AddUserToGroup(Guid roomId) =>
