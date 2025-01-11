@@ -56,8 +56,16 @@ public class AuthenticationController(AuthService authService) : ControllerBase
             userResult.Value.RefreshToken != tokenModel.RefreshToken ||
             userResult.Value.RefreshTokenExpiryTime <= DateTime.UtcNow)
             return new ApiResponse<JwtToken>(false, null, "ComplexRefreshTokenError");
-
+        
         var tokens = await authService.UpdateUserTokens(userResult.Value);
+        HttpContext.Response.Cookies.Append("spooky-cookies", tokens.AccessToken);
+        HttpContext.Response.Cookies.Append("olega-na-front", tokens.RefreshToken,
+            new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.Strict
+            });
         return new ApiResponse<JwtToken>(true, tokens, null);
     }
 }
