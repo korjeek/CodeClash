@@ -28,7 +28,7 @@ public class RoomController(RoomService roomService, UserService userService) : 
     [HttpGet("check-for-admin")]
     public async Task<ApiResponse<bool?>> CheckUserIsAdmin()
     {
-        var userId = Request.GetUserIdFromCookie();
+        var userId = Request.GetUserIdFromAuthorizedUserCookie();
         var isUserAdminResult = await roomService.IsUserAdmin(userId);
         if (isUserAdminResult.IsFailure)
             return new ApiResponse<bool?>(false, null, isUserAdminResult.Error);
@@ -38,7 +38,7 @@ public class RoomController(RoomService roomService, UserService userService) : 
     [HttpGet("get-room-info")]
     public async Task<ApiResponse<RoomDTO>> GetRoomInfo()
     {
-        var userId = Request.GetUserIdFromCookie();
+        var userId = Request.GetUserIdFromAuthorizedUserCookie();
         var roomIdResult = await userService.GetUserRoomId(userId);
         if (roomIdResult.IsFailure)
             return new ApiResponse<RoomDTO>(false, null, roomIdResult.Error);
@@ -51,7 +51,7 @@ public class RoomController(RoomService roomService, UserService userService) : 
     [HttpGet("get-room-status")]
     public async Task<ApiResponse<RoomStatus?>> GetRoomStatus()
     {
-        var userId = Request.GetUserIdFromCookie();
+        var userId = Request.GetUserIdFromAuthorizedUserCookie();
         var roomIdResult = await userService.GetUserRoomId(userId);
         if (roomIdResult.IsFailure)
             return new ApiResponse<RoomStatus?>(false, null, roomIdResult.Error);
