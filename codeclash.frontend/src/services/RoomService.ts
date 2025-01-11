@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {Room} from "../interfaces/RoomInterfaces.ts";
+import apiClient from "./InterceptionService.ts";
 
 const API_URL = 'https://localhost:7282/rooms';
 
@@ -14,6 +15,6 @@ export const getRoom = async (): Promise<Room> => {
 }
 
 export const getRoomsList = async (): Promise<Room[]> => {
-    const response = await axios.get(`${API_URL}/get-rooms`, { withCredentials: true });
+    const response = await apiClient.get(`${API_URL}/get-rooms`, { withCredentials: true });
     return response.data.data;
 }

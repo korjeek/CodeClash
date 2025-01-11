@@ -28,7 +28,7 @@
     border: 0.3vh solid #A64AFF;
     border-radius: 3vh;
     color: #A64AFF;
-    background-color: #070707;
+    background-color: #0F0F0F;
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
