@@ -24,6 +24,7 @@ export default function CreateRoomPage() {
     const [activeProblem, setActiveProblem] = useState('');
     const [inputValue, setInputValue] = useState<string>('');
     const [selectedTask, setSelectedTask] = useState(false);
+    const [userInRoom, setUserInRoom] = useState<boolean>(false);
     const signalR = new SignalRService()
     const navigate = useNavigate();
 
@@ -38,7 +39,8 @@ export default function CreateRoomPage() {
 
     const createRoom = async () => {
         try {
-            const room = {roomName, time: `00:${activeMin}:00`, issueId: activeProblem!}
+            const time = activeMin === '60' ? `01:00:00` : `00:${activeMin}:00`
+            const room = {roomName, time: time, issueId: activeProblem!}
             await signalR.startConnection()
             const createdRoom = await signalR.invoke<CreateRoomData, Room>("CreateRoom", room);
             if (createdRoom)
@@ -46,6 +48,8 @@ export default function CreateRoomPage() {
                 await signalR.invoke<string, Room>("JoinRoom", createdRoom.id)
                 navigate(`/lobby`);
             }
+            else
+                setUserInRoom(true)
         }
         catch {
             console.error('Failed to create room. Please try again.');
@@ -115,6 +119,7 @@ export default function CreateRoomPage() {
                         </div>
                     </div>
                 </div>
+                {userInRoom && <div className="wrong-login-warning">User is already in room.</div>}
                 <button
                     className={selectedTask && (inputValue.trim() !== '' ? 'lightgreen' : '')
                         ? "active-acc-create-room-btn" : "acc-create-room-btn"}

@@ -39,7 +39,6 @@ public class AuthenticationController(AuthService authService) : ControllerBase
             {
                 HttpOnly = true,
                 Secure = true,
-                SameSite = SameSiteMode.Strict
             });
         var authResponse = new AuthResponse(user.Name, user.Email, tokens.AccessToken, tokens.RefreshToken);
         return new ApiResponse<AuthResponse>(true, authResponse, null);
@@ -63,8 +62,7 @@ public class AuthenticationController(AuthService authService) : ControllerBase
             new CookieOptions
             {
                 HttpOnly = true,
-                Secure = true,
-                SameSite = SameSiteMode.Strict
+                Secure = true
             });
         return new ApiResponse<JwtToken>(true, tokens, null);
     }

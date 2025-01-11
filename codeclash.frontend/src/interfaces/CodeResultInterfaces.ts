@@ -9,8 +9,8 @@ export interface FailedTestErrorDTO{
 }
 
 export interface ErrorResultDTO{
-    compileErrorDTO: CompileErrorDTO;
-    failedTestErrorDTO: FailedTestErrorDTO;
+    compileError: CompileErrorDTO;
+    failedTestError: FailedTestErrorDTO;
 }
 
 export interface OkResultDTO{
@@ -19,6 +19,6 @@ export interface OkResultDTO{
 }
 
 export interface SolutionTestResultDTO{
-    okResultDTO: OkResultDTO;
-    errorResultDTO: ErrorResultDTO;
+    okResult: OkResultDTO;
+    errorResult: ErrorResultDTO;
 }

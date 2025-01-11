@@ -7,8 +7,10 @@ public class SolutionTask
         int n = nums.Length;
         for (int i = 0; i < n; i++)
         {
-          result[0] = j;
-          result[1] = j;
+            int complement = target - nums[i];
+            if (hashtable.TryGetValue(complement, out var value))
+                return new[] { value, i };
+            hashtable[nums[i]] = i;
         }
 
         return new int[] { };

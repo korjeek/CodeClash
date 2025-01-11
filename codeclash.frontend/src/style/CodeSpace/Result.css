@@ -1,0 +1,37 @@
+.result-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    color: #888888;
+}
+
+.nothing-yet{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #888888;
+    height: 90%;
+}
+
+.error-window{
+    border-radius: 3vh;
+    color: #DA4167;
+    background-color: #DA416750;
+    margin: 0 3vh;
+    padding: 1vh 3vh;
+}
+
+.wrong-res{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 3vh;
+    color: #DA4167;
+    background-color: #DA416750;
+    padding: 1vh 3vh;
+}
