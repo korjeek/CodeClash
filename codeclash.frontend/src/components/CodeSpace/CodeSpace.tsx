@@ -48,7 +48,7 @@ export default function CodeSpace(){
     };
 
     const submitCode = async () => {
-        const result = await signalR.invoke<CheckSolutionRequest, any>("CheckSolution",
+        const result = signalR.invoke<CheckSolutionRequest, string>("CheckSolution",
             {solution: code, issueName: problem!.name, leftTime: convertTime(time)})
         console.log(result);
     }

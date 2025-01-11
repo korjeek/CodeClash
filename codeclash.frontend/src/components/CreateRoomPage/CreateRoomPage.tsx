@@ -44,7 +44,7 @@ export default function CreateRoomPage() {
             if (createdRoom)
             {
                 await signalR.invoke<string, Room>("JoinRoom", createdRoom.id)
-                navigate(`/lobby?id=${createdRoom.id}`);
+                navigate(`/lobby`);
             }
         }
         catch {

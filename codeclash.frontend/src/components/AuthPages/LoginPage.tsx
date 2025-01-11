@@ -2,22 +2,27 @@ import React, {useState} from 'react';
 import '../../style/Default/BackGround.css'
 import '../../style/AuthPage/AuthField.css'
 import '../../style/AuthPage/Input.css'
+import '../../style/AuthPage/Button.css'
 import {login} from "../../services/AuthService.ts";
 import {useNavigate} from "react-router-dom";
 
 export default function RegisterPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [checkState, setCheckState] = useState(false);
+    const [wrongLogin, setWrongLogin] = useState('');
     const navigate = useNavigate();
 
     const handleLogin = async (event: React.FormEvent) => {
         event.preventDefault();
         try {
+            setCheckState(true);
             await login({ email, password });
             navigate('/competitions')
         }
         catch (error) {
-            console.error('Login failed:', error);
+            setCheckState(false);
+            setWrongLogin(error.response.data);
         }
     };
 
@@ -52,8 +57,13 @@ export default function RegisterPage() {
                     <span className="border"></span>
                 </div>
             </div>
+            {wrongLogin && <div className="wrong-login-warning">{wrongLogin}</div>}
             <div className="auth-confirm">
-                <button type="submit" className="auth-button">Log In</button>
+                <button type="submit" className={checkState ? "active-auth-button" : "auth-button"}>
+                    {checkState && <div className="loading"></div>}
+                    <div className="correct"></div>
+                    {!checkState && <span className="auth-text">Log In</span>}
+                </button>
                 <h5>Don't have an account? <a href="/reg" aria-current="page">Sign Up</a></h5>
             </div>
         </form>
