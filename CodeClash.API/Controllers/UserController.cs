@@ -14,7 +14,7 @@ public class UserController(UserService userService, RoomService roomService) : 
     [HttpGet("get-user-state")]
     public async Task<ApiResponse<UserStateDTO>> GetUserState()
     {
-        var userId = Request.GetUserIdFromCookie();
+        var userId = Request.GetUserIdFromAuthorizedUserCookie();
         var roomIdResult = await userService.GetUserRoomId(userId);
         if (roomIdResult.IsFailure)
             return new ApiResponse<UserStateDTO>(true,
