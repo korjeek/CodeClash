@@ -8,6 +8,7 @@ import {initialSelectedTab, TabItem} from "../../Props/PageStateProps.ts";
 import {getTokenFromCookies, getUserInfoFromToken} from "../../services/JWTTokenService.ts";
 import {getRoomStatus} from "../../services/UserService.ts";
 import {RoomStatus} from "../../interfaces/UserInterfaces.ts";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate.ts";
 
 const tabs = [
     { text: TabItem.Competitions, href: "/competitions" },
@@ -20,6 +21,7 @@ export default function BaseNavBar({ tab }: initialSelectedTab) {
     const [userInfo, setUserInfo] = useState<{name: string, email: string}>({name: '', email: ''})
     const [roomStatus, setRoomStatus] = useState<RoomStatus>({hasRoom: false, competitionIssueId: ''});
     const navigate = useNavigate();
+    const axiosPrivate = useAxiosPrivate();
 
     useEffect(() => {
         const getUserInfo = () => {
@@ -35,7 +37,7 @@ export default function BaseNavBar({ tab }: initialSelectedTab) {
         }
 
         const fetchRoomStatus = async () => {
-            const status = await getRoomStatus();
+            const status = await getRoomStatus(axiosPrivate);
             setRoomStatus(status);
         }
 

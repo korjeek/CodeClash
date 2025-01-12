@@ -16,6 +16,20 @@
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border 0.3s ease-in-out;
 }
 
+.check-button{
+    border-radius: 3vh;
+    background-color: #5EFC8D;
+    border: 0.3vh solid #5EFC8D;
+    color: #5EFC8D;
+}
+
+.check-button:hover{
+    border-radius: 3vh;
+    background-color: #5EFC8D;
+    border: 0.3vh solid #5EFC8D;
+    color: black;
+}
+
 .submit-button:hover{
     border-radius: 3vh;
     background-color: #5EFC8D;

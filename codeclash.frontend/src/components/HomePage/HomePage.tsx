@@ -13,7 +13,6 @@ import SignalRService from "../../services/SignalRService.ts";
 import {TabItem} from "../../Props/PageStateProps.ts";
 import {getPaginationRange, searchRoom} from "../../services/PagindationService.ts";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate.ts";
-import {useAuth} from "../../contexts/AuthState.ts";
 
 
 export default function HomePage() {
@@ -29,15 +28,10 @@ export default function HomePage() {
     useEffect(() => {
         async function fetchRooms() {
             await signalR.startConnection();
-            try{
-                const roomsList = await getRoomsList(axiosPrivate);
-                const paginationRange = await getPaginationRange(currentPage, Math.ceil(roomsList.length / 6));
-                setRooms(roomsList);
-                setPages(paginationRange);
-            }
-            catch (err){
-                // navigate('/login', {state: {from: location}, replace: true});
-            }
+            const roomsList = await getRoomsList(axiosPrivate);
+            const paginationRange = await getPaginationRange(currentPage, Math.ceil(roomsList.length / 6));
+            setRooms(roomsList);
+            setPages(paginationRange);
         }
 
         fetchRooms();

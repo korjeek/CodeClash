@@ -64,7 +64,6 @@ export default function RegisterPage() {
             <div className="auth-confirm">
                 <button type="submit" className={checkState ? "active-auth-button" : "auth-button"}>
                     {checkState && <div className="loading"></div>}
-                    <div className="correct"></div>
                     {!checkState && <span className="auth-text">Log In</span>}
                 </button>
                 <h5>Don't have an account? <a href="/reg" aria-current="page">Sign Up</a></h5>
