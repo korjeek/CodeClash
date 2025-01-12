@@ -18,6 +18,7 @@ public class Program
 		}
 		
 		using var testEngine = TestEngineActivator.CreateInstance();
+		testEngine.InternalTraceLevel = InternalTraceLevel.Off;
 		var testPackage = new TestPackage(testAssemblies)
 		{
 			Settings = { ["InternalTraceLevel"] = "Off" }
