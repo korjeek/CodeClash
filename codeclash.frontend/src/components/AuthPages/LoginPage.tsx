@@ -5,6 +5,7 @@ import '../../style/AuthPage/Input.css'
 import '../../style/AuthPage/Button.css'
 import {login} from "../../services/AuthService.ts";
 import {useNavigate} from "react-router-dom";
+import {useAuth} from "../../contexts/AuthState.ts";
 
 export default function RegisterPage() {
     const [email, setEmail] = useState('');
@@ -12,12 +13,14 @@ export default function RegisterPage() {
     const [checkState, setCheckState] = useState(false);
     const [wrongLogin, setWrongLogin] = useState('');
     const navigate = useNavigate();
+    const { setAuth } = useAuth();
 
     const handleLogin = async (event: React.FormEvent) => {
         event.preventDefault();
         try {
             setCheckState(true);
-            await login({ email, password });
+            const response = await login({ email, password });
+            setAuth(response)
             navigate('/competitions')
         }
         catch (error) {

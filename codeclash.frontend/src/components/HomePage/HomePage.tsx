@@ -6,12 +6,14 @@ import '../../style/HomePage/Rooms.css'
 import '../../style/Default/AuthNavBar.css'
 import '../../style/Default/BaseNavBar.css'
 import {Room} from "../../interfaces/RoomInterfaces.ts";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import BaseNavBar from "../NavBars/BaseNavBar.tsx";
 import {getRoomsList} from "../../services/RoomService.ts";
 import SignalRService from "../../services/SignalRService.ts";
 import {TabItem} from "../../Props/PageStateProps.ts";
 import {getPaginationRange, searchRoom} from "../../services/PagindationService.ts";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate.ts";
+import {useAuth} from "../../contexts/AuthState.ts";
 
 
 export default function HomePage() {
@@ -20,19 +22,26 @@ export default function HomePage() {
     const [search, setSearch] = useState<string>('');
     const [currentPage, setCurrentPage] = useState<number>(1);
     const navigate = useNavigate();
+    const location = useLocation();
     const signalR = useMemo(() => new SignalRService(), []);
+    const axiosPrivate = useAxiosPrivate();
 
     useEffect(() => {
         async function fetchRooms() {
             await signalR.startConnection();
-            const roomsList = await getRoomsList();
-            const paginationRange = await getPaginationRange(currentPage, Math.ceil(roomsList.length / 6));
-            setRooms(roomsList);
-            setPages(paginationRange);
+            try{
+                const roomsList = await getRoomsList(axiosPrivate);
+                const paginationRange = await getPaginationRange(currentPage, Math.ceil(roomsList.length / 6));
+                setRooms(roomsList);
+                setPages(paginationRange);
+            }
+            catch (err){
+                // navigate('/login', {state: {from: location}, replace: true});
+            }
         }
 
         fetchRooms();
-    }, [currentPage, navigate, signalR])
+    }, [axiosPrivate, currentPage, location, navigate, signalR])
 
     const joinRoom = async (roomId: string) => {
         const response = await signalR.invoke<string, Room>("JoinRoom", roomId)

@@ -1,6 +1,5 @@
 import * as signalR from '@microsoft/signalr';
 import {Response} from "../interfaces/ResponseInterface.ts";
-import axios from "axios";
 
 const SIGNALR_API_URL = 'https://localhost:7282/rooms'
 
@@ -56,7 +55,6 @@ export default class SignalRService {
             }
         }
         catch (err) {
-            console.log(err)
             console.error('Error while establishing SignalR connection:', err);
         }
     }
