@@ -34,12 +34,7 @@ public class AuthenticationController(AuthService authService) : ControllerBase
         var user = userResult.Value;
         var tokens = await authService.UpdateUserTokens(user);
         HttpContext.Response.Cookies.Append("spooky-cookies", tokens.AccessToken);
-        HttpContext.Response.Cookies.Append("olega-na-front", tokens.RefreshToken,
-            new CookieOptions
-            {
-                HttpOnly = true,
-                Secure = true
-            });
+        HttpContext.Response.Cookies.Append("olega-na-front", tokens.RefreshToken);
         var authResponse = new AuthResponse(user.Name, user.Email, tokens.AccessToken, tokens.RefreshToken);
         return Ok(authResponse);
     }
@@ -54,16 +49,11 @@ public class AuthenticationController(AuthService authService) : ControllerBase
         if (userResult.IsFailure ||
             userResult.Value.RefreshToken != tokenModel.RefreshToken ||
             userResult.Value.RefreshTokenExpiryTime <= DateTime.UtcNow)
-            return BadRequest("ComplexRefreshTokenError");
+            return BadRequest($"ComplexRefreshTokenError, {userResult.Value.RefreshTokenExpiryTime}");
         
         var tokens = await authService.UpdateUserTokens(userResult.Value);
         HttpContext.Response.Cookies.Append("spooky-cookies", tokens.AccessToken);
-        HttpContext.Response.Cookies.Append("olega-na-front", tokens.RefreshToken,
-            new CookieOptions
-            {
-                HttpOnly = true,
-                Secure = true
-            });
+        HttpContext.Response.Cookies.Append("olega-na-front", tokens.RefreshToken);
         return Ok(tokens);
     }
 }
