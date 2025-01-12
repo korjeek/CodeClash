@@ -21,7 +21,7 @@ public class Program
 		var testPackage = new TestPackage(testAssemblies)
 		{
 			Settings = { ["InternalTraceLevel"] = "Off" }
-		};	
+		};
 		var runner = testEngine.GetRunner(testPackage);
 		var filter = TestFilter.Empty;
 		
