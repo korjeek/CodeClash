@@ -20,6 +20,7 @@ public static class ApiExtensions
                     ValidateIssuer = false,
                     ValidateAudience = false,
                     ValidateLifetime = true,
+                    LifetimeValidator = CustomLifetimeValidator,
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Secret"]!))
                 };
@@ -35,5 +36,28 @@ public static class ApiExtensions
             });
 
         services.AddAuthorization();
+    }
+    
+    private static bool CustomLifetimeValidator(
+        DateTime? notBefore,
+        DateTime? expires,
+        SecurityToken securityToken,
+        TokenValidationParameters validationParameters)
+    {
+        if (expires != null && DateTime.UtcNow > expires)
+        {
+            Console.WriteLine("Token has expired.");
+            return false;
+        }
+
+        if (notBefore != null && DateTime.UtcNow < notBefore)
+        {
+            Console.WriteLine("Token is not yet valid.");
+            return false;
+        }
+
+        // Дополнительная кастомная логика
+        Console.WriteLine("Token lifetime is valid.");
+        return true;
     }
 }

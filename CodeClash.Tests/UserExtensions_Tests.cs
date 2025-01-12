@@ -27,9 +27,9 @@ namespace CodeClash.Tests
 			Assert.That(userResult.IsSuccess, Is.True);
 			var user = userResult.Value;
 
-			user.UpdateRefreshToken("refreshtoken");
-			user.UpdateRefreshTokenExpiryTime(DateTime.UtcNow.AddDays(7));
-			user.UpdateRoomAdminStatus(true);
+			user.SetRefreshToken("refreshtoken");
+			user.SetRefreshTokenExpiryTime(DateTime.UtcNow.AddDays(7));
+			user.SetRoomAdminStatus(true);
 
 			var userEntity = user.GetUserEntity();
 

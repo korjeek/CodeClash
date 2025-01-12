@@ -12,7 +12,7 @@ public class TokenService(IConfiguration configuration)
     public JwtToken UpdateTokens(User user)
     {
         var accessToken = CreateAccessToken(user);
-        var refreshToken = UpdateRefreshToken(user);
+        var refreshToken = UpdateRefreshToken();
         return new JwtToken(accessToken, refreshToken);
     }
     
@@ -28,11 +28,9 @@ public class TokenService(IConfiguration configuration)
         return tokenHandler.WriteToken(jwtSecurityToken);
     }
 
-    private string UpdateRefreshToken(User user)
+    private string UpdateRefreshToken()
     {
-        user.UpdateRefreshToken(JwtBearerExtensions.GenerateRefreshToken());
-        user.UpdateRefreshTokenExpiryTime(DateTime.UtcNow.AddDays(7));
-        return user.RefreshToken;
+        return JwtBearerExtensions.GenerateRefreshToken();
     }
 
     public ClaimsPrincipal? GetPrincipalClaims(string accessToken) => 

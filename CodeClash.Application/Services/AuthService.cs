@@ -56,7 +56,7 @@ public class AuthService(UsersRepository usersRepository, TokenService tokenServ
 
     private void UpdateUsersRefreshTokenProperties(User user, string refreshToken)
     {
-        user.UpdateRefreshToken(refreshToken);
-        user.UpdateRefreshTokenExpiryTime(DateTime.UtcNow.AddHours(12));
+        user.SetRefreshToken(refreshToken);
+        user.SetRefreshTokenExpiryTime(DateTime.UtcNow.AddDays(7));
     }
 }
