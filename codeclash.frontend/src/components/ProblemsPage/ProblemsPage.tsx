@@ -24,7 +24,7 @@ export default function ProblemsPage() {
             <BaseNavBar tab={TabItem.Problems}/>
             <div className="content-wrapper">
                 <h1>Problems</h1>
-                {problems.map((problem, i) => (
+                {problems.map((problem) => (
                     <div className="problem-item-description" key={problem.id}>{problem.name}</div>
                 ))}
             </div>
