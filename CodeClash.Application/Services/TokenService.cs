@@ -9,14 +9,14 @@ namespace CodeClash.Application.Services;
 
 public class TokenService(IConfiguration configuration)
 {
-    public JwtToken UpdateTokens(User user)
+    public JwtToken UpdateRefreshToken(User user)
     {
         var accessToken = CreateAccessToken(user);
         var refreshToken = UpdateRefreshToken();
         return new JwtToken(accessToken, refreshToken);
     }
     
-    private string CreateAccessToken(User user)
+    public string CreateAccessToken(User user)
     {
         var token = user.CreateClaims().CreateJwtToken(configuration);
         return CompileJwtSecurityToken(token);

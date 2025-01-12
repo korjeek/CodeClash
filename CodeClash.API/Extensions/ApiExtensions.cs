@@ -20,8 +20,8 @@ public static class ApiExtensions
                     ValidateIssuer = false,
                     ValidateAudience = false,
                     ValidateLifetime = true,
-                    LifetimeValidator = CustomLifetimeValidator,
                     ValidateIssuerSigningKey = true,
+                    LifetimeValidator = CustomLifetimeValidator,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Secret"]!))
                 };
 

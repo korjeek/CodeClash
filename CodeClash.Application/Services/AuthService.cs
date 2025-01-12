@@ -34,16 +34,15 @@ public class AuthService(UsersRepository usersRepository, TokenService tokenServ
 
     public async Task<JwtToken> UpdateUserTokens(User user)
     {
-        var tokens = tokenService.UpdateTokens(user);
+        var tokens = tokenService.UpdateRefreshToken(user);
         UpdateUsersRefreshTokenProperties(user, tokens.RefreshToken);
         await usersRepository.UpdateUserRefreshToken(user.GetUserEntity());
-
         return tokens;
     }
 
-    public async Task<Result<User>> GetUserByPrincipalClaims(JwtToken tokenModel)
+    public async Task<Result<User>> GetUserByPrincipalClaims(string accessToken)
     {
-        var principal = tokenService.GetPrincipalClaims(tokenModel.AccessToken);
+        var principal = tokenService.GetPrincipalClaims(accessToken);
 
         if (principal is null)
             return Result.Failure<User>("Complex refresh token error is occured.");

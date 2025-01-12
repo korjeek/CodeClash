@@ -1,17 +1,13 @@
-﻿FROM node
-
+﻿FROM node as frontend
 WORKDIR /app
-
 EXPOSE 5000
-EXPOSE 5001
-
 COPY package.json .
-
 RUN npm install --legacy-peer-deps
-RUN npm install -g serve
-
 COPY . .
-
 RUN npm run build
 
-CMD ["npm", "run", "start"]
+FROM ngnix:stable-alpine as server
+COPY --from=server /usr/src/app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+CMD ["nginx", "-g", "daemon off;"]

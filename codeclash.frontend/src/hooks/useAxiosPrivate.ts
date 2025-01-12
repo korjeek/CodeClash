@@ -3,10 +3,11 @@ import { useEffect } from "react";
 import useRefreshToken from "./useRefreshToken";
 import {AxiosInstance} from "axios";
 import {useAuth} from "../contexts/AuthState.ts";
+import Cookies from 'js-cookie';
 
 const useAxiosPrivate: () => AxiosInstance = () => {
     const refresh = useRefreshToken();
-    const auth = useAuth();
+    const { auth } = useAuth();
 
     useEffect(() => {
         const responseIntercept = axiosPrivate.interceptors.response.use(
@@ -24,7 +25,9 @@ const useAxiosPrivate: () => AxiosInstance = () => {
                     if (spookyCookies) {
                         console.log('Spooky-cookies found. Attempting token refresh...');
                         try {
-                            await refresh();
+                            const accessTooken = await refresh();
+                            Cookies.set('spooky-cookies', accessTooken, { secure: true, sameSite: 'None' });
+                            // console.log(auth)
                             // Повторяем исходный запрос
                             return axiosPrivate(error.config);
                         } catch (refreshError) {
@@ -44,7 +47,7 @@ const useAxiosPrivate: () => AxiosInstance = () => {
         return () => {
             axiosPrivate.interceptors.response.eject(responseIntercept);
         }
-    }, [auth, refresh])
+    }, [refresh])
 
     return axiosPrivate;
 }

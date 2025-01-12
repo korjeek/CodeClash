@@ -10,7 +10,7 @@ namespace CodeClash.API.Controllers;
 [ApiController]
 [EnableCors("CorsPolicy")]
 [Route("auth")]
-public class AuthenticationController(AuthService authService) : ControllerBase
+public class AuthenticationController(AuthService authService, TokenService tokenService) : ControllerBase
 {
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterRequest request)
@@ -33,8 +33,9 @@ public class AuthenticationController(AuthService authService) : ControllerBase
             return BadRequest(userResult.Error);
         var user = userResult.Value;
         var tokens = await authService.UpdateUserTokens(user);
-        HttpContext.Response.Cookies.Append("spooky-cookies", tokens.AccessToken);
-        HttpContext.Response.Cookies.Append("olega-na-front", tokens.RefreshToken);
+        var cookieOptions = new CookieOptions { SameSite = SameSiteMode.None };
+        HttpContext.Response.Cookies.Append("spooky-cookies", tokens.AccessToken, cookieOptions);
+        HttpContext.Response.Cookies.Append("olega-na-front", tokens.RefreshToken, cookieOptions);
         var authResponse = new AuthResponse(user.Name, user.Email, tokens.AccessToken, tokens.RefreshToken);
         return Ok(authResponse);
     }
@@ -42,18 +43,19 @@ public class AuthenticationController(AuthService authService) : ControllerBase
     [HttpPost("refresh-token")]
     public async Task<IActionResult> RefreshToken()
     {
-        if (!Request.Cookies.TryGetValue("spooky-cookies", out var accessToken) || !Request.Cookies.TryGetValue("olega-na-front", out var refreshToken))
-            return BadRequest("User has not essential cookies. To get it login or register.");
-        var tokenModel = new JwtToken(accessToken, refreshToken);
-        var userResult = await authService.GetUserByPrincipalClaims(tokenModel);
+        if (!Request.Cookies.TryGetValue("spooky-cookies", out var accessToken))
+            return BadRequest("User has not accessToken. To get it login");
+        if (!Request.Cookies.TryGetValue("olega-na-front", out var refreshToken))
+            return BadRequest("User has not refreshToken. To get it login or register.");
+
+        var userResult = await authService.GetUserByPrincipalClaims(accessToken);
         if (userResult.IsFailure ||
-            userResult.Value.RefreshToken != tokenModel.RefreshToken ||
+            userResult.Value.RefreshToken != refreshToken ||
             userResult.Value.RefreshTokenExpiryTime <= DateTime.UtcNow)
             return BadRequest($"ComplexRefreshTokenError, {userResult.Value.RefreshTokenExpiryTime}");
-        
-        var tokens = await authService.UpdateUserTokens(userResult.Value);
-        HttpContext.Response.Cookies.Append("spooky-cookies", tokens.AccessToken);
-        HttpContext.Response.Cookies.Append("olega-na-front", tokens.RefreshToken);
-        return Ok(tokens);
+
+        var newAccessToken = tokenService.CreateAccessToken(userResult.Value);
+        HttpContext.Response.Cookies.Append("spooky-cookies", newAccessToken, new CookieOptions {SameSite = SameSiteMode.None});
+        return Ok(newAccessToken);
     }
 }

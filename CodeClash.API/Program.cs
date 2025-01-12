@@ -41,7 +41,7 @@ services.AddCors(options =>
     options.AddPolicy("CorsPolicy",policyBuilder =>
     {
         policyBuilder
-            .WithOrigins("http://localhost:5173", "https://localhost:7282")
+            .WithOrigins("http://localhost:5000", "https://localhost:7282")
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();
