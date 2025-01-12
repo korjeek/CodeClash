@@ -13,24 +13,24 @@ namespace CodeClash.API.Controllers;
 public class AuthenticationController(AuthService authService) : ControllerBase
 {
     [HttpPost("register")]
-    public async Task<ApiResponse<AuthResponse>> Register([FromBody] RegisterRequest request)
+    public async Task<IActionResult> Register([FromBody] RegisterRequest request)
     {
         if (!ModelState.IsValid)
-            return new ApiResponse<AuthResponse>(false, null, "Incorrect request data.");
+            return BadRequest("Incorrect request data.");
         var userResult = await authService.CreateUser(request.UserName, request.Email, request.Password);
         if (userResult.IsFailure)
-            return new ApiResponse<AuthResponse>(false, null, userResult.Error);
+            return BadRequest(userResult.Error);
         return await Login(new LoginRequest(request.Email, request.Password));
     }
 
     [HttpPost("login")]
-    public async Task<ApiResponse<AuthResponse>> Login([FromBody] LoginRequest request)
+    public async Task<IActionResult> Login([FromBody] LoginRequest request)
     {
         if (!ModelState.IsValid)
-            return new ApiResponse<AuthResponse>(false, null, "Incorrect request data.");
+            return BadRequest("Incorrect request data.");
         var userResult = await authService.GetVerifiedUser(request.Email, request.Password);
         if (userResult.IsFailure)
-            return new ApiResponse<AuthResponse>(false, null, userResult.Error);
+            return BadRequest(userResult.Error);
         var user = userResult.Value;
         var tokens = await authService.UpdateUserTokens(user);
         HttpContext.Response.Cookies.Append("spooky-cookies", tokens.AccessToken);
@@ -41,20 +41,20 @@ public class AuthenticationController(AuthService authService) : ControllerBase
                 Secure = true
             });
         var authResponse = new AuthResponse(user.Name, user.Email, tokens.AccessToken, tokens.RefreshToken);
-        return new ApiResponse<AuthResponse>(true, authResponse, null);
+        return Ok(authResponse);
     }
 
     [HttpPost("refresh-token")]
-    public async Task<ApiResponse<JwtToken>> RefreshToken()
+    public async Task<IActionResult> RefreshToken()
     {
         if (!Request.Cookies.TryGetValue("spooky-cookies", out var accessToken) || !Request.Cookies.TryGetValue("olega-na-front", out var refreshToken))
-            return new ApiResponse<JwtToken>(false, null, "User has not essential cookies. To get it login or register.");
+            return BadRequest("User has not essential cookies. To get it login or register.");
         var tokenModel = new JwtToken(accessToken, refreshToken);
         var userResult = await authService.GetUserByPrincipalClaims(tokenModel);
         if (userResult.IsFailure ||
             userResult.Value.RefreshToken != tokenModel.RefreshToken ||
             userResult.Value.RefreshTokenExpiryTime <= DateTime.UtcNow)
-            return new ApiResponse<JwtToken>(false, null, "ComplexRefreshTokenError");
+            return BadRequest("ComplexRefreshTokenError");
         
         var tokens = await authService.UpdateUserTokens(userResult.Value);
         HttpContext.Response.Cookies.Append("spooky-cookies", tokens.AccessToken);
@@ -64,6 +64,6 @@ public class AuthenticationController(AuthService authService) : ControllerBase
                 HttpOnly = true,
                 Secure = true
             });
-        return new ApiResponse<JwtToken>(true, tokens, null);
+        return Ok(tokens);
     }
 }
