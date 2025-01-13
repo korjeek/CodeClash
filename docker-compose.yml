@@ -1,49 +1,61 @@
-﻿networks:
-  dev:
+﻿#networks:
+#  dev:
 
 services:
   nginx:
-    image: nginx:stable-alpine
+    image: nginx:mainline
     ports:
       - "80:80"
     volumes:
-      - './nginx.conf:/etc/nginx/nginx.conf'
-    environment:
-      - ConnectionStrings__DefaultConnection=Host=213.159.194.209;Port=25432;Database=codeclash;Username=pgadmin;Password=fragy72JK923;Include Error Detail=true
+      - ./nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - backend
       - frontend
-    networks:
-      - dev
+#    networks:
+#      - dev
 
   backend:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5099
     build:
       dockerfile: CodeClash.API/Dockerfile
       context: .
     ports:
-      - 6000:6000
-      - 6001:6001
-    networks:
-      - dev
+      - "5099:5099"
+#    networks:
+#      - dev
 
   frontend:
     build:
       context: ./codeclash.frontend
+      dockerfile: Dockerfile
     ports:
-      - 5000:5000
-    networks:
-      - dev
+      - "5000:5000"
+#    networks:
+#      - dev
 
-  database:
-    image: postgres:16.4
-    restart: always
-    environment:
-      POSTGRES_USER: pgadmin
-      POSTGRES_PASSWORD: fragy72JK923
-      POSTGRES_DB: codeclash
-    volumes:
-      - db-data:/var/lib/postgresql/data
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+#  frontend:
+#    build:
+#      context: ./codeclash.frontend
+#      target: development
+#    volumes:
+#      - .:/usr/src/app
+#      - /usr/src/app/node_modules
+#    ports:
+#      - 5000:5000
+#    command: npm run dev
 
-volumes:
-  db-data:
+#  database:
+#    image: postgres:16.4
+#    restart: always
+#    environment:
+#      POSTGRES_USER: pgadmin
+#      POSTGRES_PASSWORD: fragy72JK923
+#      POSTGRES_DB: codeclash
+#    volumes:
+#      - db-data:/var/lib/postgresql/data
+#      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+#
+#volumes:
+#  db-data:
