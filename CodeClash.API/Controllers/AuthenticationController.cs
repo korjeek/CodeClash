@@ -9,7 +9,7 @@ namespace CodeClash.API.Controllers;
 
 [ApiController]
 [EnableCors("CorsPolicy")]
-[Route("auth")]
+[Route("api/auth")]
 public class AuthenticationController(AuthService authService, TokenService tokenService) : ControllerBase
 {
     [HttpPost("register")]

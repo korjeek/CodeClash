@@ -10,7 +10,7 @@ namespace CodeClash.API.Controllers;
 
 [ApiController]
 [Authorize]
-[Route("issue")]
+[Route("api/issue")]
 public class IssueController(IssueService issueService, 
     TestUserSolutionService testUserSolutionService,
     UserService userService, IConfiguration configuration) : ControllerBase

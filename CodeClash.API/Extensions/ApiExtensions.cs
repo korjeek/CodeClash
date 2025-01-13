@@ -46,18 +46,15 @@ public static class ApiExtensions
     {
         if (expires != null && DateTime.UtcNow > expires)
         {
-            Console.WriteLine("Token has expired.");
             return false;
         }
 
         if (notBefore != null && DateTime.UtcNow < notBefore)
         {
-            Console.WriteLine("Token is not yet valid.");
             return false;
         }
 
         // Дополнительная кастомная логика
-        Console.WriteLine("Token lifetime is valid.");
         return true;
     }
 }

@@ -1,7 +1,7 @@
 import {Issue} from "../interfaces/IssueInterfaces.ts";
 import {AxiosInstance} from "axios";
 
-const API_URL = 'https://localhost:7282/issue';
+const API_URL = 'http://localhost:5099/api/issue';
 
 export const getAllProblems = async (axiosPrivate: AxiosInstance): Promise<Issue[]> => {
     const response = await axiosPrivate.get(`${API_URL}/get-all-issues`, { withCredentials: true });

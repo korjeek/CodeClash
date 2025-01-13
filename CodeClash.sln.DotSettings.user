@@ -34,7 +34,7 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=faa3bead_002D46e1_002D4d18_002D9541_002D110f89d21af5/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Session" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;And&gt;&#xD;
     &lt;Namespace&gt;CodeClash.Tests&lt;/Namespace&gt;&#xD;
-    &lt;Project Location="C:\Users\Maksim Tseshnaty\Desktop\Unik\CodeClash\CodeClash.Tests" Presentation="&amp;lt;CodeClash.Tests&amp;gt;" /&gt;&#xD;
+    &lt;Project Location="CodeClash.Tests" Presentation="&amp;lt;CodeClash.Tests&amp;gt;" /&gt;&#xD;
   &lt;/And&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	

@@ -1,8 +1,9 @@
 import * as signalR from '@microsoft/signalr';
 import {Response} from "../interfaces/ResponseInterface.ts";
 import axios from "../api/axios.ts";
+import Cookies from 'js-cookie';
 
-const SIGNALR_API_URL = 'https://localhost:7282/rooms'
+const SIGNALR_API_URL = 'http://localhost:5099/api/rooms'
 
 export default class SignalRService {
     private readonly connection: signalR.HubConnection;
@@ -51,7 +52,7 @@ export default class SignalRService {
                 return response.data;
         }
         catch (err) {
-            await refreshToken();
+            // await refreshToken();
             return this.invoke<TArg, TResult>(methodName, arg);
         }
     }
@@ -83,7 +84,8 @@ const refreshToken = async () => {
             const { access_token } = response.data;
 
             // Устанавливаем новый аксес токен в cookies
-            document.cookie = `access_token=${access_token}; HttpOnly; Secure; SameSite=Strict; Path=/`;
+            // document.cookie = `access_token=${access_token}; HttpOnly; Secure; SameSite=Strict; Path=/`;
+            Cookies.set('spooky-cookies', access_token, { secure: true, sameSite: 'None' });
         }
     } catch (error) {
         console.error('Token refresh failed:', error);

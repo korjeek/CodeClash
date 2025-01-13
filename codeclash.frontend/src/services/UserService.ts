@@ -1,7 +1,7 @@
 import {AxiosInstance} from 'axios';
 import {RoomStatus} from "../interfaces/UserInterfaces.ts";
 
-const API_URL = 'https://localhost:7282/user';
+const API_URL = 'http://localhost:5099/api/user';
 
 export const getRoomStatus = async (axiosPrivate: AxiosInstance): Promise<RoomStatus> => {
     const response = await axiosPrivate.get(`${API_URL}/get-user-state`, { withCredentials: true });

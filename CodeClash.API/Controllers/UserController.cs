@@ -8,7 +8,7 @@ namespace CodeClash.API.Controllers;
 
 [ApiController]
 [Authorize]
-[Route("user")]
+[Route("api/user")]
 public class UserController(UserService userService, RoomService roomService) : ControllerBase
 {
     [HttpGet("get-user-state")]

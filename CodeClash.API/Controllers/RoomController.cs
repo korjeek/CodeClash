@@ -9,7 +9,7 @@ namespace CodeClash.API.Controllers;
 
 [ApiController]
 [Authorize]
-[Route("rooms")]
+[Route("api/rooms")]
 public class RoomController(RoomService roomService, UserService userService) : ControllerBase
 {
     [HttpGet("get-rooms")]

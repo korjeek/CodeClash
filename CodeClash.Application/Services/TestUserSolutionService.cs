@@ -13,31 +13,31 @@ public class TestUserSolutionService(RoomsRepository roomsRepository, UsersRepos
 {
     public readonly ConcurrentDictionary<string, string> startCodeLocations = new()
     {
-        ["Find sum"] = "../TestSources/FindSum/SolutionTask.cs",
-        ["Roman to integer"] = "../TestSources/RomanToInteger/SolutionTask.cs",
-        ["Delete duplicates"] = "../TestSources/DeleteDuplicates/SolutionTask.cs",
-        ["Longest common prefix"] = "../TestSources/LongestCommonPrefix/SolutionTask.cs",
-        ["Valid parentheses"] = "../TestSources/ValidParentheses/SolutionTask.cs",
-        ["Palindrome"] = "../TestSources/Palindrome/SolutionTask.cs",
-        ["Merge two sorted lists"] = "../TestSources/MergeTwoSortedLists/SolutionTask.cs",
+        ["Find sum"] = "/src/TestSources/FindSum/SolutionTask.cs",
+        ["Roman to integer"] = "/src/TestSources/RomanToInteger/SolutionTask.cs",
+        ["Delete duplicates"] = "/src/TestSources/DeleteDuplicates/SolutionTask.cs",
+        ["Longest common prefix"] = "/src/TestSources/LongestCommonPrefix/SolutionTask.cs",
+        ["Valid parentheses"] = "/src/TestSources/ValidParentheses/SolutionTask.cs",
+        ["Palindrome"] = "/src/TestSources/Palindrome/SolutionTask.cs",
+        ["Merge two sorted lists"] = "/src/TestSources/MergeTwoSortedLists/SolutionTask.cs",
     };
 
 
     private readonly Dictionary<string, string> issueTestsLocations = new()
     {
-        ["Find sum"] = "../TestSources/FindSum/SolutionTaskTests.cs",
-        ["Roman to integer"] = "../TestSources/RomanToInteger/SolutionTaskTests.cs",
-        ["Delete duplicates"] = "../TestSources/DeleteDuplicates/SolutionTaskTests.cs",
-        ["Longest common prefix"] = "../TestSources/LongestCommonPrefix/SolutionTaskTests.cs",
-        ["Valid parentheses"] = "../TestSources/ValidParentheses/SolutionTaskTests.cs",
-        ["Palindrome"] = "../TestSources/Palindrome/SolutionTaskTests.cs",
-        ["Merge two sorted lists"] = "../TestSources/MergeTwoSortedLists/SolutionTaskTests.cs"
+        ["Find sum"] = "/src/TestSources/FindSum/SolutionTaskTests.cs",
+        ["Roman to integer"] = "/src/TestSources/RomanToInteger/SolutionTaskTests.cs",
+        ["Delete duplicates"] = "/src/TestSources/DeleteDuplicates/SolutionTaskTests.cs",
+        ["Longest common prefix"] = "/src/TestSources/LongestCommonPrefix/SolutionTaskTests.cs",
+        ["Valid parentheses"] = "/src/TestSources/ValidParentheses/SolutionTaskTests.cs",
+        ["Palindrome"] = "/src/TestSources/Palindrome/SolutionTaskTests.cs",
+        ["Merge two sorted lists"] = "/src/TestSources/MergeTwoSortedLists/SolutionTaskTests.cs"
     };
 
     public async Task<Result<SolutionTestResultDTO>> CheckSolution(Guid roomId, string userSolution, string issueName)
     {
-        if (!MSBuildLocator.IsRegistered)
-            MSBuildLocator.RegisterDefaults();
+        // if (!MSBuildLocator.IsRegistered)
+        //     MSBuildLocator.RegisterDefaults();
 
         var result = await roomsRepository.GetRoomById(roomId);
         if (result is null)
@@ -46,8 +46,8 @@ public class TestUserSolutionService(RoomsRepository roomsRepository, UsersRepos
             return Result.Failure<SolutionTestResultDTO>("Competition hasn't started yet.");
 
         var tests = await File.ReadAllTextAsync(issueTestsLocations[issueName]);
-        await File.WriteAllTextAsync("../CodeClash.UserSolutionTest/SolutionTaskTests.cs", tests);
-        await File.WriteAllTextAsync("../CodeClash.UserSolutionTest/SolutionTask.cs", userSolution);
+        await File.WriteAllTextAsync("/src/CodeClash.UserSolutionTest/SolutionTaskTests.cs", tests);
+        await File.WriteAllTextAsync("/src/CodeClash.UserSolutionTest/SolutionTask.cs", userSolution);
 
         // var solutionPath = @"C:\FIIT\normalProject\CodeClash";
         var solutionPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../../.."));

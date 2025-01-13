@@ -1,9 +1,8 @@
 # This is a generated file. Not intended for manual editing.
-version: "3.4"
 services:
   backend:
     build:
-      context: "C:\\Users\\Maksim Tseshnaty\\Desktop\\Unik\\CodeClash"
+      context: "C:\\FIIT\\normalProject\\CodeClash"
       dockerfile: "CodeClash.API/Dockerfile"
       target: "base"
     command: []
@@ -12,10 +11,10 @@ services:
     - "/app/bin/Debug/net8.0/CodeClash.API.dll"
     environment:
       DOTNET_USE_POLLING_FILE_WATCHER: "true"
-    image: "example:dev"
+    image: "codeclash.api:dev"
     ports: []
     volumes:
-    - "C:\\Users\\Maksim Tseshnaty\\.nuget\\packages:/home/app/.nuget/packages"
-    - "C:\\Users\\Maksim Tseshnaty\\Desktop\\Unik\\CodeClash\\CodeClash.API:/app:rw"
-    - "C:\\Users\\Maksim Tseshnaty\\Desktop\\Unik\\CodeClash:/src:rw"
+    - "C:\\Users\\artem\\.nuget\\packages:/home/app/.nuget/packages"
+    - "C:\\FIIT\\normalProject\\CodeClash\\CodeClash.API:/app:rw"
+    - "C:\\FIIT\\normalProject\\CodeClash:/src:rw"
     working_dir: "/app"
