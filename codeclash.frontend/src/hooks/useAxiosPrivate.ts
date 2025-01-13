@@ -2,12 +2,12 @@ import { axiosPrivate } from "../api/axios";
 import { useEffect } from "react";
 import useRefreshToken from "./useRefreshToken";
 import {AxiosInstance} from "axios";
-import {useAuth} from "../contexts/AuthState.ts";
 import Cookies from 'js-cookie';
+import {useNavigate} from "react-router-dom";
 
 const useAxiosPrivate: () => AxiosInstance = () => {
     const refresh = useRefreshToken();
-    const { auth } = useAuth();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const responseIntercept = axiosPrivate.interceptors.response.use(
@@ -25,18 +25,18 @@ const useAxiosPrivate: () => AxiosInstance = () => {
                     if (spookyCookies) {
                         console.log('Spooky-cookies found. Attempting token refresh...');
                         try {
-                            const accessTooken = await refresh();
-                            Cookies.set('spooky-cookies', accessTooken, { secure: true, sameSite: 'None' });
+                            const accessToken = await refresh();
+                            Cookies.set('spooky-cookies', accessToken, { secure: true, sameSite: 'None' });
                             // console.log(auth)
                             // Повторяем исходный запрос
                             return axiosPrivate(error.config);
                         } catch (refreshError) {
                             console.error('Failed to refresh token:', refreshError);
-                            console.log('login') // Перенаправляем на страницу авторизации
+                            navigate('/') // Перенаправляем на страницу авторизации
                         }
                     } else {
                         console.log('No spooky-cookies found. Redirecting to login...');
-                        console.log('login') // Перенаправляем на страницу авторизации
+                        navigate('/') // Перенаправляем на страницу авторизации
                     }
                 }
 

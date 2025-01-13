@@ -7,6 +7,7 @@ import '../../style/Lobby/Buttons.css';
 import '../../style/Lobby/Main.css';
 import {checkForAdmin, getRoom} from "../../services/RoomService.ts";
 import {TabItem} from "../../Props/PageStateProps.ts";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate.ts";
 
 export default function Lobby() {
     const [room, setRoom] = useState<Room>();
@@ -16,6 +17,7 @@ export default function Lobby() {
     const [competitionUrl, setCompetitionUrl] = useState<string>('');
     const signalR = useMemo(() => new SignalRService(), []);
     const navigate = useNavigate();
+    const axiosPrivate = useAxiosPrivate();
 
     useEffect(() => {
         signalR.onUserAction<Room>((room: Room) => {
@@ -35,13 +37,13 @@ export default function Lobby() {
         }, "UserLeave");
 
         const fetchAdminStatus = async () => {
-            const isAdmin = await checkForAdmin();
+            const isAdmin = await checkForAdmin(axiosPrivate);
             setIsAdmin(isAdmin);
         }
 
         const connectToRoom = async () => {
             await signalR.startConnection();
-            const room = await getRoom()
+            const room = await getRoom(axiosPrivate)
             setRoom(room)
         };
 
@@ -84,11 +86,6 @@ export default function Lobby() {
                 <h1 className="room-header">{room.name} lobby</h1>
                 <div className="lobby-grid">
                     <div className="online-count">Participants: {room.users.length}</div>
-                    {/*<div className="competition-info">*/}
-                    {/*    <h3 className="info-item">Author: {room.time.split(':')[1]} min</h3>*/}
-                    {/*    <h3 className="info-item">Task: {room.issueName}</h3>*/}
-                    {/*    <h3 className="info-item">Time: {room.time.split(':')[1]} min</h3>*/}
-                    {/*</div>*/}
                     <div className="users-container">
                         {room.users.map((user, index) => (
                             <div key={user.email} className="user-container">

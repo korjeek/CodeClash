@@ -1,5 +1,6 @@
 import * as signalR from '@microsoft/signalr';
 import {Response} from "../interfaces/ResponseInterface.ts";
+import axios from "../api/axios.ts";
 
 const SIGNALR_API_URL = 'https://localhost:7282/rooms'
 
@@ -7,41 +8,18 @@ export default class SignalRService {
     private readonly connection: signalR.HubConnection;
     constructor() {
         this.connection = new signalR.HubConnectionBuilder()
-            .withUrl(SIGNALR_API_URL, {withCredentials: true})
+            .withUrl(SIGNALR_API_URL,
+                {
+                    withCredentials: true,
+                    accessTokenFactory(): string | Promise<string> {
+                        return document.cookie
+                            .split('; ')
+                            .find(row => row.startsWith('spooky-cookie='))
+                            ?.split('=')[1] || '';
+                    }
+                })
             .withAutomaticReconnect()
             .build();
-
-        // this.connection.onclose(async (error) => {
-        //     console.log(error);
-        //     if (error && error.statusCode === 401) {
-        //         console.log('401 Unauthorized - attempting to refresh session...');
-        //
-        //         // Проверка наличия куки
-        //         const hasSpookyCookies = document.cookie
-        //             .split('; ')
-        //             .some((row) => row.startsWith('spooky-cookies='));
-        //
-        //         if (hasSpookyCookies) {
-        //             try {
-        //                 // Обновляем куки с помощью запроса на сервер
-        //                 await axios.post('https://localhost:7282/auth/refresh-token', null, { withCredentials: true });
-        //                 console.log('Session refreshed successfully.');
-        //
-        //                 // Переподключаемся
-        //                 await this.connection.start();
-        //                 console.log('Reconnected to SignalR hub.');
-        //             } catch (refreshError) {
-        //                 console.error('Failed to refresh session:', refreshError);
-        //                 window.location.href = '/login'; // Перенаправляем на страницу авторизации
-        //             }
-        //         } else {
-        //             console.warn('No spooky-cookies found. Redirecting to login page.');
-        //             window.location.href = '/login'; // Перенаправляем на страницу авторизации
-        //         }
-        //     } else {
-        //         console.error('SignalR connection closed unexpectedly:', error);
-        //     }
-        // });
     }
 
     public onUserAction = <T>(callback: (...args: T[]) => void, method: string) => {
@@ -55,7 +33,8 @@ export default class SignalRService {
             }
         }
         catch (err) {
-            console.error('Error while establishing SignalR connection:', err);
+            await refreshToken();
+            this.connection.start().catch(err => console.error('Error while reconnecting:', err));
         }
     }
 
@@ -72,7 +51,8 @@ export default class SignalRService {
                 return response.data;
         }
         catch (err) {
-            console.error('Error invoking method:', err);
+            await refreshToken();
+            return this.invoke<TArg, TResult>(methodName, arg);
         }
     }
 
@@ -87,3 +67,25 @@ export default class SignalRService {
         }
     }
 }
+
+const refreshToken = async () => {
+    try {
+        const refreshToken = document.cookie
+            .split('; ')
+            .find(row => row.startsWith('olega-na-front='))
+            ?.split('=')[1];
+
+        if (refreshToken) {
+            const response = await axios.post('/auth/refresh-token', undefined, {
+                withCredentials: true
+            });
+
+            const { access_token } = response.data;
+
+            // Устанавливаем новый аксес токен в cookies
+            document.cookie = `access_token=${access_token}; HttpOnly; Secure; SameSite=Strict; Path=/`;
+        }
+    } catch (error) {
+        console.error('Token refresh failed:', error);
+    }
+};

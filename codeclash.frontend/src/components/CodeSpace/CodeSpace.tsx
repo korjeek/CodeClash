@@ -17,6 +17,7 @@ import {UsersDTO} from "../../interfaces/UserInterfaces.ts";
 import {useCompetitionData} from "../../contexts/CompetitionState.ts";
 import {motion} from "framer-motion";
 import {SolutionTestResultDTO} from "../../interfaces/CodeResultInterfaces.ts";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate.ts";
 
 export default function CodeSpace(){
     const { setCompetitionResults } = useCompetitionData();
@@ -25,14 +26,16 @@ export default function CodeSpace(){
     const [code, setCode] = useState('');
     const [result, setResult] = useState<SolutionTestResultDTO>()
     const [selected, setSelected] = useState<string>('Code')
+    const [btnState, setBtnState] = useState<string>('default');
     const signalR = useMemo(() => new SignalRService(), []);
     const { param } = useParams<string>();
     const navigate = useNavigate();
+    const axiosPrivate = useAxiosPrivate();
 
     useEffect(() => {
         const fetchProblem = async ()    => {
             await signalR.startConnection();
-            const problem = await getProblem(param!);
+            const problem = await getProblem(axiosPrivate, param!);
             setProblem(problem);
             setCode(problem.initialCode)
         }
@@ -54,16 +57,16 @@ export default function CodeSpace(){
     };
 
     const submitCode = async () => {
-        console.log(code)
+        setBtnState('check')
         const response = await signalR.invoke<CheckSolutionRequest, SolutionTestResultDTO>("CheckSolution",
             {solution: code, issueName: problem!.name, leftTime: convertTime(time)})
         setResult(response)
         setSelected("Results")
+        setBtnState('complete')
     }
 
     const quitRoom = async () => {
-        const response = await signalR.invoke<undefined, Room>("QuitRoom", undefined)
-        console.log(response)
+        await signalR.invoke<undefined, Room>("QuitRoom", undefined)
         await signalR.stopConnection()
         navigate('/competitions');
     }
@@ -76,7 +79,11 @@ export default function CodeSpace(){
             <div className="header">
                 <button className="quit-button" onClick={quitRoom}>Quit</button>
                 <div className="timer">{time}</div>
-                <button className="submit-button" onClick={submitCode}>Submit</button>
+                <button className={btnState === 'default' ? "submit-button" : "check-button"} onClick={submitCode}>
+                    {(btnState == 'default') && <span>Submit</span>}
+                    {(btnState == 'check') && <div className="loading" style={{width: '20px', height: '20px'}}></div>}
+                    {(btnState == 'complete') && <div className="submit"></div>}
+                </button>
                 </div>
                 <div className="content">
                     <div className="markdown-container default-container-border">

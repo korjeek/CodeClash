@@ -13,6 +13,7 @@ import '../../style/CreateLobby/Buttons.css'
 import '../../style/CreateLobby/ProblemsList.css'
 import {MinuteButtonProps, TaskButtonProps} from "../../Props/ButtonsProps.ts";
 import {TabItem} from "../../Props/PageStateProps.ts";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate.ts";
 
 const minutes = ["5", "10", "30", "60"]
 
@@ -25,12 +26,13 @@ export default function CreateRoomPage() {
     const [inputValue, setInputValue] = useState<string>('');
     const [selectedTask, setSelectedTask] = useState(false);
     const [userInRoom, setUserInRoom] = useState<boolean>(false);
-    const signalR = new SignalRService()
+    const signalR = new SignalRService();
+    const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
 
     useEffect(() => {
         async function getIssues() {
-            const problems = await getAllProblems()
+            const problems = await getAllProblems(axiosPrivate)
             setProblems(problems)
         }
 

@@ -2,7 +2,7 @@ import axios from '../api/axios.ts';
 import {useAuth} from "../contexts/AuthState.ts";
 
 const useRefreshToken = () => {
-    const { auth, setAuth } = useAuth();
+    const { setAuth } = useAuth();
 
     return async () => {
         const response = await axios.post('/auth/refresh-token', undefined, {
@@ -16,7 +16,6 @@ const useRefreshToken = () => {
                 username: "",
                 email: ""
             });
-        console.log(response, auth);
         return response.data;
     }
 };
