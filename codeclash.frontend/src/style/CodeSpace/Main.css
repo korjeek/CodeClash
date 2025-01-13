@@ -12,8 +12,8 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    width: calc(100% - 2vh);
-    margin: 10px 0 10px 2vh;
+    width: calc(100%);
+    margin: 10px 0;
     box-sizing: border-box;
 }
 
@@ -34,19 +34,21 @@
 .markdown-container {
     display: flex;
     flex-direction: column;
-    width: calc(50% - 2rem);
+    width: calc(50% - 1rem);
     background-color: #1E1E1E;
-    overflow-y: auto;
     color: white;
     background-image: linear-gradient(#1E1E1E, #1E1E1E), linear-gradient(90deg, #6A00FF, #A64AFF);
 }
 
 .md-description{
-    padding: 0 20px 20px 20px;
+    padding: 3px 20px 0 20px;
+    margin-bottom: 10vh;
+    flex: 1;
+    overflow: auto;
 }
 
 .editor-container {
-    width: 50%;
+    width: calc(50% - 1rem);
     display: flex;
     flex-direction: column;
     justify-content: center;

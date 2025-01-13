@@ -1,8 +1,9 @@
 import React from 'react';
-import {Issue} from "./IssueInterfaces.ts";
+import {Issue} from "../interfaces/IssueInterfaces.ts";
 
 export interface ChipProps {
     text: string;
+    href: string;
     selected: boolean;
     setSelected: React.Dispatch<React.SetStateAction<string>>;
 }

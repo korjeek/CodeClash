@@ -1,10 +1,9 @@
-﻿namespace Task.Valid_Parentheses
+﻿namespace CodeClash.UserSolutionTest;
+
+public class SolutionTask
 {
-	public class SolutionTask
+	public bool IsValid(string s)
 	{
-		public bool IsValid(string s)
-		{
-			// Your code...
-		}
+		// Your code...
 	}
 }

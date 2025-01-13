@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Task.RomanToInteger
+namespace CodeClash.UserSolutionTest
 {
 	[TestFixture]
 	public class SolutionTaskTests
@@ -40,5 +40,102 @@ namespace Task.RomanToInteger
 
 		[Test]
 		public void RomanToInt_numIs90() => RunTest("XC", 90);
+
+		[Test]
+		public void RomanToInt_SingleCharacterI() => RunTest("I", 1);
+
+		[Test]
+		public void RomanToInt_SingleCharacterM() => RunTest("M", 1000);
+
+		[Test]
+		public void RomanToInt_TwoCharacters() => RunTest("VI", 6);
+
+		[Test]
+		public void RomanToInt_SubtractionPattern4() => RunTest("IV", 4);
+
+		[Test]
+		public void RomanToInt_SubtractionPattern9() => RunTest("IX", 9);
+
+		[Test]
+		public void RomanToInt_ComplexCase1987() => RunTest("MCMLXXXVII", 1987);
+
+		[Test]
+		public void RomanToInt_EmptyString() => RunTest("", 0);
+
+
+		[Test]
+		public void RomanToInt_RepeatedCharacters() => RunTest("IIII", 4);
+
+		[Test]
+		public void RomanToInt_ComplexLargeNumber() => RunTest("MMMDCCCLXXXVIII", 3888);
+
+		[Test]
+		public void RomanToInt_MultipleSubtractions() => RunTest("XCIX", 99);
+
+		[Test]
+		public void RomanToInt_LongStringOfThousands() => RunTest("MMMM", 4000);
+
+		[Test]
+		public void RomanToInt_InvalidOrder() => RunTest("MII", 1002);
+
+		[Test]
+		public void RomanToInt_MultipleAdditions() => RunTest("CLX", 160);
+
+		[Test]
+		public void RomanToInt_AllUniqueCharacters() => RunTest("IVXLCDM", 1444);
+
+		[Test]
+		public void RomanToInt_RandomOrder() => RunTest("DCLXVI", 666);
+
+		[Test]
+		public void RomanToInt_AllThousands() => RunTest("MMM", 3000);
+
+		[Test]
+		public void RomanToInt_EdgeCase3999() => RunTest("MMMCMXCIX", 3999);
+
+		[Test]
+		public void RomanToInt_InvalidCharacterInString() => RunTest("MCMXCIIVX", 2005);
+
+		[Test]
+		public void RomanToInt_LargeNumber1()
+		{
+			RunTest("MMMMMMMMMMMMMMMMMMMMMMMMM", 25000);
+		}
+
+		[Test]
+		public void RomanToInt_LargeNumber2()
+		{
+			RunTest("MMMDCCCLXXXVIII", 3888);
+		}
+
+		[Test]
+		public void RomanToInt_LargeNumber3()
+		{
+			RunTest("MMMM", 4000);
+		}
+
+		[Test]
+		public void RomanToInt_LargeNumber4()
+		{
+			RunTest("MMMCMXCIX", 3999);
+		}
+
+		[Test]
+		public void RomanToInt_LargeNumber5()
+		{
+			RunTest("MMMMM", 5000);
+		}
+
+		[Test]
+		public void RomanToInt_LargeNumber6()
+		{
+			RunTest("MMMMMMMMMMMMMMMMMMMMMMMMMMM", 27000);
+		}
+
+		[Test]
+		public void RomanToInt_LargeNumber7()
+		{
+			RunTest("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM", 63000);
+		}
 	}
 }

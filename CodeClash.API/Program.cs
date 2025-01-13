@@ -19,7 +19,7 @@ services.AddSwaggerGen();
 services.AddSignalR();
 services.AddSingleton<IUserIdProvider, UserConnectionIdProvider>();
 
-services.AddDbContext<ApplicationDbContext>();
+services.AddDbContextFactory<ApplicationDbContext>();
 //TODO Сделать, чтобы добавлялись только интерфесы с нужными методами. Интерфейсы реализовываются через Services, которые можно менять
 services.AddScoped<PasswordHasher>();
 services.AddApiAuthentication(configuration);
@@ -41,7 +41,7 @@ services.AddCors(options =>
     options.AddPolicy("CorsPolicy",policyBuilder =>
     {
         policyBuilder
-            .WithOrigins("http://localhost:5173", "https://localhost:7282")
+            .WithOrigins("http://localhost:3000", "https://localhost:7282", "http://localhost:80")
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();

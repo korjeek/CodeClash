@@ -6,6 +6,7 @@ export interface Room {
     time: string;
     issueName: string;
     users: User[];
+    participantsCount: number;
 }
 
 export interface CreateRoomData {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Task.Valid_Parentheses
+namespace CodeClash.UserSolutionTest
 {
 	[TestFixture]
 	public class SolutionTaskTests
@@ -41,5 +41,65 @@ namespace Task.Valid_Parentheses
 
 		[Test]
 		public void ValidParentheses_MixedBrackets() => RunTest("{[}]()", false);
+
+		[Test]
+		public void ValidParentheses_EmptyString() => RunTest("", true);
+
+		[Test]
+		public void ValidParentheses_SingleOpeningBracket() => RunTest("(", false);
+
+		[Test]
+		public void ValidParentheses_SingleClosingBracket() => RunTest(")", false);
+
+		[Test]
+		public void ValidParentheses_NestedBrackets() => RunTest("{[()]}", true);
+
+		[Test]
+		public void ValidParentheses_UnmatchedBrackets() => RunTest("{[}", false);
+
+		[Test]
+		public void ValidParentheses_OnlyOpeningBrackets() => RunTest("(({{[[", false);
+
+		[Test]
+		public void ValidParentheses_OnlyClosingBrackets() => RunTest("))}}]]", false);
+
+		[Test]
+		public void ValidParentheses_MismatchedOrder() => RunTest("[({})]", true);
+
+		[Test]
+		public void ValidParentheses_LongValidSequence() => RunTest("()[]{}(()[]{})", true);
+
+		[Test]
+		public void ValidParentheses_LongInvalidSequence() => RunTest("({[}])", false);
+
+		[Test]
+		public void ValidParentheses_AlternatingBrackets() => RunTest("({)}", false);
+
+		[Test]
+		public void ValidParentheses_RepeatingValidSequence() => RunTest("()()()()()", true);
+
+		[Test]
+		public void ValidParentheses_RepeatingInvalidSequence() => RunTest("(((((((((", false);
+
+		[Test]
+		public void ValidParentheses_AllTypesUnmatched() => RunTest("{[(])}", false);
+
+		[Test]
+		public void ValidParentheses_AllTypesMatched() => RunTest("{[()()]}", true);
+
+		[Test]
+		public void ValidParentheses_MultiplePairs() => RunTest("{}[]()", true);
+
+		[Test]
+		public void ValidParentheses_MismatchedClosingFirst() => RunTest(")(", false);
+
+		[Test]
+		public void ValidParentheses_ValidSequenceWithSpaces() => RunTest("{ [ ( ) ] }", false);
+
+		[Test]
+		public void ValidParentheses_ComplexNested() => RunTest("{[({[()]})]}", true);
+
+		[Test]
+		public void ValidParentheses_ComplexNestedInvalid() => RunTest("{[({[()]})}}", false);
 	}
 }

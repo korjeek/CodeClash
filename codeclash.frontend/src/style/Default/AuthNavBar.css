@@ -17,6 +17,7 @@
     min-height: 6rem;
     display: flex;
     position: fixed;
+    box-sizing: border-box;
 }
 
 .navbar-text-content{

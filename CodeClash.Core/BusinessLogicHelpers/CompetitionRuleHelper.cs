@@ -1,4 +1,4 @@
-﻿namespace CodeClash.Core;
+﻿namespace CodeClash.Core.BusinessLogicHelpers;
 
 public static class CompetitionRuleHelper
 {

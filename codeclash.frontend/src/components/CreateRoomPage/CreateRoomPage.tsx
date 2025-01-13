@@ -11,7 +11,9 @@ import '../../style/CreateLobby/Main.css'
 import '../../style/CreateLobby/Inputs.css'
 import '../../style/CreateLobby/Buttons.css'
 import '../../style/CreateLobby/ProblemsList.css'
-import {MinuteButtonProps, TaskButtonProps} from "../../interfaces/ButtonsProps.ts";
+import {MinuteButtonProps, TaskButtonProps} from "../../Props/ButtonsProps.ts";
+import {TabItem} from "../../Props/PageStateProps.ts";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate.ts";
 
 const minutes = ["5", "10", "30", "60"]
 
@@ -23,12 +25,14 @@ export default function CreateRoomPage() {
     const [activeProblem, setActiveProblem] = useState('');
     const [inputValue, setInputValue] = useState<string>('');
     const [selectedTask, setSelectedTask] = useState(false);
-    const signalR = new SignalRService()
+    const [userInRoom, setUserInRoom] = useState<boolean>(false);
+    const signalR = new SignalRService();
+    const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
 
     useEffect(() => {
         async function getIssues() {
-            const problems = await getAllProblems()
+            const problems = await getAllProblems(axiosPrivate)
             setProblems(problems)
         }
 
@@ -37,11 +41,17 @@ export default function CreateRoomPage() {
 
     const createRoom = async () => {
         try {
-            const room = {roomName, time: `00:${activeMin}:00`, issueId: activeProblem!}
+            const time = activeMin === '60' ? `01:00:00` : `00:${activeMin}:00`
+            const room = {roomName, time: time, issueId: activeProblem!}
             await signalR.startConnection()
             const createdRoom = await signalR.invoke<CreateRoomData, Room>("CreateRoom", room);
             if (createdRoom)
-                navigate(`/lobby?id=${createdRoom.id}`);
+            {
+                await signalR.invoke<string, Room>("JoinRoom", createdRoom.id)
+                navigate(`/lobby`);
+            }
+            else
+                setUserInRoom(true)
         }
         catch {
             console.error('Failed to create room. Please try again.');
@@ -55,7 +65,7 @@ export default function CreateRoomPage() {
 
     return (
         <div className="menu-page">
-            <BaseNavBar/>
+            <BaseNavBar tab={TabItem.Competitions}/>
             <motion.div
                 initial={{y: 0}}
                 animate={{y: isSlided ? '-100%' : 0}}
@@ -111,6 +121,7 @@ export default function CreateRoomPage() {
                         </div>
                     </div>
                 </div>
+                {userInRoom && <div className="wrong-login-warning">User is already in room.</div>}
                 <button
                     className={selectedTask && (inputValue.trim() !== '' ? 'lightgreen' : '')
                         ? "active-acc-create-room-btn" : "acc-create-room-btn"}

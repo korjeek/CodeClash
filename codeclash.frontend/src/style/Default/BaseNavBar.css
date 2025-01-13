@@ -14,6 +14,14 @@
 
 .menu-navbar{
     flex: 1 0 auto;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    position: static;
+}
+
+.navbar-menu-chips{
+    flex: 1 0 auto;
     justify-content: flex-start;
     gap: 2rem;
     align-items: center;
@@ -21,31 +29,26 @@
     position: static;
 }
 
-.nav-bar-button{
-    color: #ffffff;
-    position: relative;
-    padding: 7px 30px;
-    border-radius: 3vh;
-    font-size: 1rem;
-    transition: border 0.3s ease-in-out;
+.navbar-profile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    line-height: 17px;
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
-.nav-bar-button:hover{
-    border-color: #A64AFF;
+.navbar-profile p{
+    font-size: .8rem;
+    font-weight: normal;
+    color: #888888;
+    margin: 0;
 }
 
-.active-button{
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-    border-radius: 3vh;
-    background-image: linear-gradient(90deg, #6A00FF, #A64AFF);
-}
-
-.motion-span{
-    position: relative;
-    z-index: 10;
+.navbar-user-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
 }

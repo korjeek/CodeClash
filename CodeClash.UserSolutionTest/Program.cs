@@ -18,6 +18,7 @@ public class Program
 		}
 		
 		using var testEngine = TestEngineActivator.CreateInstance();
+		testEngine.InternalTraceLevel = InternalTraceLevel.Off;
 		var testPackage = new TestPackage(testAssemblies)
 		{
 			Settings = { ["InternalTraceLevel"] = "Off" }
@@ -32,26 +33,29 @@ public class Program
 	
 	private static void ParseResults(XmlNode? result, int amountTestCases)
 	{
-		var totalTime = 0.0f;
+		var totalTime = float.Parse(result?.SelectSingleNode("//test-suite")?.Attributes?["duration"]?.Value!, CultureInfo.InvariantCulture) * 1000;
+		var passedTestsCount = result?.SelectSingleNode("//test-suite")?.Attributes?["passed"]?.Value;
+		var totalTestsCount = result?.SelectSingleNode("//test-suite")?.Attributes?["testcasecount"]?.Value;
 		
 		foreach (XmlNode test in result?.SelectNodes("//test-case")!)
 		{
 			var testName = test.Attributes?["name"]?.Value;
 			var testResult = test.Attributes?["result"]?.Value;
 			
-			float.TryParse(
-				test.Attributes?["duration"]?.Value, 
-				CultureInfo.InvariantCulture, 
-				out var duration);
+			// float.TryParse(
+			// 	test.Attributes?["duration"]?.Value, 
+			// 	CultureInfo.InvariantCulture, 
+			// 	out var duration);
 			
-			totalTime += duration * 1000;
-			
+			// totalTime += duration * 1000;
 			if (testResult != "Failed") continue;
+			
 			var failureMessage = test.SelectSingleNode("failure/message")?.InnerText;
-			Console.WriteLine($"{testResult}\n{testName}\n{failureMessage}");
+			// имя упавшего теста : количество прошедших тестов : количесвто тестов всего : AssetError сообщение
+			Console.Write($"FAIL::{testName}::{passedTestsCount}::{totalTestsCount}::{failureMessage}");
 			return;
 		}
-		Console.WriteLine("OK");
-		Console.WriteLine($"Time: {totalTime / amountTestCases:F2} ms.");
+		// ОК : среднее время : количество пройденных тестов
+		Console.Write($"OK::{totalTime / amountTestCases:F2}::{passedTestsCount}");
 	}
 }

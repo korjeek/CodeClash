@@ -1,7 +1,7 @@
-﻿using System.Security.Claims;
-using CodeClash.Application.Extensions;
+﻿using CodeClash.Application.Extensions;
 using CodeClash.Application.Services;
 using CodeClash.Core.Models.DTOs;
+using CodeClash.Persistence.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,7 +15,7 @@ public class RoomController(RoomService roomService, UserService userService) : 
     [HttpGet("get-rooms")]
     public async Task<ApiResponse<List<RoomDTO>>> GetRooms()
     {
-        var roomsResult = await roomService.GetAllWaitingRoomDTOs();
+        var roomsResult = await roomService.GetAllWaitingRoomDtos();
         if (roomsResult.IsFailure)
             return new ApiResponse<List<RoomDTO>>(false, null, roomsResult.Error);
         return new ApiResponse<List<RoomDTO>>(
@@ -28,8 +28,7 @@ public class RoomController(RoomService roomService, UserService userService) : 
     [HttpGet("check-for-admin")]
     public async Task<ApiResponse<bool?>> CheckUserIsAdmin()
     {
-        Request.Cookies.TryGetValue("spooky-cookies", out string? cookie);
-        var userId = new Guid(cookie!.GetClaimsFromToken().First(c => c.Type == ClaimTypes.NameIdentifier).Value);
+        var userId = Request.GetUserIdFromAuthorizedUserCookie();
         var isUserAdminResult = await roomService.IsUserAdmin(userId);
         if (isUserAdminResult.IsFailure)
             return new ApiResponse<bool?>(false, null, isUserAdminResult.Error);
@@ -39,20 +38,26 @@ public class RoomController(RoomService roomService, UserService userService) : 
     [HttpGet("get-room-info")]
     public async Task<ApiResponse<RoomDTO>> GetRoomInfo()
     {
-        Request.Cookies.TryGetValue("spooky-cookies", out string? cookie);
-        var userId = new Guid(cookie!.GetClaimsFromToken().First(c => c.Type == ClaimTypes.NameIdentifier).Value);
-        var roomId = await userService.GetUserRoomId(userId);
-        if (!roomId.HasValue)
-            return new ApiResponse<RoomDTO>(false, null, "User has not room.");
-        var roomResult = await roomService.GetRoom(roomId.Value);
+        var userId = Request.GetUserIdFromAuthorizedUserCookie();
+        var roomIdResult = await userService.GetUserRoomId(userId);
+        if (roomIdResult.IsFailure)
+            return new ApiResponse<RoomDTO>(false, null, roomIdResult.Error);
+        var roomResult = await roomService.GetRoomByRoomId(roomIdResult.Value);
         if (roomResult.IsFailure)
             return new ApiResponse<RoomDTO>(false, null, roomResult.Error);
-        return new ApiResponse<RoomDTO>(true, roomResult.Value.GetRoomDTOFromRoom(), null);
+        return new ApiResponse<RoomDTO>(true, roomResult.Value.GetRoomDtoFromRoom(), null);
     }
 
-    [HttpPost("get-room-leaders")]
-    public async Task<ApiResponse<List<UserDTO>>> GetRoomLeaders(Guid roomId)
+    [HttpGet("get-room-status")]
+    public async Task<ApiResponse<RoomStatus?>> GetRoomStatus()
     {
-        throw new NotImplementedException();
+        var userId = Request.GetUserIdFromAuthorizedUserCookie();
+        var roomIdResult = await userService.GetUserRoomId(userId);
+        if (roomIdResult.IsFailure)
+            return new ApiResponse<RoomStatus?>(false, null, roomIdResult.Error);
+        var roomEntityResult = await roomService.GetRoomEntityById(roomIdResult.Value);
+        if (roomEntityResult.IsFailure)
+            return new ApiResponse<RoomStatus?>(false, null, roomEntityResult.Error);
+        return new ApiResponse<RoomStatus?>(true, roomEntityResult.Value.Status, null);
     }
 }

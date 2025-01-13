@@ -8,19 +8,29 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CodeClash.API.Controllers;
 
+[ApiController]
+[Authorize]
 [Route("issue")]
 public class IssueController(IssueService issueService, 
-    TestUserSolutionService testUserSolutionService) : ControllerBase
+    TestUserSolutionService testUserSolutionService,
+    UserService userService, IConfiguration configuration) : ControllerBase
 {
     [HttpPost("add-issue")]
-    public async Task<IActionResult> AddIssue([FromBody] CreateIssueRequest request)
+    public async Task<ApiResponse<IssueDTO>> AddIssue([FromBody] CreateIssueRequest request)
     {
-        // TODO: добавить проверку на пароль админа по задачам, может придумать другой способ добавлять задачи
+        var userId = Request.GetUserIdFromAuthorizedUserCookie();
+        var userEntity = await userService.GetUser(userId);
+        if (userEntity.IsFailure)
+            return new ApiResponse<IssueDTO>(false, null, userEntity.Error);
+        if (userEntity.Value.Email != configuration["AdminUser:AdminEmail"]! ||
+            userEntity.Value.PasswordHash != configuration["AdminUser:AdminPasswordHash"])
+            return new ApiResponse<IssueDTO>(false, null, "Only administrator can add issues!");
+        
         var newIssueResult = Issue.Create(Guid.NewGuid(), request.Description, request.Name);
         if (newIssueResult.IsFailure)
-            return BadRequest(newIssueResult.Error);
+            return new ApiResponse<IssueDTO>(false, null, newIssueResult.Error);
         await issueService.AddIssueToDb(newIssueResult.Value);
-        return Ok(newIssueResult.Value.GetIssueDTO());
+        return new ApiResponse<IssueDTO>(true, newIssueResult.Value.GetIssueDTO(), null);
     }
 
     [HttpGet("get-all-issues")]

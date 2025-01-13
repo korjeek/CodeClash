@@ -33,10 +33,10 @@ public class User
         return Result.Success(new User(id, email, passwordHash, name, isAdmin));
     }
 
-    public void UpdateRoomAdminStatus(bool isAdmin) => IsAdmin = isAdmin;
+    public void SetRoomAdminStatus(bool isAdmin) => IsAdmin = isAdmin;
     
-    public void UpdateRefreshToken(string refreshToken) => RefreshToken = refreshToken;
+    public void SetRefreshToken(string? refreshToken) => RefreshToken = refreshToken;
 
-    public void UpdateRefreshTokenExpiryTime(DateTime refreshTokenExpiryTime) =>
+    public void SetRefreshTokenExpiryTime(DateTime refreshTokenExpiryTime) =>
         RefreshTokenExpiryTime = refreshTokenExpiryTime;
 }

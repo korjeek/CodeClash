@@ -23,12 +23,13 @@
     border-radius: 3vh;
     width: 50vh;
     color: white;
-    font-family: Inter, Arial;
     text-align: center;
+    gap: 5vh
 }
 
 .auth-header{
-    margin: 5vh 0;
+    margin-top: 5vh;
+    margin-bottom: 0;
     width: 100%;
 }
 
@@ -43,26 +44,16 @@
 }
 
 .auth-confirm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     width: 100%;
-    margin: 5vh 0;
+    margin-bottom: 5vh;
 }
 
-.auth-button{
-    width: 60%;
-    height: 6vh;
-    border: 1px solid cyan;
-    border-radius: 3vh;
-    padding: 7px 40px;
-    box-shadow: 0 4px 4px 0 rgb(21, 113, 131);
-    background: #000;
-    color: cyan;
-    font-weight: 600;
-    font-size: 1.25rem;
-    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-}
-
-.auth-button:hover{
-    border: 1px solid cyan;
-    background-color: cyan;
-    color: black;
+.wrong-login-warning{
+    padding: 0 10vh;
+    color: #DA4167;
+    margin: -4vh 0;
 }

@@ -10,57 +10,52 @@ namespace CodeClash.API.Controllers;
 [ApiController]
 [EnableCors("CorsPolicy")]
 [Route("auth")]
-public class AuthenticationController(AuthService authService) : ControllerBase
+public class AuthenticationController(AuthService authService, TokenService tokenService) : ControllerBase
 {
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterRequest request)
     {
-        if (!ModelState.IsValid) 
-            return BadRequest(ModelState);
+        if (!ModelState.IsValid)
+            return BadRequest("Incorrect request data.");
         var userResult = await authService.CreateUser(request.UserName, request.Email, request.Password);
         if (userResult.IsFailure)
             return BadRequest(userResult.Error);
-        
         return await Login(new LoginRequest(request.Email, request.Password));
     }
-    
+
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginRequest request)
     {
         if (!ModelState.IsValid)
-            return BadRequest(ModelState);
-        var userResult = await authService.GetUser(request.Email, request.Password);
+            return BadRequest("Incorrect request data.");
+        var userResult = await authService.GetVerifiedUser(request.Email, request.Password);
         if (userResult.IsFailure)
             return BadRequest(userResult.Error);
         var user = userResult.Value;
-        var tokens = await authService.UpdateUsersTokens(user);
-        HttpContext.Response.Cookies.Append("spooky-cookies", tokens.AccessToken);
-        
-        return Ok(new AuthResponse(user.Name, user.Email, tokens.AccessToken, tokens.RefreshToken));
+        var tokens = await authService.UpdateUserTokens(user);
+        var cookieOptions = new CookieOptions { SameSite = SameSiteMode.None };
+        HttpContext.Response.Cookies.Append("spooky-cookies", tokens.AccessToken, cookieOptions);
+        HttpContext.Response.Cookies.Append("olega-na-front", tokens.RefreshToken, cookieOptions);
+        var authResponse = new AuthResponse(user.Name, user.Email, tokens.AccessToken, tokens.RefreshToken);
+        return Ok(authResponse);
     }
-    
-    [HttpPut] // TODO: Может изменить на PUT? Обычно именно его используют для обновления данных на сервере, а использовать везде только POST это КОЛХОЗ, ну и плохо в целом, так Ваня сказал
-    [Route("refresh-token")]
-    public async Task<IActionResult> RefreshToken(JwtToken? tokenModel)
+
+    [HttpPost("refresh-token")]
+    public async Task<IActionResult> RefreshToken()
     {
-        if (tokenModel is null)
-            return BadRequest(AuthRequestErrorType.InvalidTokenModel.ToString());
+        if (!Request.Cookies.TryGetValue("spooky-cookies", out var accessToken))
+            return BadRequest("User has not accessToken. To get it login");
+        if (!Request.Cookies.TryGetValue("olega-na-front", out var refreshToken))
+            return BadRequest("User has not refreshToken. To get it login or register.");
 
-        var userResult = await authService.GetUserByPrincipalClaims(tokenModel);
-        if (userResult.IsFailure || 
-            userResult.Value.RefreshToken != tokenModel.RefreshToken || 
+        var userResult = await authService.GetUserByPrincipalClaims(accessToken);
+        if (userResult.IsFailure ||
+            userResult.Value.RefreshToken != refreshToken ||
             userResult.Value.RefreshTokenExpiryTime <= DateTime.UtcNow)
-            return BadRequest(AuthRequestErrorType.ComplexRefreshTokenError);
-        
-        var tokens = await authService.UpdateUsersTokens(userResult.Value);
-        return new ObjectResult(tokens);
-    }
-}
+            return BadRequest($"ComplexRefreshTokenError, {userResult.Value.RefreshTokenExpiryTime}");
 
-internal enum AuthRequestErrorType
-{
-    ExistedAccount,
-    WrongCredentials,
-    InvalidTokenModel,
-    ComplexRefreshTokenError
+        var newAccessToken = tokenService.CreateAccessToken(userResult.Value);
+        HttpContext.Response.Cookies.Append("spooky-cookies", newAccessToken, new CookieOptions {SameSite = SameSiteMode.None});
+        return Ok(newAccessToken);
+    }
 }

@@ -54,6 +54,9 @@ namespace CodeClash.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("ParticipantsCount")
+                        .HasColumnType("integer");
+
                     b.Property<int>("Status")
                         .HasColumnType("integer");
 
@@ -81,6 +84,9 @@ namespace CodeClash.Persistence.Migrations
                         .HasColumnType("text");
 
                     b.Property<bool>("IsAdmin")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsSentSolution")
                         .HasColumnType("boolean");
 
                     b.Property<string>("Name")

@@ -1,19 +1,32 @@
-import axios from 'axios';
 import {Room} from "../interfaces/RoomInterfaces.ts";
+import {AxiosInstance} from "axios";
 
-const API_URL = 'https://localhost:7282/rooms';
+const API_URL = '/rooms';
+const controller = new AbortController();
 
-export const checkForAdmin = async (): Promise<boolean> => {
-    const response = await axios.get(`${API_URL}/check-for-admin`, { withCredentials: true });
+export const checkForAdmin = async (axiosPrivate: AxiosInstance): Promise<boolean> => {
+    const response = await axiosPrivate.get(`${API_URL}/check-for-admin`,
+        {
+            signal: controller.signal,
+            withCredentials: true
+        });
     return response.data.data;
 };
 
-export const getRoom = async (): Promise<Room> => {
-    const response = await axios.get(`${API_URL}/get-room-info`, { withCredentials: true });
+export const getRoom = async (axiosPrivate: AxiosInstance): Promise<Room> => {
+    const response = await axiosPrivate.get(`${API_URL}/get-room-info`,
+        {
+            signal: controller.signal,
+            withCredentials: true
+        });
     return response.data.data;
 }
 
-export const getRoomsList = async (): Promise<Room[]> => {
-    const response = await axios.get(`${API_URL}/get-rooms`, { withCredentials: true });
+export const getRoomsList = async (axiosPrivate: AxiosInstance): Promise<Room[]> => {
+    const response = await axiosPrivate.get(`${API_URL}/get-rooms`,
+        {
+            signal: controller.signal,
+            withCredentials: true
+        });
     return response.data.data;
 }

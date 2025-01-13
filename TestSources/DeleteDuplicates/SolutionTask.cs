@@ -1,4 +1,4 @@
-﻿namespace Task.DeleteDuplicates
+﻿namespace CodeClash.UserSolutionTest
 {
 	public class SolutionTask
 	{

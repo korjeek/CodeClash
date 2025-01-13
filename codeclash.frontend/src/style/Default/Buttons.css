@@ -1,0 +1,44 @@
+.user-room-status-btn{
+    background: #1A1A1A;
+    border: .1vh solid #5EFC8D;
+    border-radius: 3vh;
+    padding: 7px 40px;
+    font-size: 1rem;
+    transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+    color: #5EFC8D;
+}
+
+.user-room-status-btn:hover{
+    background-color: #5EFC8D;
+    border: .1vh solid #5EFC8D;
+    color: black;
+}
+
+.nav-bar-button{
+    color: #ffffff;
+    position: relative;
+    padding: 7px 30px;
+    border-radius: 3vh;
+    font-size: 1rem;
+    transition: border 0.3s ease-in-out;
+}
+
+.nav-bar-button:hover{
+    border-color: #A64AFF;
+}
+
+.active-button{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    border-radius: 3vh;
+    background-image: linear-gradient(90deg, #6A00FF, #A64AFF);
+}
+
+.motion-span{
+    position: relative;
+    z-index: 10;
+}

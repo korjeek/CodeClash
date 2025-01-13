@@ -1,10 +1,9 @@
-﻿namespace Task.Palindrome
+﻿namespace CodeClash.UserSolutionTest;
+
+public class SolutionTask
 {
-	public class SolutionTask
+	public bool IsPalindrome(int number)
 	{
-		public bool IsPalindrome(int number)
-		{
-			// Your code...
-		}
+		// Your code...
 	}
 }

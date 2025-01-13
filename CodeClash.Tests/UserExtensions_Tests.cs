@@ -14,7 +14,7 @@ namespace CodeClash.Tests
 			Assert.That(userResult.IsSuccess, Is.True);
 			var user = userResult.Value;
 
-			var userDTO = user.GetUserDTO();
+			var userDTO = user.GetUserDto();
 
 			Assert.That(userDTO.Email, Is.EqualTo(user.Email));
 			Assert.That(userDTO.Name, Is.EqualTo(user.Name));
@@ -27,9 +27,9 @@ namespace CodeClash.Tests
 			Assert.That(userResult.IsSuccess, Is.True);
 			var user = userResult.Value;
 
-			user.UpdateRefreshToken("refreshtoken");
-			user.UpdateRefreshTokenExpiryTime(DateTime.UtcNow.AddDays(7));
-			user.UpdateRoomAdminStatus(true);
+			user.SetRefreshToken("refreshtoken");
+			user.SetRefreshTokenExpiryTime(DateTime.UtcNow.AddDays(7));
+			user.SetRoomAdminStatus(true);
 
 			var userEntity = user.GetUserEntity();
 

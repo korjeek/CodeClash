@@ -1,6 +1,5 @@
 ﻿using System.Security.Claims;
 using System.Text;
-using CSharpFunctionalExtensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
@@ -22,6 +21,7 @@ public static class ApiExtensions
                     ValidateAudience = false,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
+                    LifetimeValidator = CustomLifetimeValidator,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Secret"]!))
                 };
 
@@ -36,5 +36,28 @@ public static class ApiExtensions
             });
 
         services.AddAuthorization();
+    }
+    
+    private static bool CustomLifetimeValidator(
+        DateTime? notBefore,
+        DateTime? expires,
+        SecurityToken securityToken,
+        TokenValidationParameters validationParameters)
+    {
+        if (expires != null && DateTime.UtcNow > expires)
+        {
+            Console.WriteLine("Token has expired.");
+            return false;
+        }
+
+        if (notBefore != null && DateTime.UtcNow < notBefore)
+        {
+            Console.WriteLine("Token is not yet valid.");
+            return false;
+        }
+
+        // Дополнительная кастомная логика
+        Console.WriteLine("Token lifetime is valid.");
+        return true;
     }
 }
